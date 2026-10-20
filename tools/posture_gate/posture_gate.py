@@ -705,6 +705,22 @@ def check_hands(track, P, usable=None):
                 add(fi, "below_ground", f"{', '.join(sunk)} below the ground line "
                     f"({max(low[k] for k in sunk) - float(gy):.0f} px)", set(sunk))
 
+        # The body stays outside solid props: "solids": {"block": [w, h]} (or [w, h, d] in 3D) is a
+        # box of that size centered on the prop's point; a head or body joint inside it fails
+        # (a push with the head through the block). Hands may touch or grip it.
+        solids = f.get("solids", track.get("solids")) or {}
+        if solids and torso:
+            src = f.get("_joints3d") or pts
+            where = f.get("_props3d") or f.get("props", {})
+            for prop, size in solids.items():
+                c = where.get(prop)
+                if not c or len(size) < len(c[:2]):
+                    continue
+                inside = sorted(k for k, q in src.items() if k.split("_")[0] not in ("wrist", "hand", "finger", "thumb")
+                                and all(abs(q[i] - c[i]) < size[i] / 2 - 0.05 * torso for i in range(min(len(c), len(size), len(q)))))
+                if inside:
+                    add(fi, "body_in_prop", f"{', '.join(inside)} inside the {prop}", set(inside))
+
         # Hand shape (thumb side) must match the arm it is on.
         for side, h in f.get("hands", {}).items():
             if h and h.get("looks_like") in ("l", "r") and h["looks_like"] != side \
