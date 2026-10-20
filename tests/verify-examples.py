@@ -30,8 +30,14 @@ for name, part in (("Style 1", style1), ("Style 2A", style2a)):
 # Character anchors are the current ones, verbatim, in every clip; no "same figure..." shortcut.
 dark = re.findall(r"```text\n(.*?)\n```", catalog.split("**Classic Dark", 1)[1], re.S)[0]
 assert all(dark in p for p in prompts(style1)), "Style 1 example must repeat the current Dark anchor"
-beanie = re.findall(r"```text\n(.*?)\n```", catalog.split("**Character Anchor (every clip, verbatim):**", 1)[1], re.S)[0]
-assert all(f"Character: {beanie}" in p for p in prompts(style2a)), "Style 2A example must repeat the full anchor"
+lead = re.findall(r"```text\n(.*?)\n```", catalog.split("**Character Anchor (every clip, verbatim):**", 1)[1], re.S)[0]
+beanie = re.findall(r"```text\n(.*?)\n```", catalog.split("**Alternative: Beanie Zeke anchor", 1)[1], re.S)[0]
+assert "buzz cut" in lead and "glasses" in lead and "dark red crew-neck" in lead, "Style 2 default lead is the buzz-cut, glasses one"
+assert "red beanie" in beanie and "no pom-pom" in beanie, "the beanie lead stays documented as the alternative"
+assert all(f"Character: {lead}" in p for p in prompts(style2a)), "Style 2A example must repeat the full default anchor"
+assert not any(beanie in p for p in prompts(style2a)), "one lead per video"
+for path in (SKILL / "SKILL.md", REFS / "omni-flash-prompt-contract.md"):
+    assert lead in path.read_text(), f"{path.name} must carry the same default Style 2 anchor"
 for path in [SKILL / "SKILL.md", *REFS.glob("*.md")]:
     assert "The same minimalist 2D animated stick figure" not in path.read_text().replace(
         '("The same minimalist 2D animated stick figure in a bright red beanie and yellow shirt" followed by an ellipsis)', ""), \

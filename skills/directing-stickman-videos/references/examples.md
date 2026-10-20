@@ -251,9 +251,9 @@ First verify that all six full voice blocks are identical and no scene-specific 
 
 ---
 
-# Example 2: Style 2A (Modern Beanie Zeke — Modern Studio Tech)
+# Example 2: Style 2A (Modern Pop, default lead Nam — Modern Studio Tech)
 
-Concrete end-to-end production prompt package demonstrating Style 2A (high-key white studio, subtle perspective floor grid, cyan glowing glass elements, and the full character anchor repeated in every clip).
+Concrete end-to-end production prompt package demonstrating Style 2A (high-key white studio, subtle perspective floor grid, cyan glowing glass elements, and the default lead's full character anchor repeated in every clip; for the beanie alternative, swap in its anchor from `style-catalog.md`).
 
 ## Clip 1 — The Glass Ceiling
 
@@ -262,16 +262,16 @@ Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchr
 
 Environment: A modern bright white studio space with subtle light-gray perspective grid lines on the floor plane. High-key studio lighting, clean white negative space, sleek glowing cyan and electric blue glass holographic UI elements.
 
-Character: A minimalist 2D animated stick figure wearing a bright red beanie (smooth rounded knit, no pom-pom) and a yellow t-shirt, with simple black stick limbs and shorts. Simple black lines, vibrant colors, smooth 2D animation style.
+Character: A minimalist 2D animated stick figure with a white round head, a very short dark buzz cut (close-cropped spiky black hair), thick dark rectangular eyeglasses over simple dot eyes, and a plain dark red crew-neck t-shirt, with simple black stick limbs and dark shorts. Simple black lines, vibrant colors, smooth 2D animation style.
 
-First frame: Zeke crouches mid-leap at the center of the grid floor, arms swinging up.
-Hands at start — Zeke: right hand empty; left hand empty.
+First frame: Nam crouches mid-leap at the center of the grid floor, arms swinging up.
+Hands at start — Nam: right hand empty; left hand empty.
 
 Timed Synchronized Visual Beats:
-[0–3s] (VO: "When you hit a wall, you assume you lack talent."): Zeke takes an ambitious leap upward from the grid floor and, at about 1.5s, bumps his beanie against an invisible, transparent glass ceiling overhead with a comedic bounce and a soft bonk sound. A small icon-only gray crack mark flickers on the glass.
-[3–7s] (VO: "But skill is rarely the ceiling."): Zeke lands on his feet, rubs his red beanie with his left hand, and reaches his right hand upward to touch the glass. He discovers the glass has no frame or pillars—it simply floats in mid-air.
-[7–10s] (VO: "What truly blocks you is an invisible rule you never questioned."): Zeke taps his sneaker firmly on the grid floor, sending an expanding glowing cyan circular pulse wave across the room, illuminating a floating icon-only cyan padlock on the glass panel.
-Hands at end — Zeke: right hand empty; left hand empty.
+[0–3s] (VO: "When you hit a wall, you assume you lack talent."): Nam takes an ambitious leap upward from the grid floor and, at about 1.5s, bumps the top of his head against an invisible, transparent glass ceiling overhead with a comedic bounce and a soft bonk sound; his glasses stay on. A small icon-only gray crack mark flickers on the glass.
+[3–7s] (VO: "But skill is rarely the ceiling."): Nam lands on his feet, rubs the top of his buzz-cut head with his left hand, and reaches his right hand upward to touch the glass. He discovers the glass has no frame or pillars—it simply floats in mid-air.
+[7–10s] (VO: "What truly blocks you is an invisible rule you never questioned."): Nam taps his sneaker firmly on the grid floor, sending an expanding glowing cyan circular pulse wave across the room, illuminating a floating icon-only cyan padlock on the glass panel.
+Hands at end — Nam: right hand empty; left hand empty.
 
 One off-screen adult male narrator throughout. General American accent, warm clean baritone, medium-low pitch, gentle chest resonance, no raspiness or breathiness. Calm conversational delivery, restrained pitch variation, steady speaking pace, and close, dry studio sound. Keep the same vocal timbre, register, accent, pace, and recording quality throughout. Emotional progression belongs to the visuals and music; do not change the narrator's voice or switch to character dialogue.
 
@@ -287,15 +287,15 @@ Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchr
 
 Environment: The identical modern bright white studio space with subtle light-gray perspective grid lines.
 
-Character: A minimalist 2D animated stick figure wearing a bright red beanie (smooth rounded knit, no pom-pom) and a yellow t-shirt, with simple black stick limbs and shorts. Simple black lines, vibrant colors, smooth 2D animation style.
+Character: A minimalist 2D animated stick figure with a white round head, a very short dark buzz cut (close-cropped spiky black hair), thick dark rectangular eyeglasses over simple dot eyes, and a plain dark red crew-neck t-shirt, with simple black stick limbs and dark shorts. Simple black lines, vibrant colors, smooth 2D animation style.
 
 Timed Synchronized Visual Beats:
-Hands at start — Zeke: right hand empty; left hand empty.
+Hands at start — Nam: right hand empty; left hand empty.
 
-[0–3s] (VO: "We build our own barriers out of old fears"): Inheriting the glowing cyan padlock from clip 1, Zeke pulls a sleek minimalist glowing light-pen out of his right shorts pocket with his right hand. He strides toward the edge where the floor grid ends in a sheer drop into clean white space.
-[3–7s] (VO: "and mistake comfort for our outer limit."): Zeke pauses at the edge, points the light-pen forward into mid-air with his right hand, and smoothly sweeps his right arm to draw a crisp, luminous cyan beam line forward, turning empty air into a solid glowing bridge path.
-[7–10s] (VO: "Every breakthrough starts by testing what feels impossible."): Zeke tucks the light-pen back into his right pocket, tests the glowing line bridge with one cautious foot, finds it solid, and takes three brisk, confident running strides across it into the open white space, looking ahead with determination.
-Hands at end — Zeke: right hand empty; left hand empty.
+[0–3s] (VO: "We build our own barriers out of old fears"): Inheriting the glowing cyan padlock from clip 1, Nam pulls a sleek minimalist glowing light-pen out of his right shorts pocket with his right hand. He strides toward the edge where the floor grid ends in a sheer drop into clean white space.
+[3–7s] (VO: "and mistake comfort for our outer limit."): Nam pauses at the edge, points the light-pen forward into mid-air with his right hand, and smoothly sweeps his right arm to draw a crisp, luminous cyan beam line forward, turning empty air into a solid glowing bridge path.
+[7–10s] (VO: "Every breakthrough starts by testing what feels impossible."): Nam tucks the light-pen back into his right pocket, tests the glowing line bridge with one cautious foot, finds it solid, and takes three brisk, confident running strides across it into the open white space, looking ahead with determination.
+Hands at end — Nam: right hand empty; left hand empty.
 
 One off-screen adult male narrator throughout. General American accent, warm clean baritone, medium-low pitch, gentle chest resonance, no raspiness or breathiness. Calm conversational delivery, restrained pitch variation, steady speaking pace, and close, dry studio sound. Keep the same vocal timbre, register, accent, pace, and recording quality throughout. Emotional progression belongs to the visuals and music; do not change the narrator's voice or switch to character dialogue.
 
@@ -311,15 +311,15 @@ Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchr
 
 Environment: The identical modern bright white studio space with subtle light-gray perspective grid lines.
 
-Character: A minimalist 2D animated stick figure wearing a bright red beanie (smooth rounded knit, no pom-pom) and a yellow t-shirt, with simple black stick limbs and shorts. Simple black lines, vibrant colors, smooth 2D animation style.
+Character: A minimalist 2D animated stick figure with a white round head, a very short dark buzz cut (close-cropped spiky black hair), thick dark rectangular eyeglasses over simple dot eyes, and a plain dark red crew-neck t-shirt, with simple black stick limbs and dark shorts. Simple black lines, vibrant colors, smooth 2D animation style.
 
 Timed Synchronized Visual Beats:
-Hands at start — Zeke: right hand empty; left hand empty.
+Hands at start — Nam: right hand empty; left hand empty.
 
-[0–3s] (VO: "You don't need permission to step into the next tier."): Continuing his forward run from clip 2, Zeke reaches a massive, minimalist white circular vault door standing upright on the grid floor, locked with three floating cyan concentric rings.
-[3–7s] (VO: "The moment you challenge the boundary, it begins to open."): Zeke places his right hand firmly onto the center glowing cyan circle. The three concentric rings pulse with bright electric blue light, rotate smoothly, unlock with a heavy mechanical resonance, and the heavy white circular door rolls outward.
-[7–10s] (VO: "Take the step—your real ceiling is just your imagination."): Zeke strides boldly through the open vault portal into a flood of radiant, pristine warm white horizon light, pumping his left fist upward in triumphant release as the camera tracks him forward.
-Hands at end — Zeke: right hand empty; left hand empty.
+[0–3s] (VO: "You don't need permission to step into the next tier."): Continuing his forward run from clip 2, Nam reaches a massive, minimalist white circular vault door standing upright on the grid floor, locked with three floating cyan concentric rings.
+[3–7s] (VO: "The moment you challenge the boundary, it begins to open."): Nam places his right hand firmly onto the center glowing cyan circle. The three concentric rings pulse with bright electric blue light, rotate smoothly, unlock with a heavy mechanical resonance, and the heavy white circular door rolls outward.
+[7–10s] (VO: "Take the step—your real ceiling is just your imagination."): Nam strides boldly through the open vault portal into a flood of radiant, pristine warm white horizon light, pumping his left fist upward in triumphant release as the camera tracks him forward.
+Hands at end — Nam: right hand empty; left hand empty.
 
 One off-screen adult male narrator throughout. General American accent, warm clean baritone, medium-low pitch, gentle chest resonance, no raspiness or breathiness. Calm conversational delivery, restrained pitch variation, steady speaking pace, and close, dry studio sound. Keep the same vocal timbre, register, accent, pace, and recording quality throughout. Emotional progression belongs to the visuals and music; do not change the narrator's voice or switch to character dialogue.
 

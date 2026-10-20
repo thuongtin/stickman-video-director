@@ -77,7 +77,7 @@ Vài nét vẽ đủ để giải thích một ý lớn. Trên nền trắng tin
 
 ### Phong cách 2: Hiện đại, vui mắt
 
-Mũ len đỏ và áo thun vàng giúp nhân vật dễ nhận ra. Dùng bối cảnh công nghệ gọn gàng để giải thích một sản phẩm, hoặc đưa nhân vật vào phòng ngủ, đường phố, cảnh thiên nhiên rộng để kể chuyện.
+Ở bản fork này, nhân vật chính để tóc đinh sẫm màu, đeo kính cận gọng chữ nhật đậm và mặc áo thun đỏ sẫm; nhân vật mũ len đỏ, áo vàng của upstream vẫn dùng được khi bạn yêu cầu. Dùng bối cảnh công nghệ gọn gàng để giải thích một sản phẩm, hoặc đưa nhân vật vào phòng ngủ, đường phố, cảnh thiên nhiên rộng để kể chuyện.
 
 - **Trông thế nào:** Một nhân vật dễ nhớ, hai kiểu thế giới. 2A là khoảng trắng, lưới mờ, giao diện kính trôi nổi và ánh xanh lam. 2B là bối cảnh nhiều màu, ánh sáng điện ảnh và chiều sâu.
 - **Hợp với:** 2A cho công cụ AI, sản phẩm công nghệ, hướng dẫn và demo tính năng. 2B cho phát triển bản thân, tình huống đời thường, phiêu lưu và chuyện truyền động lực.
@@ -87,6 +87,10 @@ Mũ len đỏ và áo thun vàng giúp nhân vật dễ nhận ra. Dùng bối c
 |:---:|:---:|
 | <img src="assets/readme/previews/style-2a-demo.gif" alt="Hoạt hình công nghệ tối giản với nhân vật mũ len đỏ" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="Nhân vật mũ len đỏ trong bối cảnh điện ảnh nhiều màu" width="360"> |
 | Khoảng trắng · Lưới mờ · Ánh xanh lam | Bối cảnh nhiều màu · Ánh sáng điện ảnh · Không khí kể chuyện |
+
+Hai clip trên do upstream làm với nhân vật mũ len đỏ. Đây là nhân vật chính mặc định của bản fork, vẽ từ khung xương bằng code và đã qua gate tư thế ([character sheet](docs/lead-character/sheet.png)):
+
+<p align="center"><img src="docs/lead-character/motion.gif" alt="Nhân vật chính mặc định của Phong cách 2, người que tóc đinh, đeo kính, áo thun đỏ sẫm, đi vào và vẫy tay" width="480"></p>
 
 ---
 
@@ -287,7 +291,7 @@ Hợp với: Các bộ phận khớp với nhau thế nào, nguyên nhân và k�
 
 ## Bản fork này thêm gì
 
-Bản fork này của [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) giữ nguyên mọi thứ ở trên và thêm ba phần: nhiều phong cách hơn, gate kiểm tra tư thế, và Golden Hook chi tiết hơn.
+Bản fork này của [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) giữ nguyên mọi thứ ở trên và thêm bốn phần: nhiều phong cách hơn, gate kiểm tra tư thế, Golden Hook chi tiết hơn, và nhân vật chính riêng cho Phong cách 2.
 
 ### 22 phong cách thử nghiệm
 
@@ -342,6 +346,10 @@ Skill tự chạy sổ theo dõi tay và kiểm tra gói trước khi giao promp
 ### Golden Hook chi tiết
 
 Giai đoạn đầu của kịch bản, Golden Hook, giờ có thẻ riêng trong đề xuất đạo diễn: một kiểu hook, khung hình đầu đã thấy nhân vật đang hành động với một căng thẳng rõ ràng, một khoảnh khắc hook trước khoảng giây thứ hai mà tắt tiếng vẫn hiểu, và câu nói đầu tiên dài bốn đến mười chữ, không chào hỏi. Hook nằm trong khung hình đầu và nhịp đầu của Clip 1; prompt không có thêm dòng riêng nào. Xem “Golden Hook in detail” trong `references/storyboard-template.md`.
+
+### Nhân vật chính của Phong cách 2
+
+Phong cách 2 giờ mặc định dùng nhân vật tóc đinh ngắn sẫm màu, kính cận gọng chữ nhật đậm và áo thun cổ tròn đỏ sẫm, không in chữ. Kính luôn ở trên mặt trong mọi cảnh. Nhân vật mũ len đỏ Zeke của upstream vẫn được giữ làm lựa chọn thay thế: hãy yêu cầu nhân vật mũ len, Skill sẽ dùng anchor của nhân vật đó. Character sheet, các tư thế và clip chuyển động nằm trong `docs/lead-character/`; mọi tư thế đều đã qua gate tư thế và không có gì được tạo bằng mô hình AI.
 
 <!-- readme:advantages -->
 
@@ -437,7 +445,7 @@ Dùng cho video giải thích không lộ mặt, chủ đề lịch sử và kin
 
 ## Cập nhật mới
 
-- **2026-10-20:** Bản fork thêm 22 phong cách thử nghiệm, gate tư thế cùng sổ theo dõi tay và kiểm tra gói prompt, và thẻ Golden Hook chi tiết. Xem [Bản fork này thêm gì](#fork-additions).
+- **2026-10-20:** Bản fork thêm 22 phong cách thử nghiệm, gate tư thế cùng sổ theo dõi tay và kiểm tra gói prompt, và thẻ Golden Hook chi tiết. Phong cách 2 có nhân vật chính mặc định tóc đinh, đeo kính. Xem [Bản fork này thêm gì](#fork-additions).
 - **2026-10-15:** Chỉnh lại trang chủ, các bước cài đặt và ví dụ; thêm ảnh xem trước nhẹ hơn và biểu đồ Star History. Luật của Skill không đổi.
 - **2026-10-14:** Thêm Phong cách 4, Chuyện đời thường ấm áp, với ví dụ ở ga tàu và quán cà phê.
 - **2026-10-13:** Chỉnh mô tả nhân vật và ràng buộc tư thế hiện tại của Phong cách 1.
