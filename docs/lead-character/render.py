@@ -186,26 +186,30 @@ def shirt_shape(neck, pelvis, s, half_top=12.0, half_hem=13.5):
             add(hem, px, -half_hem * s), add(sh, px, -half_top * s), add(top, px, -half_top * 0.6 * s)]
 
 
-def plaid(pen, pts, s):
-    """Fill a polygon with a large, simple red-and-navy check (few, wide bands so it cannot shimmer)."""
-    img = pen.img
+def plaid(pen, pts, s, origin, ux):
+    """Fill a polygon with a large, simple red-and-navy check (few, wide bands so it cannot shimmer).
+    The bands are laid out from `origin` along the garment axis `ux`, so the check moves and turns with the garment."""
     xs = [x * SS for x, _ in pts]; ys = [y * SS for _, y in pts]
     box = (int(min(xs)) - 2, int(min(ys)) - 2, int(max(xs)) + 3, int(max(ys)) + 3)
     w, h = box[2] - box[0], box[3] - box[1]
-    tile = Image.new("RGB", (w, h), FLANNEL)
+    ox, oy = origin[0] * SS, origin[1] * SS
+    reach = int(math.hypot(max(abs(box[0] - ox), abs(box[2] - ox)), max(abs(box[1] - oy), abs(box[3] - oy)))) + 4
+    n = 2 * reach
+    tile = Image.new("RGB", (n, n), FLANNEL)
     d = ImageDraw.Draw(tile, "RGBA")
     step, band = 11 * s * SS, 3.6 * s * SS
-    k = -(box[0] % step) - step
-    while k < w + step:
-        d.rectangle([k, 0, k + band, h], fill=PLAID + (150,))
+    k = reach - math.ceil(reach / step) * step   # a band edge sits on the origin (tile centre)
+    while k < n:
+        d.rectangle([k, 0, k + band, n], fill=PLAID + (150,))
+        d.rectangle([0, k, n, k + band], fill=PLAID + (150,))
         k += step
-    k = -(box[1] % step) - step
-    while k < h + step:
-        d.rectangle([0, k, w, k + band], fill=PLAID + (150,))
-        k += step
+    # tile "down" is the garment axis: rotate it from (0, 1) onto ux
+    ang = math.degrees(math.atan2(ux[1], ux[0])) - 90
+    tile = tile.rotate(-ang, resample=Image.BICUBIC, center=(reach, reach), fillcolor=FLANNEL)
+    tile = tile.crop((box[0] - (ox - reach), box[1] - (oy - reach), box[2] - (ox - reach), box[3] - (oy - reach)))
     mask = Image.new("L", (w, h), 0)
     ImageDraw.Draw(mask).polygon([(x - box[0], y - box[1]) for x, y in zip(xs, ys)], fill=255)
-    img.paste(tile, box[:2], mask)
+    pen.img.paste(tile, box[:2], mask)
 
 
 def draw_leg(pen, j, k, s, view):
@@ -232,14 +236,14 @@ def draw_arm(pen, j, k, s, prop=None):
     pen.circle(wr, 4.8 * s, fill=INK)
     # flannel sleeve rolled up to just above the elbow, so the forearm stays a stick
     poly, end, px = sleeve_shape(sh, el, s)
-    plaid(pen, poly, s)
+    plaid(pen, poly, s, sh, axis(sh, el)[0])
     pen.poly(poly, None, INK, 1.8 * s)
     pen.line([add(end, px, 4.8 * s), add(end, px, -4.8 * s)], CUFF, 3.2 * s)
 
 
 def draw_shirt(pen, j, s, view):
     body = shirt_shape(j["neck"], j["pelvis"], s)
-    plaid(pen, body, s)
+    plaid(pen, body, s, j["neck"], axis(j["neck"], j["pelvis"])[0])
     ux, px = axis(j["neck"], j["pelvis"])
     top = add(j["neck"], ux, 1 * s); hem = add(j["pelvis"], ux, 5 * s)
     if view == "front":

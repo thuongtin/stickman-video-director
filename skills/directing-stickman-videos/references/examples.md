@@ -262,7 +262,7 @@ Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchr
 
 Environment: A modern bright white studio space with subtle light-gray perspective grid lines on the floor plane. High-key studio lighting, clean white negative space, sleek glowing cyan and electric blue glass holographic UI elements.
 
-Character: A minimalist 2D animated stick figure with a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
+Character: A minimalist 2D animated stick figure with a big white round head, simple dot eyes, a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
 
 First frame: Nam crouches mid-leap at the center of the grid floor, arms swinging up.
 Hands at start — Nam: right hand empty; left hand empty.
@@ -287,12 +287,12 @@ Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchr
 
 Environment: The identical modern bright white studio space with subtle light-gray perspective grid lines.
 
-Character: A minimalist 2D animated stick figure with a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
+Character: A minimalist 2D animated stick figure with a big white round head, simple dot eyes, a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
 
 Timed Synchronized Visual Beats:
 Hands at start — Nam: right hand empty; left hand empty.
 
-[0–3s] (VO: "We build our own barriers out of old fears"): Inheriting the glowing cyan padlock from clip 1, Nam pulls a sleek minimalist glowing light-pen out of his right shorts pocket with his right hand. He strides toward the edge where the floor grid ends in a sheer drop into clean white space.
+[0–3s] (VO: "We build our own barriers out of old fears"): Inheriting the glowing cyan padlock from clip 1, Nam pulls a sleek minimalist glowing light-pen out of his right jeans pocket with his right hand. He strides toward the edge where the floor grid ends in a sheer drop into clean white space.
 [3–7s] (VO: "and mistake comfort for our outer limit."): Nam pauses at the edge, points the light-pen forward into mid-air with his right hand, and smoothly sweeps his right arm to draw a crisp, luminous cyan beam line forward, turning empty air into a solid glowing bridge path.
 [7–10s] (VO: "Every breakthrough starts by testing what feels impossible."): Nam tucks the light-pen back into his right pocket, tests the glowing line bridge with one cautious foot, finds it solid, and takes three brisk, confident running strides across it into the open white space, looking ahead with determination.
 Hands at end — Nam: right hand empty; left hand empty.
@@ -311,7 +311,7 @@ Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchr
 
 Environment: The identical modern bright white studio space with subtle light-gray perspective grid lines.
 
-Character: A minimalist 2D animated stick figure with a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
+Character: A minimalist 2D animated stick figure with a big white round head, simple dot eyes, a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
 
 Timed Synchronized Visual Beats:
 Hands at start — Nam: right hand empty; left hand empty.
