@@ -90,7 +90,13 @@ Vài nét vẽ đủ để giải thích một ý lớn. Trên nền trắng tin
 
 Hai clip trên do upstream làm với nhân vật mũ len đỏ. Đây là nhân vật chính mặc định của bản fork, vẽ từ khung xương bằng code và đã qua gate tư thế ([character sheet](docs/lead-character/sheet.png)):
 
+<a id="lead-character-preview"></a>
+
 <p align="center"><img src="docs/lead-character/motion.gif" alt="Nhân vật chính mặc định của Phong cách 2, người que tóc đinh, đeo kính, sơ mi trắng và quần jeans, đi vào và vẫy tay" width="480"></p>
+
+<p align="center"><img src="docs/lead-character/sheet.png" alt="Character sheet của Nam: bốn góc nhìn, bảng khóa ngoại hình, bảy biểu cảm và bảy tư thế" width="760"></p>
+
+<p align="center"><sub>Nam, nhân vật chính mặc định: tóc đinh, kính cận, sơ mi trắng ngắn tay, quần jeans. Muốn dùng nhân vật mũ len đỏ Zeke của upstream thì chỉ cần yêu cầu.</sub></p>
 
 ---
 
@@ -349,7 +355,7 @@ Giai đoạn đầu của kịch bản, Golden Hook, giờ có thẻ riêng tron
 
 ### Nhân vật chính của Phong cách 2
 
-Phong cách 2 giờ mặc định dùng nhân vật tóc đinh ngắn sẫm màu, kính cận gọng chữ nhật đậm, sơ mi trắng trơn ngắn tay, cổ bẻ nhỏ, cài cúc, tay áo xắn, và quần jeans xanh đậm. Dáng người và khuôn mặt theo nhân vật mũ len của upstream. Kính luôn ở trên mặt trong mọi cảnh. Nhân vật mũ len đỏ Zeke của upstream vẫn được giữ làm lựa chọn thay thế: hãy yêu cầu nhân vật mũ len, Skill sẽ dùng anchor của nhân vật đó. Character sheet, các tư thế và clip chuyển động nằm trong `docs/lead-character/`; mọi tư thế đều đã qua gate tư thế và không có gì được tạo bằng mô hình AI.
+Phong cách 2 giờ mặc định dùng nhân vật tóc đinh ngắn sẫm màu, kính cận gọng chữ nhật đậm, sơ mi trắng trơn ngắn tay, cổ bẻ nhỏ, cài cúc, tay áo xắn, và quần jeans xanh đậm. Dáng người và khuôn mặt theo nhân vật mũ len của upstream. Kính luôn ở trên mặt trong mọi cảnh. Nhân vật mũ len đỏ Zeke của upstream vẫn được giữ làm lựa chọn thay thế: hãy yêu cầu nhân vật mũ len, Skill sẽ dùng anchor của nhân vật đó. Character sheet, các tư thế và clip chuyển động nằm trong `docs/lead-character/` (xem ảnh ở [Phong cách 2](#lead-character-preview)); mọi tư thế đều đã qua gate tư thế và không có gì được tạo bằng mô hình AI.
 
 <!-- readme:advantages -->
 

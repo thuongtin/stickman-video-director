@@ -94,6 +94,8 @@ Os dois clipes acima foram feitos no upstream com o personagem de gorro vermelho
 
 <p align="center"><img src="docs/lead-character/motion.gif" alt="Boneco de palito com cabelo raspado, óculos, camisa branca e jeans entra andando e acena" width="480"></p>
 
+<p align="center"><img src="docs/lead-character/sheet.png" alt="Ficha do personagem Nam: quatro vistas, travas de visual, expressões e poses" width="760"></p>
+
 ---
 
 ### Estilo 3: Traço pré-histórico / Humor ácido

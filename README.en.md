@@ -90,7 +90,13 @@ In this fork the lead has a short dark buzz cut, dark rectangular glasses, a whi
 
 The two clips above were made upstream with the red-beanie lead. Here is this fork's default lead, drawn from a code rig that passed the posture gate ([character sheet](docs/lead-character/sheet.png)):
 
+<a id="lead-character-preview"></a>
+
 <p align="center"><img src="docs/lead-character/motion.gif" alt="The default Style 2 lead, a stick figure with a buzz cut, glasses, a white shirt and jeans, walks in and waves" width="480"></p>
+
+<p align="center"><img src="docs/lead-character/sheet.png" alt="Nam's character sheet: four views, outfit locks, seven expressions and seven poses" width="760"></p>
+
+<p align="center"><sub>Nam, the default lead: buzz cut, glasses, white short-sleeved shirt, jeans. Ask for upstream's red-beanie Zeke to use him instead.</sub></p>
 
 ---
 
@@ -349,7 +355,7 @@ The first stage of the script, the Golden Hook, now has its own card in the dire
 
 ### Style 2 lead
 
-Style 2 now defaults to a lead with a short dark buzz cut, thick dark rectangular glasses, a plain white short-sleeved button-up shirt with rolled sleeves, and dark blue jeans. The body and face follow upstream's red-beanie lead. The glasses stay on in every shot. Upstream's red-beanie Zeke stays as the alternative: ask for the beanie character and the Skill uses its anchor instead. The character sheet, poses and motion clip are in `docs/lead-character/`; every pose passed the posture gate, and none of it was made with an AI model.
+Style 2 now defaults to a lead with a short dark buzz cut, thick dark rectangular glasses, a plain white short-sleeved button-up shirt with rolled sleeves, and dark blue jeans. The body and face follow upstream's red-beanie lead. The glasses stay on in every shot. Upstream's red-beanie Zeke stays as the alternative: ask for the beanie character and the Skill uses its anchor instead. The character sheet, poses and motion clip are in `docs/lead-character/` (shown under [Style 2](#lead-character-preview)); every pose passed the posture gate, and none of it was made with an AI model.
 
 <!-- readme:advantages -->
 

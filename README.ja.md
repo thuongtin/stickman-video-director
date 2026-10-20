@@ -94,6 +94,8 @@
 
 <p align="center"><img src="docs/lead-character/motion.gif" alt="坊主頭とメガネ、白いシャツとジーンズの棒人間が歩いて手を振る" width="480"></p>
 
+<p align="center"><img src="docs/lead-character/sheet.png" alt="ナムのキャラクターシート：4方向、外見ロック、表情、ポーズ" width="760"></p>
+
 ---
 
 ### スタイル3：原始時代の手描きアニメ／ブラックユーモア
