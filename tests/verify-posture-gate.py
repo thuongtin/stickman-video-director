@@ -179,6 +179,22 @@ f["joints"]["elbow_r"] = [hx + 25, hy + 20]; f["joints"]["wrist_r"] = [hx + 4, h
 assert "arm_over_face" in kinds(pg.check(t), "warn")
 f["holds"] = {"mug": "r"}; f["props"] = {"mug": [hx - 10, hy]}
 assert "arm_over_face" not in kinds(pg.check(t), "warn")
+# side view: a held prop on the face warns; a prop at the face edge (a cup at the mouth) does not
+t = ex.track(ex.frames_with(None))
+f = t["frames"][4]; hx, hy = f["joints"]["head"]
+f["holds"] = {"ball": "r"}; f["props"] = {"ball": [hx + 2, hy]}
+assert "arm_over_face" in kinds(pg.check(t), "warn")
+f["face_cover"] = True
+assert "arm_over_face" not in kinds(pg.check(t), "warn")
+# a prop point can have its own contact: the cane tip must reach the ground
+t = ex.track(ex.frames_with(None))
+f = t["frames"][4]; wx, wy = f["joints"]["wrist_r"]
+ground = max(v[1] for k, v in f["joints"].items() if k.startswith(("toe", "ankle", "heel")))
+f["holds"] = {"cane": "r"}; f["props"] = {"cane": [wx, wy], "cane.tip": [wx + 5, ground - 40]}
+f["contacts"] = {"r": "cane", "cane.tip": "ground"}
+assert "contact_miss" in kinds(pg.check(t))
+f["props"]["cane.tip"][1] = ground
+assert "contact_miss" not in kinds(pg.check(t))
 # contacts: a wrist 0.3 torso-lengths short of its target misses by default, passes with a looser tolerance
 t = front_track(); f = t["frames"][3]; j = f["joints"]
 torso = ((j["neck"][0] - j["pelvis"][0]) ** 2 + (j["neck"][1] - j["pelvis"][1]) ** 2) ** 0.5
@@ -220,7 +236,7 @@ assert hand_ledger.lint((GATE / "examples/ledger_ok.md").read_text()) == []
 problems = hand_ledger.lint((GATE / "examples/ledger_bad.md").read_text())
 assert any("beat puts the red paper card" in p for p in problems), problems
 assert any("missing 'Hands at end'" in p for p in problems), problems
-assert any("previous clip ended" in p for p in problems), problems
+assert any("ended clip 1 with" in p for p in problems), problems
 assert hand_ledger.lint("### Clip 1\nNo props here. She holds her breath.\n") == []
 # no ledger at all while a beat holds something
 assert hand_ledger.lint("### Clip 1\n[0-3s] Mia grabs the phone from the table.\n")
@@ -238,12 +254,68 @@ assert hand_ledger.lint("Style: the character holds clean key poses between snap
 assert any("near arm" in p for p in hand_ledger.lint("[0-3s] Pip raises his near arm.\n"))
 # paws count as hands, and a sentence is checked against the character it names
 pkg = """### Clip 1
-Hands at start — Kaka: right flipper holds the folder; left flipper empty. Miso: right paw empty; left paw holds the folder.
+Hands at start — Kaka: right flipper holds the blue folder; left flipper empty. Miso: right paw empty; left paw holds the red folder.
 [0-3s] Miso opens the folder in her right paw.
-Hands at end — Kaka: right flipper holds the folder; left flipper empty. Miso: right paw empty; left paw holds the folder.
+Hands at end — Kaka: right flipper holds the blue folder; left flipper empty. Miso: right paw empty; left paw holds the red folder.
 """
 problems = hand_ledger.lint(pkg)
 assert len(problems) == 1 and "Miso's right hand" in problems[0], problems
+# several characters: a hand belongs to the clause's subject or to "Name's"; a pass must be about
+# the prop; one prop is never in two characters' hands; "Mr." stays part of a name
+pkg = """### Clip 1
+Hands at start — Candy: right hand holds the red balloon; left hand empty. Bean: right hand empty; left hand empty. Mr. Square: right hand empty; left hand holds the briefcase.
+[0-3s] Candy walks up to Bean and holds the red balloon out in her right hand.
+[3-7s] Candy passes the red balloon from her right hand into Bean's left hand. Mr. Square watches, briefcase in his left hand.
+Hands at end — Candy: right hand empty; left hand empty. Bean: right hand empty; left hand holds the red balloon. Mr. Square: right hand empty; left hand holds the briefcase.
+"""
+assert hand_ledger.lint(pkg) == [], hand_ledger.lint(pkg)
+problems = hand_ledger.lint(pkg.replace("Candy passes the red balloon from her right hand into Bean's left hand.",
+                                        "Candy smiles. The marker leaves frame."))
+assert len(problems) == 2 and all("no beat passes" in p for p in problems), problems
+assert hand_ledger.lint(pkg.replace("Candy passes the red balloon from her right hand into Bean's left hand.",
+                                    "Candy sets the red balloon down. Bean picks the red balloon up with his left hand.")) == []
+problems = hand_ledger.lint(pkg.replace("Hands at end — Candy: right hand empty", "Hands at end — Candy: right hand holds the red balloon"))
+assert len(problems) == 1 and "Bean and Candy's hands at the end" in problems[0], problems
+problems = hand_ledger.lint(pkg.replace("briefcase in his left hand", "briefcase in his right hand"))
+assert len(problems) == 1 and "Mr. Square's right hand" in problems[0], problems
+pkg = """### Clip 1
+Hands at start — Kai: right hand holds the teddy bear; left hand empty. Mimi: right hand empty; left hand empty.
+- [0-3s] (VO: "Mimi tries a different one."): Kai holds the teddy bear out in his right hand.
+- [3-7s] Kai lets go of the teddy bear as Mimi takes it with her left hand.
+Hands at end — Kai: right hand empty; left hand empty. Mimi: right hand empty; left hand holds the teddy bear.
+"""
+assert hand_ledger.lint(pkg) == [], hand_ledger.lint(pkg)
+assert hand_ledger.lint(pkg.replace("as Mimi takes it with her left hand", "and passes it to Mimi, who takes it with the left hand")) == []
+assert hand_ledger.lint(pkg.replace("Kai lets go of the teddy bear as Mimi takes it with her left hand",
+                                    "Mimi walks over, takes the teddy bear from Kai with her left hand")) == []
+# a character who skips a clip is compared with their own last hands line
+pkg = """### Clip 1
+Hands at start — Ti: right hand holds the teddy; left hand empty.
+[0-3s] Ti hugs the teddy in his right hand.
+Hands at end — Ti: right hand holds the teddy; left hand empty.
+### Clip 2
+Hands at start — Mai: right hand empty; left hand empty.
+[0-3s] Mai waves.
+Hands at end — Mai: right hand empty; left hand empty.
+### Clip 3
+Hands at start — Ti: right hand empty; left hand holds the teddy.
+[0-3s] Ti hugs the teddy in his left hand.
+Hands at end — Ti: right hand empty; left hand holds the teddy.
+"""
+assert any("ended clip 1 with teddy" in p for p in hand_ledger.lint(pkg)), hand_ledger.lint(pkg)
+# paws and "who"; a part names its prop; pointing is not holding; an unlisted prop in an empty hand warns
+pkg = """### Clip 1
+Hands at start — Pip: right paw empty; left paw holds the carrot. Toby: right paw empty; left paw empty. Na: right hand empty; left hand empty.
+[0-3s] Pip hops out holding the carrot in his left paw and gives the carrot to Toby, who takes it in his right paw.
+[3-7s] Na points at it with her right hand. Mai gives Na the yellow paper balloon; Na takes the string in her left hand.
+Hands at end — Pip: right paw empty; left paw empty. Toby: right paw holds the carrot; left paw empty. Na: right hand empty; left hand holds the yellow paper balloon.
+"""
+assert hand_ledger.lint(pkg) == [], hand_ledger.lint(pkg)
+problems = hand_ledger.lint(pkg.replace("takes the string in her left hand", "takes the string in her right hand"))
+assert len(problems) == 1 and "balloon in Na's right hand" in problems[0], problems
+warnings = []
+assert hand_ledger.lint(pkg.replace("Na points at it", "Na draws with a paper pencil in her right hand. Na points at it"), warnings) == []
+assert len(warnings) == 1 and "paper pencil in Na's right hand" in warnings[0], warnings
 # only the hand in the prop's own clause counts
 pkg = """### Clip 1
 Hands at start — Nori: right hand holds the phone; left hand empty.
@@ -277,7 +349,7 @@ assert hand_ledger.lint(pkg.replace("her left paw.", "her right paw.")) == []
 assert hand_ledger.lint(pkg.replace("Miso catches it", "Miso blows on the folder and catches it")
                         .replace("her left paw.", "her right paw.")) == []
 problems = hand_ledger.lint(pkg.replace("Kaka slides the blue folder to Miso. ", ""))
-assert len(problems) == 1 and "name the prop" in problems[0], problems
+assert any("name the prop" in p for p in problems), problems
 
 # 3D axes as documented: facing +z, the character's right is at -x; an arm reaching forward passes
 j = {"head": [0, 1.7, 0], "neck": [0, 1.5, 0], "pelvis": [0, 1, 0], "shoulder_r": [-.2, 1.45, 0],

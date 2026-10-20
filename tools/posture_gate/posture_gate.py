@@ -218,6 +218,12 @@ def frame_angles(pts, facing, limits=LIMITS):
                 p, c = vec(pts, pv), vec(pts, cv)
                 if p is not None and c is not None:
                     out[f"{key}_{s}"] = (abs(signed(p, c)), 0, fro[lim]["max"], {pv[0], pv[1], cv[1]}, (pv, cv))
+            # no limit in front view, but an arm flung 130° in one frame is still a pop
+            for key, pv, cv in (("arm_swing", ("neck", "pelvis"), (f"shoulder_{s}", f"elbow_{s}")),
+                                ("forearm_swing", (f"shoulder_{s}", f"elbow_{s}"), (f"elbow_{s}", f"wrist_{s}"))):
+                p, c = vec(pts, pv), vec(pts, cv)
+                if p is not None and c is not None:
+                    out[f"{key}_{s}"] = (signed(p, c), -180, 180, {cv[0], cv[1]}, (cv,))
     return out
 
 
@@ -399,7 +405,7 @@ def check(track, profile=None):
 
     # A walk or run is off balance for a frame or two at every step; only a pose held
     # off balance (about a fifth of a second or longer) would really fall over.
-    hold = max(2, round(0.2 * fps))
+    hold = max(2, math.ceil(0.2 * fps))  # 3 frames at 12 fps, so a pose held on twos still passes
     runs, run = [], []
     for fi in off_balance:
         if run and fi != run[-1] + 1:
@@ -521,20 +527,35 @@ def check_hands(track, P, usable=None):
                         f"{'at the ' + _side(other) + ' hand' if d_other < d_own else 'away from it'}",
                         {f"wrist_{side}", f"elbow_{side}"})
 
-        # A hand meant to touch something (a door, a table, a face) must reach it.
-        for side, target in f.get("contacts", {}).items():
-            at = (f.get("_props3d") or f.get("props", {})).get(target) if isinstance(target, str) else target
-            if at and f"wrist_{side}" in pts and torso:
-                d = norm(sub(at, pts[f"wrist_{side}"]))
-                if d > f.get("contact_tolerance", track.get("contact_tolerance", 0.25)) * torso:
-                    label = target if isinstance(target, str) else "its target"
-                    add(fi, "contact_miss", f"the {_side(side)} hand should touch {label} but stops "
-                        f"{d / torso:.1f} torso-lengths away", {f"wrist_{side}", f"elbow_{side}"})
+        # A hand meant to touch something (a door, a table, a face) must reach it. A prop's own
+        # point can have a contact too: {"cane.tip": "ground"} for a cane held at "cane".
+        props = f.get("_props3d") or f.get("props", {})
+        feet = [pts[k][1] for k in pts if k.split("_")[0] in ("ankle", "toe", "heel")]
+        tol = f.get("contact_tolerance", track.get("contact_tolerance", 0.25))
+        for src, target in f.get("contacts", {}).items():
+            hand = src in SIDES
+            frm = pts.get(f"wrist_{src}") if hand else props.get(src)
+            if not frm or not torso:
+                continue
+            if target == "ground":
+                if three_d or not feet:
+                    continue
+                d = abs(frm[1] - max(feet))  # image y grows downward; the lowest foot is the ground
+            else:
+                at = props.get(target) if isinstance(target, str) else target
+                if not at:
+                    continue
+                d = norm(sub(at, frm))
+            if d > tol * torso:
+                label = target if isinstance(target, str) else "its target"
+                who = f"the {_side(src)} hand" if hand else f"the {src}"
+                add(fi, "contact_miss", f"{who} should touch {label} but stops {d / torso:.1f} torso-lengths away",
+                    {f"wrist_{src}", f"elbow_{src}"} if hand else set())
 
         # Front view: a forearm sweeping across the face, unless the beat asks for it.
         if not three_d and f.get("facing", "front") == "front" and not f.get("face_cover") \
                 and "head" in pts and "neck" in pts:
-            r = 0.5 * norm(sub(pts["head"], pts["neck"]))
+            r = f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
             for side in SIDES:
                 ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
                 if r and all(k in pts for k in ks):
@@ -552,7 +573,7 @@ def check_hands(track, P, usable=None):
                 and "head" in pts and "neck" in pts:
             side = facing[0]
             ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
-            r = 0.5 * norm(sub(pts["head"], pts["neck"]))
+            r = f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
             busy = side in f.get("contacts", {}) or side in f.get("holds", {}).values()
             ahead = 1 if facing == "right" else -1
             if r and not busy and all(k in pts for k in ks) and any(
@@ -561,6 +582,25 @@ def check_hands(track, P, usable=None):
                 add(fi, "arm_over_face", f"the near ({_side(side)}) arm crosses the face in side view "
                     "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                     {ks[1], ks[2], "head"}, severity="warn")
+            # a held prop (a raised ball, a book) sitting on the face; a cup at the mouth stays at the edge
+            for prop, hs in f.get("holds", {}).items():
+                at = f.get("props", {}).get(prop)
+                if r and at and norm(sub(at, pts["head"])) < 0.6 * r and (at[0] - pts["head"][0]) * ahead >= 0:
+                    add(fi, "arm_over_face", f"the {prop} covers the face in side view "
+                        "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
+                        {f"wrist_{hs}", "head"}, severity="warn")
+
+        # Nothing goes through the floor: with "ground_y" (image y of the ground line, y down),
+        # a head, hand or foot below it is an error (a roll or bow sinking into the ground).
+        gy = f.get("ground_y", track.get("ground_y"))
+        if gy is not None and not three_d and torso:
+            low = dict((k, p[1]) for k, p in pts.items())
+            if "head" in pts and "neck" in pts:  # the drawn head is a disc, not a point
+                low["head"] += f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
+            sunk = sorted(k for k, y in low.items() if y - float(gy) > 0.05 * torso)
+            if sunk:
+                add(fi, "below_ground", f"{', '.join(sunk)} below the ground line "
+                    f"({max(low[k] for k in sunk) - float(gy):.0f} px)", set(sunk))
 
         # Hand shape (thumb side) must match the arm it is on.
         for side, h in f.get("hands", {}).items():
