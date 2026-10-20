@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Posture gate fixtures: each known posture or left/right bug must be caught, clean motion must pass."""
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -180,6 +181,22 @@ assert "arm_over_face" not in kinds(pg.check(t), "warn")
 del f["contacts"]
 f["face_cover"] = True
 assert "arm_over_face" not in kinds(pg.check(t), "warn")
+# "face_cover" lets the hand reach the face, not the arm lie on it: an elbow in the middle of the face,
+# or pulled across the chest so the forearm runs diagonally over the face, is an error (regression:
+# pushing up glasses with the elbow across the body); a hand on the face with the elbow out passes
+r = pg.check(json.loads((GATE / "examples/face_cover_arm_across.json").read_text()))
+bad = sorted({i["frame"] for i in r["issues"] if i["kind"] == "arm_over_face" and i["severity"] == "error"})
+assert bad == list(range(34, 44)), bad
+t = front_track()
+f = t["frames"][2]; hx, hy = f["joints"]["head"]; sx = f["joints"]["shoulder_l"][0]
+f["props"] = {}; f["holds"] = {}; f["face_cover"] = True
+f["joints"]["wrist_l"] = [hx + 4, hy]
+f["joints"]["elbow_l"] = [sx + 6, hy + 30]  # hand on the face, elbow low on its own side
+assert "arm_over_face" not in kinds(pg.check(t))
+f["joints"]["elbow_l"] = [hx + 2, hy + 4]  # elbow in the middle of the face
+assert "arm_over_face" in kinds(pg.check(t))
+f["joints"]["elbow_l"] = [hx - (sx - hx), hy + 30]  # elbow across on the far side, forearm over the face
+assert "arm_over_face" in kinds(pg.check(t))
 # facing the camera, both hands jumping across the midline in one frame warns (arms folding fast look the same)
 t = front_track()
 for i, f in enumerate(t["frames"]):

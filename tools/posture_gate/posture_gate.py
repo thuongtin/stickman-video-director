@@ -889,6 +889,27 @@ def check_hands(track, P, usable=None):
                         {f"wrist_{hs}", "head"}, severity="warn")
                     break
 
+        # Front view, a hand meant to touch the face ("face_cover"): it may reach the face, but the arm
+        # still may not lie on it. The elbow stays off the middle of the face, and it stays on its own
+        # side: an elbow pulled across the chest sends the forearm diagonally over the face.
+        if not three_d and f.get("facing", "front") == "front" and f.get("face_cover") \
+                and "head" in pts and "neck" in pts:
+            r = f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
+            h, mid = pts["head"], pts["neck"][0]
+            for side in SIDES:
+                ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
+                if not r or not all(k in pts for k in ks):
+                    continue
+                sh, el, wr = (pts[k] for k in ks)
+                if norm(sub(el, h)) < 0.5 * r:
+                    add(fi, "arm_over_face", f"the {_side(side)} elbow sits in the middle of the face; \"face_cover\" "
+                        "lets the hand reach the face, not the arm lie on it", {ks[1], "head"})
+                elif _chord(h, r, el, wr) > 0.5 * r and (el[0] - mid) * (sh[0] - mid) < 0 \
+                        and abs(el[0] - mid) > 0.25 * r:  # a hand at the chin (think) stays at the face's edge
+                    add(fi, "arm_over_face", f"the {_side(side)} elbow crosses to the far side of the body and the "
+                        "forearm runs diagonally across the face; keep the elbow on its own side, low and out",
+                        {ks[1], ks[2], "head"})
+
         # Front view, standing: with "body_width" (the drawn torso's width at the chest, track units,
         # on the track or a frame), a shoulder joint inside the torso outline or an arm hanging over
         # the chest instead of beside it is a warning (every joint angle is legal, but the arms lie on
@@ -1090,6 +1111,19 @@ def _seg_seg(a, b, c, d):
     if cross(a, b, c) * cross(a, b, d) < 0 and cross(c, d, a) * cross(c, d, b) < 0:
         return 0.0
     return min(_seg_dist(a, c, d), _seg_dist(b, c, d), _seg_dist(c, a, b), _seg_dist(d, a, b))
+
+
+def _chord(c, r, a, b):
+    """Length of segment a-b inside the circle of radius r around c."""
+    d = sub(b, a); L = norm(d)
+    if L == 0:
+        return 0.0
+    u = (d[0] / L, d[1] / L); m = sub(a, c)
+    t0 = -(m[0] * u[0] + m[1] * u[1]); q = r * r - (norm(m) ** 2 - t0 * t0)
+    if q <= 0:
+        return 0.0
+    w = math.sqrt(q)
+    return max(0.0, min(L, t0 + w) - max(0.0, t0 - w))
 
 
 def _side(s): return {"l": "left", "r": "right"}.get(s, s) if isinstance(s, str) else " and ".join(map(_side, s))
