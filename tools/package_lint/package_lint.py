@@ -17,7 +17,8 @@ Phase A (storyboard table)
   A6 a number in the post-production overlay note that the English VO never says   RED
 Phase B (prompts)
   B1 prompt count = N (with --clips), and Phase A rows = prompts when both exist   RED
-  B2 `Opening hook:` exactly once, in Clip 1 only                            RED
+  B2 a prompt carries a separate `Opening hook:` line (the hook lives in Clip 1's first frame and first beat)   RED;
+     Clip 1's first beat does not time a hit at about 2 s or earlier (opening-hook.md)   YELLOW
   B3 tools/posture_gate/hand_ledger.py on the whole package                  RED
   B4 a catalog anchor (style-catalog.md) or --anchor used in Clip 1 is missing from a later clip   RED
   B5 the narrator paragraph differs between clips; with approved dialogue written as one
@@ -205,13 +206,26 @@ def spoken_free(p):
                      if not re.match(r"\s*(audio-only dialogue|dialogue|voiceover|vo|voice|audio|music|sfx|sound)\b", l, re.I))
 
 
+def hook_hit(p):
+    """Clip 1's first beat (from [0–…] up to the [3–…] beat) times a hit "at about N s" with N <= 2.5."""
+    start = re.search(r"\[0\s*[–-]", p)
+    if not start:
+        return False
+    rest = p[start.start():]
+    end = re.search(r"\[3\s*[–-]", rest)
+    first = rest[:end.start()] if end else rest
+    return any(float(n) <= 2.5 for n in re.findall(r"at about (\d+(?:\.\d+)?)\s*(?:s\b|sec)", first, re.I))
+
+
 def lint_phase_b(text, ps, clips, extra_anchors):
     out = []
     if clips and len(ps) != clips:
         out.append((RED, "B1", f"package has {len(ps)} prompts, expected {clips}"))
-    hooks = [p.count("Opening hook:") for p in ps]
-    if hooks[0] != 1 or any(hooks[1:]):
-        out.append((RED, "B2", f"`Opening hook:` counts per clip {hooks}; it belongs once in Clip 1 only"))
+    stray = [n for n, p in enumerate(ps, 1) if re.search(r"^\s*Opening hook:", p, re.M)]
+    if stray:
+        out.append((RED, "B2", f"clips {stray} carry an `Opening hook:` line; put the hook in Clip 1's first frame and first beat"))
+    if not hook_hit(ps[0]):
+        out.append((YELLOW, "B2", "clip 1: the first beat does not time a hook hit at about 2 s or earlier"))
     for problem in hand_ledger.lint(text):
         out.append((RED, "B3", problem))
     for anchor in catalog_anchors() + list(extra_anchors):

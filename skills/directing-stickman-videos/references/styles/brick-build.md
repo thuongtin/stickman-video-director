@@ -209,7 +209,7 @@ toy-sized: a cascade of plastic clicks and a short clatter, no explosion, no cam
 4. Head never nods or tilts; torso never bends; elbows and knees fold one way up to 90°; legs never spread.
 5. Knob hands hold only bars; bricks are clamped in both hands; the skirt figure never shows legs.
 6. Stepped stop-motion timing, no motion blur, no morphing or melting plastic.
-7. Every clip with a brick declares `Two-hand props: red brick.` (or the brick's name); hands lines pass `hand_ledger.py`; Clip 1 has an `Opening hook:` line that passes `verify-opening-hook.py`.
+7. Every clip with a brick declares `Two-hand props: red brick.` (or the brick's name); hands lines pass `hand_ledger.py`; Clip 1's first frame and first beat carry the hook and pass `verify-opening-hook.py`.
 
 ## Sample package and lint facts
 

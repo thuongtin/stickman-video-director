@@ -29,6 +29,6 @@
 - PACK-4: Every prompt contains exact dialogue, voice, BGM/SFX, transition, and negative constraints.
 - PACK-5: Every prompt repeats the selected aspect ratio and theme.
 - PACK-6: The stitching guide matches adjacent endings and openings.
-- PACK-7: Clip 1 alone carries one `Opening hook:` sentence after the output specification that matches its first frame and `[0–3s]` beat, with no on-screen words or numbers.
+- PACK-7: Clip 1's first-frame state and first beat carry the approved hook (hit timed at about 2s or earlier), with no separate `Opening hook:` line and no on-screen words or numbers.
 
 Score each assertion PASS or FAIL and quote the response passage that supports the score.

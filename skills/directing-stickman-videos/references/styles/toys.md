@@ -165,7 +165,7 @@ Follow the camera grammar in `storyboard-template.md`:
 
 ## Prompt blocks per clip
 
-1. Output line, then (clip 1 only) the `Opening hook:` sentence.
+1. Output line. (Clip 1's hook lives in its first frame and first timed beat, not in a separate line.)
 2. Frozen style block.
 3. `Characters (exactly N, no one else):` with the full anchor of every toy on screen, then the body rule.
 4. Props with one fixed name each ("red block", "blue block", "big button", "red-tipped stick"), sized against a

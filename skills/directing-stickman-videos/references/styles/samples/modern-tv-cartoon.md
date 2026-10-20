@@ -9,8 +9,6 @@ Hook card: pattern Reaction before cause / Sudden entry. First frame: a dark att
 ```text
 Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
 
-Opening hook: In a pitch-dark attic only June's flashlight beam moves; at about 1.2s the beam lands on Marco's face as he leans in through the doorway, and June and Marco both jump in surprise.
-
 Style: modern American TV cartoon. Flat bright colour fills with no shading, no gradients and no texture; one thin, even, dark-plum outline on every shape. Characters have rounded bean-shaped bodies, big round heads, simple black dot eyes with one white highlight, small simple mouths, and bendy noodle arms and legs that curve smoothly instead of showing sharp elbows or knees. Noodle limbs always keep the same length: they bend by curving, never by stretching or shrinking. Hands are small rounded cartoon hands with four fingers. Snappy, clear key poses with smooth in-betweens; squash and stretch only on the body, never on the arms or legs. Seen from the front, the arms grow from the outer edge of the shoulders and hang with a visible gap from the waist; they never lie on the chest or belly. Palette: warm tan wood, navy, mustard yellow, teal and coral, with the light source as the brightest shape.
 
 Environment: a cosy wooden attic at night: slanted roof beams, a round window with a navy night sky and a pale yellow moon, a cardboard box and an old lamp on the floor.

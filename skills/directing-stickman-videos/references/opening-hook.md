@@ -1,6 +1,8 @@
 # Opening Hook Contract
 
-Use this reference for Stage 1 (Golden Hook) in Phase A and for the first prompt in Phase B. It applies to every style; the style overrides at the end only change intensity and pattern choice. Pattern ideas are adapted for stick-figure, no-text Omni Flash clips from the MIT-licensed `rediumvex/ai-video-generator-claude` skills (© 2026 Roman Knox); wording here is our own.
+Use this reference for Stage 1 (Golden Hook) in Phase A and for the first prompt in Phase B. It applies to every style; the style overrides at the end only change intensity and pattern choice.
+
+Source: the hook craft here (what the viewer sees and hears in the first two seconds, and the pattern names) is learned from the MIT-licensed `rediumvex/ai-video-generator-claude` skills (© 2026 Roman Knox), rewritten in our own words for stick figures and our no-text rule. That repository writes prompts for a different video model and has nothing to do with Flow or Omni Flash. Only its hook technique is taken here; none of its prompt-writing rules, prompt order or claims about how a model reads a prompt.
 
 ## Why the first two seconds are separate work
 
@@ -51,15 +53,15 @@ Choose the pattern that fits the source's actual tension, not the loudest one. E
 - Liquid or shape morphing remains banned in every pattern; express change through concrete action, cuts and wipes.
 - Do not name a hook pattern, a "viral" label or a platform inside the prompt; describe only what is seen and heard.
 
-## Prompt placement (Phase B, Clip 1 only)
+## Carrying the hook into Phase B (Clip 1)
 
-- Write one plain sentence beginning `Opening hook:` immediately after the output specification of Clip 1. It describes the first frame and the hook hit in concrete visual terms. It is a summary for the model, not a new instruction set, and it must agree with the first-frame state and `[0–3s]` beat below it.
-- Make the Clip 1 first-frame state the hook's first frame: the character is present and already moving in the first second.
-- In the `[0–3s]` beat, time the hook hit (for example "at about 1.5s"), then the confirmation. Sync the sound cue to the hit in the Music/SFX line.
+The hook adds no new line or section to the prompt. It lives in the slots `omni-flash-prompt-contract.md` already has:
+
+- The Clip 1 first-frame state is the hook's first frame: the character is present and already moving in the first second.
+- The first timed beat of Clip 1 (`[0–3s]`, or `[0–2s]` then `[2–3s]`) times the hook hit, for example "at about 1.5s", then the confirmation.
+- The Music/SFX line syncs the sound cue to the hit.
 - The quoted dialogue begins with the approved first spoken line; the full voice block is unchanged.
-- Clips 2–N do not carry an `Opening hook:` line.
-
-Placing the hook first follows the observation that video models weight the start of a prompt toward the start of the clip. This has not yet been A/B-tested on Omni Flash; record results when tested.
+- Clips 2–N are unaffected.
 
 ## Ending loop (optional)
 
@@ -88,4 +90,4 @@ For `9:16` shorts that are watched on repeat, the final clip may end on a frame 
 - The open loop is paid off in a named clip, and the hook does not claim anything the source does not support.
 - No words, numbers, counters or text cards appear in the hook; any such text is a post-production overlay.
 - No morphing, strobe or subliminal flashes; silence or black lasts no longer than one second.
-- Clip 1 carries exactly one `Opening hook:` sentence that agrees with its first frame and `[0–3s]` beat; other clips carry none.
+- Clip 1's first-frame state and first timed beat carry the hook, with the hit timed at about 2s or earlier; no prompt carries a separate `Opening hook:` line.

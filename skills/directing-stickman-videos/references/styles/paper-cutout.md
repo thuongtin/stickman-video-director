@@ -204,7 +204,7 @@ Phase A for this style includes:
 
 Each prompt follows `omni-flash-prompt-contract.md` in this order:
 1. Output spec.
-2. `Opening hook:` in clip 1 only.
+2. No separate hook line: Clip 1's hook lives in its first frame and first timed beat (`opening-hook.md`).
 3. Style block: material lock, palette lines, the mixed-cast sentence if needed, and the motion lock.
 4. Full cast cards for every visible role.
 5. Set layers.

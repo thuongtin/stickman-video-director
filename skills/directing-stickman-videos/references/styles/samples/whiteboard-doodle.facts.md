@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `whiteboard-doodle.md` sha256 5c8c3207d257d034
+- package: `whiteboard-doodle.md` sha256 a13249579462caa8
 - checked: 2026-10-20
 - storyboard rows: none
 - prompts: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=afc1bf4b88c09710f537b3e5421ecbeeaf4874dadd413bb064a3409467a266de -->
+<!-- package_lint facts end sha256=d7b93acca5135e377492803a32721c51eaa6700a770a1b9ced45f3288d7d44e4 -->

@@ -11,8 +11,6 @@ Style 1 line figure: letting go of a cord and turning; a second figure trips and
 ```text
 Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
 
-Opening hook: from the first frame Stick Figure A is already trudging right, dragging a violet line tangle twice its size on a violet cord, and at about 1.5s a second tangle drops onto the first with a heavy thud that jerks A back one step.
-
 Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use only saturated anxiety violet, vivid danger red, and warm action gold as accents; this clip primarily uses violet. Treat these ordinary color names as visual art direction only. Compose across left, center, and right with deliberate negative space on the right. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
 
 First frame: A is mid-step in the left third, leaning forward and walking right, dragging a huge violet line tangle behind on a violet cord.
@@ -88,8 +86,6 @@ Style 2A beanie figure: leap into a glass ceiling; pen from the right pocket in 
 
 ```text
 Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchronized audio.
-
-Opening hook: from the first frame Zeke is already crouched mid-leap on the grid floor, and at about 1.5s his beanie bumps an invisible glass ceiling with a comedic bounce that drops him back down.
 
 Environment: A modern bright white studio space with subtle light-gray perspective grid lines on the floor plane. High-key studio lighting, clean white negative space, sleek glowing cyan and electric blue glass holographic UI elements.
 
@@ -167,8 +163,6 @@ Paper cutout, three characters: balloon passed from one character's right hand t
 
 ```text
 Create an approximately 10-second 16:9 horizontal paper cutout stop-motion clip targeting 720p at 24 FPS with synchronized audio.
-
-Opening hook: the first frame is a close view of the yellow paper balloon bobbing above Mai's right hand as she walks right along the paper path, and at about 1.5s a torn grass strip slides away and the camera pulls back to reveal Bé Na at the right edge, staring up at the balloon.
 
 Flat two-dimensional paper cutout stop-motion animation shot straight down onto a tabletop. Every character, prop and scenery element is a separate rigid piece of matte paper with visible paper fibre and slightly irregular cut or torn edges, layered with small soft contact shadows between layers. One warm key light from the upper left. No drawn outlines.
 
@@ -299,8 +293,6 @@ Chibi, short arms: several cast members in one frame, teddy-bear handoff
 
 ```text
 Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
-Opening hook: Bo toddles along a sunny park path with his teddy bear while a bouncing orange basketball comes in from the left, and at about 1.5 seconds the ball taps Bo on the back.
-
 Style and environment: Flat 2D cel-shaded anime animation with a hand-drawn look; thick soft dark-brown outline of constant weight on characters and props; flat colors with one soft shadow tone and no gradients; soft pastel backgrounds built from simple shapes, with fewer details than the characters; the characters' outfit colors stay the most saturated things on screen. A sunny neighborhood park: a sandy path, a low green hedge, a wooden bench on the right and a small basketball hoop on a post at the far left.
 
 Characters (exactly 3, each keeps its own design; no one else appears):

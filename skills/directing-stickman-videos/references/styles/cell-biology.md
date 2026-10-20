@@ -58,7 +58,7 @@ science-lab (research pack, `gated`). Visible differences:
 
 ## Frozen style block
 
-Pasted verbatim into every clip, right after the output spec (and after the opening hook in clip 1):
+Pasted verbatim into every clip, right after the output spec:
 
 ```text
 Style and environment: a bright, friendly 2D animated micro-world inside a human blood vessel, like a cheerful view through a microscope. Characters are soft translucent cells with a jelly-like gradient fill, a thick darker membrane outline with a thin light inner line just inside it, a glossy white highlight near the top, and inner details (nucleus, granules) visible through the membrane. Histology-stain palette on pale peach plasma: crimson, lilac, sky blue, lime green, peach cream and golden yellow. The floor is one row of flat pink lining cells, each with an oval rose nucleus; behind the characters, soft out-of-focus round cells and tiny drifting particles float in the plasma. Gentle depth of field, soft even light, no hard shadows. Clean, rounded educational cartoon; not photorealistic, not a medical textbook illustration.

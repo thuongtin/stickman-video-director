@@ -37,10 +37,11 @@ for path in [SKILL / "SKILL.md", *REFS.glob("*.md")]:
         '("The same minimalist 2D animated stick figure in a bright red beanie and yellow shirt" followed by an ellipsis)', ""), \
         f"Retired Style 2 shortcut in {path.name}"
 
-# Opening hook: exactly one line, in clip 1 only.
+# Opening hook: carried by clip 1's first frame and first beat, never a separate line.
 for part in (style1, style2a):
     ps = prompts(part)
-    assert ps[0].count("Opening hook:") == 1 and not any("Opening hook:" in p for p in ps[1:])
+    assert not any("Opening hook:" in p for p in ps)
+    assert re.search(r"\[0–3s\][^\n]*at about 1\.5s", ps[0], re.I), "Clip 1's first beat times the hook hit"
 
 # No on-screen words or abstract morphing taught by example.
 for p in prompts(examples):

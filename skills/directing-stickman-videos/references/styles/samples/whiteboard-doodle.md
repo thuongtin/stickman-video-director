@@ -27,8 +27,6 @@ Built by `make_cast_package.py` from the frozen blocks in `whiteboard-doodle.md`
 ```text
 Create an approximately 10-second 16:9 horizontal whiteboard animation clip targeting 720p at 24 FPS with synchronized audio.
 
-Opening hook: from the first frame Bean and Mr. Square already stand drawn on the board, both frowning, with the marker tip mid-stroke above Bean's head, and at about 1.5s the marker closes a small black rain cloud that drops three short rain strokes onto Bean with a soft marker squeak.
-
 Board: a matte white whiteboard fills the entire frame, seen flat and front-on, soft even daylight, very faint gray ghosting of old erased marks. All drawings are black whiteboard-marker line art with slightly irregular hand-drawn strokes, natural ink density and rounded line ends, medium consistent line weight; characters and props are outlines left white inside. Lines appear exactly under the marker tip in natural stroke order; nothing appears ahead of the tip and nothing fades in. The only other marker colors are red, blue and green, used on small areas such as a blush, a bow, a tie, a collar, a scarf, a balloon, a small circle or an arrow. No painted background, no shading, no gradients, no 3D.
 
 Drawing hand: one adult right hand holding a black whiteboard marker with the cap off enters from the lower right; plain dark sleeve cuff at the frame edge, no rings, no watch, five natural fingers, one marker. It stays at the edge of the drawing and leaves frame while the doodles move.
@@ -46,7 +44,7 @@ Layout on the board: Mr. Square stands at the left, Bean at the center right; Ca
 First frame: Mr. Square drawn at the left and Bean drawn at the center right, both frowning; the marker tip is mid-stroke on a small cloud above Bean's head. Candy is not drawn yet.
 Hands at start — Bean: right hand empty; left hand empty. Mr. Square: right hand empty; left hand holds the black briefcase. Drawing hand: right hand holds the black whiteboard marker.
 
-[0–3s] (VO: "A bad mood spreads fast."): Camera holds. The marker closes the rain cloud above Bean; three short rain strokes fall on him and his shoulders drop.
+[0–3s] (VO: "A bad mood spreads fast."): Camera holds. At about 1.5s the marker closes the rain cloud above Bean with a soft marker squeak; three short rain strokes fall on him and his shoulders drop.
 [3–7s] (VO: "One gloomy cloud, and the whole line sags."): Camera holds. The hand stretches the cloud with one long stroke to the left until it also hangs over Mr. Square; his frown deepens and he glances at his wrist.
 [7–10s] (VO: "Then a small girl shows up with a balloon."): Slow lateral track left. The hand draws Candy between them in stroke order: head, pigtails and bows, face, green triangle dress, arms, legs, then a red balloon on a string held in her right hand. The hand leaves frame and Candy bounces once, looking at Bean.
 

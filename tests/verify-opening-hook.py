@@ -40,16 +40,24 @@ def check_card(card, clip_count):
     assert not any(re.search(rf"\b{w}", hook_text) for w in ON_SCREEN_TEXT), "On-screen text in hook"
 
 
+def first_beat(prompt):
+    start = re.search(r"\[0\s*[–-]", prompt)
+    assert start, "Clip 1 has no first timed beat"
+    rest = prompt[start.start():]
+    end = re.search(r"\[3\s*[–-]", rest)
+    return rest[:end.start()] if end else rest
+
+
 def check_package(prompts):
+    """The hook lives in Clip 1's first frame and first beat; no prompt carries a separate hook line."""
     assert prompts, "No prompts"
-    lines = [p for p in prompts[0].splitlines() if p.strip()]
-    hook_lines = [i for i, line in enumerate(lines) if line.startswith("Opening hook:")]
-    assert hook_lines == [1], "Clip 1 needs exactly one Opening hook sentence right after the output spec"
-    hook = lines[1].lower()
-    assert not any(w in hook for w in BANNED_EFFECTS), "Banned effect in Opening hook sentence"
-    assert not any(re.search(rf"\b{w}", hook) for w in ON_SCREEN_TEXT), "On-screen text in Opening hook"
-    for prompt in prompts[1:]:
-        assert "Opening hook:" not in prompt, "Only Clip 1 carries an Opening hook sentence"
+    for prompt in prompts:
+        assert not re.search(r"^\s*Opening hook:", prompt, re.M), "No separate Opening hook line in any prompt"
+    beat = first_beat(prompts[0])
+    hits = [float(n) for n in re.findall(r"at about (\d+(?:\.\d+)?)\s*(?:s\b|sec)", beat, re.I)]
+    assert hits and min(hits) <= 2.5, "Clip 1's first beat must time the hook hit at about 2s or earlier"
+    low = beat.lower()
+    assert not any(w in low for w in BANNED_EFFECTS), "Banned effect in the hook beat"
 
 
 good_card = {
@@ -84,16 +92,16 @@ for field, bad in (
         raise AssertionError(f"Bad hook card was not rejected: {field}={bad!r}")
 
 spec = "Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip."
-hook = ("Opening hook: Stick Figure A is already buckling under a house-sized violet thought tangle; "
-        "at about 1.5s it drops lower and the floor cracks.")
-body = "Character: ...\n[0–3s] ...\n[3–7s] ...\n[7–10s] ..."
-check_package([f"{spec}\n\n{hook}\n\n{body}", f"{spec}\n\n{body}", f"{spec}\n\n{body}"])
+hooked = ("First frame: Stick Figure A is already buckling under a house-sized violet thought tangle.\n"
+          "[0–3s] A strains upward; at about 1.5s the tangle drops lower and the floor cracks.\n[3–7s] ...\n[7–10s] ...")
+plain = "First frame: A walks right.\n[0–3s] A walks.\n[3–7s] ...\n[7–10s] ..."
+check_package([f"{spec}\n\n{hooked}", f"{spec}\n\n{plain}", f"{spec}\n\n{plain}"])
 for bad in (
-    [f"{spec}\n\n{body}", f"{spec}\n\n{body}"],
-    [f"{spec}\n\n{body}\n{hook}", f"{spec}\n\n{body}"],
-    [f"{spec}\n\n{hook}\n\n{body}", f"{spec}\n\n{hook}\n\n{body}"],
-    [f"{spec}\n\n{hook}\n{hook}\n\n{body}"],
-    [f"{spec}\n\nOpening hook: a bold countdown appears.\n\n{body}"],
+    [f"{spec}\n\n{plain}", f"{spec}\n\n{plain}"],
+    [f"{spec}\n\nOpening hook: A is buckling.\n\n{hooked}", f"{spec}\n\n{plain}"],
+    [f"{spec}\n\n{hooked}", f"{spec}\n\nOpening hook: A is buckling.\n\n{plain}"],
+    [f"{spec}\n\n{hooked.replace('at about 1.5s', 'at about 4s')}"],
+    [f"{spec}\n\n{hooked.replace('drops lower', 'morphs into liquid')}"],
 ):
     try:
         check_package(bad)
@@ -104,22 +112,23 @@ for bad in (
 
 # Routing: every planning and prompt contract points at the hook reference.
 skill = (SKILL / "SKILL.md").read_text()
-assert "references/opening-hook.md" in skill and "`Opening hook:`" in skill
+assert "references/opening-hook.md" in skill and "adds no extra prompt line" in skill
 storyboard = (SKILL / "references/storyboard-template.md").read_text()
 assert "hook card from `opening-hook.md`" in storyboard and "`0–2s` hook" in storyboard
 assert "passes the hook checks in `opening-hook.md`" in storyboard
 contract = (SKILL / "references/omni-flash-prompt-contract.md").read_text()
 assert "Clip 1 only: follow `opening-hook.md`" in contract
-assert "Clip 1 carries exactly one `Opening hook:` sentence" in contract
+assert "The hook adds no separate line to the prompt." in contract
 
 ref = REF.read_text()
 for style in ("Style 1:", "Style 2A:", "Style 2B:", "Style 3:", "Style 4:"):
     assert style in ref, f"Missing style override: {style}"
-assert "has not yet been A/B-tested on Omni Flash" in ref, "Untested placement must stay labeled"
 assert "MIT-licensed" in ref, "Source attribution missing"
+assert "nothing to do with Flow" in ref and "Only its hook technique is taken" in ref, "Source scope must stay explicit"
+assert "Prompt placement" not in ref and "weight the start of a prompt" not in ref, "Borrowed prompt-order claim is back"
 assert len(patterns()) >= 10
 
 if len(sys.argv) > 1:
     check_package(re.findall(r"```text\n(.*?)\n```", Path(sys.argv[1]).read_text(), re.S))
-    print("Supplied package hook placement passed.")
+    print("Supplied package hook check passed.")
 print(f"Opening hook regression passed ({len(patterns())} patterns); no retention score claimed.")

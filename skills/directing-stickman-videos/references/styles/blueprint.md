@@ -60,7 +60,7 @@ blueprint has no colour, no lighting and no room set.
 
 ## Frozen style block
 
-Pasted verbatim into every clip, right after the output spec (and after the opening hook in clip 1):
+Pasted verbatim into every clip, right after the output spec:
 
 ```text
 Style and environment: an animated engineering blueprint in flat 2D. The whole frame is cyanotype paper: deep Prussian-blue ground with slightly uneven exposure, faint fold creases, and a fine pale-blue drafting grid with a heavier line every fifth square, a thin double white border and an empty ruled title block in the lower right corner. Everything is drawn in crisp pale white lines of one or two weights over flat, slightly lighter blue fills; there is no other color. Draftsman's marks stay on every drawing: small pin-joint circles with cross-hairs at shoulders, elbows and knees, faint dash-dot centre lines through limbs and machines, dashed hidden lines for parts behind a wall, 45-degree section hatching on cut surfaces and work clothes, dimension lines with arrowheads whose labels are blank rounded capsules, and faint head guides (a centre line and an eye line) running just past each head. Machines are shown in cutaway: housings in hatched section with gear trains inside. New machine parts appear by being plotted on line by line, left to right, never by fading or morphing. Characters stand in flat side or front view on two white ground lines; the back row stands higher, not smaller.

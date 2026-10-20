@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `toys.md` sha256 c72e0fedec87236d
+- package: `toys.md` sha256 de810559d2f1f0f0
 - checked: 2026-10-20
 - storyboard rows: none
 - prompts: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=0f4560a6a946433273c0cd01d0c3da79be4110301a9c251fb5b6d6e4d1b0cfec -->
+<!-- package_lint facts end sha256=29f4b83c7d8d59797284220ffdfdd1c1e2ceff91dfc95b678a08d89aa149912f -->

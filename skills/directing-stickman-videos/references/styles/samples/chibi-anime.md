@@ -16,8 +16,6 @@
 
 ```text
 Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
-Opening hook: Bo toddles along a sunny park path with his teddy bear while a bouncing orange basketball comes in from the left, and at about 1.5 seconds the ball taps Bo on the back.
-
 Style and environment: Flat 2D cel-shaded anime animation with a hand-drawn look; thick soft dark-brown outline of constant weight on characters and props; flat colors with one soft shadow tone and no gradients; soft pastel backgrounds built from simple shapes, with fewer details than the characters; the characters' outfit colors stay the most saturated things on screen. A sunny neighborhood park: a sandy path, a low green hedge, a wooden bench on the right and a small basketball hoop on a post at the far left.
 
 Characters (exactly 3, each keeps its own design; no one else appears):

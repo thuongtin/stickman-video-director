@@ -198,7 +198,7 @@ Reaction before cause (a hero braced and staring, then the thing flies in), Sudd
 
 ## Sample package
 
-[samples/superhero.md](samples/superhero.md): 3 clips, 16:9, opening hook in clip 1, hands ledger in every clip. Gates: `package_lint.py` PASS (0 red, 0 yellow), facts block [samples/superhero.facts.md](samples/superhero.facts.md); `tests/verify-opening-hook.py` passes; `hand_ledger.py` PASS. Regenerate with `src/run_all.sh`.
+[samples/superhero.md](samples/superhero.md): 3 clips, 16:9, hook in clip 1's first frame and first beat, hands ledger in every clip. Gates: `package_lint.py` PASS (0 red, 0 yellow), facts block [samples/superhero.facts.md](samples/superhero.facts.md); `tests/verify-opening-hook.py` passes; `hand_ledger.py` PASS. Regenerate with `src/run_all.sh`.
 
 ## Catalog entry (ready to paste)
 
