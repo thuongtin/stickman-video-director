@@ -247,6 +247,7 @@ SPOKEN = re.compile(r'\(VO:\s*"[^"\n]*"\)|“[^”\n]*”', re.I)
 def held(text):
     t = text.strip().lower()
     t = re.sub(r"^(holds|holding|grips|gripping|carries|carrying)\s+", "", t)
+    t = re.sub(r"\s*\(shared\)", "", t)  # one big prop two characters hold together
     return None if t in ("empty", "is empty", "free", "nothing", "-") else re.sub(r"^(the|a|an)\s+", "", t)
 
 
@@ -315,7 +316,7 @@ def lint(text, warnings=None):
                     if p:
                         holders.setdefault(p, set()).add(name)
             for p, who in holders.items():
-                if len(who) > 1:
+                if len(who) > 1 and not re.search(rf"{re.escape(p)}\s*\(shared\)", lines[k][0], re.I):
                     problems.append(f"Clip {n}: the {p} is in {' and '.join(sorted(who))}'s hands at the {k} "
                                     f"at once; after a pass, empty the giver's hand (two separate props need "
                                     f"different names, e.g. \"{sorted(who)[0]}'s {p}\")")

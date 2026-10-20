@@ -631,6 +631,14 @@ assert hand_ledger.lint(stone) == [], hand_ledger.lint(stone)
 assert any("Than's hands end without" in p for p in hand_ledger.lint(stone.replace(" Gach takes the stone from Than with her left hand.", "")))
 assert any("ends without it" in p for p in hand_ledger.lint(stone.replace("- [3-6s] Gach turns to the wall. Gach places the stone in the gap and lets go.\n", "")))
 assert any("lets go of the stone" in p for p in hand_ledger.lint(stone.replace("Gach: right hand holds the mallet; left hand empty.\n", "Gach: right hand holds the mallet; left hand holds the stone.\n")))
+# one big prop two characters hold together is marked "(shared)"
+sheet = ("## Clip 1\nHands at start — Ba: right hand holds the paper sheet (shared); left hand holds the paper sheet (shared). "
+         "Mai: right hand holds the paper sheet (shared); left hand holds the paper sheet (shared).\n"
+         "- [0-3s] Ba and Mai lift the paper sheet together with both hands.\n"
+         "Hands at end — Ba: right hand holds the paper sheet (shared); left hand holds the paper sheet (shared). "
+         "Mai: right hand holds the paper sheet (shared); left hand holds the paper sheet (shared).\n")
+assert hand_ledger.lint(sheet) == [], hand_ledger.lint(sheet)
+assert any("at once" in p for p in hand_ledger.lint(sheet.replace(" (shared)", "")))
 # a character outside the hands lines who has no hands
 ox = ("## Clip 1\nCharacters: Lua, a farmer; Trau Da, a stone ox. Trau Da has no hands and stays out of the hands lines.\n"
       "Hands at start — Lua: right hand empty; left hand empty.\n"
