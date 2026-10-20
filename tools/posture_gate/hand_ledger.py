@@ -43,6 +43,7 @@ HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|
                      r"clutch(?:es|ing)?|carr(?:y|ies|ying)|picks? up|picking up|wields?|"
                      r"(?:in|with) (?:his|her|their|its|one|both) (?:left |right )?(?:hand|paw|flipper|wing|hoof|claw|fin)s?)\b[^.\n]{0,40}", re.I)
 NEAR_FAR = re.compile(rf"\b(near|far|upstage|downstage) (?:arm|{LIMB[3:-1]})s?\b", re.I)
+CLAUSE = re.compile(r",\s*|;\s*|\s+(?:and|then|while|before|after)\s+", re.I)
 SIDE = re.compile(rf"\b(left|right) {LIMB}s?\b", re.I)
 
 
@@ -129,7 +130,10 @@ def lint(text):
                 for sent in re.split(r"(?<=[.!?;])\s+", beats):
                     named = {c for c in everyone if c.lower() in sent.lower()}
                     if key in sent.lower() and (not named or name in named):
-                        sides = {m.group(1).lower()[0] for m in SIDE.finditer(sent)}
+                        # only the hand named in the same clause as the prop counts:
+                        # "opens the door with the left hand and takes out the tea with the right hand"
+                        clauses = [c for c in CLAUSE.split(sent) if key in c.lower()]
+                        sides = {m.group(1).lower()[0] for c in clauses for m in SIDE.finditer(c)}
                         if sides and not sides & allowed and (n, sent) not in seen:
                             seen.add((n, sent))
                             problems.append(f"Clip {n}: beat puts the {prop} in {name}'s "

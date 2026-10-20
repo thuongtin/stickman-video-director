@@ -221,6 +221,14 @@ Hands at end — Kaka: right flipper holds the folder; left flipper empty. Miso:
 """
 problems = hand_ledger.lint(pkg)
 assert len(problems) == 1 and "Miso's right hand" in problems[0], problems
+# only the hand in the prop's own clause counts
+pkg = """### Clip 1
+Hands at start — Nori: right hand holds the phone; left hand empty.
+[0-3s] Nori opens the fridge door with the left hand and takes out the milk tea with the right hand.
+Hands at end — Nori: right hand holds the phone; left hand holds the milk tea.
+"""
+assert any("milk tea in Nori's right hand" in p for p in hand_ledger.lint(pkg)), hand_ledger.lint(pkg)
+assert hand_ledger.lint(pkg.replace("tea with the right", "tea with the left")) == []
 # either hand order, a marked time cut, a prop picked up mid-clip named with the wrong hand
 pkg = """### Clip 1
 Hands at start — Nori: right hand holds the phone; left hand empty.

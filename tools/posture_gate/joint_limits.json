@@ -32,8 +32,8 @@
       "ref_percentile": 0.5
     },
     "pixel": {
-      "_note": "Rigs snapped to a pixel grid: bones only a few pixels long, so allow 1.5 px of rounding on lengths and wider angle tolerance.",
-      "angle_tolerance": 20,
+      "_note": "Rigs snapped to a pixel grid: bones only a few pixels long, so allow 1.5 px of rounding on lengths. Angles stay strict; gate angles on the pre-snap joints if rounding trips them.",
+      "angle_tolerance": 8,
       "bone_stretch": 0.06,
       "bone_shrink": 0.06,
       "abs_tolerance_px": 1.5,

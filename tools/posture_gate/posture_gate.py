@@ -752,6 +752,9 @@ def main(argv=None):
         tracks = [json.loads(Path(p).read_text()) for p in paths]
     except (OSError, ValueError) as e:
         print(f"cannot read track: {e}", file=sys.stderr); return 2
+    for p, t in zip(paths, tracks):
+        if not isinstance(t, dict) or not isinstance(t.get("frames"), list):
+            print(f"{p}: not a pose track (needs a \"frames\" list)", file=sys.stderr); return 2
     if a.cmd == "fix":
         fixed = fix(tracks[0])
         Path(a.out).write_text(json.dumps(fixed, indent=1))
