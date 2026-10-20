@@ -41,7 +41,8 @@ EXCUSE = re.compile(r"\b(handoff|hand-off|time cut)\b[.:,]?\s*", re.I)
 LIMB = r"(?:hand|paw|flipper|wing|hoof|claw|fin|glove|mitten|mitt|fist|palm)"
 ENTRY = re.compile(rf"(?P<name>\s*(?:(?:Mr|Mrs|Ms|Dr|St)\.\s*)?[^:;.]+?):\s*(?P<a>(?:right|left) {LIMB}\s+[^;]+?);\s*(?P<b>(?:right|left) {LIMB}\s+[^.;\n]+)", re.I)
 HAND = re.compile(rf"(right|left) {LIMB}\s+(.+)", re.I | re.S)
-TRANSFER = re.compile(r"\b(pass(es|ed)?|hands (it )?over|hand it over|hands (?:\w+ )?(?:the|a|an|it|her|his|them)|gives?|takes?|swaps?|switch(es)?|moves? .* to (his|her|their|its) "
+TRANSFER = re.compile(r"\b(opens? (?:his|her|their|its) (?:left |right )?(?:hand|paw|fist|fingers)|closes? (?:his|her|their|its) "
+                      r"(?:left |right )?(?:hand|paw|fingers) (?:around|on|over)|lets? (?:\S+ ){0,3}?go|pass(es|ed)?|hands (it )?over|hand it over|(?<!both )(?<!his )(?<!her )(?<!their )(?<!its )(?<!two )(?<!the )(?<!with )hands (?:\w+ )?(?:the|a|an|it|her|his|them)\b|gives?|takes?|swaps?|switch(es)?|moves? .* to (his|her|their|its) "
                       r"(left|right) hand|drops?|puts?|sets? (?:\S+ ){0,3}?down|places?|picks?|grabs?|catch(es)?|toss(es)?|"
                       r"throws?|releases?|lets? go|tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|receives?|"
                       r"accepts?|snatch(es)?|pulls? out|takes? out)\b", re.I)
@@ -51,7 +52,7 @@ HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|
                      r"clutch(?:es|ing)?|carr(?:y|ies|ying)|picks? up|picking up|wields?|"
                      rf"(?:in|with) (?:his|her|their|its|one|both) (?:left |right )?{LIMB}s?)\b[^.\n]{{0,40}}", re.I)
 # verbs that let go of a prop: a hand that ends empty needs one ("sets the brush down")
-RELEASE = re.compile(r"\b(pass(es|ed)?|hands (it )?over|hand it over|hands (?:\w+ )?(?:the|a|an|it|her|his|them)|gives?|"
+RELEASE = re.compile(r"\b(opens? (?:his|her|their|its) (?:left |right )?(?:hand|paw|fist|fingers)|lets? (?:\S+ ){0,3}?go|pass(es|ed)?|hands (it )?over|hand it over|(?<!both )(?<!his )(?<!her )(?<!their )(?<!its )(?<!two )(?<!the )(?<!with )hands (?:\w+ )?(?:the|a|an|it|her|his|them)\b|gives?|"
                      r"swaps?|switch(es)?|moves?|drops?|puts?|sets?|places?|toss(es)?|throws?|releases?|lets? go|"
                      r"tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|rests?|lowers? .* (?:onto|on|into)|offers?)\b", re.I)
 BOTH = re.compile(rf"\b(?:both|two) {LIMB}s\b", re.I)
@@ -62,6 +63,10 @@ STATIC = re.compile(r"^\W*(?:output|style(?: and environment)?|characters?|props
 TIMED = re.compile(r"^\s*[-*]?\s*\[[^\]\n]*\d[^\]\n]*\].*$", re.M)
 NEAR_FAR = re.compile(rf"\b(near|far|upstage|downstage) (?:arm|{LIMB[3:-1]})s?\b", re.I)
 PRONOUN = re.compile(r"\b(it|them)\b", re.I)
+# "it" / "them" as the thing a hand holds or passes
+PRON_OBJ = re.compile(r"\b(?:hold|grab|grip|take|took|catch|caught|pick|carr(?:y|ie)|clutch|lift|raise|pass|hand|give|gave|"
+                      r"drop|put|set|place|toss|throw|tuck|swap|switch|move|receive|accept|snatch|hug|cradle|lower|offer)"
+                      r"\w*\s+(?:\w+\s+)?\b(it|them)\b(?!\s+(?:\w+\s+)?(?:between|among))", re.I)
 CLAUSE = re.compile(r",\s*|;\s*|\s+(?:and|then|while|before|after|as|when|until|but)\s+", re.I)
 SIDE = re.compile(rf"\b(left|right) {LIMB}s?\b", re.I)
 # a prop tucked under or carried in an arm is on that side: "tucks the box under his left arm"
@@ -77,9 +82,23 @@ PARTS = {"string": ("balloon", "kite", "yo-yo"), "strap": ("bag", "backpack", "c
          "handle": ("bag", "cane", "umbrella", "suitcase", "briefcase", "mug", "cup", "basket", "bucket", "pan",
                     "kettle", "racket", "broom"), "leash": ("dog", "puppy"), "stick": ("lollipop",)}
 # "a pencil in her right hand": an object put in a hand, for props the hands lines never list
-OBJ_IN_HAND = re.compile(rf"\b(?:a|an|the|his|her|their|its)\s+((?:[\w-]+\s+){{0,3}}?[\w-]+)\s+(?:still\s+)?in\s+"
+OBJ_IN_HAND = re.compile(rf"\b(?:a|an|the|his|her|their|its)\s+((?:[\w-]+\s+){{0,3}}?[\w-]+)\s+(?:(?:still|out|up|high|tight|close)\s+)?in\s+"
                          rf"(?:his|her|their|its|the|one)\s+(left|right)\s+{LIMB}\b", re.I)
-NOT_PROPS = {"face", "chin", "head", "cheek", "hair", "pocket", "hand", "paw", "arm", "nose", "mouth", "ear", "eye",
+# "with her hand": a hand that takes or holds something without saying which
+UNSIDED = re.compile(rf"\b(?:with|in|into) (?:his|her|their|its|one|a) {LIMB}\b", re.I)
+FINGER = re.compile(r"\b(left|right) (?:index |pointer |middle |little )?(?:finger|thumb)s?\b", re.I)
+POINTS = re.compile(r"\b(?:point|gesture)(?:s|ed|ing)?\b", re.I)
+# picking up, grabbing or catching something; the next words name it
+PICKUP = re.compile(r"\b(?:picks? up|picking up|scoops? up|snatch(?:es)?|catch(?:es)?|takes? (?=[^,;.]*\b(?:from|off|out of)\b))\s+", re.I)
+STOP = {"from", "off", "out", "with", "in", "into", "and", "to", "up", "onto", "on", "at", "by", "as", "while", "then",
+        "before", "after", "of", "toward", "towards", "over", "under", "between", "it", "them"}
+# "hands now empty": whatever was in them is gone
+EMPTIED = re.compile(rf"\b(?:{LIMB}s?|arms) (?:are |is )?(?:now )?(?:empty|free)\b|\bempty-handed\b", re.I)
+NOT_THINGS = {"step", "steps", "breath", "look", "seat", "bow", "turn", "sip", "bite", "moment", "peek", "glance",
+              "photo", "picture", "note", "notes", "chance", "deep", "pose", "position", "lead", "aim", "cue", "beat"}
+# a character drawn without hands ("no arms, no hands") has no hands to hold anything with
+NO_HANDS = re.compile(r"\b(?:no (?:arms|hands)|armless|handless|without (?:arms|hands))\b", re.I)
+NOT_PROPS = {"side", "shoulder", "coat", "sleeve", "back", "front", "air", "way", "place", "time", "face", "chin", "head", "cheek", "hair", "pocket", "hand", "paw", "arm", "nose", "mouth", "ear", "eye",
              "hip", "waist", "lap", "chest", "belly", "tail", "string", "handle", "strap"}
 # sentence breaks, but not after "Mr." / "Dr." in a name
 SENT = re.compile(r"(?<!\bMr\.)(?<!\bMs\.)(?<!\bDr\.)(?<!\bSt\.)(?<!\bMrs\.)(?<=[.!?;])\s+|\s*\n\s*")
@@ -145,6 +164,7 @@ def hand_owners(sent, cast, state=None):
             hands += [("r", owner), ("l", owner), ("b", owner)]
         if POINTING.search(clause) and not GRASP.search(clause):
             hands = []  # "points at the jar with her right hand" holds nothing
+        state.setdefault("clauses", []).append((clause, subject or state.get("subject")))
         out.append((clause, hands))
     if subject:
         state["subject"] = subject
@@ -200,7 +220,7 @@ def lint(text, warnings=None):
         lines = {k.lower(): (q + " " + v, parse_ledger(EXCUSE.sub("", v))) for k, q, v in LINE.findall(body)}
         ledgers.append((n, body, lines))
     for n, body, _ in ledgers:
-        for sent in sentences(LINE.sub("", body)):
+        for sent in sentences(STATIC.sub("", LINE.sub("", body))):  # "far arm one shade darker" is drawing
             m = NEAR_FAR.search(sent)
             if m:
                 problems.append(f"Clip {n}: \"{m.group(0)}\" is ambiguous (it flips when the character turns); "
@@ -278,11 +298,14 @@ def lint(text, warnings=None):
                     problems.append(f"Clip {n}: {name}'s hands end without the {', '.join(unreleased)}, but no beat "
                                     f"puts it down, drops or gives it away")
                 elif warnings is not None and any(end[1][name][sd] in moved for sd in ("r", "l")) \
-                        and not any(SIDE.search(x) or ARM_SIDE.search(x) or BOTH.search(x) for x in passes):
+                        and not any(o in (name, None) for x in sents
+                                    if (TRANSFER.search(x) or re.search(r"\b(?:grip|grab|catch|clutch)\w*", x, re.I))
+                                    and any(mentions(x, end[1][name][sd]) for sd in ("r", "l") if end[1][name][sd] in moved)
+                                    for _, hs in hand_owners(x, set(start[1]) | set(end[1])) for _, o in hs):
                     # "Bao hands Mira the loaf": the model picks the receiving hand itself
                     warnings.append(f"Clip {n}: the beat that gives {name} the "
                                     f"{next(end[1][name][sd] for sd in ('r', 'l') if end[1][name][sd] in moved)} "
-                                    f"names no hand; say which hand takes it: \"{excerpt(passes[0])}\"")
+                                    f"names no hand; say which hand takes it: \"{excerpt(next((x for x in passes if any(mentions(x, end[1][name][sd]) for sd in ('r', 'l') if end[1][name][sd] in moved)), passes[0]))}\"")
         # beat sentences that name a ledger prop with a hand it is never in during this clip
         # (start or end ledger; a prop picked up mid-clip only appears in the end ledger)
         everyone = set(start[1]) | set(end[1])
@@ -346,44 +369,155 @@ def lint(text, warnings=None):
                 at = low_beats.find(clause.lower(), cursor) if clause else -1
                 cursor = at if at >= 0 else cursor
                 low = clause.lower()
-                pron = PRONOUN.search(clause)
+                pron = PRON_OBJ.search(clause)  # "takes it", not "slaps it" or "a low five between them"
                 hands = next((h for c, h in owned if c == clause), [])
                 if not (pron and hands and (HOLDING.search(clause) or TRANSFER.search(clause))) \
                         or any(mentions(low, p) for p in owners) or (n, sent) in seen:
                     continue
-                before = low_beats[:cursor + pron.start()]
+                before = low_beats[:cursor + pron.start(1)]
                 last = lambda p: max(before.rfind(k) for k in keys(p))
                 prop = max(owners, key=last, default=None)
                 key = prop and prop.split()[-1]
                 if prop is None or last(prop) < 0:
                     seen.add((n, sent))
-                    problems.append(f"Clip {n}: name the prop instead of \"{pron.group(0)}\" "
+                    problems.append(f"Clip {n}: name the prop instead of \"{pron.group(1)}\" "
                                     f"when a hand takes or holds it: \"{excerpt(sent)}\"")
                     continue
                 who = {o for _, o in hands if o in owners[prop]}
+                if not who and any(o for _, o in hands):
+                    continue  # someone the hands lines never give it to: not their hands to compare
                 allowed = set().union(*(owners[prop][c] for c in (who or owners[prop])))
                 sides = {side for side, o in hands if side != "b" and (not who or o in who)}
                 if not sides & allowed:
                     seen.add((n, sent))
-                    problems.append(f"Clip {n}: \"{pron.group(0)}\" (the {key}) goes in the "
+                    problems.append(f"Clip {n}: \"{pron.group(1)}\" (the {key}) goes in the "
                                     f"{'left' if 'l' in sides else 'right'} hand, but the hands lines keep it in the "
                                     f"{'right' if 'r' in allowed else 'left'} hand: \"{excerpt(sent)}\"")
-        # "with a paper pencil in her right hand" while the hands lines keep that hand empty
-        if warnings is not None:
-            for sent, owned in attribute(beats, everyone):
-                for clause, hands in owned:
-                    for m in OBJ_IN_HAND.finditer(clause):
-                        what, side = m.group(1).lower(), m.group(2).lower()[0]
-                        owner = next((o for sd, o in hands if sd == side), None) or (next(iter(everyone)) if len(everyone) == 1 else None)
-                        if owner is None or what.split()[-1].rstrip("s") in NOT_PROPS or not hands:
-                            continue
-                        led = [x.get(owner) for x in (start[1], end[1]) if x.get(owner)]
-                        listed = {p for x in (start[1], end[1]) for h in x.values() for p in h.values() if p}
-                        if led and all(h[side] is None for h in led) and not any(mentions(what, p) or
-                                                                                 any(k in what for k in keys(p)) for p in listed):
-                            warnings.append(f"Clip {n}: beat puts {m.group(1)} in {owner}'s "
-                                            f"{'right' if side == 'r' else 'left'} hand, which the hands lines keep empty; "
-                                            f"list it there or drop it: \"{excerpt(sent)}\"")
+        # "with a paper pencil in her right hand" while the hands lines keep that hand empty, or
+        # "the cog in his left hand" while they call it the big gear
+        listed = {p for x in (start[1], end[1]) for h in x.values() for p in h.values() if p}
+        for sent, owned in attribute(beats, everyone):
+            for clause, hands in owned:
+                for m in OBJ_IN_HAND.finditer(clause):
+                    what, side = m.group(1).lower(), m.group(2).lower()[0]
+                    owner = next((o for sd, o in hands if sd == side), None) or (next(iter(everyone)) if len(everyone) == 1 else None)
+                    if owner is None or what.split()[-1].rstrip("s") in NOT_PROPS or not hands or \
+                            any(mentions(what, p) or any(k in what for k in keys(p)) for p in listed) or (n, sent) in seen:
+                        continue
+                    led = [x.get(owner) for x in (start[1], end[1]) if x.get(owner)]
+                    if not led:
+                        continue
+                    other = {h["l" if side == "r" else "r"] for h in led} - {None}
+                    hand = "right" if side == "r" else "left"
+                    if all(h[side] is None for h in led) and len(other) == 1 and all(h["l" if side == "r" else "r"] for h in led) \
+                            and warnings is not None:
+                        # the one thing this character holds is in the other hand: perhaps it, renamed
+                        warnings.append(f"Clip {n}: beat puts {m.group(1)} in {owner}'s {hand} hand, which the hands "
+                                        f"lines keep empty; if it is the {next(iter(other))}, they keep that in the other "
+                                        f"hand (call it the same in both, or list an alias in brackets): \"{excerpt(sent)}\"")
+                    elif warnings is None:
+                        continue
+                    elif all(h[side] is None for h in led):
+                        warnings.append(f"Clip {n}: beat puts {m.group(1)} in {owner}'s {hand} hand, which the hands "
+                                        f"lines keep empty; list it there or drop it: \"{excerpt(sent)}\"")
+                    else:
+                        p = next(h[side] for h in led if h[side])
+                        warnings.append(f"Clip {n}: beat calls {m.group(1)} what the hands lines call the {p}; use one "
+                                        f"name, or add it in brackets: \"{p} ({what.split()[-1]})\": \"{excerpt(sent)}\"")
+        # every clause with its subject, for the checks below
+        st, rows = {}, []
+        for si, x in enumerate(sentences("\n".join(TIMED.findall(beats)) + "\n" + "\n".join(
+                re.findall(r"^\W*final frame\b.*$", beats, re.I | re.M)) if TIMED.search(beats) else STATIC.sub("", beats))):
+            for clause, hands in hand_owners(x, everyone, st):
+                rows.append((si, x, clause, st["clauses"][len(rows)][1], hands))
+        # the last beat that puts a prop in a character's hands sets how the clip ends
+        for name in end[1]:
+            for p in sorted({v for v in end[1][name].values() if v}):
+                want = {sd for sd in ("r", "l") if end[1][name][sd] == p}
+                last = None
+                for _, x, clause, _, hands in rows:
+                    sides = {sd for sd, o in hands if sd != "b" and o == name}
+                    if sides and mentions(clause, p):
+                        last = (sides, x)
+                if last and (n, last[1]) not in seen:
+                    sides, x = last
+                    say = lambda ss: " and ".join("right hand" if sd == "r" else "left hand" for sd in sorted(ss, reverse=True))
+                    if sides - want:
+                        seen.add((n, x))
+                        problems.append(f"Clip {n}: the last beat with the {p} has it in {name}'s {say(sides)}, but "
+                                        f"the end line has it in the {say(want)}: \"{excerpt(x)}\"")
+                    elif want - sides and warnings is not None:
+                        warnings.append(f"Clip {n}: the end line has the {p} in {name}'s {say(want)}, but the last "
+                                        f"beat with it uses only the {say(sides)}; show the other hand join it: "
+                                        f"\"{excerpt(x)}\"")
+        # held all clip: (character, side) -> prop
+        held_all = {(c, sd): start[1][c][sd] for c in start[1] if c in end[1] for sd in ("r", "l")
+                    if start[1][c][sd] and end[1][c][sd] == start[1][c][sd]}
+        for idx, (si, x, clause, who, hands) in enumerate(rows):
+            # a thing picked up or caught that the hands lines never list must be put down again
+            for m in PICKUP.finditer(clause):
+                words = []
+                for w in re.findall(r"[\w'-]+", clause[m.end():]):
+                    if w.lower() in STOP:
+                        break
+                    words.append(w)
+                words = [w for w in words if w.lower() not in ("the", "a", "an", "his", "her", "their", "its", "one", "another")]
+                if not words or (n, x) in seen:
+                    continue
+                noun, thing = words[-1], " ".join(words)
+                if noun.lower().rstrip("s") in NOT_PROPS or noun.lower() in NOT_THINGS or \
+                        any(mentions(thing, p) for p in listed) or noun.lower() in ("him", "her", "them", "it"):
+                    continue
+                pat = re.compile(rf"(?<!\w){re.escape(noun)}(?!\w)", re.I)
+                if not any((RELEASE.search(c2) and (pat.search(c2) or (s2 == si and PRONOUN.search(c2))))
+                           or (EMPTIED.search(c2) and w2 == who) for s2, _, c2, w2, _ in rows[idx + 1:]):
+                    gained = sorted({end[1][who][sd] for sd in ("r", "l") if who in end[1] and end[1][who][sd]
+                                     and (who not in start[1] or start[1][who][sd] != end[1][who][sd])})
+                    seen.add((n, x))
+                    if gained and warnings is not None:
+                        warnings.append(f"Clip {n}: {who} {m.group(0).strip()} the {thing}, which the hands lines never "
+                                        f"list; if it is the {gained[0]}, use one name or add it in brackets: "
+                                        f"\"{gained[0]} ({noun.lower()})\": \"{excerpt(x)}\"")
+                    elif not gained:
+                        problems.append(f"Clip {n}: {who or 'a character'} {m.group(0).strip()} the {thing}, but no later "
+                                        f"beat puts it down or passes it on, and the hands lines never list it: \"{excerpt(x)}\"")
+            # pointing with a hand that holds something all clip
+            if POINTS.search(clause) and not GRASP.search(clause) and who and (
+                    name_at(who, clause) >= 0 or re.match(r"\W*(?:(?:and|then)\s+)?(?:he|she|they|point|gesture)", clause, re.I)):
+                sides = {mm.group(1).lower()[0] for mm in (*SIDE.finditer(clause), *FINGER.finditer(clause))}
+                busy = {sd: p for (c, sd), p in held_all.items() if c == who}
+                for sd in sorted(sides):
+                    if sd in busy and not mentions(clause, busy[sd]) and (n, x) not in seen:
+                        seen.add((n, x))
+                        problems.append(f"Clip {n}: {who} points with the {'right' if sd == 'r' else 'left'} hand, "
+                                        f"which holds the {busy[sd]} all clip: \"{excerpt(x)}\"")
+                if not sides and busy and warnings is not None and re.search(r"\bpoint", clause, re.I):
+                    sd, p = next(iter(busy.items()))
+                    warnings.append(f"Clip {n}: say which hand {who} points with ({who}'s "
+                                    f"{'right' if sd == 'r' else 'left'} hand holds the {p}): \"{excerpt(x)}\"")
+            # "picks it up with her hand": which hand?
+            u = UNSIDED.search(clause)
+            if u and warnings is not None and not hands and not POINTING.search(clause) and \
+                    (GRASP.search(clause) or PICKUP.search(clause) or TRANSFER.search(clause)):
+                warnings.append(f"Clip {n}: say which hand (\"{u.group(0)}\"): \"{excerpt(x)}\"")
+        # a character drawn without hands
+        for name in everyone:
+            for x in sentences(text):  # "Bacillo has no hands", "Bacillo: a rod-shaped germ with no arms"
+                at = name_at(name, x)
+                if at < 0:
+                    continue
+                seg = x[at + len(name):]
+                cut = min([name_at(c, seg) for c in everyone if c != name and name_at(c, seg) >= 0] or [len(seg)])
+                seg = seg[:cut]
+                if NO_HANDS.search(seg) and not re.search(r"\b(?:paw|flipper|wing|hoof|claw|fin|glove|mitten|tentacle)s?\b", seg, re.I):
+                    things = sorted({p for led in (start[1], end[1]) for p in led.get(name, {}).values() if p})
+                    if things:
+                        problems.append(f"Clip {n}: {name} has no hands (\"{NO_HANDS.search(seg).group(0)}\"), "
+                                        f"but the hands lines put the {', '.join(things)} in them")
+                    elif warnings is not None:
+                        warnings.append(f"Clip {n}: {name} has no hands (\"{NO_HANDS.search(seg).group(0)}\"); "
+                                        f"leave {name} out of the hands lines")
+                    break
         for name, hands in (end[1] or start[1]).items():
             last_seen[name] = (n, hands)
     return problems

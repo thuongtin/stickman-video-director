@@ -256,6 +256,16 @@ for _s in SIDES:
                           (f"hip_{_s}", f"knee_{_s}"): "thigh", (f"knee_{_s}", f"ankle_{_s}"): "shank"})
 
 
+def center_of_mass_2d(pts, mass=None):
+    """Center of mass as a point (x, y), with the same segment fractions as center_of_mass."""
+    tot, x, y = 0.0, 0.0, 0.0
+    for (a, b), m in MASS:
+        m = (mass or {}).get(SEGMENT_NAMES[(a, b)], m)
+        if a in pts and b in pts:
+            tot += m; x += m * (pts[a][0] + pts[b][0]) / 2; y += m * (pts[a][1] + pts[b][1]) / 2
+    return (x / tot, y / tot) if tot else None
+
+
 def center_of_mass(pts, mass=None):
     """Horizontal center of mass. `mass` overrides segment fractions for non-human
     proportions, e.g. {"head": 0.3} for a chibi; they are renormalised."""
@@ -332,6 +342,7 @@ def check(track, profile=None):
 
     prev = None
     off_balance = []
+    drift = {}  # zero_g frames: (center of mass, torso, touching something)
     for fi, ((pts, facing), scale) in enumerate(zip(frames, scales)):
         # 1. joint limits
         angles = frame_angles(pts, facing, limits)
@@ -445,6 +456,9 @@ def check(track, profile=None):
 
         # 4. balance: center of mass over what holds the body up
         fr = track["frames"][fi]
+        if fr.get("zero_g") and torso:
+            drift[fi] = (center_of_mass_2d(pts, track.get("mass")), torso,
+                         bool(fr.get("contacts") or fr.get("supported")))
         if not (fr.get("airborne") or fr.get("supported") is True):
             feet = [pts[k] for s in SIDES for k in (f"ankle_{s}", f"toe_{s}", f"heel_{s}") if k in pts]
             com = center_of_mass(pts, track.get("mass"))
@@ -457,14 +471,33 @@ def check(track, profile=None):
                 # Extra support: joints (pelvis when sitting, knee_l when kneeling, wrist_r
                 # pushing a block) or props by name, e.g. "supported": ["pelvis", "block"].
                 mirror = -1 if facing == "left" else 1
-                for k in fr.get("supported") or []:
+                listed = fr.get("supported") or []
+                for k in listed:
                     if k in pts:
                         support.append(pts[k][0])
+                        # a kneeling knee must reach the ground; a joint resting on a prop lists the prop too
+                        # (12% of the height: a thick cartoon knee sits a little above the floor line)
+                        if k.startswith("knee") and all(x in pts for x in listed) and pts[k][1] - ground > 0.12 * height:
+                            add(fi, "warn", "support_floating", f"{k} is listed as holding the body up but is "
+                                f"{(pts[k][1] - ground) / height:.0%} of the figure's height above the ground "
+                                "(lower it to the ground, or list the prop it rests on)", {k})
                     elif k in fr.get("props", {}):
                         support.append(mirror * float(fr["props"][k][0]))
                 margin = P["balance_margin"] * height
                 if support and not (min(support) - margin <= com <= max(support) + margin):
                     off_balance.append(fi)
+
+    # Floating in zero gravity ("zero_g": true): with nothing touched for three frames, the center
+    # of mass drifts in a straight line at a steady speed; limbs may move, the hips move against them.
+    for fi in sorted(drift):
+        trio = [drift.get(fi + d) for d in (-1, 0, 1)]
+        if all(trio) and not any(t[2] for t in trio) and all(t[0] for t in trio):
+            (a, b, c), torso_ = [t[0] for t in trio], trio[1][1]
+            acc = math.hypot(c[0] - 2 * b[0] + a[0], c[1] - 2 * b[1] + a[1])
+            if acc > 0.04 * torso_:
+                add(fi, "error", "zero_g_drift", f"floating body's center of mass speeds up or turns "
+                    f"({acc / torso_:.2f} torso/frame²) with nothing touched; in free fall only a push "
+                    "changes the drift", {"pelvis"})
 
     # A walk or run is off balance for a frame or two at every step; only a pose held
     # off balance (about a fifth of a second or longer) would really fall over.
@@ -616,6 +649,23 @@ def check_hands(track, P, usable=None):
                     if norm(sub(at, mid)) > hold_tol * torso:
                         add(fi, "prop_wrong_hand", f"{prop} should be carried in both hands but is drawn away "
                             "from them", {"wrist_l", "wrist_r"})
+                    # grip points "<prop>.l" / "<prop>.r" from the prop's shape: each hand must reach its own
+                    # (a big gear passes the midpoint test with the hands under it). Points copied from the
+                    # wrists check nothing.
+                    grips = f.get("_props3d") or f.get("props", {})
+                    for x in SIDES:
+                        g = grips.get(f"{prop}.{x}")
+                        if g and torso and not just_passed and f"wrist_{x}" in pts:
+                            span = hand_span(f, track, pts, x)
+                            d = _seg_dist(g, *span) if span[0] != span[1] else norm(sub(g, span[0]))
+                            if d < 1e-6 * torso and fi == 0:
+                                add(fi, "prop_wrong_hand", f"{prop}.{x} is the {_side(x)} wrist itself, so the grip "
+                                    "check is empty; take the grip points from the prop's shape",
+                                    {f"wrist_{x}"}, severity="warn")
+                            elif x not in f.get("contacts", {}) and \
+                                    d > f.get("contact_tolerance", track.get("contact_tolerance", 0.25)) * torso:
+                                add(fi, "prop_wrong_hand", f"the {_side(x)} hand is {d / torso:.1f} torso-lengths from "
+                                    f"its grip on the {prop}", {f"wrist_{x}"})
                 continue
             side = next(iter(hands_of(side)), None)
             other = "r" if side == "l" else "l"
@@ -668,6 +718,14 @@ def check_hands(track, P, usable=None):
                         add(fi, "arm_over_face", f"the {_side(side)} forearm crosses the face "
                             "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                             {ks[1], ks[2], "head"}, severity="warn")
+            # a held prop (a pot, a magnifier lens) over the face; give a long prop its far end as
+            # "<prop>.<part>" (the grip is the prop's own point)
+            for prop, hs, at in held_points(f):
+                if r and norm(sub(at, pts["head"])) < 0.8 * r:
+                    add(fi, "arm_over_face", f"the {prop} covers the face "
+                        "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
+                        {f"wrist_{hs}", "head"}, severity="warn")
+                    break
 
         # Front view, standing: with "body_width" (the drawn torso's width at the chest, track units,
         # on the track or a frame), a shoulder joint inside the torso outline or an arm hanging over
@@ -677,6 +735,31 @@ def check_hands(track, P, usable=None):
         bw = f.get("body_width", track.get("body_width"))
         if bw and not three_d and facing == "front" and not f.get("airborne") and "neck" in pts:
             mid, half = pts["neck"][0], float(bw) / 2
+            # the drawn body's half-width at a height: "body_profile" [[t, half_width], ...] from the
+            # pelvis (t=0) to the neck (t=1), or a straight taper from "hip_width" to "body_width"
+            prof = f.get("body_profile", track.get("body_profile"))
+            hw = float(f.get("hip_width", track.get("hip_width", bw))) / 2
+            def half_at(y):
+                if "pelvis" not in pts or pts["pelvis"][1] == pts["neck"][1]:
+                    return half
+                t = max(0.0, min(1.0, (pts["pelvis"][1] - y) / (pts["pelvis"][1] - pts["neck"][1])))
+                if prof:
+                    pr = sorted(prof)
+                    for (t0, w0), (t1, w1) in zip(pr, pr[1:]):
+                        if t0 <= t <= t1:
+                            return w0 + (w1 - w0) * (t - t0) / ((t1 - t0) or 1)
+                    return pr[0][1] if t < pr[0][0] else pr[-1][1]
+                return hw + (half - hw) * t
+            # the drawn forearm and hand have thickness: "limb_width" (track units), and the hand
+            # reaches "hand_length" past the wrist
+            lw = float(f.get("limb_width", track.get("limb_width", 0))) / 2
+            def arm_points(ks):
+                e, w = pts[ks[1]], pts[ks[2]]
+                out = [w, tuple((a + b) / 2 for a, b in zip(e, w))]
+                if not (prof or lw or "hip_width" in f or "hip_width" in track):
+                    return out  # chest width only: the wrist and forearm, as before
+                tip = hand_span(f, track, pts, ks[2][-1])[1]
+                return out + ([tip] if tip and tip != w else [])
             down = lambda a, b: math.degrees(math.atan2(abs(b[0] - a[0]), b[1] - a[1]))  # 0 = straight down
             for side in SIDES:
                 ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
@@ -687,9 +770,17 @@ def check_hands(track, P, usable=None):
                 busy = side in f.get("contacts", {}) or any(side in hands_of(v) for v in f.get("holds", {}).values())
                 if not busy and all(k in pts for k in ks) and pts[ks[2]][1] > pts[ks[1]][1] > pts[ks[0]][1] \
                         and down(pts[ks[0]], pts[ks[1]]) < 25 and down(pts[ks[1]], pts[ks[2]]) < 25 \
-                        and abs(pts[ks[2]][0] - mid) < half:
+                        and any(abs(q[0] - mid) - lw < half_at(q[1]) for q in arm_points(ks)):
                     add(fi, "arm_over_body", f"the {_side(side)} arm hangs over the body, not beside it",
                         set(ks), severity="warn")
+                # reaching past the body to the far side (both hands on a wheel rim with the forearms
+                # crossed over the chest): held or not, the grip is outside the torso but the arm is on it
+                elif all(k in pts for k in ks) and (pts[ks[1]][0] - mid) * (pts[ks[2]][0] - mid) < 0 \
+                        and pts[ks[2]][1] > pts[ks[0]][1] \
+                        and abs(pts[ks[2]][0] - mid) > half and "pelvis" in pts \
+                        and pts[ks[0]][1] <= (pts[ks[1]][1] + pts[ks[2]][1]) / 2 <= pts["pelvis"][1]:
+                    add(fi, "arm_over_body", f"the {_side(side)} forearm crosses the chest to reach the far side; "
+                        "grip on the near side of the body instead", {ks[1], ks[2]}, severity="warn")
 
         # Side view: the near arm (the right arm when facing right) cutting across the head
         # hides the face; a hand holding a prop or touching something there is meant to.
@@ -699,18 +790,22 @@ def check_hands(track, P, usable=None):
             side = facing[0]
             ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
             r = f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
-            busy = side in f.get("contacts", {}) or any(side in hands_of(v) for v in f.get("holds", {}).values())
+            # a hand holding a cup at the mouth is meant to be there; one holding a ball cocked behind
+            # the head for a throw is not, so only a prop at the face excuses the arm
+            busy = side in f.get("contacts", {}) or any(
+                hs == side and r and norm(sub(at, pts["head"])) < 1.3 * r and at[1] >= pts["head"][1] - 0.3 * r
+                for _, hs, at in held_points(f, both=True))
             ahead = 1 if facing == "right" else -1
             if r and not busy and all(k in pts for k in ks) and any(
                     _seg_dist(pts["head"], a, b) < r and (_closest(pts["head"], a, b)[0] - pts["head"][0]) * ahead > 0
-                    for a, b in ((pts[ks[0]], pts[ks[1]]), (pts[ks[1]], pts[ks[2]]))):  # the face half, not the back of the head
+                    for a, b in ((tuple(p + 0.4 * (q - p) for p, q in zip(pts[ks[0]], pts[ks[1]])), pts[ks[1]]),
+                                 (pts[ks[1]], pts[ks[2]]))):  # the face half, not the back of the head; not the shoulder
                 add(fi, "arm_over_face", f"the near ({_side(side)}) arm crosses the face in side view "
                     "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                     {ks[1], ks[2], "head"}, severity="warn")
             # a held prop (a raised ball, a book) sitting on the face; a cup at the mouth stays at the edge
-            for prop, hs in ((p_, sorted(hands_of(v))[0]) for p_, v in f.get("holds", {}).items() if hands_of(v)):
-                at = f.get("props", {}).get(prop)
-                if r and at and norm(sub(at, pts["head"])) < 0.6 * r and (at[0] - pts["head"][0]) * ahead >= 0:
+            for prop, hs, at in held_points(f):
+                if r and norm(sub(at, pts["head"])) < 0.6 * r and (at[0] - pts["head"][0]) * ahead >= 0:
                     add(fi, "arm_over_face", f"the {prop} covers the face in side view "
                         "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                         {f"wrist_{hs}", "head"}, severity="warn")
@@ -768,6 +863,17 @@ def _seg_dist(p, a, b):
 
 
 def _side(s): return {"l": "left", "r": "right"}.get(s, s) if isinstance(s, str) else " and ".join(map(_side, s))
+
+
+def held_points(f, both=False):
+    """(prop, hand, point) for every point of every held prop: its grip and its "<prop>.<part>" points
+    (with both=True, once per holding hand)."""
+    props = f.get("props", {})
+    for prop, v in f.get("holds", {}).items():
+        for hs in sorted(hands_of(v))[:None if both else 1]:
+            for k, at in props.items():
+                if at and (k == prop or k.startswith(prop + ".")):
+                    yield (k, hs, at)
 
 
 def hands_of(v):
@@ -856,9 +962,26 @@ def check_scene(tracks):
                 ja, jb = fa.get("joints", {}), fr[b].get("joints", {})
                 ra, rb = head_r(ta, fa), head_r(tracks[b], fr[b])
                 if "head" in ja and "head" in jb and ra and rb and not (fa.get("overlap_ok") or fr[b].get("overlap_ok")):
-                    if norm(sub(ja["head"], jb["head"])) < max(ra, rb):
+                    d = norm(sub(ja["head"], jb["head"]))
+                    if d < max(ra, rb):
                         add(fi, "head_overlap", f"{names[a]}'s and {names[b]}'s heads overlap (mark \"overlap_ok\": true "
                             "if one passes behind the other)")
+                    elif d < 0.97 * (ra + rb):  # drawn heads partly overlapping
+                        add(fi, "head_overlap", f"{names[a]}'s and {names[b]}'s heads touch or partly overlap "
+                            f"({d:.0f} apart, radii {ra:.0f} + {rb:.0f})", severity="warn")
+            # another character's held prop or body over this one's face (a raised ball, walking across)
+            for b in range(len(tracks)):
+                jb = fr[b].get("joints", {})
+                rb = head_r(tracks[b], fr[b])
+                if b == a or "head" not in jb or not rb or fa.get("overlap_ok") or fr[b].get("overlap_ok"):
+                    continue
+                ja = fa.get("joints", {})
+                cover = next((k for k, _, at in held_points(fa) if norm(sub(at, jb["head"])) < 0.8 * rb), None)
+                if not cover and "neck" in ja and "pelvis" in ja and _seg_dist(jb["head"], ja["neck"], ja["pelvis"]) < 0.8 * rb:
+                    cover = "body"
+                if cover:
+                    add(fi, "face_covered", f"{names[a]}'s {cover} covers {names[b]}'s face (mark \"overlap_ok\": true "
+                        "if one passes behind the other)", severity="warn")
     return issues
 
 
@@ -1051,7 +1174,7 @@ def main(argv=None):
         for r in results:
             r["status"] = "PASS" if r["passed"] else "FAIL"
     seq = check_scene(tracks) if a.scene else check_sequence(tracks)
-    passed = all(r["status"] != "FAIL" for r in results) and not seq
+    passed = all(r["status"] != "FAIL" for r in results) and not any(i.get("severity", "error") == "error" for i in seq)
     if a.report:
         for n, (t, r) in enumerate(zip(tracks, results)):
             write_report(t, r, Path(a.report) / f"clip{n + 1}" if len(tracks) > 1 else a.report)
@@ -1067,7 +1190,7 @@ def main(argv=None):
         print(f"{r['status']} ({r['profile']} profile): {r['errors']} errors, "
               f"{r['warnings']} warnings, {r['frames_checked']}/{r['frames']} frames checked")
     for i in seq:
-        print(f"ERROR {'frame ' + str(i['frame']) if a.scene else 'between clips'}: {i['message']}")
+        print(f"{i.get('severity', 'error').upper():5} {'frame ' + str(i['frame']) if a.scene else 'between clips'}: {i['message']}")
     if len(paths) > 1:
         print("PASS" if passed else "FAIL", "(whole scene)" if a.scene else "(all clips)")
     return 0 if passed else 1

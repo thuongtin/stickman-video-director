@@ -437,7 +437,7 @@ assert any("both hands" in p for p in hand_ledger.lint(kept))
 w = []; hand_ledger.lint(pkg.replace("the red paper; left hand holds the red paper", "the scroll; left hand holds the scroll"), w)
 assert any("never name the scroll" in x for x in w), w
 w = []; hand_ledger.lint(pkg.replace("Man receives the red paper with both hands", "Man takes it"), w)
-assert w == [], w  # the receiving hands are named in the first sentence ("with both hands")
+assert any("names no hand" in x for x in w), w  # "with both hands" in that beat are Do's, not Man's
 assert hand_ledger.mentions("drops the phone", "smartphone")
 one = """## Clip 1
 Hands at start — Ray: right hand holds the cereal box; left hand empty.
@@ -447,6 +447,42 @@ Hands at end — Ray: right hand holds the cereal box; left hand empty.
 assert hand_ledger.lint(one) == []
 assert any("left hand" in p for p in hand_ledger.lint(one.replace("under his right arm", "under his left arm")))
 assert not hand_ledger.mentions("a small smug smile", "coffee mug") and hand_ledger.mentions("two mugs", "coffee mug")
+
+# a thing picked up mid-clip that the hands lines never list must be put down again; pointing
+# with the hand that holds something all clip fails; a character without hands holds nothing
+lab = """Characters: Nova, a chemist. Germ, a round germ with no arms, no hands.
+## Clip 1
+Hands at start — Nova: right hand holds the flask; left hand empty.
+- [0-3s] Nova picks up the yellow cup from the tray with her left hand. Nova sets the yellow cup back on the tray with her left hand.
+- [3-7s] Nova points at the foam with her left index finger.
+Hands at end — Nova: right hand holds the flask; left hand empty.
+"""
+assert hand_ledger.lint(lab) == [], hand_ledger.lint(lab)
+assert any("no later beat puts it down" in p for p in hand_ledger.lint(lab.replace(" Nova sets the yellow cup back on the tray with her left hand.", "")))
+assert any("points with the right hand" in p for p in hand_ledger.lint(lab.replace("left index finger", "right index finger")))
+w = []; hand_ledger.lint(lab.replace("with her left hand. Nova sets", "with her hand. Nova sets"), w)
+assert any("say which hand" in x for x in w), w
+assert any("no hands" in p for p in hand_ledger.lint(lab.replace("left hand empty.\n- [0-3s]", "left hand empty. Germ: right hand holds the key; left hand empty.\n- [0-3s]")))
+# the last beat with a prop sets how the clip ends; "opens her hand" lets go
+assert any("last beat" in p for p in hand_ledger.lint(lab.replace("Nova points at the foam with her left index finger.", "Nova cradles the flask in both hands.")))
+space = """## Clip 1
+Hands at start — Lyra: right hand holds the apple; left hand empty.
+- [0-3s] Lyra opens her right hand and the apple stays in mid-air.
+Hands at end — Lyra: right hand empty; left hand empty.
+"""
+assert hand_ledger.lint(space) == [], hand_ledger.lint(space)
+# "it" is a held prop only after a hold or pass verb: not "slaps it", not "between them"
+five = """## Clip 1
+Hands at start — Sprout: right hand empty; left hand holds the cane.
+- [0-3s] Sprout leans on the cane with the left hand. Benny holds out a hand and Sprout slaps it with its right hand, a low five between them.
+Hands at end — Sprout: right hand empty; left hand holds the cane.
+"""
+assert hand_ledger.lint(five) == [], hand_ledger.lint(five)
+# an unknown name for the one thing a character holds, put in the other hand, warns
+drink = space.replace("- [0-3s] Lyra opens her right hand and the apple stays in mid-air.", "- [0-3s] Lyra sips the drink in her left hand.").replace(
+    "Hands at end — Lyra: right hand empty;", "Hands at end — Lyra: right hand holds the apple;")
+w = []; hand_ledger.lint(drink, w)
+assert any("if it is the apple" in x for x in w), w
 
 # 3D axes as documented: facing +z, the character's right is at -x; an arm reaching forward passes
 j = {"head": [0, 1.7, 0], "neck": [0, 1.5, 0], "pelvis": [0, 1, 0], "shoulder_r": [-.2, 1.45, 0],
@@ -474,6 +510,35 @@ t["body_width"] = sw * 0.9
 assert "arm_over_body" not in kinds(pg.check(t), "warn")
 t["body_width"] = sw * 1.6
 assert "arm_over_body" in kinds(pg.check(t), "warn")
+
+# a held prop (or its far end, "<prop>.<part>") over the face warns in front view
+t = front_track(); f = t["frames"][3]; j = f["joints"]
+f["holds"] = {"lens": "r"}; f["props"] = {"lens": list(j["wrist_r"]), "lens.glass": list(j["head"])}
+assert "arm_over_face" in kinds(pg.check(t), "warn")
+f["props"]["lens.glass"] = [j["wrist_r"][0], j["wrist_r"][1] + 5]
+assert "arm_over_face" not in kinds(pg.check(t), "warn")
+
+# zero gravity: with nothing touched the center of mass drifts in a straight line
+t = side_track()
+for i, f in enumerate(t["frames"]):
+    f["airborne"] = f["zero_g"] = True
+    f["joints"] = {k: [x + 3 * i, y] for k, (x, y) in f["joints"].items()}
+assert "zero_g_drift" not in kinds(pg.check(t))
+t["frames"][5]["joints"] = {k: [x, y - 40] for k, (x, y) in t["frames"][5]["joints"].items()}
+assert "zero_g_drift" in kinds(pg.check(t))
+
+# a knee listed as support must reach the ground
+t = side_track(); f = t["frames"][0]; f["supported"] = ["knee_l"]
+assert "support_floating" in kinds(pg.check(t), "warn")
+
+# a forearm crossing the chest to grip the far side warns even while it holds something
+t = front_track(); f = t["frames"][3]; j = f["joints"]
+sw = abs(j["shoulder_l"][0] - j["shoulder_r"][0]); t["body_width"] = sw * 0.9
+mx, ys, yp = j["neck"][0], j["shoulder_r"][1], j["pelvis"][1]
+side_r = 1 if j["shoulder_r"][0] > mx else -1
+j["elbow_r"] = [mx + side_r * sw * 0.3, (ys + yp) / 2]; j["wrist_r"] = [mx - side_r * sw * 0.6, (ys + yp) / 2]
+f["holds"] = {"wheel": "r"}; f["props"] = {"wheel": list(j["wrist_r"])}
+assert any("crosses the chest" in i["message"] for i in pg.check(t)["issues"])
 
 # a solid prop: the head inside a block fails, hands on its face pass
 t = front_track(); f = t["frames"][3]; j = f["joints"]
@@ -521,6 +586,11 @@ c = copy.deepcopy(b); c["name"] = "Vex"
 for f in c["frames"]:
     f["joints"] = {k: [v[0] - 295, v[1]] for k, v in f["joints"].items()}
 assert any(i["kind"] == "head_overlap" for i in pg.check_scene([a, c]))
+# one character's raised ball over the other's face
+d = copy.deepcopy(b); fd = d["frames"][4]
+fa["holds"], fa["props"] = {"ball": "r"}, {"ball": list(fd["joints"]["head"])}
+assert any(i["kind"] == "face_covered" for i in pg.check_scene([a, d]))
+fa["holds"], fa["props"] = {}, {}
 # a prop handed from one character to the other must not jump between their hands
 a, b = front_track(), front_track()
 a["name"], b["name"] = "Sol", "Kip"
