@@ -20,13 +20,17 @@ Only the Python standard library is needed, except `estimate_pose.py` (`pip inst
 - **Limb length**: a limb stretching or shrinking against its rest length (rigs), or stretching against the longest length seen (video).
 - **Pops and snaps**: a joint turning faster than a person can in one frame (in front view too: an arm flung up in one frame); a knee or elbow flipping bend direction.
 - **Balance** (warning): center of mass outside whatever touches the ground (feet, knees, pelvis, hands), held for about a fifth of a second or longer (3 frames at 12 fps, so a drawing held on twos passes), so a walk's single-support moments pass. Mark jumps and falls `"airborne": true`; list other supports per frame, `"supported": ["pelvis", "wrist_r", "chair"]` (joints or prop names), or `"supported": true`. A big-headed character can set `"mass": {"head": 0.3}` (segments: head, trunk, upper_arm, forearm, thigh, shank).
-- **Head yaw** (3D tracks with a `nose` joint): head turned more than 80° from the body.
-- **Left/right**: hands trading places, shoulders facing against the hips, a held prop jumping to the other hand (within a clip or across a cut), a prop drawn at the wrong hand, a left hand shape drawn on a right arm.
+- **Head yaw** (3D tracks with a `nose` joint): head turned more than 80° from the body, measured about the neck, so a head tipped back (limbo, knee slide) is not a turned head. In 3D tracks elbows and knees are measured from their true 3D bones, and a knee's bend direction from its own foot.
+- **Left/right**: hands trading places or both jumping across the body's midline in one frame (in side view arms may swing past each other at a human speed), shoulders facing against the hips, a held prop jumping to the other hand (within a clip or across a cut), a prop drawn at the wrong hand, a left hand shape drawn on a right arm.
 - **Contact** (optional): `"contacts": {"r": "door"}` (a prop name or a point) fails when that wrist stops more than 0.25 torso-lengths short of it. A big-handed character can widen this with `"contact_tolerance": 0.35` on the track or a frame. A prop with a second point names it `"<prop>.<part>"` in `props`, and that point can have its own contact: a cane held at `"cane"` with `"cane.tip"` and `"contacts": {"l": "cane", "cane.tip": "ground"}` (the ground is the lowest foot); list `"cane.tip"` in `supported` when the character leans on it.
 - **Ground** (optional): with `"ground_y"` (image y of the ground line) on the track or a frame, any joint or the bottom of the head below it fails (a roll or bow sinking into the floor).
 - **Arm over face** (warning): in front view a forearm sweeping across the head; in side view the near arm (the right arm when facing right) crossing the face half of the head, unless that hand holds a prop or has a contact there; in side view also a held prop sitting on the face (a raised ball). Mark intended moments `"face_cover": true`. The face is a circle of half the neck-to-head distance; a big-headed character sets its drawn head radius with `"head_radius"` on the track (or a frame), in track units. Not checked: a hand hidden behind a big head (2D occlusion).
 
 `fix` repairs a rig track by clamping joint angles into range and restoring limb lengths. It does not invent new key poses for pops, balance or hand mix-ups; those still fail after `fix`.
+
+## Several characters in one shot
+
+`posture_gate.py check --scene sol.json kip.json` checks tracks of one shot against each other (same frames, same coordinates; each track has a `"name"`): a prop handed from one character to the other must be at the same place in both hands at the pass, a contact naming another character's joint (`"contacts": {"r": "Kip.wrist_l"}` for a high five or fist bump) must reach it, and one head must not sit inside another (`"overlap_ok": true` when one passes behind the other). Without `--scene`, several tracks are clips in story order.
 
 ## Pose track format
 

@@ -127,11 +127,15 @@ def to_2d(track):
         if props:
             f["_props3d"] = {k: list(p) for k, p in props.items()}
             f["props"] = {k: [round(dot(sub(p, o), fwd), 3), round(-dot(sub(p, o), up), 3)] for k, p in props.items()}
-        # head yaw: nose direction against the body's forward, both flattened onto the ground
+        # head yaw: the turn of the nose about the neck, against the body's forward, both seen
+        # down the neck (a head tipped back in a limbo or knee slide is not a turned head)
         if "nose" in j and "head" in j:
-            n = sub(j["nose"], j["head"]); n = unit(tuple(x - dot(n, up) * u for x, u in zip(n, up)))
-            if n:
-                f["_yaw"] = math.degrees(math.atan2(dot(n, lat), dot(n, fwd)))
+            ax = unit(sub(j["head"], j["neck"])) if "neck" in j else up
+            ax = ax or up
+            flat = lambda v: tuple(x - dot(v, ax) * a for x, a in zip(v, ax))
+            n, fw, lt = flat(sub(j["nose"], j["head"])), flat(fwd), flat(lat)
+            if norm(n) > 1e-6 and norm(fw) > 0.3 and norm(lt) > 0.3:
+                f["_yaw"] = math.degrees(math.atan2(dot(unit(n), unit(lt)), dot(unit(n), unit(fw))))
     return out
 
 
@@ -335,6 +339,35 @@ def check(track, profile=None):
                 if full and l is not None and l < 0.5 * full:
                     del angles[key]
                     break
+        # A 3D rig's elbow or knee bends by the angle between its true 3D bones: in the side
+        # projection an arm brought across the chest with the upper arm twisted inward reads
+        # far more bent than it is. A knee's bend direction comes from its own foot, so a
+        # turned-out leg does not read as bending backward.
+        j3 = track["frames"][fi].get("_joints3d")
+        if j3 and facing in ("left", "right"):
+            for name, (a, b, c) in (("elbow", ("shoulder", "elbow", "wrist")), ("knee", ("hip", "knee", "ankle"))):
+                for s_ in SIDES:
+                    a_, b_, c_ = f"{a}_{s_}", f"{b}_{s_}", f"{c}_{s_}"
+                    if all(k in j3 for k in (a_, b_, c_)):
+                        u, w = sub(j3[b_], j3[a_]), sub(j3[c_], j3[b_])
+                        if norm(u) and norm(w):
+                            flex = math.degrees(math.acos(max(-1.0, min(1.0, dot(u, w) / (norm(u) * norm(w))))))
+                            key = f"{name}_{s_}"
+                            # an elbow cannot fold backward far, so its projected direction only
+                            # counts near straight (a twisted upper arm flips the projection)
+                            sign = -1 if key in angles and angles[key][0] < 0 and (name == "knee" or flex < 20) else 1
+                            toe = j3.get(f"toe_{s_}")
+                            if name == "knee" and toe:
+                                # a knee bends toward its own toes, whichever way the leg is turned out
+                                ha = sub(j3[c_], j3[a_]); tt = dot(sub(j3[b_], j3[a_]), ha) / (dot(ha, ha) or 1.0)
+                                out_ = sub(j3[b_], tuple(x + tt * y for x, y in zip(j3[a_], ha)))
+                                # the front of the shin is the foot's direction across the shin
+                                ft = sub(toe, j3[c_]); sh = unit(sub(j3[c_], j3[b_]))
+                                front = sub(ft, tuple(dot(ft, sh) * x for x in sh)) if sh else ft
+                                if norm(out_) > 0.05 * norm(ha) and norm(front) > 0.3 * norm(ft):
+                                    sign = 1 if dot(out_, front) >= 0 else -1
+                            lim = limits["sagittal"][name]
+                            angles[key] = (sign * flex, lim["min"], lim["max"], {a_, b_, c_}, ((a_, b_), (b_, c_)))
         for key, (v, lo, hi, inv, _) in angles.items():
             over = arc_violation(v, lo, hi)
             if over > P["angle_tolerance"]:
@@ -494,9 +527,29 @@ def check_hands(track, P, usable=None):
         if prev is not None and torso and all(k in pts and k in prev for k in ("wrist_l", "wrist_r")):
             keep = norm(sub(pts["wrist_l"], prev["wrist_l"])) + norm(sub(pts["wrist_r"], prev["wrist_r"]))
             swap = norm(sub(pts["wrist_l"], prev["wrist_r"])) + norm(sub(pts["wrist_r"], prev["wrist_l"]))
-            if keep > 0.8 * torso and swap < 0.35 * keep:
+            # in profile the two arms legitimately swing past each other (a run on twos at 12 fps);
+            # there a swap only counts if an arm would have had to turn faster than a person can
+            facing = f.get("facing") or infer_facing(pts)
+            if facing in ("left", "right") and not three_d:
+                step = P["max_joint_speed"] / float(track.get("fps", 12))
+                turn = [abs(wrap(signed(sub(prev[f"elbow_{s}"], prev[f"shoulder_{s}"]), sub(pts[f"elbow_{s}"], pts[f"shoulder_{s}"]))))
+                        for s in SIDES if all(f"{k}_{s}" in pts and f"{k}_{s}" in prev for k in ("shoulder", "elbow"))]
+                plausible = len(turn) == 2 and max(turn) <= step
+            else:
+                plausible = False
+            if keep > 0.8 * torso and swap < 0.35 * keep and not plausible:
                 add(fi, "hand_swap", "left and right hands traded places in one frame", {
                     "shoulder_l", "elbow_l", "wrist_l", "shoulder_r", "elbow_r", "wrist_r"})
+            elif facing not in ("left", "right") and not three_d and all(k in pts and k in prev for k in ("neck", "pelvis")):
+                # facing the camera: both hands jumping across the body's midline in one frame
+                def side_of(p, q):
+                    a = sub(p["neck"], p["pelvis"])
+                    return (a[0] * (q[1] - p["pelvis"][1]) - a[1] * (q[0] - p["pelvis"][0])) / (norm(a) or 1.0)
+                was = [side_of(prev, prev[f"wrist_{s}"]) for s in SIDES]
+                now = [side_of(pts, pts[f"wrist_{s}"]) for s in SIDES]
+                if all(w * n < 0 and min(abs(w), abs(n)) > 0.1 * torso for w, n in zip(was, now)):
+                    add(fi, "hand_swap", "both hands crossed to the other side of the body in one frame", {
+                        "shoulder_l", "elbow_l", "wrist_l", "shoulder_r", "elbow_r", "wrist_r"})
         prev = pts
 
         # Head turned past the shoulders (3D tracks with a nose joint).
@@ -642,6 +695,63 @@ def check_sequence(tracks):
                 issues.append({"frame": None, "clip": k + 1, "severity": "error", "kind": "prop_hand_switch",
                                "message": f"{prop} ends clip {k + 1} in the {_side(end[prop])} hand but starts "
                                           f"clip {k + 2} in the {_side(side)} hand", "joints": []})
+    return issues
+
+
+def check_scene(tracks):
+    """Several characters of one shot, frame by frame in the same coordinates (each track has a
+    "name"): a prop passed from one to another must be at the same place in both hands at the
+    pass, a contact naming another character's joint ("contacts": {"r": "Kip.wrist_l"} for a
+    high five) must reach it, and one head must not sit inside another."""
+    issues = []
+    def add(fi, kind, msg, severity="error"):
+        issues.append({"frame": fi, "severity": severity, "kind": kind, "message": msg, "joints": []})
+    names = [t.get("name") or (t.get("character") or "").split(" (")[0] or f"track {k + 1}" for k, t in enumerate(tracks)]
+    def torso(f):
+        j = f.get("joints", {})
+        return norm(sub(j["neck"], j["pelvis"])) if "neck" in j and "pelvis" in j else None
+    def head_r(t, f):
+        j = f.get("joints", {})
+        return f.get("head_radius", t.get("head_radius")) or (0.5 * norm(sub(j["head"], j["neck"])) if "head" in j and "neck" in j else None)
+    n = min(len(t["frames"]) for t in tracks)
+    for fi in range(n):
+        fr = [t["frames"][fi] for t in tracks]
+        for a, (ta, fa) in enumerate(zip(tracks, fr)):
+            T = torso(fa)
+            if not T:
+                continue
+            tol = fa.get("contact_tolerance", ta.get("contact_tolerance", 0.25))
+            # a prop leaving this character's hand appears at the same place in the receiver's
+            if fi:
+                for prop in (tracks[a]["frames"][fi - 1].get("holds") or {}):
+                    if prop in (fa.get("holds") or {}):
+                        continue
+                    for b, fb in enumerate(fr):
+                        if b != a and prop in (fb.get("holds") or {}) and prop not in (tracks[b]["frames"][fi - 1].get("holds") or {}):
+                            pa, pb = tracks[a]["frames"][fi - 1].get("props", {}).get(prop), fb.get("props", {}).get(prop)
+                            if pa and pb and norm(sub(pa, pb)) > 0.35 * T:
+                                add(fi, "handoff_gap", f"{prop} jumps {norm(sub(pa, pb)) / T:.1f} torso-lengths from "
+                                    f"{names[a]} to {names[b]} at the hand-off")
+            # hands meeting another character's joint (high five, fist bump, handshake)
+            for side, target in (fa.get("contacts") or {}).items():
+                if side not in SIDES or not isinstance(target, str) or "." not in target:
+                    continue
+                who, joint = target.split(".", 1)
+                if who in names and f"wrist_{side}" in fa.get("joints", {}):
+                    other = fr[names.index(who)].get("joints", {})
+                    if joint in other:
+                        d = norm(sub(fa["joints"][f"wrist_{side}"], other[joint]))
+                        if d > tol * T:
+                            add(fi, "contact_miss", f"{names[a]}'s {_side(side)} hand should meet {who}'s "
+                                f"{joint.replace('_l', ' (left)').replace('_r', ' (right)')} but stops {d / T:.1f} torso-lengths away")
+            # one head inside another
+            for b in range(a + 1, len(tracks)):
+                ja, jb = fa.get("joints", {}), fr[b].get("joints", {})
+                ra, rb = head_r(ta, fa), head_r(tracks[b], fr[b])
+                if "head" in ja and "head" in jb and ra and rb and not (fa.get("overlap_ok") or fr[b].get("overlap_ok")):
+                    if norm(sub(ja["head"], jb["head"])) < max(ra, rb):
+                        add(fi, "head_overlap", f"{names[a]}'s and {names[b]}'s heads overlap (mark \"overlap_ok\": true "
+                            "if one passes behind the other)")
     return issues
 
 
@@ -809,6 +919,8 @@ def main(argv=None):
     c.add_argument("--report", help="folder for report.svg/.json/.txt (one subfolder per clip if several)")
     c.add_argument("--json", action="store_true", help="print the full result as JSON")
     c.add_argument("--strict", action="store_true", help="fail on errors even in the non-blocking video profile")
+    c.add_argument("--scene", action="store_true",
+                   help="the tracks are characters of one shot (same frames, same coordinates), not clips in order")
     f = sub_.add_parser("fix", help="repair a rig track"); f.add_argument("track"); f.add_argument("-o", "--out", required=True)
     a = ap.parse_args(argv)
     paths = [a.track] if a.cmd == "fix" else a.tracks
@@ -831,7 +943,7 @@ def main(argv=None):
     if a.strict:
         for r in results:
             r["status"] = "PASS" if r["passed"] else "FAIL"
-    seq = check_sequence(tracks)
+    seq = check_scene(tracks) if a.scene else check_sequence(tracks)
     passed = all(r["status"] != "FAIL" for r in results) and not seq
     if a.report:
         for n, (t, r) in enumerate(zip(tracks, results)):
@@ -848,9 +960,9 @@ def main(argv=None):
         print(f"{r['status']} ({r['profile']} profile): {r['errors']} errors, "
               f"{r['warnings']} warnings, {r['frames_checked']}/{r['frames']} frames checked")
     for i in seq:
-        print(f"ERROR between clips: {i['message']}")
+        print(f"ERROR {'frame ' + str(i['frame']) if a.scene else 'between clips'}: {i['message']}")
     if len(paths) > 1:
-        print("PASS" if passed else "FAIL", "(all clips)")
+        print("PASS" if passed else "FAIL", "(whole scene)" if a.scene else "(all clips)")
     return 0 if passed else 1
 
 

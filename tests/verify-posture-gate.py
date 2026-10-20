@@ -172,6 +172,17 @@ f["joints"]["elbow_l"] = [f["joints"]["head"][0] + 14, f["joints"]["head"][1] + 
 assert "arm_over_face" in kinds(pg.check(t), "warn")
 f["face_cover"] = True
 assert "arm_over_face" not in kinds(pg.check(t), "warn")
+# facing the camera, both hands jumping across the midline in one frame is a swap too
+t = front_track()
+for i, f in enumerate(t["frames"]):
+    j = f["joints"]; f["props"] = {}; f["holds"] = {}
+    T = ((j["neck"][0] - j["pelvis"][0]) ** 2 + (j["neck"][1] - j["pelvis"][1]) ** 2) ** 0.5
+    x, y = j["pelvis"][0], j["pelvis"][1]
+    d = 0.28 * T if i < 3 else -0.14 * T
+    j["wrist_l"], j["wrist_r"] = [x + d, y - (0 if i < 3 else 0.1 * T)], [x - d, y - (0 if i < 3 else 0.1 * T)]
+assert any(i["kind"] == "hand_swap" and i["frame"] == 3 for i in pg.check(t)["issues"])
+# side view: arms swinging past each other in a walk are not a hand swap
+assert "hand_swap" not in kinds(pg.check(ex.track(ex.frames_with(None))))
 # side view: the near arm across the head warns, unless it holds or touches something there
 t = ex.track(ex.frames_with(None))
 f = t["frames"][4]; hx, hy = f["joints"]["head"]
@@ -316,6 +327,45 @@ assert len(problems) == 1 and "balloon in Na's right hand" in problems[0], probl
 warnings = []
 assert hand_ledger.lint(pkg.replace("Na points at it", "Na draws with a paper pencil in her right hand. Na points at it"), warnings) == []
 assert len(warnings) == 1 and "paper pencil in Na's right hand" in warnings[0], warnings
+# "her" in a sentence naming nobody is the character named last; the quoted beat drops the VO placeholder
+pkg = """### Clip 1
+Hands at start — Tilly: right hand holds the stamp; left hand holds the red folder. Marge: right hand holds the red folder; left hand empty.
+- [0-3s] (VO: "Again."): Tilly stamps the square; her left hand keeps holding the red folder open.
+- [3-7s] Marge waits.
+Hands at end — Tilly: right hand holds the stamp; left hand holds the red folder. Marge: right hand holds the red folder; left hand empty.
+"""
+assert not any("Marge's left" in p for p in hand_ledger.lint(pkg)), hand_ledger.lint(pkg)
+problems = hand_ledger.lint(pkg.replace("her left hand keeps", "her right hand keeps"))
+assert any("Tilly's right" in p for p in problems) and all('""' not in p for p in problems), problems
+# names match whole words with their case: "Ti" is not "Timed", "May" is not "may"
+pkg = """### Clip 1
+Hands at start — May: right hand empty; left hand holds the lantern. Ti: right hand empty; left hand empty.
+Timed beats:
+- [0-3s] May flips around and holds the lantern up in her right hand.
+Hands at end — May: right hand empty; left hand holds the lantern. Ti: right hand empty; left hand empty.
+"""
+problems = hand_ledger.lint(pkg)
+assert len(problems) == 1 and "lantern in May's right hand" in problems[0], problems
+# gloves and mittens are hands; "Name's open left glove" is that character's
+pkg = """### Clip 1
+Hands at start — Bơ: right hand holds the pie; left hand empty. Mít: right hand empty; left hand empty.
+- [0-3s] Bơ slides the pie onto Mít's open left glove and lets go.
+Hands at end — Bơ: right hand empty; left hand empty. Mít: right hand empty; left hand holds the pie.
+"""
+assert hand_ledger.lint(pkg) == [], hand_ledger.lint(pkg)
+problems = hand_ledger.lint(pkg.replace("- [0-3s] Bơ slides", "- [0-3s] Bơ balances the pie on his left glove. Bơ slides"))
+assert len(problems) == 1 and "pie in Bơ's left hand" in problems[0], problems
+# short names: "Na" is not in "Final frame" or "banana"; ", and Grandma holds" is Grandma's clause
+pkg = """### Clip 1
+Hands at start — Na: right hand holds the drawing; left hand empty. Grandma: right hand holds the cane; left hand empty.
+[0–3s] Na passes the drawing to Grandma, and the narrator laughs at a banana.
+[3–7s] Their hands meet at the sheet, Na lets go, and Grandma holds the drawing in her left hand.
+Final frame: Grandma holds the drawing up in her left hand.
+Hands at end — Na: right hand empty; left hand empty. Grandma: right hand holds the cane; left hand holds the drawing.
+"""
+assert hand_ledger.lint(pkg) == [], hand_ledger.lint(pkg)
+problems = hand_ledger.lint(pkg.replace("Final frame: Grandma holds the drawing up in her left", "Final frame: Na holds the drawing up in her left"))
+assert len(problems) == 1 and "drawing in Na's left hand" in problems[0], problems
 # only the hand in the prop's own clause counts
 pkg = """### Clip 1
 Hands at start — Nori: right hand holds the phone; left hand empty.
@@ -359,6 +409,32 @@ j = {"head": [0, 1.7, 0], "neck": [0, 1.5, 0], "pelvis": [0, 1, 0], "shoulder_r"
 assert pg.check({"fps": 12, "frames": [{"joints": j}]}, "rig")["status"] == "PASS"
 mirrored = {k: [-v[0], v[1], v[2]] for k, v in j.items()}
 assert pg.check({"fps": 12, "frames": [{"joints": mirrored}]}, "rig")["status"] == "FAIL"
+
+# a scene: two characters in one shot, checked against each other
+import copy  # noqa: E402
+a, b = front_track(), front_track()
+a["name"], b["name"] = "Sol", "Kip"
+for f in b["frames"]:
+    f["joints"] = {k: [v[0] + 300, v[1]] for k, v in f["joints"].items()}
+    f["props"], f["holds"] = {}, {}
+fa, fb = a["frames"][4], b["frames"][4]
+fa["contacts"] = {"r": "Kip.wrist_l"}
+assert any(i["kind"] == "contact_miss" for i in pg.check_scene([a, b]))
+fb["joints"]["wrist_l"] = list(fa["joints"]["wrist_r"])
+assert not any(i["kind"] == "contact_miss" for i in pg.check_scene([a, b]))
+c = copy.deepcopy(b); c["name"] = "Vex"
+for f in c["frames"]:
+    f["joints"] = {k: [v[0] - 295, v[1]] for k, v in f["joints"].items()}
+assert any(i["kind"] == "head_overlap" for i in pg.check_scene([a, c]))
+# a prop handed from one character to the other must not jump between their hands
+a, b = front_track(), front_track()
+a["name"], b["name"] = "Sol", "Kip"
+for i, (f, g) in enumerate(zip(a["frames"], b["frames"])):
+    g["joints"] = {k: [v[0] + 300, v[1]] for k, v in g["joints"].items()}
+    f["holds"], g["holds"] = ({"cup": "r"}, {}) if i < 5 else ({}, {"cup": "l"})
+    f["props"] = {"cup": f["joints"]["wrist_r"]} if i < 5 else {}
+    g["props"] = {"cup": g["joints"]["wrist_l"]} if i >= 5 else {}
+assert any(i["kind"] == "handoff_gap" and i["frame"] == 5 for i in pg.check_scene([a, b]))
 
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()
