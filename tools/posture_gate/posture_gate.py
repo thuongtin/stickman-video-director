@@ -953,7 +953,9 @@ def check_hands(track, P, usable=None):
                 busy = side in f.get("contacts", {}) or any(side in hands_of(v) for v in f.get("holds", {}).values())
                 if not busy and all(k in pts for k in ks) and pts[ks[2]][1] > pts[ks[1]][1] > pts[ks[0]][1] \
                         and down(pts[ks[0]], pts[ks[1]]) < 25 and down(pts[ks[1]], pts[ks[2]]) < 25 \
-                        and any(abs(q[0] - mid) - lw < half_at(q[1]) for q in arm_points(ks)):
+                        and any(abs(q[0] - mid) - lw < half_at(q[1]) for q in arm_points(ks) + (
+                            [pts[ks[1]]] if lw else [])):
+                    # with "limb_width" the elbow counts too, as for a busy hand
                     add(fi, "arm_over_body", f"the {_side(side)} arm hangs over the body, not beside it",
                         set(ks), severity="warn")
                 # an upper arm folded in across the chest ("chicken wing"): the elbow well inside the
@@ -981,7 +983,7 @@ def check_hands(track, P, usable=None):
                 if busy and all(k in pts for k in ks[:2]) and pts[ks[1]][1] > pts[ks[0]][1] \
                         and down(pts[ks[0]], pts[ks[1]]) < 25 and any(
                             abs(q[0] - mid) - lw < half_at(q[1])
-                            for q in (pts[ks[1]], tuple((a + b) / 2 for a, b in zip(pts[ks[0]], pts[ks[1]])))):
+                            for q in (pts[ks[1]],)):
                     add(fi, "arm_over_body", f"the {_side(side)} upper arm runs down over the body, not beside it",
                         {ks[0], ks[1]}, severity="warn")
             pts = pts0
