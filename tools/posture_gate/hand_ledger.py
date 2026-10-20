@@ -13,12 +13,14 @@ This script reads the package (Markdown, clips headed "Clip N") and reports:
     (allowed only when the start line is marked, e.g. "Hands at start (time cut) — ..."
     or "Hands at start (handoff) — ..."),
   * a hand change inside a clip with no beat sentence about that prop that passes, swaps,
-    drops or picks it up,
+    drops or picks it up, and a hand left empty with no beat that lets go of the prop,
+  * "with both hands" while one hand holds another prop all clip,
   * one prop in two characters' hands in the same hands line,
   * a beat sentence that puts a ledger prop in the other hand,
   * a package with no hands lines at all while a beat holds, grabs or carries something,
   * "near hand" / "far arm" wording, which flips meaning when the character turns,
   * (warning) an unlisted prop put in a hand the hands lines keep empty,
+  * (warning) a pass that names no receiving hand, and a prop changing hands that the beats never name,
   * a hand taking or holding "it"/"them" in the wrong hand (read as the prop named last),
     or before any prop is named.
 Spoken narration ("(VO: "...")" and curly-quoted dialogue) is not read as a beat.
@@ -39,7 +41,7 @@ EXCUSE = re.compile(r"\b(handoff|hand-off|time cut)\b[.:,]?\s*", re.I)
 LIMB = r"(?:hand|paw|flipper|wing|hoof|claw|fin|glove|mitten|mitt|fist|palm)"
 ENTRY = re.compile(rf"(?P<name>\s*(?:(?:Mr|Mrs|Ms|Dr|St)\.\s*)?[^:;.]+?):\s*(?P<a>(?:right|left) {LIMB}\s+[^;]+?);\s*(?P<b>(?:right|left) {LIMB}\s+[^.;\n]+)", re.I)
 HAND = re.compile(rf"(right|left) {LIMB}\s+(.+)", re.I | re.S)
-TRANSFER = re.compile(r"\b(pass(es|ed)?|hands? (it )?over|gives?|takes?|swaps?|switch(es)?|moves? .* to (his|her|their|its) "
+TRANSFER = re.compile(r"\b(pass(es|ed)?|hands (it )?over|hand it over|hands (?:\w+ )?(?:the|a|an|it|her|his|them)|gives?|takes?|swaps?|switch(es)?|moves? .* to (his|her|their|its) "
                       r"(left|right) hand|drops?|puts?|sets? (?:\S+ ){0,3}?down|places?|picks?|grabs?|catch(es)?|toss(es)?|"
                       r"throws?|releases?|lets? go|tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|receives?|"
                       r"accepts?|snatch(es)?|pulls? out|takes? out)\b", re.I)
@@ -48,6 +50,16 @@ HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|
                      r"(?:breath|pose|gaze|ground|head|position)))|grab(?:s|bing|bed)?|grip(?:s|ping)?|"
                      r"clutch(?:es|ing)?|carr(?:y|ies|ying)|picks? up|picking up|wields?|"
                      rf"(?:in|with) (?:his|her|their|its|one|both) (?:left |right )?{LIMB}s?)\b[^.\n]{{0,40}}", re.I)
+# verbs that let go of a prop: a hand that ends empty needs one ("sets the brush down")
+RELEASE = re.compile(r"\b(pass(es|ed)?|hands (it )?over|hand it over|hands (?:\w+ )?(?:the|a|an|it|her|his|them)|gives?|"
+                     r"swaps?|switch(es)?|moves?|drops?|puts?|sets?|places?|toss(es)?|throws?|releases?|lets? go|"
+                     r"tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|rests?|lowers? .* (?:onto|on|into)|offers?)\b", re.I)
+BOTH = re.compile(rf"\b(?:both|two) {LIMB}s\b", re.I)
+# description lines that are not actions ("Props: ... wrapped in green leaves")
+STATIC = re.compile(r"^\W*(?:output|style(?: and environment)?|characters?|props?|composition|audio|voice|dialogue|"
+                    r"camera|lighting|palette|first frame)\b[^:\n]{0,40}:.*$", re.I | re.M)
+# timed beat lines, "- [3-7s] ..."
+TIMED = re.compile(r"^\s*[-*]?\s*\[[^\]\n]*\d[^\]\n]*\].*$", re.M)
 NEAR_FAR = re.compile(rf"\b(near|far|upstage|downstage) (?:arm|{LIMB[3:-1]})s?\b", re.I)
 PRONOUN = re.compile(r"\b(it|them)\b", re.I)
 CLAUSE = re.compile(r",\s*|;\s*|\s+(?:and|then|while|before|after|as|when|until|but)\s+", re.I)
@@ -73,8 +85,12 @@ SENT = re.compile(r"(?<!\bMr\.)(?<!\bMs\.)(?<!\bDr\.)(?<!\bSt\.)(?<!\bMrs\.)(?<=
 
 def keys(prop):
     """Words that name a prop in a beat: its last word ("four paper cards" -> "card") and its parts."""
-    words = [w.rstrip("s") for w in prop.lower().split()]
+    # "shoulder pole (with baskets)": a Hands line can list parts that name the prop in beats
+    inner = re.findall(r"\(([^)]*)\)", prop.lower())
+    words = [w.rstrip("s") for w in re.sub(r"\([^)]*\)", " ", prop.lower()).split()] or ["?"]
     out = {words[-1]}
+    for part in inner:
+        out |= {item.split()[-1].rstrip("s") for item in re.split(r",|\band\b|\bwith\b", part) if item.split()}
     out |= {part for part, objs in PARTS.items() if any(o in words for o in objs)}
     out |= {w for w in words if words[-1] in PARTS and w in PARTS[words[-1]]}  # "balloon string" is a balloon
     return out
@@ -82,7 +98,10 @@ def keys(prop):
 
 def mentions(text, prop):
     low = text.lower()
-    return any(k in low for k in keys(prop))
+    ks = keys(prop)
+    # "the phone" names the smartphone, "the ball" the basketball
+    return any(k in low for k in ks) or any(len(w) >= 4 and k.endswith(w) and k != w
+                                           for w in set(re.findall(r"\w+", low)) for k in ks)
 
 
 def name_at(name, text):
@@ -118,6 +137,9 @@ def hand_owners(sent, cast, state=None):
                                                        clause[:m.start()].rstrip())),
                          subject or state.get("subject"))
             hands.append((m.group(1).lower()[0], owner))
+        for m in BOTH.finditer(clause):  # "with both hands" is each hand
+            owner = subject or state.get("subject")
+            hands += [("r", owner), ("l", owner), ("b", owner)]
         if POINTING.search(clause) and not GRASP.search(clause):
             hands = []  # "points at the jar with her right hand" holds nothing
         out.append((clause, hands))
@@ -230,7 +252,7 @@ def lint(text, warnings=None):
         # questions are not beats
         beats = NOT_BEAT.sub("", LINE.sub("", body))
         if start[1] and end[1]:
-            sents = sentences(beats)
+            sents = sentences(STATIC.sub("", beats))
             for name, hands in start[1].items():
                 if name not in end[1] or hands == end[1][name]:
                     continue
@@ -238,10 +260,26 @@ def lint(text, warnings=None):
                 # "picks it up" right after the prop is named), not in an unrelated "leaves frame"
                 moved = {p for side in ("r", "l")
                          for p in (hands[side], end[1][name][side]) if p and hands[side] != end[1][name][side]}
-                if not any(TRANSFER.search(x) and any(mentions(x, p) or (PRONOUN.search(x) and i and mentions(sents[i - 1], p))
-                                                      for p in moved) for i, x in enumerate(sents)):
+                passes = [x for i, x in enumerate(sents) if TRANSFER.search(x) and any(
+                    mentions(x, p) or (PRONOUN.search(x) and i and mentions(sents[i - 1], p)) for p in moved)]
+                # a prop nobody holds at the end was let go of: "sets the brush down", not just "lifts the paper"
+                held_end = {p for led in end[1].values() for p in led.values() if p}
+                gone = {p for p in moved if p in hands.values() and p not in held_end}
+                unreleased = sorted(p for p in gone if not any(
+                    RELEASE.search(x) and (mentions(x, p) or (PRONOUN.search(x) and i and mentions(sents[i - 1], p)))
+                    for i, x in enumerate(sents)))
+                if not passes:
                     problems.append(f"Clip {n}: {name}'s hands change between start and end "
                                     f"({', '.join(sorted(moved))}), but no beat passes, swaps, drops or picks it up")
+                elif unreleased:
+                    problems.append(f"Clip {n}: {name}'s hands end without the {', '.join(unreleased)}, but no beat "
+                                    f"puts it down, drops or gives it away")
+                elif warnings is not None and any(end[1][name][sd] in moved for sd in ("r", "l")) \
+                        and not any(SIDE.search(x) or BOTH.search(x) for x in passes):
+                    # "Bao hands Mira the loaf": the model picks the receiving hand itself
+                    warnings.append(f"Clip {n}: the beat that gives {name} the "
+                                    f"{next(end[1][name][sd] for sd in ('r', 'l') if end[1][name][sd] in moved)} "
+                                    f"names no hand; say which hand takes it: \"{excerpt(passes[0])}\"")
         # beat sentences that name a ledger prop with a hand it is never in during this clip
         # (start or end ledger; a prop picked up mid-clip only appears in the end ledger)
         everyone = set(start[1]) | set(end[1])
@@ -256,13 +294,41 @@ def lint(text, warnings=None):
                         # "opens the door with the left hand and takes out the tea with the right hand"
                         sides = {side for clause, hands in owned if mentions(clause, prop)
                                  for side, owner in hands
-                                 if owner == name or (owner is None and len(named) <= 1)}
+                                 if side != "b" and (owner == name or (owner is None and len(named) <= 1))}
                         if sides and not sides & allowed and (n, sent) not in seen:
                             seen.add((n, sent))
                             problems.append(f"Clip {n}: beat puts the {prop} in {name}'s "
                                             f"{'left' if 'l' in sides else 'right'} hand, but the hands lines "
                                             f"keep it in the {'right' if 'r' in allowed else 'left'} hand: "
                                             f"\"{excerpt(sent)}\"")
+        # "lifts the red paper with both hands" while one hand holds the brush all clip
+        for sent, owned in attribute(beats, everyone):
+            for clause, hands in owned:
+                for side, owner in hands:
+                    if side != "b" or owner not in start[1] or owner not in end[1] or (n, sent) in seen:
+                        continue
+                    if not (HOLDING.search(clause) or TRANSFER.search(clause) or GRASP.search(clause)):
+                        continue
+                    busy = [(sd, start[1][owner][sd]) for sd in ("r", "l")
+                            if start[1][owner][sd] and start[1][owner][sd] == end[1][owner][sd]
+                            and start[1][owner][{"r": "l", "l": "r"}[sd]] != start[1][owner][sd]
+                            and not mentions(clause, start[1][owner][sd])]
+                    if busy:
+                        seen.add((n, sent))
+                        sd, p = busy[0]
+                        problems.append(f"Clip {n}: {owner} uses both hands, but the {'right' if sd == 'r' else 'left'} "
+                                        f"hand holds the {p} all clip; put it down first or use one hand: \"{excerpt(sent)}\"")
+        # a ledger prop the action never names ("bánh chưng" in the hands lines, "cake" in the beats)
+        if warnings is not None:
+            action = "\n".join(TIMED.findall(beats)) or STATIC.sub("", beats)
+            # only props that change hands here: one held still all clip needs no beat
+            moving = {p for led in (start[1], end[1]) for h in led.values() for p in h.values() if p} - {
+                p for name in set(start[1]) & set(end[1]) for sd in ("r", "l")
+                for p in [start[1][name][sd]] if p and end[1][name][sd] == p} if start[1] and end[1] else set()
+            for p in sorted(moving):
+                if not mentions(action, p):
+                    warnings.append(f"Clip {n}: the beats never name the {p} from the hands lines; use the beats' "
+                                    f"word for it or add it in brackets, e.g. \"bánh chưng (cake)\"")
         # "catches it with her left paw": "it" is the ledger prop named last before it in the clip;
         # check that prop's hand, and ask for the name when no prop was named yet
         owners = {}
@@ -293,7 +359,7 @@ def lint(text, warnings=None):
                     continue
                 who = {o for _, o in hands if o in owners[prop]}
                 allowed = set().union(*(owners[prop][c] for c in (who or owners[prop])))
-                sides = {side for side, o in hands if not who or o in who}
+                sides = {side for side, o in hands if side != "b" and (not who or o in who)}
                 if not sides & allowed:
                     seen.add((n, sent))
                     problems.append(f"Clip {n}: \"{pron.group(0)}\" (the {key}) goes in the "

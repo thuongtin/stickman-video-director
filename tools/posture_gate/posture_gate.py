@@ -127,13 +127,17 @@ def to_2d(track):
         if props:
             f["_props3d"] = {k: list(p) for k, p in props.items()}
             f["props"] = {k: [round(dot(sub(p, o), fwd), 3), round(-dot(sub(p, o), up), 3)] for k, p in props.items()}
-        # head yaw: the turn of the nose about the neck, against the body's forward, both seen
+        # head yaw: the turn of the nose about the neck, against the shoulders' forward, both seen
         # down the neck (a head tipped back in a limbo or knee slide is not a turned head)
         if "nose" in j and "head" in j:
             ax = unit(sub(j["head"], j["neck"])) if "neck" in j else up
             ax = ax or up
             flat = lambda v: tuple(x - dot(v, ax) * a for x, a in zip(v, ax))
             n, fw, lt = flat(sub(j["nose"], j["head"])), flat(fwd), flat(lat)
+            if "shoulder_r" in j and "shoulder_l" in j and unit(flat(sub(j["shoulder_r"], j["shoulder_l"]))):
+                # against the shoulders: a look back over a twisted trunk turns the neck less
+                lt = flat(sub(j["shoulder_r"], j["shoulder_l"]))
+                fw = tuple(hand * x for x in cross(ax, unit(lt)))
             if norm(n) > 1e-6 and norm(fw) > 0.3 and norm(lt) > 0.3:
                 f["_yaw"] = math.degrees(math.atan2(dot(unit(n), unit(lt)), dot(unit(n), unit(fw))))
     return out
@@ -355,7 +359,7 @@ def check(track, profile=None):
                             key = f"{name}_{s_}"
                             # an elbow cannot fold backward far, so its projected direction only
                             # counts near straight (a twisted upper arm flips the projection)
-                            sign = -1 if key in angles and angles[key][0] < 0 and (name == "knee" or flex < 20) else 1
+                            sign = -1 if key in angles and angles[key][0] < 0 and (name == "knee" or flex <= 15) else 1
                             toe = j3.get(f"toe_{s_}")
                             if name == "knee" and toe:
                                 # a knee bends toward its own toes, whichever way the leg is turned out
@@ -368,6 +372,32 @@ def check(track, profile=None):
                                     sign = 1 if dot(out_, front) >= 0 else -1
                             lim = limits["sagittal"][name]
                             angles[key] = (sign * flex, lim["min"], lim["max"], {a_, b_, c_}, ((a_, b_), (b_, c_)))
+        # Front-view limits in a 3D rig, in the pelvis's own frame: a leg spread sideways
+        # (hip abduction) and a knee bending sideways out of the plane of its thigh and foot.
+        if j3 and all(k in j3 for k in ("hip_l", "hip_r")):
+            lat = unit(sub(j3["hip_r"], j3["hip_l"]))
+            fro = limits["frontal"]
+            for s_ in SIDES:
+                out_dir = lat if s_ == "r" else tuple(-x for x in lat) if lat else None
+                hip, knee, ankle, toe = (j3.get(f"{k}_{s_}") for k in ("hip", "knee", "ankle", "toe"))
+                if not (out_dir and hip and knee):
+                    continue
+                thigh = unit(sub(knee, hip))
+                if thigh:
+                    ab = math.degrees(math.asin(max(-1.0, min(1.0, dot(thigh, out_dir)))))
+                    angles[f"hip_abduction_{s_}"] = (ab, -60, fro["hip_abduction"]["max"], {f"hip_{s_}", f"knee_{s_}"},
+                                                     ((f"hip_{s_}", f"knee_{s_}"),))
+                if ankle and toe and thigh:
+                    # the foot points along the knee's bending plane; how far it points out of
+                    # that plane (across the shin) is a sideways knee. The shin twists and the
+                    # foot turns out a little at the ankle, hence the wider 3D allowance.
+                    shin, ft = unit(sub(ankle, knee)), sub(toe, ankle)
+                    hinge = unit(cross(thigh, shin)) if shin else None
+                    fp = sub(ft, tuple(dot(ft, shin) * x for x in shin)) if shin else None
+                    if hinge and norm(fp) > 0.3 * norm(ft) and math.degrees(math.acos(max(-1.0, min(1.0, dot(thigh, shin))))) > 20:
+                        side = math.degrees(math.asin(min(1.0, abs(dot(hinge, unit(fp))))))
+                        angles[f"knee_lateral_{s_}"] = (side, 0, fro["knee_lateral"].get("max_3d", 40), {f"knee_{s_}", f"ankle_{s_}"},
+                                                        ((f"knee_{s_}", f"ankle_{s_}"),))
         for key, (v, lo, hi, inv, _) in angles.items():
             over = arc_violation(v, lo, hi)
             if over > P["angle_tolerance"]:
@@ -534,7 +564,8 @@ def check_hands(track, P, usable=None):
                 step = P["max_joint_speed"] / float(track.get("fps", 12))
                 turn = [abs(wrap(signed(sub(prev[f"elbow_{s}"], prev[f"shoulder_{s}"]), sub(pts[f"elbow_{s}"], pts[f"shoulder_{s}"]))))
                         for s in SIDES if all(f"{k}_{s}" in pts and f"{k}_{s}" in prev for k in ("shoulder", "elbow"))]
-                plausible = len(turn) == 2 and max(turn) <= step
+                # ...unless each wrist lands almost exactly on the other's spot: the labels jumped
+                plausible = len(turn) == 2 and max(turn) <= step and swap >= 0.2 * keep
             else:
                 plausible = False
             if keep > 0.8 * torso and swap < 0.35 * keep and not plausible:
@@ -547,9 +578,13 @@ def check_hands(track, P, usable=None):
                     return (a[0] * (q[1] - p["pelvis"][1]) - a[1] * (q[0] - p["pelvis"][0])) / (norm(a) or 1.0)
                 was = [side_of(prev, prev[f"wrist_{s}"]) for s in SIDES]
                 now = [side_of(pts, pts[f"wrist_{s}"]) for s in SIDES]
-                if all(w * n < 0 and min(abs(w), abs(n)) > 0.1 * torso for w, n in zip(was, now)):
-                    add(fi, "hand_swap", "both hands crossed to the other side of the body in one frame", {
-                        "shoulder_l", "elbow_l", "wrist_l", "shoulder_r", "elbow_r", "wrist_r"})
+                moved = [norm(sub(pts[f"wrist_{s}"], prev[f"wrist_{s}"])) for s in SIDES]
+                if all(w * n < 0 and min(abs(w), abs(n)) > 0.1 * torso for w, n in zip(was, now)) \
+                        and min(moved) > 0.3 * torso:  # arms folding across the chest move less per frame
+                    # a warning: arms folding across the chest fast look the same as a swap
+                    add(fi, "hand_swap", "both arms cross the body in one frame, too fast to read; "
+                        "add a passing pose", {
+                        "shoulder_l", "elbow_l", "wrist_l", "shoulder_r", "elbow_r", "wrist_r"}, severity="warn")
         prev = pts
 
         # Head turned past the shoulders (3D tracks with a nose joint).
@@ -561,21 +596,33 @@ def check_hands(track, P, usable=None):
         holds = f.get("holds", {})
         if fi > 0 and not f.get("handoff"):
             for prop, side in holds.items():
-                before = frames[fi - 1].get("holds", {}).get(prop)
-                if before and side and before != side:
-                    add(fi, "prop_hand_switch", f"{prop} jumps from the {_side(before)} hand to the "
-                        f"{_side(side)} hand (mark \"handoff\": true if it is passed on purpose)",
-                        {f"wrist_{before}", f"wrist_{side}"})
+                before = hands_of(frames[fi - 1].get("holds", {}).get(prop))
+                now = hands_of(side)
+                if before and now and not before & now:  # taking a second hand to it is fine
+                    add(fi, "prop_hand_switch", f"{prop} jumps from the {_side(sorted(before))} hand to the "
+                        f"{_side(sorted(now))} hand (mark \"handoff\": true if it is passed on purpose)",
+                        {f"wrist_{x}" for x in before | now})
 
         # A prop said to be in one hand must be drawn at that hand.
+        # how far (in torso lengths) a held prop's point may sit from the wrist; put the prop's
+        # point at the grip, a long prop's far end goes in its own "<prop>.<part>" point
+        hold_tol = f.get("hold_tolerance", track.get("hold_tolerance", 0.6))
         for prop, side in holds.items():
             at = (f.get("_props3d") or f.get("props", {})).get(prop)
-            other = "r" if side == "l" else "l"
             just_passed = f.get("handoff") or (fi > 0 and frames[fi - 1].get("handoff"))
+            if len(hands_of(side)) == 2:  # carried in both hands: drawn between them
+                if at and torso and not just_passed and all(f"wrist_{x}" in pts for x in SIDES):
+                    mid = tuple((a + b) / 2 for a, b in zip(pts["wrist_l"], pts["wrist_r"]))
+                    if norm(sub(at, mid)) > hold_tol * torso:
+                        add(fi, "prop_wrong_hand", f"{prop} should be carried in both hands but is drawn away "
+                            "from them", {"wrist_l", "wrist_r"})
+                continue
+            side = next(iter(hands_of(side)), None)
+            other = "r" if side == "l" else "l"
             if at and side and f"wrist_{side}" in pts and torso and not just_passed:
                 d_own = norm(sub(at, pts[f"wrist_{side}"]))
                 d_other = norm(sub(at, pts[f"wrist_{other}"])) if f"wrist_{other}" in pts else float("inf")
-                if d_own > 0.6 * torso or d_other < d_own:
+                if d_own > hold_tol * torso or d_other < d_own:
                     add(fi, "prop_wrong_hand", f"{prop} should be in the {_side(side)} hand but is drawn "
                         f"{'at the ' + _side(other) + ' hand' if d_other < d_own else 'away from it'}",
                         {f"wrist_{side}", f"elbow_{side}"})
@@ -588,6 +635,7 @@ def check_hands(track, P, usable=None):
         for src, target in f.get("contacts", {}).items():
             hand = src in SIDES
             frm = pts.get(f"wrist_{src}") if hand else props.get(src)
+            span = hand_span(f, track, pts, src) if hand else (frm, frm)
             if not frm or not torso:
                 continue
             if target == "ground":
@@ -598,7 +646,7 @@ def check_hands(track, P, usable=None):
                 at = props.get(target) if isinstance(target, str) else target
                 if not at:
                     continue
-                d = norm(sub(at, frm))
+                d = _seg_dist(at, *span) if span[0] != span[1] else norm(sub(at, frm))
             if d > tol * torso:
                 label = target if isinstance(target, str) else "its target"
                 who = f"the {_side(src)} hand" if hand else f"the {src}"
@@ -611,6 +659,8 @@ def check_hands(track, P, usable=None):
             r = f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
             for side in SIDES:
                 ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
+                if side in f.get("contacts", {}) or any(side in hands_of(v) for v in f.get("holds", {}).values()):
+                    continue  # a hand on the chin or holding a cup to the mouth is meant to be there
                 if r and all(k in pts for k in ks):
                     crosses = (pts[ks[2]][0] - pts["head"][0]) * (pts[ks[0]][0] - pts["head"][0]) < 0
                     if _seg_dist(pts["head"], pts[ks[1]], pts[ks[2]]) < r and \
@@ -627,7 +677,7 @@ def check_hands(track, P, usable=None):
             side = facing[0]
             ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
             r = f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
-            busy = side in f.get("contacts", {}) or side in f.get("holds", {}).values()
+            busy = side in f.get("contacts", {}) or any(side in hands_of(v) for v in f.get("holds", {}).values())
             ahead = 1 if facing == "right" else -1
             if r and not busy and all(k in pts for k in ks) and any(
                     _seg_dist(pts["head"], a, b) < r and (_closest(pts["head"], a, b)[0] - pts["head"][0]) * ahead > 0
@@ -636,7 +686,7 @@ def check_hands(track, P, usable=None):
                     "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                     {ks[1], ks[2], "head"}, severity="warn")
             # a held prop (a raised ball, a book) sitting on the face; a cup at the mouth stays at the edge
-            for prop, hs in f.get("holds", {}).items():
+            for prop, hs in ((p_, sorted(hands_of(v))[0]) for p_, v in f.get("holds", {}).items() if hands_of(v)):
                 at = f.get("props", {}).get(prop)
                 if r and at and norm(sub(at, pts["head"])) < 0.6 * r and (at[0] - pts["head"][0]) * ahead >= 0:
                     add(fi, "arm_over_face", f"the {prop} covers the face in side view "
@@ -679,7 +729,25 @@ def _seg_dist(p, a, b):
     return norm(sub(p, (a[0] + ab[0] * t, a[1] + ab[1] * t)))
 
 
-def _side(s): return {"l": "left", "r": "right"}.get(s, s)
+def _side(s): return {"l": "left", "r": "right"}.get(s, s) if isinstance(s, str) else " and ".join(map(_side, s))
+
+
+def hands_of(v):
+    """A "holds" value as a set of sides: "r", or ["l", "r"] (or "both") for a two-handed carry."""
+    if v in ("both", "b", "lr", "rl"):
+        return {"l", "r"}
+    return set() if not v else {v} if isinstance(v, str) else set(v)
+
+
+def hand_span(f, track, pts, side):
+    """The hand as a segment from the wrist to its tip: "hand_length" (track units) on the track or
+    frame extends it along the forearm, for mitten or glove hands that reach past the wrist."""
+    w, e = pts.get(f"wrist_{side}"), pts.get(f"elbow_{side}")
+    hl = f.get("hand_length", track.get("hand_length"))
+    if not (w and e and hl):
+        return w, w
+    d = unit(sub(w, e))
+    return w, (tuple(a + hl * b for a, b in zip(w, d)) if d else w)
 
 
 def check_sequence(tracks):
@@ -691,7 +759,7 @@ def check_sequence(tracks):
             continue
         end, start = a[-1].get("holds", {}), b[0].get("holds", {})
         for prop, side in start.items():
-            if end.get(prop) and side and end[prop] != side:
+            if hands_of(end.get(prop)) and hands_of(side) and not hands_of(end[prop]) & hands_of(side):
                 issues.append({"frame": None, "clip": k + 1, "severity": "error", "kind": "prop_hand_switch",
                                "message": f"{prop} ends clip {k + 1} in the {_side(end[prop])} hand but starts "
                                           f"clip {k + 2} in the {_side(side)} hand", "joints": []})
@@ -740,7 +808,8 @@ def check_scene(tracks):
                 if who in names and f"wrist_{side}" in fa.get("joints", {}):
                     other = fr[names.index(who)].get("joints", {})
                     if joint in other:
-                        d = norm(sub(fa["joints"][f"wrist_{side}"], other[joint]))
+                        span = hand_span(fa, ta, fa["joints"], side)
+                        d = _seg_dist(other[joint], *span) if span[0] != span[1] else norm(sub(span[0], other[joint]))
                         if d > tol * T:
                             add(fi, "contact_miss", f"{names[a]}'s {_side(side)} hand should meet {who}'s "
                                 f"{joint.replace('_l', ' (left)').replace('_r', ' (right)')} but stops {d / T:.1f} torso-lengths away")
