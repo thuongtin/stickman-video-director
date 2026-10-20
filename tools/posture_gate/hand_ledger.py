@@ -10,9 +10,13 @@ The prompt contract asks every clip to state, from each character's own side:
 This script reads the package (Markdown, clips headed "Clip N") and reports:
   * a clip that has no start or end hands line while others do,
   * a prop that changes hands between the end of one clip and the start of the next
-    (allowed only when the start line says "handoff" or "time cut"),
+    (allowed only when the start line is marked, e.g. "Hands at start (time cut) — ..."
+    or "Hands at start (handoff) — ..."),
   * a hand change inside a clip with no beat that passes, swaps, drops or picks it up,
-  * a beat sentence that puts a ledger prop in the other hand.
+  * a beat sentence that puts a ledger prop in the other hand,
+  * a package with no hands lines at all while a beat holds, grabs or carries something,
+  * "near hand" / "far arm" wording, which flips meaning when the character turns.
+Paw, flipper, wing, hoof, claw and fin count as hands for animal characters.
 
 Usage: hand_ledger.py package.md     Exit 0 = consistent, 1 = problems, 2 = bad input.
 """
@@ -21,12 +25,25 @@ import sys
 from pathlib import Path
 
 CLIP = re.compile(r"^#{1,4}\s*Clip\s+(\d+)\b.*$", re.I | re.M)
-LINE = re.compile(r"^\W*Hands at (start|end)\s*[—:-]+\s*(.+)$", re.I | re.M)
-ENTRY = re.compile(r"(?P<name>[^:;.]+?):\s*right hand\s+(?P<r>[^;]+?);\s*left hand\s+(?P<l>[^.;\n]+)", re.I)
+# "Hands at start — ..." or "Hands at start (time cut) — ..."
+LINE = re.compile(r"^\W*Hands at (start|end)\b([^—:\n]*?)\s*[—:-]+\s*(.+)$", re.I | re.M)
+EXCUSE = re.compile(r"\b(handoff|hand-off|time cut)\b[.:,]?\s*", re.I)
+# "Name: right hand ...; left hand ..." with the two hands in either order.
+# Animal and creature characters: a paw, flipper, wing, hoof, claw or fin is the hand.
+LIMB = r"(?:hand|paw|flipper|wing|hoof|claw|fin)"
+ENTRY = re.compile(rf"(?P<name>[^:;.]+?):\s*(?P<a>(?:right|left) {LIMB}\s+[^;]+?);\s*(?P<b>(?:right|left) {LIMB}\s+[^.;\n]+)", re.I)
+HAND = re.compile(rf"(right|left) {LIMB}\s+(.+)", re.I | re.S)
 TRANSFER = re.compile(r"\b(pass(es|ed)?|hands? (it )?over|gives?|takes?|swaps?|switch(es)?|moves? .* to (his|her|their|its) "
-                      r"(left|right) hand|drops?|puts? down|sets? down|places?|picks? up|grabs?|catch(es)?|toss(es)?|"
-                      r"throws?|releases?|lets? go)\b", re.I)
-SIDE = re.compile(r"\b(left|right) hand\b", re.I)
+                      r"(left|right) hand|drops?|puts?|sets? down|places?|picks?|grabs?|catch(es)?|toss(es)?|"
+                      r"throws?|releases?|lets? go|tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|receives?|"
+                      r"accepts?|snatch(es)?|pulls? out|takes? out)\b", re.I)
+# Verbs of holding an object; "holds still", "holds her breath", "holds the pose" are not props.
+HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|the pose|(?:his|her|their|its) "
+                     r"(?:breath|pose|gaze|ground|head|position)))|grab(?:s|bing|bed)?|grip(?:s|ping)?|"
+                     r"clutch(?:es|ing)?|carr(?:y|ies|ying)|picks? up|picking up|wields?|"
+                     r"(?:in|with) (?:his|her|their|its|one|both) (?:left |right )?(?:hand|paw|flipper|wing|hoof|claw|fin)s?)\b[^.\n]{0,40}", re.I)
+NEAR_FAR = re.compile(rf"\b(near|far|upstage|downstage) (?:arm|{LIMB[3:-1]})s?\b", re.I)
+SIDE = re.compile(rf"\b(left|right) {LIMB}s?\b", re.I)
 
 
 def held(text):
@@ -38,7 +55,12 @@ def held(text):
 def parse_ledger(line):
     out = {}
     for m in ENTRY.finditer(line):
-        out[m["name"].strip()] = {"r": held(m["r"]), "l": held(m["l"])}
+        hands = {}
+        for part in (m["a"], m["b"]):
+            side, what = HAND.match(part).groups()
+            hands[side[0].lower()] = held(what)
+        if set(hands) == {"r", "l"}:
+            out[m["name"].strip()] = hands
     return out
 
 
@@ -50,16 +72,27 @@ def split_clips(text):
 
 def lint(text):
     problems = []
-    clips = split_clips(text)
-    if not clips:
-        return ["no 'Clip N' headings found"]
+    clips = split_clips(text) or [(1, text)]  # a single prompt without a heading is clip 1
     ledgers = []
     for n, body in clips:
-        lines = {k.lower(): (v, parse_ledger(v)) for k, v in LINE.findall(body)}
+        lines = {k.lower(): (q + " " + v, parse_ledger(EXCUSE.sub("", v))) for k, q, v in LINE.findall(body)}
         ledgers.append((n, body, lines))
+    for n, body, _ in ledgers:
+        for sent in re.split(r"(?<=[.!?;])\s+", LINE.sub("", body)):
+            m = NEAR_FAR.search(sent)
+            if m:
+                problems.append(f"Clip {n}: \"{m.group(0)}\" is ambiguous (it flips when the character turns); "
+                                f"name the character's own left or right: \"{sent.strip()[:90]}\"")
     if not any(lines for _, _, lines in ledgers):
-        return []  # nobody holds anything: nothing to check
+        # No ledger at all is fine only when nobody holds anything.
+        for n, body, _ in ledgers:
+            m = HOLDING.search(body)
+            if m:
+                problems.append(f"Clip {n}: a beat has a character holding something (\"{m.group(0).strip()}\") "
+                                f"but the package has no 'Hands at start' / 'Hands at end' lines")
+        return problems
     prev_end = None
+    seen = set()
     for n, body, lines in ledgers:
         for k in ("start", "end"):
             if k not in lines:
@@ -86,14 +119,19 @@ def lint(text):
                     problems.append(f"Clip {n}: {name}'s hands change between start and end, "
                                     f"but no beat passes, swaps, drops or picks anything up")
         # beat sentences that name a ledger prop with a hand it is never in during this clip
-        for name, hands in start[1].items():
-            for prop in {p for p in hands.values() if p}:
+        # (start or end ledger; a prop picked up mid-clip only appears in the end ledger)
+        everyone = set(start[1]) | set(end[1])
+        for name in everyone:
+            props = {p for led in (start[1], end[1]) for p in led.get(name, {}).values() if p}
+            for prop in props:
                 allowed = {side for led in (start[1], end[1]) for side, p in led.get(name, {}).items() if p == prop}
-                key = prop.split()[-1]
-                for sent in re.split(r"(?<=[.!?])\s+", beats):
-                    if key in sent.lower() and not TRANSFER.search(sent):
+                key = prop.split()[-1].rstrip("s")  # "four paper cards" also matches "a second card"
+                for sent in re.split(r"(?<=[.!?;])\s+", beats):
+                    named = {c for c in everyone if c.lower() in sent.lower()}
+                    if key in sent.lower() and (not named or name in named):
                         sides = {m.group(1).lower()[0] for m in SIDE.finditer(sent)}
-                        if sides and not sides & allowed:
+                        if sides and not sides & allowed and (n, sent) not in seen:
+                            seen.add((n, sent))
                             problems.append(f"Clip {n}: beat puts the {prop} in {name}'s "
                                             f"{'left' if 'l' in sides else 'right'} hand, but the hands lines "
                                             f"keep it in the {'right' if 'r' in allowed else 'left'} hand: "

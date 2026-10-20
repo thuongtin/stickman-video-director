@@ -91,6 +91,101 @@ t = side_track(ex.head_backward)
 t["limits_override"] = {"sagittal": {"neck": {"min": -130}}}
 assert "joint_limit" not in kinds(pg.check(t))
 
+# ---- feedback from the style threads ----
+import math  # noqa: E402
+
+def front3d(bug=None, n=6):
+    """Front-facing wave as a 3D rig (y up, character faces +z, its left is +x)."""
+    t = front_track()
+    t.pop("rest")
+    for i, f in enumerate(t["frames"][:n]):
+        j = {k: [x, -y, 0.0] for k, (x, y) in f["joints"].items()}
+        for side in ("l", "r"):  # feet point forward, toward the camera
+            a = j[f"ankle_{side}"]; j[f"toe_{side}"] = [a[0], a[1] - 1, 10.0]
+        j["nose"] = [j["head"][0], j["head"][1], 8.0]
+        f["joints"], f["props"] = j, {k: [x, -y, 0.0] for k, (x, y) in f["props"].items()}
+        if bug:
+            bug(i, f)
+    t["frames"] = t["frames"][:n]
+    return t
+
+def point_at_camera(i, f):
+    j = f["joints"]; sh = j["shoulder_r"]
+    j["elbow_r"] = [sh[0], sh[1], 30.0]; j["wrist_r"] = [sh[0], sh[1], 58.0]
+
+def yaw_120(i, f):
+    h = f["joints"]["head"]
+    f["joints"]["nose"] = [h[0] + 8 * math.sin(math.radians(120)), h[1], 8 * math.cos(math.radians(120))]
+
+def flip3d(i, f):
+    j = f["joints"]
+    for k in ("shoulder", "elbow", "wrist"):
+        j[f"{k}_l"], j[f"{k}_r"] = j[f"{k}_r"], j[f"{k}_l"]
+    f["props"] = {}
+
+# 3D rigs: an arm pointing at the camera is not a shrunk limb; yaw and twist are caught in 3D
+assert pg.check(front3d())["passed"], pg.check(front3d())["issues"][:3]
+assert pg.check(front3d(point_at_camera))["passed"], pg.check(front3d(point_at_camera))["issues"][:3]
+assert "head_yaw" in kinds(pg.check(front3d(yaw_120)))
+assert "torso_flip" in kinds(pg.check(front3d(flip3d)))
+
+# kneeling / sitting: whatever touches the ground supports the body; named supports work too
+def kneel(i, a, kw, f):
+    a.update(lean=0, hip_l=90, knee_l=90, hip_r=-10, knee_r=150, ankle_r=-40)
+r = pg.check(side_track(kneel))
+assert "balance" not in kinds(r, "warn"), r["issues"][:3]
+t = side_track(ex.topple)
+for f in t["frames"]:
+    f["supported"] = ["wrist_l"]
+    f["joints"]["wrist_l"] = [f["joints"]["neck"][0] + 40, f["joints"]["toe_l"][1]]
+assert "balance" not in kinds(pg.check(t), "warn")
+t = side_track(ex.topple)
+for f in t["frames"]:
+    f["supported"] = True
+assert "balance" not in kinds(pg.check(t), "warn")
+
+# a big chibi head can be given its own mass
+assert pg.center_of_mass({"neck": (0, 1), "head": (10, 2), "pelvis": (0, 0)}, {"head": 0.5}) > \
+    pg.center_of_mass({"neck": (0, 1), "head": (10, 2), "pelvis": (0, 0)})
+
+# pixel-snapped rigs: 1 px of rounding on a 4 px bone is not a stretch in the pixel profile
+t = side_track()
+for f in t["frames"]:
+    f["joints"] = {k: [round(x / 9), round(y / 9)] for k, (x, y) in f["joints"].items()}
+t.pop("rest")
+assert "bone_stretch" in kinds(pg.check(t, "rig")) or "bone_shrink" in kinds(pg.check(t, "rig"))
+assert not ({"bone_stretch", "bone_shrink"} & kinds(pg.check(t, "pixel")))
+
+# front view: a sideways-looking knee under a raised thigh (cross-legged) is only a warning
+def cross_legged(i, a, f):
+    a["leg_l"] = a["leg_r"] = 80
+r = pg.check(front_track(cross_legged))
+assert "joint_limit" not in kinds(r) and "joint_limit" in kinds(r, "warn"), r["issues"][:2]
+
+# hand contact and arm over face
+t = front_track()
+t["frames"][3]["props"]["door"] = [400, 100]; t["frames"][3]["contacts"] = {"r": "door"}
+assert "contact_miss" in kinds(pg.check(t))
+t = front_track()
+f = t["frames"][2]; f["joints"]["wrist_l"] = [f["joints"]["head"][0] - 10, f["joints"]["head"][1]]
+f["joints"]["elbow_l"] = [f["joints"]["head"][0] + 14, f["joints"]["head"][1] + 20]; f["props"] = {}
+assert "arm_over_face" in kinds(pg.check(t), "warn")
+f["face_cover"] = True
+assert "arm_over_face" not in kinds(pg.check(t), "warn")
+
+# mirrored figure: every joint labelled on the wrong side while facing the camera
+t = front_track()
+for f in t["frames"]:
+    f["joints"] = {(k[:-1] + {"l": "r", "r": "l"}[k[-1]] if k[-2:] in ("_l", "_r") else k): v
+                   for k, v in f["joints"].items()}
+    f["holds"], f["props"] = {}, {}
+assert "mirrored_body" in kinds(pg.check(t))
+
+# a zero-length rest bone (foot pointing straight at the camera) must not crash
+t = front_track()
+t["rest"]["toe_l"] = list(t["rest"]["ankle_l"]); t["rest"]["toe_r"] = list(t["rest"]["ankle_r"])
+pg.check(t)
+
 # CLI exit codes
 ok = GATE / "examples/walk_clean.json"
 bad = GATE / "examples/knee_backward.json"
@@ -112,7 +207,33 @@ problems = hand_ledger.lint((GATE / "examples/ledger_bad.md").read_text())
 assert any("beat puts the red paper card" in p for p in problems), problems
 assert any("missing 'Hands at end'" in p for p in problems), problems
 assert any("previous clip ended" in p for p in problems), problems
-assert hand_ledger.lint("### Clip 1\nNo props here.\n") == []
+assert hand_ledger.lint("### Clip 1\nNo props here. She holds her breath.\n") == []
+# no ledger at all while a beat holds something
+assert hand_ledger.lint("### Clip 1\n[0-3s] Mia grabs the phone from the table.\n")
+assert hand_ledger.lint("[0-3s] Mia grabs the phone from the table.\n")  # one prompt, no heading
+assert hand_ledger.lint("[0-3s] Mia waves.\n") == []
+assert any("near arm" in p for p in hand_ledger.lint("[0-3s] Pip raises his near arm.\n"))
+# paws count as hands, and a sentence is checked against the character it names
+pkg = """### Clip 1
+Hands at start — Kaka: right flipper holds the folder; left flipper empty. Miso: right paw empty; left paw holds the folder.
+[0-3s] Miso opens the folder in her right paw.
+Hands at end — Kaka: right flipper holds the folder; left flipper empty. Miso: right paw empty; left paw holds the folder.
+"""
+problems = hand_ledger.lint(pkg)
+assert len(problems) == 1 and "Miso's right hand" in problems[0], problems
+# either hand order, a marked time cut, a prop picked up mid-clip named with the wrong hand
+pkg = """### Clip 1
+Hands at start — Nori: right hand holds the phone; left hand empty.
+[0-3s] Nori takes out the milk tea with the right hand.
+[3-7s] She tucks the phone into her pocket.
+Hands at end — Nori: right hand empty; left hand holds the milk tea.
+### Clip 2
+Hands at start (time cut) — Nori: left hand empty; right hand holds the milk tea.
+[0-3s] Nori sips the milk tea.
+Hands at end — Nori: left hand empty; right hand holds the milk tea.
+"""
+problems = hand_ledger.lint(pkg)
+assert len(problems) == 1 and "milk tea in Nori's right hand" in problems[0], problems
 
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()

@@ -19,8 +19,11 @@ Only the Python standard library is needed, except `estimate_pose.py` (`pip inst
 - **Joint limits** in side view (knee and elbow only fold one way, hip, shoulder, neck, ankle) and front view (knee never bends sideways, leg/head tilt), from clinical range-of-motion norms in [`joint_limits.json`](joint_limits.json). A track can widen a limit with `"limits_override": {"sagittal": {"hip": {"max": 170}}}`, e.g. for a dancer's high kick.
 - **Limb length**: a limb stretching or shrinking against its rest length (rigs), or stretching against the longest length seen (video).
 - **Pops and snaps**: a joint turning faster than a person can in one frame; a knee or elbow flipping bend direction.
-- **Balance** (warning): center of mass outside the feet while standing. Mark jumps and falls `"airborne": true`.
+- **Balance** (warning): center of mass outside whatever touches the ground (feet, knees, pelvis, hands), held for about a fifth of a second or longer, so a walk's single-support moments pass. Mark jumps and falls `"airborne": true`; list other supports per frame, `"supported": ["pelvis", "wrist_r", "chair"]` (joints or prop names), or `"supported": true`. A big-headed character can set `"mass": {"head": 0.3}` (segments: head, trunk, upper_arm, forearm, thigh, shank).
+- **Head yaw** (3D tracks with a `nose` joint): head turned more than 80° from the body.
 - **Left/right**: hands trading places, shoulders facing against the hips, a held prop jumping to the other hand (within a clip or across a cut), a prop drawn at the wrong hand, a left hand shape drawn on a right arm.
+- **Contact** (optional): `"contacts": {"r": "door"}` (a prop name or a point) fails when that hand stops short of it.
+- **Arm over face** (warning, front view): a forearm sweeping across the head. Mark intended moments `"face_cover": true`. Not checked: an arm crossing the face in side view, and a hand hidden behind a big head (2D occlusion).
 
 `fix` repairs a rig track by clamping joint angles into range and restoring limb lengths. It does not invent new key poses for pops, balance or hand mix-ups; those still fail after `fix`.
 
@@ -46,7 +49,9 @@ Only the Python standard library is needed, except `estimate_pose.py` (`pip inst
 }
 ```
 
-Image coordinates, y down. `_l` / `_r` are the **character's** left and right. `facing` is `left`, `right`, `front` or `side`; when omitted it is inferred from the feet and shoulder width. Missing joints skip the checks that need them. `holds`, `props`, `hands`, `handoff`, `airborne` and `scale` (camera zoom on a rig) are optional.
+Image coordinates, y down. A 3D rig can pass `[x, y, z]` joints (and props) instead: each frame is checked in the body's own side view with true 3D bone lengths, so a limb pointing at the camera is not "shrunk" (`"up_axis"` defaults to `[0, 1, 0]`; set `"handedness": "left"` for Unity-style coordinates). If only a camera projection of a 3D rig is available, set `"projected": true`: limbs are then never called shrunk, and stretch is measured against the longest length seen. Draw `rest` in the same view as the frames. `_l` / `_r` are the **character's** left and right. `facing` is `left`, `right`, `front` (toward the camera), `back` or `side`; when omitted it is inferred from the feet and shoulder width. With `front` or `back` given, the gate also checks that the right shoulder is on the correct side of the screen, which catches a mirrored figure. Missing joints skip the checks that need them. `holds`, `props`, `hands`, `handoff`, `airborne`, `supported`, `contacts`, `face_cover` and `scale` (camera zoom on a rig) are optional.
+
+Profiles: `rig` (strict, default for rig tracks), `pixel` (rigs snapped to a pixel grid: 1.5 px of rounding allowed on lengths, 20° on angles), `video` (estimated poses, REVIEW only). In flat front view only a knee bending sideways under a hanging thigh is an error; other front-view hip and knee readings are warnings, since cross-legged sitting and kneeling look the same there, and limbs pointing at the viewer may look short.
 
 [`examples/make_examples.py`](examples/make_examples.py) builds a walk cycle, a front-facing wave with a cup, and one track per bug; [`examples/make_figures.py`](examples/make_figures.py) redraws the figures above.
 

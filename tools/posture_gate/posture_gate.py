@@ -6,7 +6,7 @@ Works on a pose track (JSON of 2D joint positions per frame) from either
   * a pose estimator run on generated frames (estimate_pose.py, "video" profile).
 
 Usage:
-  posture_gate.py check track.json [more clips in order...] [--profile rig|video] [--report DIR]
+  posture_gate.py check track.json [more clips in order...] [--profile rig|pixel|video] [--report DIR]
   posture_gate.py fix   track.json -o fixed.json
 
 Exit code 0 = pass (or REVIEW: video-profile errors sent to a human, see --strict),
@@ -60,8 +60,13 @@ MASS = [(("neck", "head"), 0.081), (("pelvis", "neck"), 0.497)] + [
 
 
 # ---------- geometry ----------
-def sub(a, b): return (a[0] - b[0], a[1] - b[1])
-def norm(v): return math.hypot(v[0], v[1])
+def sub(a, b): return tuple(x - y for x, y in zip(a, b))
+def norm(v): return math.sqrt(sum(x * x for x in v))
+def dot(a, b): return sum(x * y for x, y in zip(a, b))
+def cross(a, b): return (a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0])
+def unit(v):
+    n = norm(v)
+    return tuple(x / n for x in v) if n > 1e-9 else None
 
 def signed(p, c):
     """Signed angle in degrees from vector p to vector c, counter-clockwise positive (y up)."""
@@ -80,6 +85,54 @@ def rotate(pt, pivot, deg):
     a = math.radians(deg)
     x, y = pt[0] - pivot[0], pt[1] - pivot[1]
     return (pivot[0] + x * math.cos(a) - y * math.sin(a), pivot[1] + x * math.sin(a) + y * math.cos(a))
+
+
+# ---------- 3D tracks ----------
+def is_3d(track):
+    return any(v is not None and len(v) == 3 for f in track["frames"] for v in f["joints"].values())
+
+
+def to_2d(track):
+    """Project a 3D rig track onto each frame's own side view (the body's sagittal plane),
+    so a limb pointing at a camera never looks short or bent. True 3D bone lengths, joints
+    and props are kept for the length and left/right checks. Coordinates: "up_axis"
+    (default [0, 1, 0]) is up; the character's right is +x when it faces +z, as in
+    Blender/three.js. A left-handed engine (Unity) sets "handedness": "left"."""
+    up = unit(tuple(float(x) for x in track.get("up_axis", (0, 1, 0))))
+    hand = -1 if track.get("handedness") == "left" else 1
+    out = json.loads(json.dumps(track))
+    out.pop("rest", None)  # rest lengths come from 3D below
+    for f in out["frames"]:
+        j = {k: tuple(float(c) for c in v) for k, v in f["joints"].items() if v is not None and len(v) == 3}
+        for mid, a, b in (("neck", "shoulder_l", "shoulder_r"), ("pelvis", "hip_l", "hip_r")):
+            if mid not in j and a in j and b in j:
+                j[mid] = tuple((x + y) / 2 for x, y in zip(j[a], j[b]))
+        lat = None
+        for a, b in (("hip_r", "hip_l"), ("shoulder_r", "shoulder_l")):
+            if a in j and b in j:
+                v = sub(j[a], j[b]); v = tuple(x - dot(v, up) * u for x, u in zip(v, up))
+                lat = unit(v)
+                if lat:
+                    break
+        if lat is None or "pelvis" not in j:
+            f["joints"] = {}
+            continue
+        fwd = tuple(hand * x for x in cross(up, lat))
+        o = j["pelvis"]
+        f["joints"] = {k: [round(dot(sub(p, o), fwd), 3), round(-dot(sub(p, o), up), 3)] for k, p in j.items()}
+        f["facing"] = "right"
+        f["_joints3d"] = {k: list(p) for k, p in j.items()}
+        f["_len3d"] = {f"{a}>{b}": norm(sub(j[a], j[b])) for a, b in BONES if a in j and b in j}
+        props = {k: tuple(float(c) for c in v) for k, v in f.get("props", {}).items() if len(v) == 3}
+        if props:
+            f["_props3d"] = {k: list(p) for k, p in props.items()}
+            f["props"] = {k: [round(dot(sub(p, o), fwd), 3), round(-dot(sub(p, o), up), 3)] for k, p in props.items()}
+        # head yaw: nose direction against the body's forward, both flattened onto the ground
+        if "nose" in j and "head" in j:
+            n = sub(j["nose"], j["head"]); n = unit(tuple(x - dot(n, up) * u for x, u in zip(n, up)))
+            if n:
+                f["_yaw"] = math.degrees(math.atan2(dot(n, lat), dot(n, fwd)))
+    return out
 
 
 # ---------- track loading ----------
@@ -168,19 +221,49 @@ def frame_angles(pts, facing, limits=LIMITS):
     return out
 
 
-def center_of_mass(pts):
+def front_ambiguous(key, pts):
+    """In a flat front view a bent hip or knee seen from the front looks like a sideways bend
+    (cross-legged sitting, kneeling, knock knees). Only a knee under a near-vertical thigh is
+    unambiguous; everything else is a warning."""
+    if key.startswith("hip_abduction"):
+        return True
+    if key.startswith("knee_lateral"):
+        s = key[-1]
+        th = vec(pts, ("pelvis", "neck")), vec(pts, (f"hip_{s}", f"knee_{s}"))
+        if th[0] is None or th[1] is None:
+            return True
+        return abs(180 - abs(signed(th[0], th[1]))) > 30  # thigh not hanging down
+    return False
+
+
+SEGMENT_NAMES = {("neck", "head"): "head", ("pelvis", "neck"): "trunk"}
+for _s in SIDES:
+    SEGMENT_NAMES.update({(f"shoulder_{_s}", f"elbow_{_s}"): "upper_arm", (f"elbow_{_s}", f"wrist_{_s}"): "forearm",
+                          (f"hip_{_s}", f"knee_{_s}"): "thigh", (f"knee_{_s}", f"ankle_{_s}"): "shank"})
+
+
+def center_of_mass(pts, mass=None):
+    """Horizontal center of mass. `mass` overrides segment fractions for non-human
+    proportions, e.g. {"head": 0.3} for a chibi; they are renormalised."""
     tot, x = 0.0, 0.0
     for (a, b), m in MASS:
+        m = (mass or {}).get(SEGMENT_NAMES[(a, b)], m)
         if a in pts and b in pts:
             tot += m; x += m * (pts[a][0] + pts[b][0]) / 2
-    return x / tot if tot > 0.5 else None
+    return x / tot if tot > 0.5 * sum((mass or {}).get(SEGMENT_NAMES[k], m) for k, m in MASS) else None
 
 
 # ---------- check ----------
 def check(track, profile=None):
     profile = profile or track.get("profile") or ("video" if track.get("source") == "estimator" else "rig")
-    P = LIMITS["profiles"][profile]
+    P = dict(LIMITS["profiles"][profile])
+    if track.get("projected"):
+        # A 3D rig flattened through a camera: limbs only ever look shorter, so measure
+        # stretch against the longest length seen and never call a limb shrunk.
+        P.update(bone_shrink=None, ref_percentile=1.0, left_right_mismatch=None)
     limits = merged_limits(track)
+    if is_3d(track):
+        track = to_2d(track)
     fps = float(track.get("fps", 12))
     issues = []
 
@@ -201,14 +284,21 @@ def check(track, profile=None):
     def scaled_len(pts, a, b, scale):
         return norm(sub(pts[a], pts[b])) / scale if a in pts and b in pts else None
 
+    def true_len(fi, pts, a, b, scale):
+        """Real limb length: 3D when the track is 3D, else what is drawn."""
+        l3 = track["frames"][fi].get("_len3d")
+        if l3 is not None:
+            return l3.get(f"{a}>{b}") if a in pts and b in pts else None
+        return scaled_len(pts, a, b, scale)
+
     scales = [float(f.get("scale", 1.0)) for f in track["frames"]]
     ref = {}
-    if "rest" in track:
+    if "rest" in track and not track.get("projected"):  # a projected rest pose is foreshortened too
         rest, _ = load_frame({"joints": track["rest"], "facing": "right"}, 0)
         ref = {b: norm(sub(rest[b[0]], rest[b[1]])) for b in BONES if b[0] in rest and b[1] in rest}
     else:
         for b in BONES:
-            ls = [scaled_len(p, *b, s) for (p, _), s in zip(frames, scales)]
+            ls = [true_len(fi, p, *b, s) for fi, ((p, _), s) in enumerate(zip(frames, scales))]
             ls = [l for l in ls if l]
             if ls:
                 # Estimated limbs only look shorter (turned toward the camera), so their true
@@ -220,12 +310,14 @@ def check(track, profile=None):
             if a.endswith("_l"):
                 rb = (a[:-1] + "r", b[:-1] + "r")
                 if (a, b) in ref and rb in ref:
-                    d = abs(ref[(a, b)] - ref[rb]) / max(ref[(a, b)], ref[rb])
+                    longest = max(ref[(a, b)], ref[rb])
+                    d = abs(ref[(a, b)] - ref[rb]) / longest if longest > 1e-9 else 0.0
                     if d > P["left_right_mismatch"]:
                         add(None, "error", "left_right_mismatch",
                             f"{a[:-2]}->{b[:-2]} left/right lengths differ by {d:.0%}", {a, b, *rb})
 
     prev = None
+    off_balance = []
     for fi, ((pts, facing), scale) in enumerate(zip(frames, scales)):
         # 1. joint limits
         angles = frame_angles(pts, facing, limits)
@@ -233,22 +325,24 @@ def check(track, profile=None):
         for key in list(angles):
             for seg in angles[key][4]:
                 l = scaled_len(pts, *seg, scale)
-                if seg in ref and l is not None and l < 0.5 * ref[seg]:
+                full = true_len(fi, pts, *seg, scale) if "_len3d" in track["frames"][fi] else ref.get(seg)
+                if full and l is not None and l < 0.5 * full:
                     del angles[key]
                     break
         for key, (v, lo, hi, inv, _) in angles.items():
             over = arc_violation(v, lo, hi)
             if over > P["angle_tolerance"]:
-                add(fi, "error", "joint_limit",
+                sev = "warn" if facing == "front" and front_ambiguous(key, pts) else "error"
+                add(fi, sev, "joint_limit",
                     f"{key} at {v:.0f}° (allowed {lo}..{hi}, {facing} view) — {over:.0f}° past the limit", inv)
 
         # 2. bone lengths (stretching / shrinking limbs)
-        torso = scaled_len(pts, "pelvis", "neck", scale)
+        torso = true_len(fi, pts, "pelvis", "neck", scale)
         tref = ref.get(("pelvis", "neck"))
         for b in BONES:
-            l = scaled_len(pts, *b, scale)
-            if l is None or b not in ref:
-                continue
+            l = true_len(fi, pts, *b, scale)
+            if l is None or b not in ref or ref[b] <= 1e-9:
+                continue  # (a zero-length reference: e.g. a rest foot pointing straight at the camera)
             if profile == "video":
                 # Camera distance changes: compare limb/torso ratios, not raw pixels.
                 if not torso or not tref or b == ("pelvis", "neck"):
@@ -256,9 +350,13 @@ def check(track, profile=None):
                 r = (l / torso) / (ref[b] / tref)
             else:
                 r = l / ref[b]
-            if r > 1 + P["bone_stretch"]:
+            # Pixel art rounds joints to whole pixels: allow that much on short bones.
+            px = P.get("abs_tolerance_px", 0) / max(ref[b] * (scale if profile != "video" else 1), 1e-9)
+            if r > 1 + max(P["bone_stretch"], px):
                 add(fi, "error", "bone_stretch", f"{b[0]}->{b[1]} stretched to {r:.0%} of its length", set(b))
-            elif P["bone_shrink"] and r < 1 - P["bone_shrink"]:
+            elif P["bone_shrink"] and r < 1 - max(P["bone_shrink"], px) and \
+                    (facing in ("left", "right") or "_len3d" in track["frames"][fi]):
+                # (in front view a limb pointing at the viewer is legitimately short)
                 add(fi, "error", "bone_shrink", f"{b[0]}->{b[1]} shrunk to {r:.0%} of its length", set(b))
 
         # 3. pops and knees/elbows snapping direction between frames
@@ -268,7 +366,7 @@ def check(track, profile=None):
                     pv = prev[0][key][0]
                     speed = abs(wrap(v - pv)) * fps
                     if speed > P["max_joint_speed"]:
-                        add(fi, "error" if profile == "rig" else "warn", "pop",
+                        add(fi, "error" if P["blocking"] else "warn", "pop",
                             f"{key} jumps {abs(wrap(v - pv)):.0f}° in one frame ({speed:.0f}°/s)", angles[key][3])
                     elif key.split("_")[0] in ("elbow", "knee") and facing in ("left", "right") \
                             and pv * v < 0 and min(abs(pv), abs(v)) > 15:
@@ -276,20 +374,45 @@ def check(track, profile=None):
                             angles[key][3])
         prev = (angles, facing)
 
-        # 4. balance: center of mass over the feet when standing
-        if not track["frames"][fi].get("airborne"):
+        # 4. balance: center of mass over what holds the body up
+        fr = track["frames"][fi]
+        if not (fr.get("airborne") or fr.get("supported") is True):
             feet = [pts[k] for s in SIDES for k in (f"ankle_{s}", f"toe_{s}", f"heel_{s}") if k in pts]
-            com = center_of_mass(pts)
+            com = center_of_mass(pts, track.get("mass"))
             if feet and com is not None and len(pts) >= 8:
                 ys = [y for _, y in pts.values()]
                 height = max(ys) - min(ys)
-                ground = min(y for _, y in feet)
-                support = [x for x, y in feet if y - ground < 0.05 * height]
+                ground = min(ys)
+                # whatever touches the ground holds the body up: feet, knees, pelvis, hands
+                support = [p[0] for p in pts.values() if p[1] - ground < 0.05 * height]
+                # Extra support: joints (pelvis when sitting, knee_l when kneeling, wrist_r
+                # pushing a block) or props by name, e.g. "supported": ["pelvis", "block"].
+                mirror = -1 if facing == "left" else 1
+                for k in fr.get("supported") or []:
+                    if k in pts:
+                        support.append(pts[k][0])
+                    elif k in fr.get("props", {}):
+                        support.append(mirror * float(fr["props"][k][0]))
                 margin = P["balance_margin"] * height
                 if support and not (min(support) - margin <= com <= max(support) + margin):
-                    add(fi, "warn", "balance",
-                        "center of mass is outside the feet — the pose would topple "
-                        "(mark the frame \"airborne\": true if it is a jump or fall)", {"pelvis", "neck"})
+                    off_balance.append(fi)
+
+    # A walk or run is off balance for a frame or two at every step; only a pose held
+    # off balance (about a fifth of a second or longer) would really fall over.
+    hold = max(2, round(0.2 * fps))
+    runs, run = [], []
+    for fi in off_balance:
+        if run and fi != run[-1] + 1:
+            runs.append(run); run = []
+        run.append(fi)
+    runs.append(run)
+    for run in runs:
+        if len(run) >= hold:
+            for fi in run:
+                add(fi, "warn", "balance",
+                    "center of mass is outside what supports the body — the pose would topple "
+                    "(mark the frame \"airborne\": true for a jump or fall, or list what it rests on: "
+                    "\"supported\": [\"pelvis\", \"knee_l\", \"<prop>\"], or true)", {"pelvis", "neck"})
 
     issues += check_hands(track, P, usable)
     issues.sort(key=lambda i: (-1 if i["frame"] is None else i["frame"]))
@@ -308,25 +431,29 @@ def check(track, profile=None):
 
 # ---------- left / right hands ----------
 def raw_points(frame, min_conf):
-    """Image-space joints (no mirroring), confidence-filtered, with neck/pelvis derived."""
+    """Image-space joints (no mirroring), or the true 3D joints of a 3D track,
+    confidence-filtered, with neck/pelvis derived."""
     conf = frame.get("conf", {})
-    pts = {k: (float(v[0]), float(v[1])) for k, v in frame["joints"].items()
+    src = frame.get("_joints3d") or frame["joints"]
+    pts = {k: tuple(float(c) for c in v) for k, v in src.items()
            if v is not None and conf.get(k, 1.0) >= min_conf}
     for mid, a, b in (("neck", "shoulder_l", "shoulder_r"), ("pelvis", "hip_l", "hip_r")):
         if mid not in pts and a in pts and b in pts:
-            pts[mid] = ((pts[a][0] + pts[b][0]) / 2, (pts[a][1] + pts[b][1]) / 2)
+            pts[mid] = tuple((x + y) / 2 for x, y in zip(pts[a], pts[b]))
     return pts
 
 
 def check_hands(track, P, usable=None):
     """Left/right mistakes generated video makes: arms trading places, the upper body
     flipped against the legs, a prop jumping to the other hand, a prop drawn in the
-    wrong hand, and a left hand drawn on the right arm (mirrored hand)."""
+    wrong hand, a left hand drawn on the right arm (mirrored hand), a hand missing what
+    it should touch, and a forearm sweeping across the face."""
     issues = []
     def add(fi, kind, msg, joints, severity="error"):
         issues.append({"frame": fi, "severity": severity, "kind": kind, "message": msg, "joints": sorted(joints)})
 
     frames = track["frames"]
+    yaw_max = merged_limits(track)["yaw"]["neck_yaw"]["max"]
     prev = None
     for fi, f in enumerate(frames):
         pts = raw_points(f, P["min_confidence"]) if usable is None or fi in usable else {}
@@ -334,12 +461,28 @@ def check_hands(track, P, usable=None):
 
         # Upper body facing the opposite way from the hips: shoulders' left/right order
         # is reversed against the hips' order while both are seen square-on.
-        if torso and all(k in pts for k in ("shoulder_l", "shoulder_r", "hip_l", "hip_r")):
+        three_d = "_joints3d" in f
+        if three_d and torso and all(k in pts for k in ("shoulder_l", "shoulder_r", "hip_l", "hip_r")):
+            if dot(sub(pts["shoulder_r"], pts["shoulder_l"]), sub(pts["hip_r"], pts["hip_l"])) < 0:
+                add(fi, "torso_flip", "shoulders face the opposite way from the hips (upper body twisted "
+                    "more than 90° against the legs)", {"shoulder_l", "shoulder_r", "hip_l", "hip_r"})
+        elif torso and all(k in pts for k in ("shoulder_l", "shoulder_r", "hip_l", "hip_r")):
             sw = pts["shoulder_l"][0] - pts["shoulder_r"][0]
             hw = pts["hip_l"][0] - pts["hip_r"][0]
             if sw * hw < 0 and abs(sw) > 0.3 * torso and abs(hw) > 0.2 * torso:
                 add(fi, "torso_flip", "shoulders face the opposite way from the hips (left and right "
                     "sides swapped between upper and lower body)", {"shoulder_l", "shoulder_r", "hip_l", "hip_r"})
+
+        # Facing the camera, the character's right side is on the screen's left. Labels the
+        # other way round mean the figure is drawn mirrored (or its joints are mislabelled).
+        if not three_d and f.get("facing") in ("front", "back") and torso and \
+                all(k in pts for k in ("shoulder_l", "shoulder_r")):
+            sw = pts["shoulder_l"][0] - pts["shoulder_r"][0]
+            if abs(sw) > 0.2 * torso and (sw < 0) == (f["facing"] == "front"):
+                add(fi, "mirrored_body", f"facing {'the camera' if f['facing'] == 'front' else 'away'}, the "
+                    f"character's right shoulder should be on screen {'left' if f['facing'] == 'front' else 'right'}"
+                    " — the figure is mirrored or its left/right labels are swapped",
+                    {"shoulder_l", "shoulder_r"})
 
         # Arms trading places between frames: each wrist lands where the other one was.
         if prev is not None and torso and all(k in pts and k in prev for k in ("wrist_l", "wrist_r")):
@@ -349,6 +492,11 @@ def check_hands(track, P, usable=None):
                 add(fi, "hand_swap", "left and right hands traded places in one frame", {
                     "shoulder_l", "elbow_l", "wrist_l", "shoulder_r", "elbow_r", "wrist_r"})
         prev = pts
+
+        # Head turned past the shoulders (3D tracks with a nose joint).
+        if "_yaw" in f and abs(f["_yaw"]) > yaw_max + P["angle_tolerance"]:
+            add(fi, "head_yaw", f"head turned {abs(f['_yaw']):.0f}° from the body (more than "
+                f"{yaw_max}° turns it past the shoulders)", {"neck", "head"})
 
         # Which hand holds which prop must not change without a planned hand-off.
         holds = f.get("holds", {})
@@ -362,15 +510,40 @@ def check_hands(track, P, usable=None):
 
         # A prop said to be in one hand must be drawn at that hand.
         for prop, side in holds.items():
-            at = f.get("props", {}).get(prop)
+            at = (f.get("_props3d") or f.get("props", {})).get(prop)
             other = "r" if side == "l" else "l"
-            if at and side and f"wrist_{side}" in pts and torso:
+            just_passed = f.get("handoff") or (fi > 0 and frames[fi - 1].get("handoff"))
+            if at and side and f"wrist_{side}" in pts and torso and not just_passed:
                 d_own = norm(sub(at, pts[f"wrist_{side}"]))
                 d_other = norm(sub(at, pts[f"wrist_{other}"])) if f"wrist_{other}" in pts else float("inf")
                 if d_own > 0.6 * torso or d_other < d_own:
                     add(fi, "prop_wrong_hand", f"{prop} should be in the {_side(side)} hand but is drawn "
                         f"{'at the ' + _side(other) + ' hand' if d_other < d_own else 'away from it'}",
                         {f"wrist_{side}", f"elbow_{side}"})
+
+        # A hand meant to touch something (a door, a table, a face) must reach it.
+        for side, target in f.get("contacts", {}).items():
+            at = (f.get("_props3d") or f.get("props", {})).get(target) if isinstance(target, str) else target
+            if at and f"wrist_{side}" in pts and torso:
+                d = norm(sub(at, pts[f"wrist_{side}"]))
+                if d > 0.35 * torso:
+                    label = target if isinstance(target, str) else "its target"
+                    add(fi, "contact_miss", f"the {_side(side)} hand should touch {label} but stops "
+                        f"{d / torso:.1f} torso-lengths away", {f"wrist_{side}", f"elbow_{side}"})
+
+        # Front view: a forearm sweeping across the face, unless the beat asks for it.
+        if not three_d and f.get("facing", "front") == "front" and not f.get("face_cover") \
+                and "head" in pts and "neck" in pts:
+            r = 0.5 * norm(sub(pts["head"], pts["neck"]))
+            for side in SIDES:
+                ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
+                if r and all(k in pts for k in ks):
+                    crosses = (pts[ks[2]][0] - pts["head"][0]) * (pts[ks[0]][0] - pts["head"][0]) < 0
+                    if _seg_dist(pts["head"], pts[ks[1]], pts[ks[2]]) < r and \
+                            (crosses or norm(sub(pts[ks[2]], pts["head"])) < r):
+                        add(fi, "arm_over_face", f"the {_side(side)} forearm crosses the face "
+                            "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
+                            {ks[1], ks[2], "head"}, severity="warn")
 
         # Hand shape (thumb side) must match the arm it is on.
         for side, h in f.get("hands", {}).items():
@@ -380,6 +553,13 @@ def check_hands(track, P, usable=None):
                     f"{_side(h['looks_like'])} hand (thumb on the wrong side)",
                     {f"wrist_{side}", f"elbow_{side}"})
     return issues
+
+
+def _seg_dist(p, a, b):
+    """Distance from point p to segment a-b."""
+    ab, ap = sub(b, a), sub(p, a)
+    t = max(0.0, min(1.0, (ap[0] * ab[0] + ap[1] * ab[1]) / max(ab[0] ** 2 + ab[1] ** 2, 1e-9)))
+    return norm(sub(p, (a[0] + ab[0] * t, a[1] + ab[1] * t)))
 
 
 def _side(s): return {"l": "left", "r": "right"}.get(s, s)
@@ -416,7 +596,7 @@ def fix(track):
                 ls.append(norm(sub(p[b[0]], p[b[1]])) / float(f.get("scale", 1.0)))
         if ls:
             lengths[b] = statistics.median(ls)
-    if "rest" in track:
+    if "rest" in track and not track.get("projected"):  # a projected rest pose is foreshortened too
         rest, _ = load_frame({"joints": track["rest"], "facing": "right"}, 0)
         lengths.update({b: norm(sub(rest[b[0]], rest[b[1]])) for b in BONES if b[0] in rest and b[1] in rest})
 
@@ -561,7 +741,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub_ = ap.add_subparsers(dest="cmd", required=True)
     c = sub_.add_parser("check", help="gate one or more clip tracks, in story order")
-    c.add_argument("tracks", nargs="+"); c.add_argument("--profile", choices=["rig", "video"])
+    c.add_argument("tracks", nargs="+"); c.add_argument("--profile", choices=["rig", "pixel", "video"])
     c.add_argument("--report", help="folder for report.svg/.json/.txt (one subfolder per clip if several)")
     c.add_argument("--json", action="store_true", help="print the full result as JSON")
     c.add_argument("--strict", action="store_true", help="fail on errors even in the non-blocking video profile")

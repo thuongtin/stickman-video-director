@@ -99,7 +99,7 @@ Forbid:
 - photorealism and unwanted 3D humanoid rendering
 - facial features (pupils, realistic eyes, lips) or hair unless approved
 - extra limbs, malformed anatomy, disconnected lines, or changed proportions
-- knees or elbows bending backward, stretching or rubbery limbs, a head turned past the shoulders, swapped left and right hands, or a prop switching hands without a visible pass
+- knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, or a prop switching hands without a visible pass
 - broken or changing line weight
 - **For Style 1**: do not reject allowed occasional simple line expressions as character drift; filled heads, sudden head/body proportion changes, duplicated/retained limb poses, body silhouettes, separate hand/foot shapes and detached body lines remain failures. Inspect actual footage at reaches, releases, turns and walking poses, and compare clips. State the scope of inspection: sparse keyframes cannot prove the absence of brief errors.
 - inverted theme polarity or unexplained colors
