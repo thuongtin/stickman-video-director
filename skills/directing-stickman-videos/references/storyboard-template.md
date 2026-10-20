@@ -97,7 +97,7 @@ Use at least four relevant devices per row:
 - concrete visual metaphor
 - diagram, arrow, or icon-only symbol
 - particles, energy, explosion, or light
-- camera push, pull, pan, orbit, shake, or tracking move
+- one camera move chosen by the camera grammar below
 - foreground wipe or object crossing the lens
 - match cut, foreground wipe, or motion-matched transition (a prop is swapped by a cut, never melted or reshaped on screen)
 - interaction with another figure or oversized object
@@ -109,6 +109,22 @@ Spend the density on effects, camera and cuts, not on the body. Posture budget p
 - At most one demanding body action per character per beat: turning around, reaching overhead, crossing the arms over the body, passing a prop between hands, falling and getting up. Simple walking, pointing or holding a pose does not count.
 - Do not pair a demanding body action with a camera shake, orbit or tilt in the same beat; let the camera move before or after it.
 - A visual change can be a prop, effect, cut or camera move; the character does not have to change pose every two seconds.
+
+## Camera grammar
+
+The camera is punctuation, not decoration on every sentence. In the `Motion, camera, and transition` column name the main camera move of each beat in plain words from this list:
+
+- **Transition moves** (calm, about one second, ease in and out): hold, slow push-in, pull back, lateral track or pan, hard cut.
+- **Accent moves** (fast): fast push-in, slam zoom, whip pan, camera shake, orbit.
+
+Before choosing a move, answer three questions: where should the viewer look now, and can they already see it; is this beat a transition or an accent; what did the previous move do.
+
+- Hold the camera when the picture already moves by itself (a line drawing on, a treadmill, a falling object) and while a character performs a demanding body action. A held beat still counts as a visual change when the subject acts.
+- Use slow moves for transitions. Save accent moves for a reveal, a reversal or the punchline: at most one accent beat per clip, and accents in no more than one third of the clips. The `0–2s` hook may use one more accent.
+- After pushing in, come back out: do not make the main move of three consecutive clips an inward move (push-in, fly-through, zoom into an object). Pull back, track sideways, hold, or cut to a new shot size in between.
+- Do not give every clip the same move. One move repeated clip after clip, whether a steady slow push or a quick push each time, reads as a slideshow.
+
+These rules adapt the camera-language notes of huashu-art-motion (MIT, alchaincyf), where one 102-second film with about 48 inward pushes was judged "too many, too fast, not smooth" and a film with an even slow push on every shot "felt like a slideshow". They are untested on Flow.
 
 ## Palette and text
 
@@ -141,6 +157,9 @@ Do not include final model prompts. A global change invalidates approval and req
 
 ## Phase A checks
 
+`tools/package_lint/package_lint.py proposal.md --clips N` checks the storyboard table mechanically (rows, Hands column, camera accents and inward pushes, a closing text card, beats that only appear, overlay numbers the VO never says). The rest of this list stays a reading check.
+
+
 - Source, aspect ratio (`16:9` or `9:16`), duration, and style/theme are known.
 - Script strictly implements the 5-Stage High-Completion Heartbeat Engine.
 - The hook card is complete and passes the hook checks in `opening-hook.md`; its open loop is paid off in a named clip.
@@ -149,6 +168,7 @@ Do not include final model prompts. A global change invalidates approval and req
 - Exactly N storyboard rows have distinct narrative purposes (N = duration / 10).
 - Every row has three beats, at least four visual devices, audio, and a transition.
 - Visual change occurs approximately every two to three seconds.
+- Every beat names its main camera move from the camera grammar; accent moves stay within one per clip and one third of the clips, and no three consecutive clips push inward.
 - Every row fills the Hands column from the character's own side, and no beat spends more than one demanding body action per character or pairs one with a camera shake, orbit or tilt.
 - No more than three saturated accent colors are used (for Style 1) or clean palette rules followed (for Style 2).
 - No technical color notation is present.
