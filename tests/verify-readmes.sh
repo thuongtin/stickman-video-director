@@ -5,7 +5,7 @@ readme_root=$(git rev-parse --show-toplevel)
 default_readmes=(
   README.md
   README.en.md
-  README.zh-CN.md
+  README.vi.md
   README.ja.md
   README.ko.md
   README.pt-BR.md
@@ -41,7 +41,8 @@ section_markers=(
 )
 shared_tokens=(
   'README.en.md'
-  'README.zh-CN.md'
+  'README.vi.md'
+  'fork-additions'
   'README.ja.md'
   'README.ko.md'
   'README.pt-BR.md'
@@ -119,23 +120,13 @@ for readme in "${readmes[@]}"; do
     printf '%s contains obsolete preview or installation instructions\n' "$readme" >&2
     exit 1
   fi
-  if [[ "$readme" == README.md || "$readme" == README.zh-CN.md ]]; then
-    for token in '全部画风一览' '风格 4：治愈故事风' 'assets/readme/previews/style-4-cozy-station.gif' 'assets/readme/previews/style-4-cozy-cafe.gif'; do
+  if [[ "$readme" == README.md || "$readme" == README.vi.md ]]; then
+    for token in 'Phong cách 4: Chuyện đời thường ấm áp' 'assets/readme/previews/style-4-cozy-station.gif' 'assets/readme/previews/style-4-cozy-cafe.gif' 'assets/readme/previews/style-3-community-fire.gif' 'Ví dụ 1: “Con người có công việc đầu tiên như thế nào?”'; do
       rg -Fq "$token" "$readme_path" || {
-        printf '%s missing style 4 token: %s\n' "$readme" "$token" >&2
+        printf '%s missing Vietnamese homepage token: %s\n' "$readme" "$token" >&2
         exit 1
       }
     done
-    for token in 'assets/readme/previews/style-3-community-fire.gif' '案例 1：《人类的第一份工作是怎么来的？》'; do
-      rg -Fq "$token" "$readme_path" || {
-        printf '%s missing community example token: %s\n' "$readme" "$token" >&2
-        exit 1
-      }
-    done
-    if rg -n 'href="assets/readme/[^" ]+\.mp4"|点击.*(完整|打开)|确证历史复原|完播率.*60%|彻底解决了|成本几乎为零' "$readme_path"; then
-      printf '%s contains obsolete preview instructions or unsupported copy\n' "$readme" >&2
-      exit 1
-    fi
   fi
   for pair in "${paired_demos[@]}"; do
     read -r first_demo second_demo <<< "$pair"
@@ -153,12 +144,12 @@ for readme in "${readmes[@]}"; do
   fi
 done
 
-cmp -s "$readme_root/README.md" "$readme_root/README.zh-CN.md" || {
-  printf 'Default homepage must match the Chinese README.\n' >&2
+cmp -s "$readme_root/README.md" "$readme_root/README.vi.md" || {
+  printf 'Default homepage must match the Vietnamese README.\n' >&2
   exit 1
 }
-rg -Fq '[**简体中文**](README.zh-CN.md) · [English](README.en.md)' "$readme_root/README.md" || {
-  printf 'Default homepage missing Chinese/English language navigation.\n' >&2
+rg -Fq '[**Tiếng Việt**](README.vi.md) · [English](README.en.md)' "$readme_root/README.md" || {
+  printf 'Default homepage missing Vietnamese/English language navigation.\n' >&2
   exit 1
 }
 rg -Fq '# AI Stickman Animation Style Library' "$readme_root/README.en.md" || {

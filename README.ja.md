@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[简体中文](README.zh-CN.md) · [English](README.en.md) · [**日本語**](README.ja.md) · [한국어](README.ko.md) · [Português do Brasil](README.pt-BR.md)
+[Tiếng Việt](README.vi.md) · [English](README.en.md) · [**日本語**](README.ja.md) · [한국어](README.ko.md) · [Português do Brasil](README.pt-BR.md)
 
 # AI棒人間アニメのスタイル集
 
@@ -53,6 +53,8 @@
 [使い始める](#quick-start) · [最近の更新](#recent-updates) · [制作ガイド（中国語）](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
+
+このフォークで追加した22の実験的スタイル、姿勢ゲート、Golden Hookの詳細は、[English](README.en.md#fork-additions)と[Tiếng Việt](README.vi.md#fork-additions)のREADMEにまとめています。
 
 <!-- readme:demos -->
 

@@ -14,6 +14,7 @@ approved_voiceover = (
     "The reward got smaller. The workload got bigger. And somehow… they called that progress.",
 )
 locales = {
+    "vi": ("Tiếng Việt", "# Thư viện phong cách hoạt hình người que bằng AI", "### Phong cách", "Chuyện đời thường ấm áp", "Cả hai đều bằng tiếng Trung"),
     "en": ("English", "# AI Stickman Animation Style Library", "### Style", "Cozy Storytelling", "Both are in Chinese"),
     "ja": ("日本語", "# AI棒人間アニメのスタイル集", "### スタイル", "ほっとする日常ストーリー", "どちらも中国語"),
     "ko": ("한국어", "# AI 스틱맨 애니메이션 스타일 모음", "### 스타일", "따뜻한 일상 이야기", "두 글 모두 중국어"),
@@ -75,8 +76,9 @@ for locale, (label, title, style_prefix, style_four, tutorial_language) in local
             assert (root / link.split("#")[0]).exists(), (path.name, link)
     print(f"{path.name}: style/asset parity, original narration, links and onboarding passed.")
 
-assert source == (root / "README.zh-CN.md").read_text()
+assert source == (root / "README.vi.md").read_text()
+assert not (root / "README.zh-CN.md").exists()
 assert not re.search(r"monixin888|2109651037850325112", source, re.IGNORECASE)
-assert "# AI 火柴人动画画风大全" in source
-assert "[**简体中文**](README.zh-CN.md) · [English](README.en.md)" in source
-print("Chinese remains the default homepage.")
+assert "# Thư viện phong cách hoạt hình người que bằng AI" in source
+assert "[**Tiếng Việt**](README.vi.md) · [English](README.en.md)" in source
+print("Vietnamese is the default homepage.")

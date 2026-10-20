@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[简体中文](README.zh-CN.md) · [**English**](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Português do Brasil](README.pt-BR.md)
+[Tiếng Việt](README.vi.md) · [**English**](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Português do Brasil](README.pt-BR.md)
 
 # AI Stickman Animation Style Library
 
@@ -46,11 +46,11 @@ I'm testing popular stickman animation styles from across the web and sharing th
 
 <div align="center">
 
-**4 styles · 6 visual options · Tested examples · Free and open source**
+**4 styles · 6 visual options · 22 experimental styles · Posture gate · Free and open source**
 
 ⭐ **Star it now. Next time you make an animation, skip the hunt for prompts.**
 
-[Get started](#quick-start) · [Latest updates](#recent-updates) · [Full walkthrough (Chinese)](https://x.com/CrazyKaomei/status/2102311241046008268)
+[Get started](#quick-start) · [What this fork adds](#fork-additions) · [Latest updates](#recent-updates) · [Full walkthrough (Chinese)](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
 
@@ -117,6 +117,64 @@ A mug you've been saving for a special occasion. A message you feel compelled to
 |:---:|:---:|
 | <img src="assets/readme/previews/style-4-cozy-station.gif" alt="A character dealing with message anxiety at a train station" width="360"> | <img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="Taking a break at a sunlit outdoor café" width="360"> |
 | Train station · Tracking shots · Emotional close-ups | Outdoor café · Warm light · Everyday gestures |
+
+<a id="fork-additions"></a>
+
+## What this fork adds
+
+This fork of [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) keeps everything above and adds three things: more styles, a posture gate, and a more detailed Golden Hook.
+
+### 22 experimental styles
+
+Besides Styles 1–4, the Skill can use 22 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
+
+- **How to pick one:** ask for an experimental style, or name one by its key, for example “make it in the `dong-ho` style”. The Skill offers them only when asked, and tells you each one is `gated`.
+- **What `gated` means:** the character rigs passed the posture gate, and the sample package passed the package checks below. These styles have not yet been checked against generated video.
+- **Where they live:** `skills/directing-stickman-videos/references/styles/<key>.md`, with the sample package in `styles/samples/<key>.md`. The full list is in the “Experimental styles” table of `references/style-catalog.md`.
+
+| Key | Style | Good for |
+|---|---|---|
+| `chibi-anime` | Chibi Anime | Everyday-life comedy, study tips, relationship sketches, children's content, reaction-heavy shorts |
+| `paper-cutout` | Paper Cutout / Collage | Deadpan comedy; gentle stories and children's English |
+| `whiteboard-doodle` | Whiteboard Doodle | Step-by-step explainers, habits and ideas built up piece by piece, light social stories |
+| `watercolor-storybook` | Watercolor Storybook | Bedtime stories, children's education, fables, family and nostalgia |
+| `ink-wash` | Ink-Wash / Sumi-e | Reflective explainers, habits and patience, craft, folk-tale style stories |
+| `mid-century` | 1950s Mid-Century Limited Animation | Satirical explainers, workplace and money topics, small ensembles of character types |
+| `dong-ho` | Đông Hồ Folk Print | Vietnamese culture, Tết and village stories, gentle fables |
+| `science-lab` | Science Lab Explainer | Science and how-it-works explainers for kids and families, hands-on demos |
+| `blueprint` | Engineering Blueprint | Science, engineering, invention and how-it-works explainers |
+| `cell-biology` | Cell-Biology Micro-World | Immunity, blood, wound-healing and infection explainers for kids and families |
+| `retro-space` | Retro Space-Age Astronomy | Space science explainers: orbits, gravity and free fall, the Moon, planets |
+| `youtube-storytime` | Storytime Animation | Funny true stories told by a narrator about their own life |
+| `us-sitcom` | Prime-Time Sitcom | Dry comedy about everyday life, family and office dynamics |
+| `modern-tv-cartoon` | Modern TV Cartoon | Comedy explainers, kids and family stories, small-town adventure told by an ensemble |
+| `stylized-3d-family` | Stylized 3D Family Film | Warm family stories, kids' explainers, holiday stories |
+| `superhero` | Superhero Action Cartoon | Short action stories, team-up gags, hero explainers, kids' content (one narrator, no character voices) |
+| `dino-world` | Dino World | Kids' dinosaur science, fossils, "how do we know?" stories |
+| `toys` | Toys Come Alive | Gentle kids' stories, teamwork and sharing, simple physics (balance, towers) |
+| `chu-tieu` | Chú Tiểu Little Monks | Mindfulness and kindness lessons, Buddhist-inspired everyday stories, slow-living tips |
+| `vn-webcomic` | Vietnamese Web-Comic in Motion | One-joke relatable gags, literal wordplay, neighbourhood slice-of-life |
+| `voxel-world` | Voxel Block World | Building and teamwork stories, cause and effect, step-by-step assembly |
+| `brick-build` | Brick-Built Town | How parts fit together, cause and effect, gentle kids' stories, small physics jokes |
+
+No prompt names a studio, brand or famous character. Where a style resembles a well-known look, it matches the genre and material only.
+
+### Posture gate and package checks
+
+Video models often bend a knee the wrong way, stretch a limb, or move a held prop to the wrong hand. These tools catch that before and after generation. They need only Python 3; reading poses from a video also needs `pip install mediapipe opencv-python-headless`.
+
+| Tool | What it checks | Run |
+|---|---|---|
+| Hand ledger | Every held prop stays in one named hand (the character's own left or right) unless a beat passes it; `Hands at start` / `Hands at end` lines chain from clip to clip. | `python3 tools/posture_gate/hand_ledger.py package.md` |
+| Package lint | The whole prompt package: hook placement, the same anchors and voice block in every clip, the five posture negatives, music continuity, no logos or written text, plus the hand ledger. | `python3 tools/package_lint/package_lint.py package.md` |
+| Posture gate | Pose tracks from code-drawn rigs or from a video: joint limits, limb length, one-frame pops, balance, arms over the torso or face, left and right hands swapping. `--scene` checks several characters in one shot, such as a hand-off. | `python3 tools/posture_gate/posture_gate.py check track.json` |
+| Risk sheet | One image per generated clip with frames around the moments its prompt marks as risky (passes, turns, falls), for a person to review. | `python3 tools/risk_sheet/risk_sheet.py package.md --clip 2 --video clip2.mp4 -o out/` |
+
+The Skill runs the hand ledger and package lint before it hands over the prompts. Details: `tools/posture_gate/README.md` and `references/posture-gate.md`.
+
+### Golden Hook in detail
+
+The first stage of the script, the Golden Hook, now has its own card in the director's proposal: a hook pattern, a first frame that already shows the character mid-action with a visible tension, one hook moment by about two seconds that reads with the sound off, and a first spoken line of four to ten words with no greeting. The hook lives in Clip 1's first frame and first beat; it adds no extra line to the prompt. See “Golden Hook in detail” in `references/storyboard-template.md`.
 
 <!-- readme:advantages -->
 
@@ -212,6 +270,7 @@ Use it for faceless explainers, history and business topics, personal growth, ev
 
 ## Latest updates
 
+- **2026-10-20:** This fork adds 22 experimental styles, the posture gate with the hand ledger and package lint, and the detailed Golden Hook card. See [What this fork adds](#fork-additions).
 - **2026-10-15:** Refined the Chinese homepage, installation steps, and examples; added lighter previews and a Star History chart. Skill rules unchanged.
 - **2026-10-14:** Added Style 4, Cozy Storytelling, with train-station and café examples.
 - **2026-10-13:** Refined Style 1's character descriptions and current-pose constraints.
