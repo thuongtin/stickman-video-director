@@ -360,8 +360,7 @@ def eye(pen, x, y, s, expr, k=1.0):
         pen.arc([x - 2.4 * s, y - 1.5 * s, x + 2.4 * s, y + 2.5 * s], 200, 340, INK, 1.4 * s)
         return
     k *= 1.2 if expr == "surprised" else 1.0
-    pen.d.ellipse([(x - 1.6 * k * s) * SS, (y - 2.5 * k * s) * SS, (x + 1.6 * k * s) * SS, (y + 2.5 * k * s) * SS], fill=INK)
-    pen.circle((x + 0.5 * s, y - 1.2 * s), 0.55 * s, fill=(255, 255, 255))
+    pen.d.ellipse([(x - 1.5 * k * s) * SS, (y - 2.1 * k * s) * SS, (x + 1.5 * k * s) * SS, (y + 2.1 * k * s) * SS], fill=INK)
 
 
 def brows(pen, cx, cy, r, s, expr, xs):
