@@ -2,7 +2,7 @@
 
 Load this reference only when a concrete end-to-end example resolves ambiguity. Reuse its workflow and level of detail, not its topic, wording, metaphors, or palette.
 
-All examples follow the shared `voice-continuity.md` contract. Freeze one complete profile per video; different examples may choose different voices. The male block has user listening acceptance for the separate Style 2A Hope test; the female profile below is an illustrative adaptation, not a provider-tested voice. Both examples follow the current character anchors, `opening-hook.md` (Clip 1) and `posture-gate.md` (hands named from each character's own side, `Hands at start` / `Hands at end` lines in every clip). `tests/verify-examples.py` runs `tools/posture_gate/hand_ledger.py` on each example.
+All examples follow the shared `voice-continuity.md` contract. Freeze one complete profile per video; different examples may choose different voices. The male block has user listening acceptance for the separate Style 2A Hope test; the female profile below is an illustrative adaptation, not a provider-tested voice. Both examples follow the current character anchors, the Golden Hook section of `storyboard-template.md` (Clip 1) and `posture-gate.md` (hands named from each character's own side, `Hands at start` / `Hands at end` lines in every clip). `tests/verify-examples.py` runs `tools/posture_gate/hand_ledger.py` on each example.
 
 ## User source
 
@@ -94,8 +94,6 @@ The moment you move, fear loses power. Stop waiting to feel ready. Try, make mis
 
 ```text
 Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
-
-Opening hook: from the first frame Stick Figure A is already trudging right, dragging a violet line tangle twice its size on a violet cord, and at about 1.5s a second tangle drops onto the first with a heavy thud that jerks A back one step.
 
 Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use only saturated anxiety violet, vivid danger red, and warm action gold as accents; this clip primarily uses violet. Treat these ordinary color names as visual art direction only. Compose across left, center, and right with deliberate negative space on the right. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
 
@@ -261,8 +259,6 @@ Concrete end-to-end production prompt package demonstrating Style 2A (high-key w
 
 ```text
 Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchronized audio.
-
-Opening hook: from the first frame Zeke is already crouched mid-leap on the grid floor, and at about 1.5s his beanie bumps an invisible glass ceiling with a comedic bounce that drops him back down.
 
 Environment: A modern bright white studio space with subtle light-gray perspective grid lines on the floor plane. High-key studio lighting, clean white negative space, sleek glowing cyan and electric blue glass holographic UI elements.
 

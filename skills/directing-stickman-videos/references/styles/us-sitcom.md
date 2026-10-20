@@ -145,7 +145,7 @@ Posture limits from the gate and from eye checks:
 
 ## 9. Hook override
 
-Sudden entry, Reaction before cause and Before → after cut suit this style. The sample uses Sudden entry (at 1.2 s Benji slides in on his knees and stares up at the remote while Gary keeps clicking with a blank face). As `opening-hook.md` says for dry comedy, the held deadpan look is the hit: a plastic click plus a carpet swish is the loudest it may be, within the loudness limit above. No impact booms or record scratches.
+Sudden entry, Reaction before cause and Before → after cut suit this style. The sample uses Sudden entry (at 1.2 s Benji slides in on his knees and stares up at the remote while Gary keeps clicking with a blank face). As the Golden Hook section of `storyboard-template.md` says for dry comedy, the held deadpan look is the hit: a plastic click plus a carpet swish is the loudest it may be, within the loudness limit above. No impact booms or record scratches.
 
 ## 10. Sample package and gates
 

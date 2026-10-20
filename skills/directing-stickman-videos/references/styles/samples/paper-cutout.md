@@ -23,8 +23,6 @@ Screen direction: Mai and Ông Bảo face right, Bé Na faces left. Facing left,
 ```text
 Create an approximately 10-second 16:9 horizontal paper cutout stop-motion clip targeting 720p at 24 FPS with synchronized audio.
 
-Opening hook: the first frame is a close view of the yellow paper balloon bobbing above Mai's right hand as she walks right along the paper path, and at about 1.5s a torn grass strip slides away and the camera pulls back to reveal Bé Na at the right edge, staring up at the balloon.
-
 Flat two-dimensional paper cutout stop-motion animation shot straight down onto a tabletop. Every character, prop and scenery element is a separate rigid piece of matte paper with visible paper fibre and slightly irregular cut or torn edges, layered with small soft contact shadows between layers. One warm key light from the upper left. No drawn outlines.
 
 Construction-paper palette: mustard, brick red, navy, teal, cream and white paper with black paper details, flat colours with no gradients. Collage palette: kraft brown, newsprint grey, dusty pink, warm ochre, sky blue and cream papers; patterns such as knit, polka dots, plaid and pinstripes appear on clothing and scenery, never on faces.

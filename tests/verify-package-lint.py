@@ -45,7 +45,7 @@ for code, (text, kw) in mutations.items():
 
 # Per-speaker voice lines: a speaker may be absent from a clip, but their block never changes.
 duo = "\n".join([
-    "```text\nOpening hook: Ana is already running.\n[0–3s] Ana runs.\n[3–7s] Ana stops.\n[7–10s] Ana waves.\n"
+    "```text\n[0–3s] Ana runs; at about 1s she trips.\n[3–7s] Ana stops.\n[7–10s] Ana waves.\n"
     "Voice — Ana: adult woman, General American accent, warm alto.\nNo swapped left and right hands.\n```",
     "```text\n[0–3s] Ben runs.\n[3–7s] Ana and Ben stop.\n[7–10s] Ben waves.\n"
     "Voice — Ana: adult woman, General American accent, warm alto.\n"

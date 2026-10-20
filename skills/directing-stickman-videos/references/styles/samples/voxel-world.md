@@ -1,6 +1,6 @@
 # Voxel world sample package: “The last stone” (3 clips, 16:9, ~30 s)
 
-Six original blocky characters of one village, Xóm Khối; this story uses Gạch, Bấc, Than, Bà Lúa, Tí Mầm and Trâu Đá. Anchors are the `look` fields of src/cast.py, pasted in full. Hands are named from each character's own side; every character wears the lemon-yellow band on the right wrist (Bấc on its right leg, Trâu Đá on its right foreleg). Bấc and Trâu Đá have no hands and stay out of the hands lines. The score is set once in clip 1 and continues unchanged; each beat names its camera move. The hook follows references/opening-hook.md (pattern: Physics break). The prompts never name any existing game. Not yet tested on Flow.
+Six original blocky characters of one village, Xóm Khối; this story uses Gạch, Bấc, Than, Bà Lúa, Tí Mầm and Trâu Đá. Anchors are the `look` fields of src/cast.py, pasted in full. Hands are named from each character's own side; every character wears the lemon-yellow band on the right wrist (Bấc on its right leg, Trâu Đá on its right foreleg). Bấc and Trâu Đá have no hands and stay out of the hands lines. The score is set once in clip 1 and continues unchanged; each beat names its camera move. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Physics break). The prompts never name any existing game. Not yet tested on Flow.
 
 ## Global continuity block
 
@@ -18,8 +18,6 @@ Six original blocky characters of one village, Xóm Khối; this story uses Gạ
 
 ```text
 Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
-
-Opening hook: Gạch is already tapping the top row of a low stone-block wall with the wooden mallet in her right hand; at about 1s one stone block in the top row pops loose, tumbles off the back of the wall and leaves a square gap, and Gạch freezes with her pixel mouth wide open.
 
 Style and environment: a cozy blocky voxel world where everything is built from cubes: a small riverside village of mossy green ground blocks on a grey stone embankment, stone-block walls, bamboo, rice paddies, thatch and clay-tile roofs, in warm late-afternoon light. Every block face carries a low-resolution pixel texture of 16 by 16 square texels, rendered crisp with hard nearest-neighbour edges, never smoothed, blurred or painterly; the texel grid is the same size on every block and stays locked to the faces while the camera moves. Simple sunlit block lighting: top faces brightest, side faces a step darker, soft dark shading in the inside corners where blocks meet, soft short shadows under characters and blocks, no glossy highlights, a light distance haze. Clear blue sky with a few flat square clouds. A clean real-time 3D game-render look with a steady camera; not photoreal, not claymation, not smooth CGI.
 

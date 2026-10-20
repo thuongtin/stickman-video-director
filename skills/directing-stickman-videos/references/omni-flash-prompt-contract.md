@@ -48,7 +48,7 @@ Write every prompt in this order:
 
 Make each prompt self-contained and usable without any external context.
 
-Clip 1 only: follow `opening-hook.md`. Add one plain `Opening hook:` sentence directly after the output specification that describes the approved first frame and hook hit; make the first-frame state the hook's first frame, time the hit inside `[0–3s]`, sync its sound cue, and start the quoted dialogue with the approved first spoken line. Clips 2–N carry no `Opening hook:` line.
+Clip 1 only: follow "Golden Hook in detail" in `storyboard-template.md`. Make the first-frame state the approved hook's first frame, time the hook hit inside the first beat, sync its sound cue, and start the quoted dialogue with the approved first spoken line. The hook adds no separate line to the prompt.
 
 ## Style language
 
@@ -131,7 +131,7 @@ Start with prompt-level consistency, rather than immediately routing voice drift
 - Each prompt repeats ratio (`16:9` or `9:16`), style/theme, character, palette, voice, audio, transition, and negative locks.
 - Style 1 prompts repeat one identical full character block and contain no contradictory appearance instructions. Simple-expression allowance agrees with the negative constraints. Generated consistency is checked separately from prompt compliance.
 - Each prompt has all three timed beats and at least four relevant visual devices.
-- Clip 1 carries exactly one `Opening hook:` sentence that matches the approved hook card, its first frame and its `[0–3s]` beat; no other clip carries one, and the hook contains no on-screen words or numbers.
+- Clip 1's first-frame state and first timed beat match the approved hook card, the hit is timed at about 2s or earlier, no prompt carries an `Opening hook:` line, and the hook contains no on-screen words or numbers.
 - Every ending connects to the next opening through a planned action/prop/direction or an approved location/time cut. Style 4 does not repeat one room unless requested.
 - Dialogue exactly matches the approved narration.
 - Dialogue is explicitly audio-only and is never displayed visually.

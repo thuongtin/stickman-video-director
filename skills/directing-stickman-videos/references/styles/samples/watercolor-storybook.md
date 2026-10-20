@@ -19,8 +19,6 @@ Three standalone Phase B prompts. Each prompt carries the output spec, the envir
 ```text
 Approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
 
-Opening hook: the first frame is a close view of a glowing paper lantern swinging from an old hand in a dark garden, and at about 1.5s the camera pulls back to reveal the grandfather walking with his cane toward two waiting children.
-
 Hand-painted watercolor storybook illustration on warm off-white cold-press paper. Soft transparent washes, gentle granulation, wet-edge blooms and pale unpainted paper highlights. Backgrounds are looser, paler and lower in contrast than the character; foreground is soft and slightly out of focus. Muted natural palette of sky blue, sage green, warm ochre, dusty rose and soft brown, with the character's mustard yellow and red as the strongest colors. The paper grain stays fixed to the frame and does not crawl, shimmer or move with the characters. Setting: a small grandfather's garden at dusk with a winding gravel path, round shrubs, a low wooden gate on the right and the dark edge of a forest beyond it; a deep blue evening sky with the first pale stars.
 
 Cast on screen, exactly these characters and no others:

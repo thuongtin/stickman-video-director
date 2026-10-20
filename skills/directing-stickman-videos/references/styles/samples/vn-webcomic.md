@@ -1,13 +1,11 @@
 # Xóm Ao — "Save my seat" (vn-webcomic, 3 clips, 16:9, ~30 s)
 
-Sample package for the vn-webcomic style draft. Hook pattern: Reaction before cause (references/opening-hook.md). Post-production overlay (optional, not in prompts): none needed, the joke reads muted.
+Sample package for the vn-webcomic style draft. Hook pattern: Reaction before cause (Golden Hook section, references/storyboard-template.md). Post-production overlay (optional, not in prompts): none needed, the joke reads muted.
 
 ## Clip 1 — Hook: the guarded stool
 
 ```text
 Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
-
-Opening hook: Cóc stands side-on in a quiet alley holding a red plastic stool out in front of his chest with both arms straight, the stool lifted off the ground, arms trembling, his head turned to stare at the viewer with a flat deadpan face; at about 1.5s Cô Vịt walks into frame with a glass of iced tea, sees him, and her dot eyes snap into two big empty white circles.
 
 Style and environment: a flat 2D cartoon in the look of a Vietnamese social-media comic strip brought to motion, original animal characters only. Characters are small round animals about two heads tall: big round heads, soft bean-shaped bodies, short noodle arms and legs of even width, round mitten hands, and one thick uniform black outline around every shape. Flat pastel color fills only: no shading, no gradients, no texture, no lighting effects. Faces are tiny and calm: two small black dot eyes and a small mouth. For a big reaction the dot eyes snap into two large empty white circles, or white circles with a pinpoint pupil, and later snap back; small comic marks drawn on the face (a sweat drop, pink blush) are allowed. Backgrounds are a simple Vietnamese alley in flat pastel shapes: a warm cream wall, a shopfront with a rolled-up shutter and a hanging bulb, a small low green tea table, red plastic stools. Reaction shots use a plain flat pastel color with thin speed lines from the edges. Comic-strip timing: a character holds a pose, then snaps quickly into the next; each punchline lands after a held, silent beat of about one second.
 

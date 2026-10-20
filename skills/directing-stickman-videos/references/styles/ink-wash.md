@@ -234,7 +234,7 @@ low drum; same instruments and tempo in every clip. SFX: brush bristles on paper
 - Hand-to-face beats are in profile; look-ups lean the body; bows push the hips back.
 - `Hands at start` / `Hands at end` lines for every character in every clip; `hand_ledger.py` passes.
 - At most four characters per clip; every visible character is doing something.
-- Clip 1 has one `Opening hook:` sentence matching its first frame and `[0–3s]` beat.
+- Clip 1's first frame and first timed beat carry the hook (Golden Hook section of `storyboard-template.md`); no prompt has a separate `Opening hook:` line.
 - Every beat names its camera move; at most one accent per clip.
 
 ## Sample package and facts

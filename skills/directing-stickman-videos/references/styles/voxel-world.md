@@ -216,7 +216,7 @@ Following the camera grammar in `storyboard-template.md`:
 
 ## Hooks that fit
 
-These patterns from `references/opening-hook.md` suit the style:
+These patterns from the Golden Hook section of `references/storyboard-template.md` suit the style:
 
 - Physics break: a block pops out of a wall. This is used in the sample.
 - Impossible object: a floating block.

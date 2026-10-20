@@ -1,6 +1,6 @@
 # Brick-build sample package: "The top row pops" (3 clips, 16:9, ~30 s)
 
-Six original brick-built townsfolk of Phố Khối; this story uses Bác Vữa, Bé Nút, Cô Bột, Ông Tạ and Bà Rêu. Hands are named from each figure's own side; every figure wears its lime-green ring on the right wrist. A knob hand holds only a prop with a round bar (the baguette, the wick pole, the watering can handle); a brick has no bar, so it is clamped between both knob hands. The hook follows references/opening-hook.md (pattern: Physics break; payoff in Clip 3). The brand name of toy bricks is never written in the prompts. Not yet tested on Flow.
+Six original brick-built townsfolk of Phố Khối; this story uses Bác Vữa, Bé Nút, Cô Bột, Ông Tạ and Bà Rêu. Hands are named from each figure's own side; every figure wears its lime-green ring on the right wrist. A knob hand holds only a prop with a round bar (the baguette, the wick pole, the watering can handle); a brick has no bar, so it is clamped between both knob hands. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Physics break; payoff in Clip 3). The brand name of toy bricks is never written in the prompts. Not yet tested on Flow.
 
 ## Global continuity block
 
@@ -18,8 +18,6 @@ Six original brick-built townsfolk of Phố Khối; this story uses Bác Vữa, 
 
 ```text
 Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
-
-Opening hook: Bác Vữa, a brick-built builder figure, is already pressing a red brick onto the top of a half-built tan brick wall with both knob hands; at about 1s the whole top row pops off the studs and tumbles onto the baseplate.
 
 Style and environment: real brick stop-motion, like a tabletop film shot frame by frame: a small town built entirely from glossy plastic toy bricks on a green studded baseplate with a grey studded road, a tan brick bakery with a red-and-white striped awning and a clear window, a dark grey street lamp, a tree of stacked round brown bricks with green cone leaves, and a pale blue backdrop. Filmed with a macro lens close to the baseplate: shallow depth of field, the background softly blurred, a soft warm key light from the upper right and a cool fill from the left. Every surface is glossy molded ABS plastic with round studs on top, crisp seams between bricks, faint fingerprints and fine scuffs catching the light. The studs are plain and smooth. Animation is stop-motion at 12 poses per second, each pose held for two frames, no motion blur, a very slight light flicker between poses; figures move in small clicks. When the camera moves it is a slow slider move stepped on the same twos. Not CGI, not a cartoon drawing, no people anywhere.
 

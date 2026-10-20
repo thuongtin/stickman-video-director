@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `voxel-world.md` sha256 e8299ada7d19b364
+- package: `voxel-world.md` sha256 8203f01f08761b8f
 - checked: 2026-10-20
 - storyboard rows: none
 - prompts: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=c273b56743fac2b62393662c1ba6059a4261d5eabd0f6a6183d5268de9d07db6 -->
+<!-- package_lint facts end sha256=7c49a1c07e7f1ba79c39d9cab9a0ed1a65f184205e363a841a4b99033d8f41a8 -->

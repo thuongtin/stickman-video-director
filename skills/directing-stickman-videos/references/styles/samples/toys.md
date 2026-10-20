@@ -1,13 +1,11 @@
 # Toys sample package: “Tower before morning” (3 clips, 16:9, ~30 s)
 
-Six original toys from one toy box; this story uses Kit, Bông, Đật, Thiếc, Chốt and Mây. Hands are named from each toy's own side; every toy wears its lime-green band on the right wrist (Đật on its right stub arm). Plush paws and the tin robot's knob hands cannot grip, so they only hold with both hands. The first spoken line, the hook and the joint rules follow references/opening-hook.md and the toys style reference. Not yet tested on Flow.
+Six original toys from one toy box; this story uses Kit, Bông, Đật, Thiếc, Chốt and Mây. Hands are named from each toy's own side; every toy wears its lime-green band on the right wrist (Đật on its right stub arm). Plush paws and the tin robot's knob hands cannot grip, so they only hold with both hands. The first spoken line, the hook and the joint rules follow the Golden Hook section of references/storyboard-template.md and the toys style reference. Not yet tested on Flow.
 
 ## Clip 1 — The tower wobbles
 
 ```text
 Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
-
-Opening hook: Kit, a teal action figure, is already pushing a big yellow block toward the base of a tall block tower on the bedroom floor; at about 1s the red block on top of the tower tips off and falls, and Bông, a lavender plush bear, stumbles under it and catches it against his belly with both paws.
 
 Style and environment: a warm, cozy toy-photography look: real toys come alive on the wooden floor of a child's bedroom at dusk, filmed like a macro lens close to the floor, shallow depth of field, soft warm lamp light from the right and a gentle blue window glow from the left. Every material reads true and stays the same: glossy molded plastic, cream muslin with visible stitches, soft fuzzy plush, painted tin with rivets, painted wood with fine grain, a glossy painted shell. Honey-colored floorboards, a plain cream wall with a skirting board, a few plain colored wooden blocks blurred in the background. Smooth, charming character animation with a handmade feel; toys keep their toy proportions and materials; not a cartoon drawing, no people anywhere.
 
