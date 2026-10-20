@@ -23,7 +23,7 @@ Require these before planning:
     - `Style 2B (Cinematic Story)`: full-color narrative environments, cinematic lighting & depth
   - `Style 3 (Prehistoric Hand-Drawn / Dark Comedy)`: expressive white filled heads, black stick limbs, animal-hide costumes and earthy prehistoric settings; story-specific casting
   - `Style 4 (Cozy Storytelling / 治愈故事风)`: expressive minimalist white-filled characters with dark stick limbs in full-color 2D cartoon environments; varied story locations and cinematic shot changes
-  - Experimental styles (`gated`, not tried on Flow), offered only when the user asks for an experimental style or names one by slug: the 22 slug styles in the "Experimental styles" table of `references/style-catalog.md` (for example `dong-ho`, `chu-tieu`, `watercolor-storybook`). Say the style is `gated` when offering it.
+  - Experimental styles (`gated`), offered only when the user asks for an experimental style or names one by slug: the 22 slug styles in the "Experimental styles" table of `references/style-catalog.md` (for example `dong-ho`, `chu-tieu`, `watercolor-storybook`). Say the style is `gated` when offering it.
 
 If aspect ratio or visual style is missing, ask for all missing items in one concise message and stop. If duration is omitted, default to 60 seconds (6 clips). If a user provides a duration not divisible by 10, round to the nearest 10-second multiple. If a user specifies only light or dark theme, default to Style 1. Never select an aspect ratio or style silently. Do not re-ask choices already supplied.
 

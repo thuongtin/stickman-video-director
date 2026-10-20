@@ -6,7 +6,7 @@
 Status: gated (2026-10-20). Covers: 3 clips of 10 s, 16:9, one kid explorer with up to two dinosaurs per clip,
 one prop handoff (dinosaur to kid), a sauropod walk, a hadrosaur dropping to four legs.
 Not covered: 9:16, more than three characters in a clip, night or rain, close-ups of mouths eating, fights.
-Not tried on Flow. Not scored (no independent review yet).
+Not scored (no independent review yet).
 ```
 
 Evidence: posture gate on every pose and the motion test (`gallery/gate-v2.txt`, `motion-test/scene-gate-v2.txt`,
@@ -218,6 +218,6 @@ Style matrix row:
 | **dino-world** | Dino World | Sunny Cretaceous valley, flat cel colour with one soft shade, thick warm dark-brown outline | Kids' dinosaur science, fossils, "how do we know?" stories | Original cartoon dinosaurs with real body plans (level back, tail counterweight, pillar legs), one yellow band on the right, plus kid explorer Lan |
 ```
 
-Status row: `| dino-world | gated | Posture gate + dino rules (gallery/gate-v2.txt, motion-test/scene-gate-v2.txt); package_lint facts (samples/dino-world.facts.md); not tried on Flow |`
+Status row: `| dino-world | gated | Posture gate + dino rules (gallery/gate-v2.txt, motion-test/scene-gate-v2.txt); package_lint facts (samples/dino-world.facts.md) |`
 
 Setup-gate line: `dino-world (gated, experimental): kids' dinosaur science with original cartoon dinosaurs; offer only when the user asks for an experimental style.`

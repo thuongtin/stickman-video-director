@@ -8,7 +8,6 @@ Draft style pack for `skills/directing-stickman-videos/references/`, written fro
 Status: gated (2026-10-20). Covers: 3 clips, 16:9, four of the six cast members on screen together, two teddy-bear
 hand-offs (Kai to Mimi, Mimi to Bo), a daytime park and the same park at golden hour.
 Not covered: 9:16, more than four characters in one shot, night or interior scenes, characters speaking on screen.
-Not tried on Flow.
 ```
 
 Evidence: 121 rig tracks pass `posture_gate.py` with the drawn body and head sizes declared (`gallery/cast/gate-summary.txt`, `gallery/gate-output.txt`), one two-character `--scene` hand-off passes (`gallery/cast/scene/`), and the sample package passes `package_lint.py` with the facts block in [`samples/chibi-anime.facts.md`](samples/chibi-anime.facts.md). No independent review score yet.
@@ -23,7 +22,7 @@ These works are cited from general knowledge of the shows; no frames were re-ins
 2. *Azumanga Daioh* (TV anime, 2002): normal-proportion characters that switch to chibi for reaction cuts. Supports the anime emotion marks (sweat drop, sparkle eyes, spiral eyes) as short timed graphics and the snappy reaction hold. Runs out on the cast: its chibi form is a gag mode, not a design to freeze.
 3. *Chibi Maruko-chan* (TV anime, 1990–): everyday-life comedy with small, flat-coloured, thickly outlined characters in simple pastel settings. Supports the flat fill, the soft outline and backgrounds simpler than the characters. Runs out on the eyes: its dot eyes are the opposite of this pack's large highlighted eyes.
 
-How-to sources (proportion ratios, Flow ingredients) are listed in `README.md`; they are not works.
+How-to sources (proportion ratios, reference images) are listed in `README.md`; they are not works.
 
 ### Five signature traits
 
@@ -84,7 +83,7 @@ Model sheets show the signature prop in the hand the package uses (`gallery/cast
 
 ### Reference images (strongly recommended)
 
-Where the generation tool accepts reference images (Flow "Ingredients", up to three per prompt), attach a front-facing full-body model sheet of each recurring character on a plain background, and optionally a location keyframe. Generate the sheet once from the frozen anchor, approve it with the user, and reuse the same file for every clip. The text anchor still repeats in each prompt.
+Where the generation tool accepts reference images, attach a front-facing full-body model sheet of each recurring character on a plain background, and optionally a location keyframe. Generate the sheet once from the frozen anchor, approve it with the user, and reuse the same file for every clip. The text anchor still repeats in each prompt.
 
 ## Core rules this style overrides
 
@@ -160,7 +159,7 @@ Style matrix:
 Status:
 
 ```text
-| chibi-anime | gated | 121 rig tracks and one --scene hand-off pass posture_gate; sample package passes package_lint (samples/chibi-anime.facts.md). Not tried on Flow |
+| chibi-anime | gated | 121 rig tracks and one --scene hand-off pass posture_gate; sample package passes package_lint (samples/chibi-anime.facts.md) |
 ```
 
 Setup gate (offered only when the user asks for an experimental style):

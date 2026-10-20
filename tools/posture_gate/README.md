@@ -6,7 +6,7 @@ Catches the body and left/right-hand errors video models make, at three points i
 |---|---|---|
 | Phase B prompts, before generating | `hand_ledger.py package.md` | yes |
 | Code-rendered characters (SVG/JS/3D rigs) | `posture_gate.py check track.json` | yes |
-| Generated clips (Flow) | `estimate_pose.py` then `posture_gate.py check` | review only |
+| Generated clips | `estimate_pose.py` then `posture_gate.py check` | review only |
 
 `hand_ledger.py` rules are listed in the skill's `references/posture-gate.md`. On a pass between characters: "B takes the X from A" (or "A gives/passes/hands the X to B") is itself A's release, and no separate "A lets go" beat is needed; A's end line must then be empty of X. A release beat is needed when nobody takes the prop (a drop, a put-down) and when a character goes from holding a prop in both hands to one hand ("lets go with his right hand").
 

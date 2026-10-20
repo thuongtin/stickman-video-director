@@ -4,7 +4,7 @@
 
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, 2–3 characters on screen, ball handoffs, a low five, indoor and porch sets, 16:9.
-Not covered: Minh and Bảo in a package, 9:16, crowds (4+ in one clip), night scenes, fast action. Not tried on Flow.
+Not covered: Minh and Bảo in a package, 9:16, crowds (4+ in one clip), night scenes, fast action.
 ```
 
 Slug: `stylized-3d-family`. Evidence: posture gate on 186 pose tracks and two multi-character motion tests ([README.md](README.md), `gallery/gate-output-v2.txt`, `motion/gate-motion.txt`); the sample package [samples/stylized-3d-family.md](samples/stylized-3d-family.md) passes `package_lint.py` and `hand_ledger.py` ([facts block](samples/stylized-3d-family.facts.md)); `tests/verify-opening-hook.py` passes on it.
@@ -62,7 +62,7 @@ Style 2B bans "3D humanoid CGI" because a prompt that only says "3D" lets the mo
 | Hands | simplified cartoon hands (this cast: three fingers and a thumb) | realistic knuckles, nails and veins |
 | Motion | clear key poses, slight squash and stretch, weighty | motion-capture jitter, realistic micro-movement |
 
-Will Omni Flash hold it? Likely for faces and materials, less certain for hands and proportions, untested on Flow. Video models have seen far more stylized family-film 3D than any other 3D look, so these words are a strong attractor. The risks are (1) adults drifting to realistic heights and small eyes in wide shots, (2) five-fingered hands coming back in close-ups, (3) a likeness of a famous character if a studio or film is named, which is why prompts never name one. Test order on Flow: one character close-up, one adult in a wide shot, then the package.
+Will Omni Flash hold it? Likely for faces and materials, less certain for hands and proportions. Video models have seen far more stylized family-film 3D than any other 3D look, so these words are a strong attractor. The risks are (1) adults drifting to realistic heights and small eyes in wide shots, (2) five-fingered hands coming back in close-ups, (3) a likeness of a famous character if a studio or film is named, which is why prompts never name one. Test order on Flow: one character close-up, one adult in a wide shot, then the package.
 
 ### Prompt wording for each `must` trait
 
@@ -197,13 +197,13 @@ Style matrix row:
 Status row:
 
 ```text
-| stylized-3d-family | gated | Posture gate and package lint (`style-research/stylized-3d-family/`); not tried on Flow |
+| stylized-3d-family | gated | Posture gate and package lint (`style-research/stylized-3d-family/`) |
 ```
 
 Setup gate line (offered only when the user asks for an experimental style):
 
 ```text
-stylized-3d-family (gated, experimental): stylized 3D family-film look with a six-character family cast; not tried on Flow.
+stylized-3d-family (gated, experimental): stylized 3D family-film look with a six-character family cast.
 ```
 
 ## Files

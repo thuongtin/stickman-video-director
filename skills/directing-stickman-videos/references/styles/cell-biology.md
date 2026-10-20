@@ -7,7 +7,7 @@ Status: gated (2026-10-20). Covers: 3 clips, 16:9, up to four characters on scre
 Mac and the germ Bacillo), a two-hand oxygen-bubble handoff, a two-hand net stretch and release, a one-hand throw,
 a two-hand catch, the hug-then-cut swallow, side-on staging along the vessel floor.
 Not covered: 9:16, Vee on screen in a clip, all six cells in one shot, crowds, turns while carrying, a continuous
-swallow (always a cut), scenes outside a blood vessel. Not tried on Flow.
+swallow (always a cut), scenes outside a blood vessel.
 ```
 
 Evidence for `gated` (paths relative to `/mnt/project-files/style-research/cell-biology/`):
@@ -219,7 +219,7 @@ Style matrix:
 Status:
 
 ```text
-| cell-biology | gated | Gate and lint evidence in /mnt/project-files/style-research/cell-biology/ (cell-biology.md); not tried on Flow |
+| cell-biology | gated | Gate and lint evidence in /mnt/project-files/style-research/cell-biology/ (cell-biology.md) |
 ```
 
 Setup gate (experimental styles only):
@@ -228,7 +228,7 @@ Setup gate (experimental styles only):
   - `cell-biology (Cell-Biology Micro-World, experimental: gated)`: translucent cartoon cells and germs inside a blood vessel for how-the-body-works explainers
 ```
 
-## Acceptance (Flow test still needed)
+## Acceptance
 
 - No writing, formulas, labels or numbers appeared anywhere, and no logos.
 - Cells stayed translucent with a visible nucleus and the double membrane line.

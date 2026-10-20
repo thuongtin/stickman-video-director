@@ -3,7 +3,7 @@
 ## Global continuity block
 
 - Ratio and length: 16:9, three clips of about ten seconds, about 30 seconds in all.
-- Style: `ink-wash` (research style, gated, not tried on Flow). Black ink, gray washes and warm rice paper; the only colour is one small vermilion accent per character. The style and brush-grammar sentences are repeated verbatim in every clip; only the last place sentence changes.
+- Style: `ink-wash` (research style, gated). Black ink, gray washes and warm rice paper; the only colour is one small vermilion accent per character. The style and brush-grammar sentences are repeated verbatim in every clip; only the last place sentence changes.
 - Cast: Mac, Old Tung, Lien, Dom, Ba; at most four in one clip. Each visible character's full anchor is repeated verbatim. Handedness is fixed: Mac paints with his right hand; Old Tung keeps the walking staff in his left hand and takes the brush with his right; Ba carries the shoulder pole on his right shoulder with his right hand on the pole in front of the shoulder.
 - Setting: one riverbank (misty mountains, leaning pine on the right, the long sheet of rice paper), dawn in clip 1, a moment later in clip 2, full morning in clip 3; named time steps, no location change.
 - Narrator: one off-screen adult male voice, same frozen voice block in every clip; no character speaks.

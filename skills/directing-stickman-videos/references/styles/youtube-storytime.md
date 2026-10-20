@@ -4,7 +4,7 @@
 
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, 4 characters (Mo, Rosa, Dex, Bea), coffee handoff, high five, 16:9.
-Not covered: Ms. Hargrove and Grandpa Walt in a package, 9:16, crowds, outdoor scenes. Not tried on Flow.
+Not covered: Ms. Hargrove and Grandpa Walt in a package, 9:16, crowds, outdoor scenes.
 ```
 
 Evidence for `gated`: 72 pose tracks pass the posture gate with 0 errors and 0 warnings (`gallery/gate-output-v2.txt`), the 4-character motion test passes `posture_gate.py --scene` (`motion-test/gate-v2.txt`), and the sample package passes `hand_ledger.py`, `package_lint.py` (facts block: [`samples/youtube-storytime.facts.md`](samples/youtube-storytime.facts.md)) and `tests/verify-opening-hook.py`. Every claim below about how the model behaves is a prompt design choice, not an observed result. Research notes, sources, gallery and gate results are in `README.md` next to this file. The slug names the genre for the catalog only; no prompt contains the word "YouTube".
@@ -14,8 +14,8 @@ Catalog lines (to add when the pack moves into `references/`):
 | Catalog | Line |
 |---|---|
 | Style matrix | `youtube-storytime`: flat 2D first-person storytime cartoon, big round heads, even medium-weight outline, flat fills, narrator avatar with radial-stripe cutaways; text post-overlay; motion stepped |
-| Status | `youtube-storytime`: gated (2026-10-20), not tried on Flow |
-| Setup gate | Offer only when the user asks for an experimental style; say it is `gated`, not `flow-tested` |
+| Status | `youtube-storytime`: gated (2026-10-20) |
+| Setup gate | Offer only when the user asks for an experimental style; say it is `gated` |
 
 ## What the format is
 
@@ -134,7 +134,7 @@ Negative constraints: no 3D render, no CGI, no anime or manga style, no realisti
 
 | Override | Reason |
 |---|---|
-| The narrator's mouth moves with the VO, but only in narrator cutaways; in story shots no one lip-syncs | The narrator on screen is the genre's signature; limiting lip-sync to one character in one shot type keeps the top Flow risk (lip-sync spreading to everyone) contained |
+| The narrator's mouth moves with the VO, but only in narrator cutaways; in story shots no one lip-syncs | The narrator on screen is the genre's signature; limiting lip-sync to one character in one shot type keeps the top generation risk (lip-sync spreading to everyone) contained |
 | Text policy: `post-overlay` | Real storytime videos use labels and captions constantly ("3 hours later"), but generated text is unreliable; every text item goes to post |
 | Up to three shots per 10-second clip (story wide, reaction close-up, narrator cutaway) | The genre's comedy lives in the cut to the reaction; one shot per clip would lose it |
 
@@ -195,7 +195,7 @@ Hook loudness: the hook hit is one short, light sound (a whoosh on the whip pan,
 
 `samples/youtube-storytime.md` ("The coffee I didn't earn", 3 clips, 16:9): passes `hand_ledger.py` with no warnings, `package_lint.py` with 0 red and 0 yellow (facts: [`samples/youtube-storytime.facts.md`](samples/youtube-storytime.facts.md)) and `verify-opening-hook.py`.
 
-## Risks on Omni Flash (untested)
+## Generation risks
 
 1. Lip-sync spreading to every character in story shots. The voice block restricts it; check the first clip.
 2. Smooth motion and face morphing instead of snapped poses.

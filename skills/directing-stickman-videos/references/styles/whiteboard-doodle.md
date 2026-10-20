@@ -6,7 +6,6 @@
 Status: gated (2026-10-20). Covers: one 3-clip 16:9 package with three characters (Bean, Candy, Mr. Square) and two balloon
 passes; cast sheets, expressions and posture tracks for six characters; one two-character scene track (the balloon pass).
 Not covered: 9:16, eraser-only beats in a cast package, readable handwriting, crowds, night or colored boards.
-Not tried on Flow.
 ```
 
 Drafted with `references/style-pack-template.md` (repo main, PR #5). Evidence: posture gate reports in `gallery/report.md` (Bean poses) and `gallery/cast/cast_report.md` (cast), scene track `gallery/scene/`, package lint facts in [`samples/whiteboard-doodle.facts.md`](samples/whiteboard-doodle.facts.md). Not scored; no independent review yet.
@@ -178,6 +177,6 @@ Clip 1 sets it; clips 2–N say the identical score continues from clip 1 with i
 
 | Style | Status | Evidence |
 |---|---|---|
-| whiteboard-doodle | gated | Posture gate reports and lint facts linked in `whiteboard-doodle.md`; not tried on Flow |
+| whiteboard-doodle | gated | Posture gate reports and lint facts linked in `whiteboard-doodle.md` |
 
-Setup gate line: `whiteboard-doodle` — experimental (gated); offer only when the user asks for an experimental style, and say it has not been tried on Flow.
+Setup gate line: `whiteboard-doodle` — experimental (gated); offer only when the user asks for an experimental style, and say it is `gated`.
