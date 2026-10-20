@@ -39,8 +39,10 @@ EXCUSE = re.compile(r"\b(handoff|hand-off|time cut)\b[.:,]?\s*", re.I)
 # "Name: right hand ...; left hand ..." with the two hands in either order.
 # Animal and creature characters: a paw, flipper, wing, hoof, claw or fin is the hand.
 LIMB = r"(?:hand|paw|flipper|wing|hoof|claw|fin|glove|mitten|mitt|fist|palm)"
-ENTRY = re.compile(rf"(?P<name>\s*(?:(?:Mr|Mrs|Ms|Dr|St)\.\s*)?[^:;.]+?):\s*(?P<a>(?:right|left) {LIMB}\s+[^;]+?);\s*(?P<b>(?:right|left) {LIMB}\s+[^.;\n]+)", re.I)
-HAND = re.compile(rf"(right|left) {LIMB}\s+(.+)", re.I | re.S)
+# "right front hoof", "left hind paw": a four-legged character's limb is still that side's hand
+POS = r"(?:(?:front|fore|back|hind|rear)\s+)?"
+ENTRY = re.compile(rf"(?P<name>\s*(?:(?:Mr|Mrs|Ms|Dr|St)\.\s*)?[^:;.]+?):\s*(?P<a>(?:right|left) {POS}{LIMB}\s+[^;]+?);\s*(?P<b>(?:right|left) {POS}{LIMB}\s+[^.;\n]+)", re.I)
+HAND = re.compile(rf"(right|left) {POS}{LIMB}\s+(.+)", re.I | re.S)
 TRANSFER = re.compile(r"\b(opens? (?:his|her|their|its) (?:left |right )?(?:hand|paw|fist|fingers)|closes? (?:his|her|their|its) "
                       r"(?:left |right )?(?:hand|paw|fingers) (?:around|on|over)|lets? (?:\S+ ){0,3}?go|pass(es|ed)?|hands (it )?over|hand it over|(?<!both )(?<!his )(?<!her )(?<!their )(?<!its )(?<!two )(?<!the )(?<!with )hands (?:\w+ )?(?:the|a|an|it|her|his|them)\b|gives?|takes?|swaps?|switch(es)?|moves? .* to (his|her|their|its) "
                       r"(left|right) hand|drops?|puts?|sets? (?:\S+ ){0,6}?down|places?|leans?|picks?|grabs?|catch(es)?|toss(es)?|"
@@ -57,6 +59,12 @@ RELEASE = re.compile(r"\b(opens? (?:his|her|their|its) (?:left |right )?(?:hand|
                      r"tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|rests?|leans?|lowers? .* (?:onto|on|into)|offers?)\b", re.I)
 # letting go of a prop where it stays (not a hand-over, a tuck or a switch of hands)
 LETGO = re.compile(r"\b(?:drops?(?! (?:into|onto|down|to|in|on|back|low)\b)|lets? (?:\S+ ){0,3}?go|releases?)\b", re.I)
+# put somewhere and left there: "places the block in the gap", "sets the cup on the table", "leans the axe
+# against the block" (not "rests the bowl on her lap", "tucks it under his arm" or "puts it in her left hand")
+PUTAWAY = re.compile(r"\b(?:places?|sets?|puts?|lays?|slots?|fits?|stands?|plants?|hangs?|leans?|props?)\s+"
+                     r"(?:(?:\w+ ){0,2}?(?:the|a|an|his|her|their|its|one|both)\b|it\b|them\b)"
+                     rf"(?=(?:(?!{LIMB}|\barms?\b|\blap\b|\bstill\b|\bholding\b|\bkeeps?\b|\bgrip)[^,;])*?\b(?:in|into|on|onto|inside|under|beneath|against|beside|atop|down)\b)"
+                     rf"(?!(?:(?!\b(?:and|then|while)\b)[^,;.])*\b(?:still holding|keeps? (?:hold|holding|a grip)|without letting go|{LIMB}s?\b))", re.I)
 BOTH = re.compile(rf"\b(?:both|two) {LIMB}s\b", re.I)
 # description lines that are not actions ("Props: ... wrapped in green leaves")
 STATIC = re.compile(r"^\W*(?:output|style(?: and environment)?|characters?|props?|composition|audio|voice|dialogue|"
@@ -70,7 +78,7 @@ PRON_OBJ = re.compile(r"\b(?:hold|grab|grip|take|took|catch|caught|pick|carr(?:y
                       r"drop|put|set|place|toss|throw|tuck|swap|switch|move|receive|accept|snatch|hug|cradle|lower|offer)"
                       r"\w*\s+(?:\w+\s+)?\b(it|them)\b(?!\s+(?:\w+\s+)?(?:between|among))", re.I)
 CLAUSE = re.compile(r",\s*|;\s*|\s+(?:and|then|while|before|after|as|when|until|but)\s+", re.I)
-SIDE = re.compile(rf"\b(left|right) {LIMB}s?\b", re.I)
+SIDE = re.compile(rf"\b(left|right) {POS}{LIMB}s?\b", re.I)
 # a prop tucked under or carried in an arm is on that side: "tucks the box under his left arm"
 ARM_SIDE = re.compile(r"\b(?:under|in|with|beneath) (?:his|her|their|its|the|one) (left|right) (?:arm|armpit|elbow)s?\b", re.I)
 # what may come before a clause's subject: list marks, "[3-7s]", a stripped "(VO: ...)", ", and then"
@@ -85,9 +93,9 @@ PARTS = {"string": ("balloon", "kite", "yo-yo"), "strap": ("bag", "backpack", "c
                     "kettle", "racket", "broom"), "leash": ("dog", "puppy"), "stick": ("lollipop",)}
 # "a pencil in her right hand": an object put in a hand, for props the hands lines never list
 OBJ_IN_HAND = re.compile(rf"\b(?:a|an|the|his|her|their|its)\s+((?:[\w-]+\s+){{0,3}}?[\w-]+)\s+(?:(?:still|out|up|high|tight|close)\s+)?in\s+"
-                         rf"(?:his|her|their|its|the|one)\s+(left|right)\s+{LIMB}\b", re.I)
+                         rf"(?:his|her|their|its|the|one)\s+(left|right)\s+{POS}{LIMB}\b", re.I)
 # "with her hand": a hand that takes or holds something without saying which
-UNSIDED = re.compile(rf"\b(?:with|in|into) (?:his|her|their|its|one|a) {LIMB}\b", re.I)
+UNSIDED = re.compile(rf"\b(?:with|in|into) (?:his|her|their|its|one|a) {POS}{LIMB}\b", re.I)
 FINGER = re.compile(r"\b(left|right) (?:index |pointer |middle |little )?(?:finger|thumb)s?\b", re.I)
 POINTS = re.compile(r"\b(?:point|gesture)(?:s|ed|ing)?\b", re.I)
 # picking up, grabbing or catching something; the next words name it
@@ -562,6 +570,18 @@ def lint(text, warnings=None):
         released = {}
         for idx, (si, x, clause, who, hands) in enumerate(rows):
             final = si >= timed_n or re.match(r"\W*final frame\b", x, re.I)
+            # "Gạch places the block in the gap" while the block is still in Than's hand: the take is missing
+            put = PUTAWAY if PUTAWAY.search(clause) else LETGO if LETGO.search(clause) else None
+            if put and who in everyone and not final and (n, x) not in seen:
+                prev = " ".join(c2 for s2, _, c2, _, _ in rows[max(0, idx - 3):idx] if s2 == si)
+                for q in sorted(listed, key=len, reverse=True):
+                    others = sorted({c for (c, _), p in now.items() if p == q and c != who})
+                    if others and q not in {p for (c, _), p in now.items() if c == who} \
+                            and acts_on(prev + ", " + clause, put, q, everyone):
+                        seen.add((n, x))
+                        problems.append(f"Clip {n}: {who} puts down the {q}, but it is still in {' and '.join(others)}'s "
+                                        f"hand; add the beat where {who} takes it: \"{excerpt(x)}\"")
+                        break
             if who and RELEASE.search(clause) and not final:
                 prev = " ".join(c2 for s2, _, c2, _, _ in rows[max(0, idx - 3):idx] if s2 == si)
                 for key in [k for k in now if k[0] == who and (PRONOUN.search(clause)
@@ -569,7 +589,8 @@ def lint(text, warnings=None):
                     del now[key]
                 # put down out of reach ("places the block in the gap and lets go"): the end line can't keep it
                 for q in listed:
-                    if LETGO.search(clause) and acts_on(prev + ", " + clause, LETGO, q, everyone) \
+                    let = LETGO if LETGO.search(clause) else PUTAWAY
+                    if let.search(clause) and acts_on(prev + ", " + clause, let, q, everyone) \
                             and not any(name_at(c, clause) >= 0 for c in everyone if c != who):
                         released[(who, q)] = (x, {sd for sd, o in hands if o == who and sd != "b"})
             if TRANSFER.search(clause) and not final:
@@ -598,6 +619,10 @@ def lint(text, warnings=None):
                             del now[key]
                         released[(c, got)] = (x, set())
                 released.pop((who, got), None)
+            elif who and not final and (GRASP.search(clause) or HOLDING.search(clause)):
+                # laid on the table, then lifted again: "lifts her folded sheet with her left hand"
+                for q in [q for (c2, q) in released if c2 == who and mentions(clause, q)]:
+                    del released[(who, q)]
             # a prop held in both hands, used with one: "lifts the broom in his left hand alone"
             for c, p in two:
                 sides = {sd for sd, o in hands if o == c}
@@ -686,7 +711,7 @@ def lint(text, warnings=None):
         for (c, q), (x, sds) in sorted(released.items()):
             if any(end[1].get(c, {}).get(sd) == q for sd in (sds or ("r", "l"))) and (n, x) not in seen:
                 seen.add((n, x))
-                problems.append(f"Clip {n}: {c} lets go of the {q} (or hands it over), but the end line still has it in {c}'s hand; "
+                problems.append(f"Clip {n}: {c} lets go of the {q} (puts it down or hands it over), but the end line still has it in {c}'s hand; "
                                 f"empty that hand in the end line or pick it up again in a beat: \"{excerpt(x)}\"")
         # declared two-hand props and holders: never one hand, in the hands lines or in a beat
         if two_names:
@@ -718,11 +743,13 @@ def lint(text, warnings=None):
             said = [x2 for x2 in sentences(text) if name_at(o, x2) >= 0
                     and NO_HANDS.search(x2[name_at(o, x2):]) and not re.search(r"\bhands?\b(?! *(?:lines?|ledger))", x2[:name_at(o, x2)])]
             for _, x, clause, w, hands in rows:
-                if w == o and said and (n, x) not in seen and any(sd != "b" for sd, ow in hands if ow == o) \
+                # "in its right front hoof", or "grips the bundle in its hoof" with no side
+                if w == o and said and (n, x) not in seen and (any(sd != "b" for sd, ow in hands if ow == o)
+                                                               or UNSIDED.search(clause)) \
                         and (OBJ_IN_HAND.search(clause) or HOLDING.search(clause) or GRASP.search(clause)):
                     seen.add((n, x))
                     problems.append(f"Clip {n}: {o} has no hands (\"{NO_HANDS.search(said[0][name_at(o, said[0]):]).group(0)}\"), "
-                                    f"but a beat has {o} hold something in one: \"{excerpt(x)}\"")
+                                    f"but a beat has {o} hold something in one; carry it on the back or in the mouth: \"{excerpt(x)}\"")
         # a character drawn without hands
         for name in everyone:
             for x in sentences(text):  # "Bacillo has no hands", "Bacillo: a rod-shaped germ with no arms"

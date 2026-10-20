@@ -825,6 +825,74 @@ assert hand_ledger.lint(mug) == [], hand_ledger.lint(mug)
 assert any("Mo lets go of the blue mug" in p for p in hand_ledger.lint(
     mug.replace("Mo: right hand empty; left hand empty.\n", "Mo: right hand holds the blue mug; left hand empty.\n")))
 
+# placing a prop counts as letting go; placing one still in someone else's hand misses the take;
+# a no-hands animal holds nothing in a hoof, sided ("right front hoof") or not
+gap = ("### Clip 1\nProps: one stone block.\n"
+       "Hands at start — Than: right hand holds the stone block; left hand empty. Gach: right hand empty; left hand empty.\n"
+       "- [0-3s] Gach takes the stone block from Than with her left hand. Than lowers his empty right hand.\n"
+       "- [3-7s] Gach places the stone block in the gap and lets go.\n"
+       "Hands at end — Than: right hand empty; left hand empty. Gach: right hand empty; left hand empty.\n")
+assert hand_ledger.lint(gap) == [], hand_ledger.lint(gap)
+assert any("add the beat where Gach takes it" in p for p in hand_ledger.lint(
+    gap.replace(" Gach takes the stone block from Than with her left hand. Than lowers his empty right hand.", "")
+       .replace("Hands at end — Than: right hand empty;", "Hands at end — Than: right hand holds the stone block;")))
+assert any("Gach lets go of the stone block" in p for p in hand_ledger.lint(
+    gap.replace("in the gap and lets go", "in the gap")
+       .replace("Gach: right hand empty; left hand empty.\n", "Gach: right hand empty; left hand holds the stone block.\n")
+       .replace("Gach: right hand empty; left hand holds the stone block.\n- [0-3s]", "Gach: right hand empty; left hand empty.\n- [0-3s]")))
+relift = gap.replace("in the gap and lets go.", "on the table.\n- [7-10s] Gach lifts the stone block again with her left hand.") \
+    .replace("Gach: right hand empty; left hand empty.\n", "Gach: right hand empty; left hand holds the stone block.\n") \
+    .replace("Gach: right hand empty; left hand holds the stone block.\n- [0-3s]", "Gach: right hand empty; left hand empty.\n- [0-3s]")
+assert hand_ledger.lint(relift) == [], hand_ledger.lint(relift)
+ox = ("### Clip 1\nTrau, a stone buffalo with no hands. Lua, a farmer.\n"
+      "Hands at start — Lua: right hand empty; left hand empty.\n"
+      "- [0-3s] Trau walks along the wall, the rice bundle steady on its back.\n"
+      "Hands at end — Lua: right hand empty; left hand empty.\n")
+assert hand_ledger.lint(ox) == [], hand_ledger.lint(ox)
+for bad in ("the rice bundle held in its right front hoof", "the rice bundle steady on its back. Trau grips the rice bundle in its hoof"):
+    assert any("Trau has no hands" in p for p in hand_ledger.lint(ox.replace("the rice bundle steady on its back", bad))), bad
+assert hand_ledger.lint("### Clip 1\nHands at start — Bo: right front hoof empty; left front hoof empty.\n"
+                        "Hands at end — Bo: right front hoof empty; left front hoof empty.\n") == []
+
+# four-legged tracks (points at the frame's top level) are read: bones, legs, pops, a stick tail
+def cat(i, sit=False):
+    j = {"hip": [100, 50], "shoulder": [60, 50], "neck": [52, 42], "head": [45, 36],
+         "tail0": [106, 46], "tail1": [112, 44], "tail2": [118, 46]}
+    for g, x in (("fl", 60), ("fr", 58), ("hl", 100), ("hr", 98)):
+        swing = 4 * math.sin(i / 3 + (0 if g in ("fl", "hr") else math.pi))
+        j[f"{g}_mid"] = [x + swing / 2 + (2 if g[0] == "f" else -2), 62]
+        j[f"{g}_paw"] = [x + swing, 74]
+    if sit:
+        j["tail0"], j["tail1"], j["tail2"] = [101, 40], [102, 28], [103, 16]
+    return j
+q = {"character": "Mup", "fps": 12, "frames": [cat(i) for i in range(12)]}
+assert pg.check(q)["passed"] and not pg.check(q)["issues"], pg.check(q)["issues"][:3]
+q["frames"][5] = dict(cat(5), fl_paw=[60, 90])
+assert "bone_stretch" in kinds(pg.check(q))
+q["frames"][5] = {k: v for k, v in cat(5).items() if k != "hr_paw"}
+assert "leg_missing" in kinds(pg.check(q))
+q["frames"][5] = dict(cat(5), tail1=[100, 56], tail2=[94, 52])
+assert "pop" in kinds(pg.check(q))
+q["frames"] = [cat(i, sit=True) for i in range(12)]
+assert "tail_like_leg" in kinds(pg.check(q), "warn")
+person = front_track(); person["name"] = "An"
+q = {"name": "Mup", "frames": [cat(i) for i in range(12)]}
+assert isinstance(pg.check_scene([person, q]), list)
+
+# a big prop two holders grip at opposite edges passes the hand-off when each lists its grip points
+a, b = front_track(), front_track()
+a["name"], b["name"] = "Hank", "Nova"
+for fa, fb in zip(a["frames"], b["frames"]):
+    fb["joints"] = {k: [v[0] + 120, v[1]] for k, v in fa["joints"].items()}
+    c = [(fa["joints"]["wrist_l"][0] + fb["joints"]["wrist_r"][0]) / 2, fa["joints"]["wrist_l"][1]]
+    fa["holds"] = fb["holds"] = {"gear": "both"}
+    fa["props"], fb["props"] = {"gear": c}, {"gear": c}
+assert any(i["kind"] == "handoff_gap" and "gear.l" in i["message"] for i in pg.check_scene([a, b]))
+for t in (a, b):
+    for f in t["frames"]:
+        f["props"].update({"gear.l": f["joints"]["wrist_l"], "gear.r": f["joints"]["wrist_r"]})
+assert not any(i["kind"] == "handoff_gap" for i in pg.check_scene([a, b]))
+
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()
 contract = (ROOT / "skills/directing-stickman-videos/references/omni-flash-prompt-contract.md").read_text()

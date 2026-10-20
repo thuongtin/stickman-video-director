@@ -88,6 +88,117 @@ def rotate(pt, pivot, deg):
     return (pivot[0] + x * math.cos(a) - y * math.sin(a), pivot[1] + x * math.sin(a) + y * math.cos(a))
 
 
+# ---------- four-legged characters ----------
+QUAD_LEGS = {"fl": "shoulder", "fr": "shoulder", "hl": "hip", "hr": "hip"}
+
+
+def _point(v):
+    return isinstance(v, (list, tuple)) and len(v) in (2, 3) and all(isinstance(x, (int, float)) for x in v)
+
+
+def as_joint_track(track):
+    """Frames that list their points at the top level ({"hip": [x, y], "fl_paw": ...}) get them under
+    "joints", so a cat track joins a --scene run with the people."""
+    for f in track.get("frames", []):
+        if isinstance(f, dict) and "joints" not in f:
+            f["joints"] = {k: v for k, v in f.items() if _point(v)}
+    return track
+
+
+def is_quadruped(track):
+    return track.get("body_plan") == "quadruped" or any(
+        "fl_paw" in f.get("joints", {}) and "hl_paw" in f.get("joints", {}) for f in track["frames"][:3])
+
+
+def check_quadruped(track, P, profile):
+    """A four-legged animal in side view: legs "fl", "fr", "hl", "hr" (front/hind, the animal's own
+    left/right), each "<leg>_mid" (elbow or hock) and "<leg>_paw", hanging from "shoulder" (front) and
+    "hip" (hind); "neck", "head" and a tail chain "tail0", "tail1", ... Bones keep their length, all
+    four legs stay drawn, no joint teleports, a leg never flips its bend, and a straight stiff tail
+    that reads as a fifth leg is flagged."""
+    issues = []
+
+    def add(fi, severity, kind, msg, joints):
+        issues.append({"frame": fi, "severity": severity, "kind": kind, "message": msg, "joints": sorted(joints)})
+
+    frames = [{k: tuple(float(x) for x in v[:2]) for k, v in f["joints"].items() if v is not None}
+              for f in track["frames"]]
+    tails = sorted({k for j in frames for k in j if re.fullmatch(r"tail\d+", k)}, key=lambda k: int(k[4:]))
+    bones = [("hip", "shoulder"), ("shoulder", "neck"), ("neck", "head")]
+    for leg, top in QUAD_LEGS.items():
+        bones += [(top, f"{leg}_mid"), (f"{leg}_mid", f"{leg}_paw")]
+    chain = ["hip"] + tails
+    bones += list(zip(chain, chain[1:])) if tails else []
+    rest = track.get("rest") or {}
+    rest = rest.get("joints", rest)
+    stretch, shrink = P["bone_stretch"], P.get("bone_shrink")
+    abs_px = P.get("abs_tolerance_px", 0)
+    if track.get("projected"):
+        shrink = None
+    ref = {}
+    for a, b in bones:
+        ls = sorted(norm(sub(j[a], j[b])) for j in frames if a in j and b in j)
+        if rest and a in rest and b in rest:
+            ref[(a, b)] = norm(sub(rest[a][:2], rest[b][:2]))
+        elif ls:
+            ref[(a, b)] = ls[-1] if track.get("projected") else ls[len(ls) // 2]
+    body = ref.get(("hip", "shoulder")) or 1.0
+    leg_len = max([ref.get((t, f"{g}_mid"), 0) + ref.get((f"{g}_mid", f"{g}_paw"), 0) for g, t in QUAD_LEGS.items()] or [body])
+    paws = [f"{g}_paw" for g in QUAD_LEGS]
+    fps = float(track.get("fps", 12))
+    prev_bend = {}
+    for fi, j in enumerate(frames):
+        f = track["frames"][fi]
+        for (a, b), r in ref.items():
+            if a in j and b in j and r > 0:
+                l = norm(sub(j[a], j[b]))
+                if l - r > stretch * r + abs_px:
+                    add(fi, "error", "bone_stretch", f"{a}-{b} is {l / r:.2f}x its length", {a, b})
+                elif shrink is not None and r - l > shrink * r + abs_px:
+                    add(fi, "error", "bone_shrink", f"{a}-{b} is {l / r:.2f}x its length", {a, b})
+        have = [p for p in paws if p in j]
+        if have and len(have) < 4:
+            add(fi, "error", "leg_missing", f"only {len(have)} of the four legs are drawn "
+                f"(missing {', '.join(sorted(set(paws) - set(have)))}); a hidden far leg still gets its points", set(have))
+        if fi and not f.get("cut"):
+            pj = frames[fi - 1]
+            if "hip" in j and "hip" in pj and norm(sub(j["hip"], pj["hip"])) > body:
+                add(fi, "error" if P["blocking"] else "warn", "pop",
+                    f"the body jumps {norm(sub(j['hip'], pj['hip'])) / body:.1f} body-lengths in one frame", {"hip"})
+            for a2, b2 in bones:  # each bone turns no faster than a person's limb may
+                if all(k in j and k in pj for k in (a2, b2)):
+                    u, v = sub(j[b2], j[a2]), sub(pj[b2], pj[a2])
+                    turn = abs(wrap(math.degrees(math.atan2(u[1], u[0]) - math.atan2(v[1], v[0]))))
+                    if turn * fps > P["max_joint_speed"]:
+                        add(fi, "error" if P["blocking"] else "warn", "pop",
+                            f"{a2}-{b2} swings {turn:.0f}° in one frame ({turn * fps:.0f}°/s)", {a2, b2})
+        for g, top in QUAD_LEGS.items():
+            m, w = f"{g}_mid", f"{g}_paw"
+            if top in j and m in j and w in j:
+                u, v = sub(j[m], j[top]), sub(j[w], j[m])
+                c = u[0] * v[1] - u[1] * v[0]
+                ang = math.degrees(math.atan2(abs(c), dot(u, v)))
+                if g in prev_bend and prev_bend[g][0] * c < 0 and min(ang, prev_bend[g][1]) > 15:
+                    add(fi, "error", "snap", f"the {g} leg flips its bend direction at {m}", {top, m, w})
+                prev_bend[g] = (c, ang)
+        # a straight, steep tail as long as a leg reads as a fifth leg (the sitting cat's stick tail)
+        if len(tails) >= 2 and all(t in j for t in tails) and "hip" in j:
+            pts = [j["hip"]] + [j[t] for t in tails]
+            segs = [sub(b2, a2) for a2, b2 in zip(pts, pts[1:])]
+            turn = max((math.degrees(math.atan2(abs(a2[0] * b2[1] - a2[1] * b2[0]), dot(a2, b2)))
+                        for a2, b2 in zip(segs, segs[1:])), default=0)
+            whole = sub(pts[-1], pts[0])
+            steep = math.degrees(math.atan2(abs(whole[1]), abs(whole[0]) or 1e-9))
+            if turn < 12 and steep > 55 and norm(whole) > 0.6 * leg_len:
+                add(fi, "warn", "tail_like_leg", "the tail is a straight stiff stick standing like a fifth leg; "
+                    "curve it, wrap it round the paws or lay it along the ground", set(tails))
+    issues.sort(key=lambda i: (-1 if i["frame"] is None else i["frame"]))
+    errors = sum(1 for i in issues if i["severity"] == "error")
+    return {"profile": profile, "frames": len(frames), "frames_checked": len(frames), "errors": errors,
+            "warnings": len(issues) - errors, "passed": errors == 0,
+            "status": "PASS" if errors == 0 else ("FAIL" if P["blocking"] else "REVIEW"), "issues": issues}
+
+
 # ---------- 3D tracks ----------
 def is_3d(track):
     return any(v is not None and len(v) == 3 for f in track["frames"] for v in f["joints"].values())
@@ -286,6 +397,9 @@ def check(track, profile=None):
         # A 3D rig flattened through a camera: limbs only ever look shorter, so measure
         # stretch against the longest length seen and never call a limb shrunk.
         P.update(bone_shrink=None, ref_percentile=1.0, left_right_mismatch=None)
+    as_joint_track(track)
+    if is_quadruped(track):
+        return check_quadruped(track, P, profile)
     limits = merged_limits(track)
     if is_3d(track):
         track = to_2d(track)
@@ -1013,6 +1127,8 @@ def check_scene(tracks):
     pass, a contact naming another character's joint ("contacts": {"r": "Kip.wrist_l"} for a
     high five) must reach it, and one head must not sit inside another."""
     issues = []
+    for t in tracks:
+        as_joint_track(t)
     def add(fi, kind, msg, severity="error"):
         issues.append({"frame": fi, "severity": severity, "kind": kind, "message": msg, "joints": []})
     names = [t.get("name") or (t.get("character") or "").split(" (")[0] or f"track {k + 1}" for k, t in enumerate(tracks)]
@@ -1046,9 +1162,15 @@ def check_scene(tracks):
                     wb = [fb["joints"][f"wrist_{x}"] for x in hands_of(fb["holds"][prop]) if f"wrist_{x}" in fb.get("joints", {})]
                     gap = min((norm(sub(p, q)) for p in wa for q in wb), default=0)
                     reach = (fa.get("hand_length", ta.get("hand_length")) or 0) + (fb.get("hand_length", tracks[b].get("hand_length")) or 0)
-                    if gap - reach > 0.35 * T:
+                    # a big prop gripped at opposite edges: each holder's own grip points ("gear.l", "gear.r")
+                    # are checked against that holder's hands, so the hands may be far apart
+                    gripped = pa and pb and all(any(f"{prop}.{x}" in (fx.get("props") or {}) for x in hands_of(fx["holds"][prop]))
+                                                for fx in (fa, fb))
+                    if gap - reach > 0.35 * T and not gripped:
                         add(fi, "handoff_gap", f"{names[a]} and {names[b]} both hold the {prop}, but their hands are "
-                            f"{gap / T:.1f} torso-lengths apart; both hands must be on it")
+                            f"{gap / T:.1f} torso-lengths apart; both hands must be on it (for a big prop held at "
+                            f"opposite edges, give each holder grip points \"{prop}.l\" / \"{prop}.r\" from the prop's "
+                            f"shape and the same \"{prop}\" point)")
             # a prop leaving this character's hand appears at the same place in the receiver's
             if fi:
                 for prop in (tracks[a]["frames"][fi - 1].get("holds") or {}):
