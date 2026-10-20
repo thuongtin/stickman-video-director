@@ -6,7 +6,7 @@
 Status: gated (2026-10-20). Covers: 3 clips, 4 characters on screen (Dr. Nova, Kip, Bolt, Prof. Otto),
 pouring, a cup picked up and set back, a two-hand to one-hand beaker handoff, a kid jump in profile, 16:9.
 Not covered: 9:16, Juno and Dr. Rocco on screen, sitting at the microscope, turns while carrying glass,
-more than four characters, outdoor scenes. Not tried on Flow.
+more than four characters, outdoor scenes.
 ```
 
 Evidence for `gated`:
@@ -199,7 +199,7 @@ Style matrix:
 Status:
 
 ```text
-| science-lab | gated | Gate and lint evidence in /mnt/project-files/style-research/science-lab/ (science-lab.md); not tried on Flow |
+| science-lab | gated | Gate and lint evidence in /mnt/project-files/style-research/science-lab/ (science-lab.md) |
 ```
 
 Setup gate (experimental styles only):

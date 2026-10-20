@@ -5,7 +5,6 @@
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, 3–4 characters on screen, flashlight and bug-jar handoffs, a low five,
 a cane held through two clips, indoor sets, 16:9. Not covered: 9:16, crowds (5+), outdoor scenes, fights or sports.
-Not tried on Flow.
 ```
 
 Slug: `modern-tv-cartoon`. Evidence: posture gate on 114 pose tracks and a 2-shot motion test
@@ -209,13 +208,13 @@ Style matrix row:
 Status row:
 
 ```text
-| modern-tv-cartoon | gated | Posture gate and package lint (`style-research/modern-tv-cartoon/`); not tried on Flow |
+| modern-tv-cartoon | gated | Posture gate and package lint (`style-research/modern-tv-cartoon/`) |
 ```
 
 Setup gate line (offered only when the user asks for an experimental style):
 
 ```text
-modern-tv-cartoon (gated, experimental): modern American TV cartoon look with an ensemble cast; not tried on Flow.
+modern-tv-cartoon (gated, experimental): modern American TV cartoon look with an ensemble cast.
 ```
 
 Research files: `/mnt/project-files/style-research/modern-tv-cartoon/`.

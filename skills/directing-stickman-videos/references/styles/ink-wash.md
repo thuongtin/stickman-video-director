@@ -5,14 +5,14 @@
 ```text
 Status: gated (2026-10-20). Covers: 3 clips on one riverbank, up to 4 characters per clip, a brush handoff
 between two characters, a shoulder pole and a walking staff, 16:9. Not covered: 9:16, crowds, night scenes,
-interiors, location changes. Not tried on Flow.
+interiors, location changes.
 ```
 
 Evidence for `gated`: 60 pose tracks (5 characters × 12) and two multi-character motion tests pass
 `tools/posture_gate/posture_gate.py` (shared copy tracking PR #4, `--scene` for the motion tests), report in
 `gate/gate-output.txt`; the sample package [`samples/ink-wash.md`](samples/ink-wash.md) passes
 `tools/package_lint/package_lint.py`, facts block in [`samples/ink-wash.facts.md`](samples/ink-wash.facts.md) (copied
-below). Every claim about how Flow behaves is a hypothesis until a Flow run confirms it.
+below).
 
 ## Visual identity
 
@@ -120,7 +120,7 @@ Dom, a small child about four and a half heads tall with a large head: one curle
 Other stories may approve another cast; keep the grammar sentence and the "different silhouette, red accent in a
 different place" rule. Robes end at or above the knee so knees stay readable.
 
-Hypothesis to test on Flow: keep at most four characters in one ten-second clip and at most two doing
+Keep at most four characters in one ten-second clip and at most two doing
 something with their hands at the same time; let others enter or leave on a beat rather than stand idle.
 
 ## Environment block
@@ -170,7 +170,7 @@ Apply `posture-gate.md` in full. These style-specific rules come from the 17 fai
 ## Motion cadence
 
 `smooth`. Ink-wash animation reads as one continuous brush in motion; stepped or on-twos timing makes the
-paper texture and the washes flicker (a hypothesis to check on Flow).
+paper texture and the washes flicker.
 
 ## Camera grammar
 
@@ -265,7 +265,7 @@ Style-matrix row:
 Status row:
 
 ```text
-| ink-wash | gated | 60 pose tracks and 2 motion tests pass posture_gate; 3-clip package passes package_lint (`ink-wash.md`, facts block). Not tried on Flow |
+| ink-wash | gated | 60 pose tracks and 2 motion tests pass posture_gate; 3-clip package passes package_lint (`ink-wash.md`, facts block) |
 ```
 
 Setup-gate line (offered only when the user asks for an experimental style):

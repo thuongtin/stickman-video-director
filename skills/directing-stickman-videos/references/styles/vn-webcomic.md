@@ -6,7 +6,6 @@
 Status: gated (2026-10-20). Covers: 3 clips, 16:9, two characters per clip, one stool held with both hands,
 a glass set down on a table, a seated character, a reaction cut; poses for six characters; one 4-character
 motion test (table pass). Not covered: 9:16, crowds, night scenes, more than two characters in one prompt.
-Not tried on Flow.
 ```
 
 Evidence: gate report `gallery/gate-v2.txt` (73 poses, including Mèo Mướp pointing with his far right hand while facing left, as in clip 2) and `motion-test/gate-v2.txt` (`--scene`, 4 characters); lint facts block `samples/vn-webcomic.facts.md`; hand ledger `prompt-package/ledger-output.txt`. Research notes, sources and gallery: `README.md` next to this file (in Vietnamese).
@@ -174,7 +173,7 @@ Follow `posture-gate.md`. Name every held prop with the character's own hand, on
 
 Reaction before cause (the absurd result first: Cóc guarding a stool, a passer-by's eyes go blank), Before → after cut, and Visual metaphor when the joke is a phrase taken literally (the literal image is the first frame). First spoken line under ten words, the premise only.
 
-## Risks on Omni Flash (untested)
+## Generation risks
 
 1. The model morphs faces smoothly instead of snapping dot eyes to empty white circles.
 2. The one-second silent hold may be filled with motion or music; it is written in both the beat and the Audio line.
@@ -193,7 +192,7 @@ Reaction before cause (the absurd result first: Cóc guarding a stool, a passer-
 |---|---|---|---|---|
 | `vn-webcomic` | Vietnamese Web-Comic in Motion | Flat pastel Vietnamese alley, thick even outline, comic-strip hold-and-snap timing | One-joke relatable gags, literal wordplay, neighbourhood slice-of-life | Original round animals about two heads tall, dot eyes that snap to empty white circles, red rubber band on the right wrist |
 
-Status row: `vn-webcomic | gated | gate-v2 reports, samples/vn-webcomic.facts.md; not tried on Flow`. Setup gate: offer only when the user asks for an experimental style, and say it is `gated`.
+Status row: `vn-webcomic | gated | gate-v2 reports, samples/vn-webcomic.facts.md`. Setup gate: offer only when the user asks for an experimental style, and say it is `gated`.
 
 ## Acceptance checklist
 

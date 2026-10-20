@@ -35,7 +35,7 @@ python3 tools/posture_gate/posture_gate.py check track.json --report out/
 python3 tools/posture_gate/posture_gate.py fix track.json -o fixed.json
 ```
 
-**Generated clips** (Flow): first make a risk sheet. It is a contact sheet of the moments the prompt itself marks as risky (hand passes, turns, overhead reaches, crossed arms, falls), together with the hands the ledger expects at each one. Review that sheet before anything else:
+**Generated clips**: first make a risk sheet. It is a contact sheet of the moments the prompt itself marks as risky (hand passes, turns, overhead reaches, crossed arms, falls), together with the hands the ledger expects at each one. Review that sheet before anything else:
 
 ```bash
 python3 tools/risk_sheet/risk_sheet.py package.md --clip 2 --video clip2.mp4 -o out/

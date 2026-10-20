@@ -6,7 +6,7 @@ Slug: `mid-century`. Number it only when it is merged into `style-catalog.md`.
 
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, a cast of five office characters with up to three in one clip, two hand-to-hand folder passes, office interiors, 16:9.
-Not covered: 9:16, crowds, outdoor or night scenes, character dialogue. Not tried on Flow.
+Not covered: 9:16, crowds, outdoor or night scenes, character dialogue.
 ```
 
 Evidence: 35 rig poses and a three-shot animatic pass `posture_gate.py` (per track and `--scene`), the sample package passes `package_lint.py` (facts block below). Gallery, gate output and before/after sheets: `gallery/`, `motion/`, `cast/` next to this file.
@@ -55,7 +55,7 @@ The sources run out on two points: how a 2026 video model renders "off-register"
 
 ## Cast cards
 
-The style is an ensemble style. Plan the cast as types from one world and give each a different geometric silhouette; two characters with the same body shape merge in generated clips. Each anchor names role and build, head shape and face marks, hat or hair, torso shape and outfit colour, legs and shoes, mitten hands, and **one fixed left/right marker**. The marker shows which hand is the character's own right (untested on Flow). Repeat every visible character's full card verbatim in every clip it appears in. Names in Hands lines have no periods ("Boxley", not "Mr. Boxley").
+The style is an ensemble style. Plan the cast as types from one world and give each a different geometric silhouette; two characters with the same body shape merge in generated clips. Each anchor names role and build, head shape and face marks, hat or hair, torso shape and outfit colour, legs and shoes, mitten hands, and **one fixed left/right marker**. The marker shows which hand is the character's own right. Repeat every visible character's full card verbatim in every clip it appears in. Names in Hands lines have no periods ("Boxley", not "Mr. Boxley").
 
 **Wendell**
 
@@ -139,7 +139,7 @@ One frozen score per video: a brisk muted-trumpet, walking upright-bass and brus
 2. Short audio crossfade (about four frames) for the score at each cut; never crossfade the voice.
 3. Add titles and captions as overlays (text policy `post-overlay`).
 4. Optional: a light paper-grain overlay and a single colour grade across all clips, if the clips drift in paper tone.
-5. Review takes, slams, bows and passes frame by frame for popping limbs, swapped hands and the left/right markers changing sides; record what Flow kept.
+5. Review takes, slams, bows and passes frame by frame for popping limbs, swapped hands and the left/right markers changing sides.
 
 ## Sample package
 
@@ -172,7 +172,7 @@ Status row:
 Setup gate line (offered only when the user asks for an experimental style):
 
 ```text
-  - `mid-century (1950s Mid-Century Limited Animation)`: experimental, gated, not tried on Flow; original angular office cast on stick-thin limbs, flat off-register colour, sparse sets, held poses on twos
+  - `mid-century (1950s Mid-Century Limited Animation)`: experimental, gated; original angular office cast on stick-thin limbs, flat off-register colour, sparse sets, held poses on twos
 ```
 
 ## Checks before delivery

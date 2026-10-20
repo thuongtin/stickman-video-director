@@ -7,7 +7,6 @@ Status: gated (2026-10-20). Covers: 3 clips in 16:9, up to four characters plus 
 in morning light, a broom pass and a two-handed tea-cup offering, joined palms, bows, seated meditation,
 walking meditation and the full prostration (lạy), 44 human poses and 4 cat poses through the posture gate.
 Not covered: 9:16, indoor shrine scenes, night, crowds, dialogue between characters, Vietnamese narration.
-Not tried on Flow.
 ```
 
 Draft for the skill's `references/` folder, named by slug. Every claim below about how Omni Flash behaves is a prompt design choice, not an observed result.
@@ -193,7 +192,7 @@ Style matrix row:
 Status row:
 
 ```text
-| chu-tieu | gated | Posture gate 0 FAIL / 0 WARN on 44 human poses, cat tracks through the shared gate, 4-character scene incl. the cat; package_lint facts in the pack (`chu-tieu.md`); not tried on Flow |
+| chu-tieu | gated | Posture gate 0 FAIL / 0 WARN on 44 human poses, cat tracks through the shared gate, 4-character scene incl. the cat; package_lint facts in the pack (`chu-tieu.md`) |
 ```
 
 Setup-gate line (offered only when the user asks for an experimental style, per the status rules):

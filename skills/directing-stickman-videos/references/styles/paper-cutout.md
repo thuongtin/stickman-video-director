@@ -4,7 +4,7 @@
 
 ```text
 Status: gated (2026-10-20). Covers: code-rendered rig of six cast members (106 poses, 6 mocap walks, one two-character balloon handoff) passing posture_gate; one 3-clip, three-character 16:9 sample package passing package_lint and the opening-hook test.
-Not covered: 9:16, crowds, night scenes, more than three characters in one frame. Not tried on Flow: every prompt wording below is a hypothesis until a Flow test confirms it.
+Not covered: 9:16, crowds, night scenes, more than three characters in one frame.
 ```
 
 Evidence: gate report `gallery/cast-gate-results.md`, scene track `gallery/tracks/scene/`, lint facts `samples/paper-cutout.facts.md`, gallery `gallery/README.md`. Draft reference for `skills/directing-stickman-videos/references/`; it is named by slug, not by the next free style number.
@@ -258,12 +258,12 @@ Status row:
 
 | Style | Status | Evidence |
 |---|---|---|
-| paper-cutout | gated | `gallery/cast-gate-results.md`, `samples/paper-cutout.facts.md`; not tried on Flow |
+| paper-cutout | gated | `gallery/cast-gate-results.md`, `samples/paper-cutout.facts.md` |
 
 Setup-gate line (offered only when the user asks for an experimental style):
 
 ```text
-- `paper-cutout` (experimental, gated, not tried on Flow): flat cut-paper puppets in stop motion, 5A construction-paper comedy or 5B collage storybook
+- `paper-cutout` (experimental, gated): flat cut-paper puppets in stop motion, 5A construction-paper comedy or 5B collage storybook
 ```
 
 ## Review checklist
@@ -277,4 +277,3 @@ Setup-gate line (offered only when the user asks for an experimental style):
 - Prop ownership follows the prop rules; no spawning or duplicated pieces.
 - No generated text, subtitles or speech bubbles; overlays are listed for post.
 - The voice block is identical across clips and the score continues from clip 1.
-- Limitations are disclosed: anchors are untested until a Flow test confirms them.

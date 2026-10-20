@@ -29,9 +29,9 @@ Read this file before planning (Phase A), and read it again before assembling pr
 
 ## Optional steps around generation
 
-These steps are part of the stitching guide when they are used. None of them has been tested on Flow yet, so a package states which ones it uses and why.
+These steps are part of the stitching guide when they are used. A package states which ones it uses and why.
 
-1. **Reference images (Flow Ingredients) or a first frame.** A pack may ship a model sheet: the character's front and side views on a plain background. A rendered first frame is another option, for code-rendered styles. Either is attached in Flow as a reference image. The anchor text is still repeated in every prompt (C7). The image adds to the text; it does not replace it. Record in the delivery note which image was attached to which clip.
+1. **Reference images or a first frame.** A pack may ship a model sheet: the character's front and side views on a plain background. A rendered first frame is another option, for code-rendered styles. Either is attached to the generation as a reference image. The anchor text is still repeated in every prompt (C7). The image adds to the text; it does not replace it. Record in the delivery note which image was attached to which clip.
 2. **Post-production**, in this order:
    1. Trim joins and short audio crossfades.
    2. The pack's own post step, if it has one (for example a pixel lock or a stop-motion step).

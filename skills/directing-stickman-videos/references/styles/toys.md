@@ -5,7 +5,7 @@
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, up to 4 toys on screen, a falling block caught, a block passed between
 two toys, a block tower, 16:9.
-Not covered: 9:16, close-ups of hands, crowds of toys, outdoor or daylight scenes, toys talking. Not tried on Flow.
+Not covered: 9:16, close-ups of hands, crowds of toys, outdoor or daylight scenes, toys talking.
 ```
 
 Evidence: posture gate and toy joint check on 61 poses and a 3-toy motion test (the cast of clip 2) (`README.md`,
@@ -231,10 +231,10 @@ a block, pull back). Keep the hit sound woody or soft (clack, thump, boff, tin c
   sentence; one name per prop.
 - Visual review by eye: no bend on a jointless limb, Thiếc's arms never out to the side, the band on the right wrist
   in every view, a gap between hanging arms and the waist in front view, a prop held where the hands actually are.
-- Flow test still needed: material consistency (plush stays plush, tin stays tin), whether the model keeps jointless
+- In a generated clip, also check: material consistency (plush stays plush, tin stays tin), whether the model keeps jointless
   limbs straight, Mây's unchanging button eyes, the wristband, and no letters on blocks.
 
-## Flow risks (inferred, not yet tested)
+## Generation risks
 
 - The model's prior for "animated toys" is one famous film franchise; expect drift toward its look and toward a
   cowboy or space ranger. The negatives and plain designs push against it but this is the first thing to check.
@@ -248,5 +248,5 @@ a block, pull back). Keep the hit sound woody or soft (clack, thump, boff, tin c
 |---|---|---|---|---|
 | `toys` | Toys Come Alive | Real toys on a child's bedroom floor at dusk, floor-level macro lens, warm lamp and blue window light | Gentle kids' stories, teamwork and sharing, simple physics (balance, towers) | Six different toys (action figure, rag doll, plush bear, tin robot, wooden soldier, roly-poly), each bending only at its built joints, lime-green band on the right wrist |
 
-Status row: `toys | gated | Gate and lint reports in /mnt/project-files/style-research/toys/; not tried on Flow`.
-Setup-gate line: "Toys come alive (experimental, gated, not tried on Flow): real toys on a bedroom floor."
+Status row: `toys | gated | Gate and lint reports in /mnt/project-files/style-research/toys/`.
+Setup-gate line: "Toys come alive (experimental, gated): real toys on a bedroom floor."

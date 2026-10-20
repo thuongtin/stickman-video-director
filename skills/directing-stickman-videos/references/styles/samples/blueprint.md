@@ -6,7 +6,7 @@ Post-production text (optional): none is needed; any title goes in the blank tit
 ## Global continuity block
 
 - Ratio and length: 16:9, three clips of about ten seconds (about 30 s).
-- Style: `blueprint` (Engineering Blueprint, style pack `blueprint.md`, status gated, not tried on Flow). The style paragraph, the character anchors and the common rules after them are repeated verbatim in every clip.
+- Style: `blueprint` (Engineering Blueprint, style pack `blueprint.md`, status gated). The style paragraph, the character anchors and the common rules after them are repeated verbatim in every clip.
 - Cast: Nova (clips 1–3), Mira (clips 1 and 3), Hank (clips 2–3), Cog (clip 3). Each anchor is the frozen text from `src/rig.py`, repeated verbatim in every clip the character appears in; a clip lists exactly who is in it.
 - Locks: every character wears one solid white cuff band on the right wrist only; Cog keeps its two round lens eyes and slot mouth; one name per prop for the whole package: the wrench, the clipboard, the big gear, the small box (never "the cog": Cog is a character).
 - Palette: Prussian blue and the white of the paper only; no accent colours.

@@ -6,8 +6,7 @@
 Status: gated (2026-10-20). Covers: code-rendered rig of five villagers (35 poses incl. CMU mocap walks, 12 expressions,
 one 6 s four-character motion test with a two-handed rice-cake handoff) passing posture_gate; one 3-clip, four-character
 16:9 sample package passing package_lint, hand_ledger and the opening-hook test.
-Not covered: 9:16, crowds, animals as cast, night scenes, three-quarter views. Not tried on Flow: every prompt wording
-below is a hypothesis until a Flow test confirms it.
+Not covered: 9:16, crowds, animals as cast, night scenes, three-quarter views.
 ```
 
 Evidence: gate output `gallery/gate-output-v2.txt` and `gallery/front-arms-fix/gate-front-rest.txt`, motion-test tracks `motion-test/tracks-v2/` (`--scene` PASS), package `samples/dong-ho.md` with lint facts `samples/dong-ho.facts.md`, gallery `gallery/` (see `README.md`). Draft for `skills/directing-stickman-videos/references/`, named by slug. Self-score not given; an independent review (style-audit thread) has read the samples, and its findings are fixed below.
@@ -132,7 +131,7 @@ Setup-gate line for `SKILL.md` (offer only when the user asks for an experimenta
   - `dong-ho (Đông Hồ Folk Print, gated)`: flat natural-pigment blocks on shimmering điệp paper with a black woodblock key line, round-faced villagers in folk costume; no writing in frames (captions added in post)
 ```
 
-## Acceptance (when tried on Flow)
+## Acceptance
 
 - No writing, seals or caption panels anywhere.
 - Colours stay flat, the paper ground stays visible; no gradients, glow or 3D shading.

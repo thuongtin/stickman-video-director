@@ -117,7 +117,7 @@ Negative constraints: no 3D render, no CGI, no gradients, no shading or soft air
 ## Stitching guide
 
 1. Generate clip 1 and check the hook frame (the leaf on An's head at about 1.5 s) and the bracelet side before going on.
-2. Generate clip 2 from clip 1's last frame if Flow offers frame-to-video; otherwise use the prompt alone. Cut clip 1 to clip 2 on the broom stroke: trim to the first frame where An's broom is in both hands.
+2. Generate clip 2 from clip 1's last frame if the generation tool offers frame-to-video; otherwise use the prompt alone. Cut clip 1 to clip 2 on the broom stroke: trim to the first frame where An's broom is in both hands.
 3. Clip 3 begins after a time cut: join it to clip 2 with a short (about 12-frame) cross-dissolve, the only dissolve in the video.
 4. Hold the last frame of clip 3 for about one second of silence while the bell fades, then end.
 5. Reject and regenerate any clip where the bracelet changes wrist, the broom or cup changes hands without a visible pass, a statue, altar or writing appears, or the cat grows a fifth leg.

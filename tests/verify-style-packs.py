@@ -23,9 +23,9 @@ assert len(packs) >= 22, f"expected the 22 kept style packs, found {len(packs)}"
 for pack in packs:
     slug = pack.stem
     text = pack.read_text()
-    assert re.search(r"Status: (gated|flow-tested|approved) \(", text), f"{slug}: no status block"
+    assert re.search(r"Status: (gated|approved) \(", text), f"{slug}: no status block"
     assert f"| `{slug}` |" in experimental, f"{slug}: not in the experimental styles table"
-    assert re.search(rf"^\| {re.escape(slug)} \| (gated|flow-tested|approved) \|", status, re.M), f"{slug}: no status row"
+    assert re.search(rf"^\| {re.escape(slug)} \| (gated|approved) \|", status, re.M), f"{slug}: no status row"
     sample = STYLES / "samples" / f"{slug}.md"
     facts = STYLES / "samples" / f"{slug}.facts.md"
     assert sample.exists() and facts.exists(), f"{slug}: sample package or facts missing"
