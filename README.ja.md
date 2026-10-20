@@ -90,6 +90,10 @@
 | <img src="assets/readme/previews/style-2a-demo.gif" alt="ミニマルなテック空間のアニメ" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="彩りと光で物語を描くアニメ" width="360"> |
 | 白い空間・薄いグリッド・シアンの光 | カラフルな舞台・映画的な光・物語の空気感 |
 
+上の2本はアップストリームの赤いニット帽のキャラクターで作られています。このフォークの既定の主人公は、短い黒の坊主頭、黒い角型メガネ、濃い赤のTシャツです（[キャラクターシート](docs/lead-character/sheet.png)、[詳細](README.en.md#fork-additions)）。
+
+<p align="center"><img src="docs/lead-character/motion.gif" alt="坊主頭とメガネ、濃い赤のTシャツの棒人間が歩いて手を振る" width="480"></p>
+
 ---
 
 ### スタイル3：原始時代の手描きアニメ／ブラックユーモア

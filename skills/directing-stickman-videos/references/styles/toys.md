@@ -47,7 +47,7 @@ direction, not a measured match.
 viewer can see: (1) here every toy is a different material (plush, cloth, tin, wood, painted shell) on a real wooden
 floor, there everything is glossy studded plastic on a studded baseplate; (2) here motion is smooth, there it is
 stop-motion on twos with flicker. Among catalog styles the closest is Style 2B (full-colour cinematic environments),
-which keeps the red-beanie stick figure and has no material rule.
+which keeps the Style 2 stick-figure lead and has no material rule.
 
 ## Originality
 

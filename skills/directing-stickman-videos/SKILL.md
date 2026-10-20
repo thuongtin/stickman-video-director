@@ -18,7 +18,7 @@ Require these before planning:
 - target duration: in multiples of 10 seconds (e.g. `30s`, `60s`, `90s`, `3min`, `5min`; default: `60s` / 6 clips if unspecified)
 - visual style and theme:
   - `Style 1 (Classic Minimalist)`: light (white background, black figure) or dark (black background, white figure)
-  - `Style 2 (Modern Beanie Zeke)`:
+  - `Style 2 (Modern Pop)`: default lead Nam (dark buzz cut, dark rectangular glasses, dark red tee); upstream's red-beanie Zeke only when the user asks for it
     - `Style 2A (Modern Studio Tech)`: pure white high-key studio, subtle light-gray perspective grid, floating cyan/blue glass UI
     - `Style 2B (Cinematic Story)`: full-color narrative environments, cinematic lighting & depth
   - `Style 3 (Prehistoric Hand-Drawn / Dark Comedy)`: expressive white filled heads, black stick limbs, animal-hide costumes and earthy prehistoric settings; story-specific casting
@@ -58,10 +58,11 @@ For Style 4, read `references/cozy-storytelling.md` before planning and prompt a
 - Keep character proportions, line weight, style, and narrator consistent across all clips.
 - For Style 1, freeze the concise character anchor from `references/style-catalog.md` and repeat it verbatim in every clip. Keep two arms and two legs, one current pose per limb, stable proportions and uniform medium line weight; a moving arm replaces its previous pose rather than adding another arm. Keep the figure monochrome and saturated accents on props/graphics. Do not replace the anchor with "same character", ellipses, numeric anatomy recipes, skeleton/path instructions or clip-specific appearance descriptions. Occasional simple line expressions are allowed; the head remains hollow. Keep rich actions and effects separate from character design. Treat generated consistency as a visual acceptance check, not a guarantee from repeated text.
 - For Style 1, limit the video to three saturated accent colors named with ordinary descriptive words (e.g. vivid red, electric blue, warm gold). For light theme, enforce a flat, digitally pure-white canvas with no textures, gradients, or 3D depth.
-- For Style 2 (Modern Beanie Zeke), enforce character consistency:
-  - Every clip, 1 through N, repeats this anchor verbatim: `A minimalist 2D animated stick figure wearing a bright red beanie (smooth rounded knit, no pom-pom) and a yellow t-shirt, with simple black stick limbs and shorts. Simple black lines, vibrant colors, smooth 2D animation style.`
-  - Never shorten it to "the same figure" or an ellipsis in later clips; that drops the no-pom-pom, limbs and shorts locks.
-  - No detailed eyes, pupils, or photorealistic features (avoids bug-eye deformation).
+- For Style 2 (Modern Pop), enforce character consistency:
+  - Every clip, 1 through N, repeats this default anchor verbatim: `A minimalist 2D animated stick figure with a white round head, a very short dark buzz cut (close-cropped spiky black hair), thick dark rectangular eyeglasses over simple dot eyes, and a plain dark red crew-neck t-shirt, with simple black stick limbs and dark shorts. Simple black lines, vibrant colors, smooth 2D animation style.`
+  - Use the beanie alternative from `references/style-catalog.md` instead only when the user asks for the beanie character or Zeke; never mix the two leads in one video.
+  - Never shorten the anchor to "the same figure" or an ellipsis in later clips; that drops the clothing, glasses and limb locks.
+  - No detailed eyes, pupils, or photorealistic features (avoids bug-eye deformation). The glasses stay on in every shot.
 - For Style 2A (Modern Studio Tech), enforce: `in a modern bright white studio space with subtle light-gray perspective grid lines on the floor plane. High-key studio lighting, clean white negative space, sleek glowing cyan and electric blue glass holographic UI elements.` Always include negative constraint: `STRICTLY MINIMALIST, NO CIRCUIT BOARD TEXTURES, NO SCI-FI WALL PANELS, NO CRACKED CONCRETE.`
 - For Style 2B (Cinematic Story), specify full-color narrative setting and cinematic lighting while preserving the 2D animated stick-figure character design.
 - For Style 4, freeze each approved character's complete anchor and repeat it in every clip where that role appears. Separate static design from first-frame positions, timed prop transfers and final states; changing scene does not reset prop ownership or the narrator. Read its reference for shot variety and visual acceptance checks.

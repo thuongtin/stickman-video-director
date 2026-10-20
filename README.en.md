@@ -77,7 +77,7 @@ A few lines can explain a big idea. On a pure-white or pure-black canvas, charac
 
 ### Style 2: Modern Pop
 
-The red beanie and yellow T-shirt make this character easy to recognize. Use a clean tech setting to explain a product, or take the character into bedrooms, streets, and open landscapes for a story.
+In this fork the lead has a short dark buzz cut, dark rectangular glasses and a dark red T-shirt; upstream's red-beanie, yellow-shirt character is still there if you ask for it. Use a clean tech setting to explain a product, or take the character into bedrooms, streets, and open landscapes for a story.
 
 - **The look:** One recognizable character, two kinds of world. 2A pairs white space and a faint grid with floating glass interfaces and cyan-blue light. 2B uses colorful settings, cinematic lighting, and depth.
 - **Best for:** 2A suits AI tools, tech products, tutorials, and feature demos. 2B suits personal growth, everyday situations, adventures, and motivational stories.
@@ -87,6 +87,10 @@ The red beanie and yellow T-shirt make this character easy to recognize. Use a c
 |:---:|:---:|
 | <img src="assets/readme/previews/style-2a-demo.gif" alt="Minimal tech animation with a red-beanie character" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="Red-beanie character in a colorful cinematic setting" width="360"> |
 | White space · Faint grid · Cyan glow | Colorful settings · Cinematic light · Story atmosphere |
+
+The two clips above were made upstream with the red-beanie lead. Here is this fork's default lead, drawn from a code rig that passed the posture gate ([character sheet](docs/lead-character/sheet.png)):
+
+<p align="center"><img src="docs/lead-character/motion.gif" alt="The default Style 2 lead, a stick figure with a buzz cut, glasses and a dark red T-shirt, walks in and waves" width="480"></p>
 
 ---
 
@@ -287,7 +291,7 @@ Good for: How parts fit together, cause and effect, gentle kids' stories, small 
 
 ## What this fork adds
 
-This fork of [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) keeps everything above and adds three things: more styles, a posture gate, and a more detailed Golden Hook.
+This fork of [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) keeps everything above and adds four things: more styles, a posture gate, a more detailed Golden Hook, and its own Style 2 lead.
 
 ### 22 experimental styles
 
@@ -342,6 +346,10 @@ The Skill runs the hand ledger and package lint before it hands over the prompts
 ### Golden Hook in detail
 
 The first stage of the script, the Golden Hook, now has its own card in the director's proposal: a hook pattern, a first frame that already shows the character mid-action with a visible tension, one hook moment by about two seconds that reads with the sound off, and a first spoken line of four to ten words with no greeting. The hook lives in Clip 1's first frame and first beat; it adds no extra line to the prompt. See “Golden Hook in detail” in `references/storyboard-template.md`.
+
+### Style 2 lead
+
+Style 2 now defaults to a lead with a short dark buzz cut, thick dark rectangular glasses and a plain dark red crew-neck T-shirt. The glasses stay on in every shot. Upstream's red-beanie Zeke stays as the alternative: ask for the beanie character and the Skill uses its anchor instead. The character sheet, poses and motion clip are in `docs/lead-character/`; every pose passed the posture gate, and none of it was made with an AI model.
 
 <!-- readme:advantages -->
 
@@ -437,7 +445,7 @@ Use it for faceless explainers, history and business topics, personal growth, ev
 
 ## Latest updates
 
-- **2026-10-20:** This fork adds 22 experimental styles, the posture gate with the hand ledger and package lint, and the detailed Golden Hook card. See [What this fork adds](#fork-additions).
+- **2026-10-20:** This fork adds 22 experimental styles, the posture gate with the hand ledger and package lint, and the detailed Golden Hook card. Style 2 now has a buzz-cut, glasses-wearing default lead. See [What this fork adds](#fork-additions).
 - **2026-10-15:** Refined the Chinese homepage, installation steps, and examples; added lighter previews and a Star History chart. Skill rules unchanged.
 - **2026-10-14:** Added Style 4, Cozy Storytelling, with train-station and café examples.
 - **2026-10-13:** Refined Style 1's character descriptions and current-pose constraints.

@@ -90,6 +90,10 @@
 | <img src="assets/readme/previews/style-2a-demo.gif" alt="미니멀 테크 스타일 애니메이션" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="영화 같은 컬러 배경의 스토리 애니메이션" width="360"> |
 | 흰 공간·은은한 격자·청록 빛 | 컬러 배경·영화 같은 조명·이야기의 분위기 |
 
+위 두 클립은 업스트림의 빨간 비니 캐릭터로 만들었습니다. 이 포크의 기본 주인공은 짧은 검은 스포츠머리, 검은 사각 안경, 짙은 빨간 티셔츠 차림입니다([캐릭터 시트](docs/lead-character/sheet.png), [자세히](README.en.md#fork-additions)).
+
+<p align="center"><img src="docs/lead-character/motion.gif" alt="스포츠머리에 안경, 짙은 빨간 티셔츠를 입은 막대 인간이 걸어와 손을 흔든다" width="480"></p>
+
 ---
 
 ### 스타일 3: 선사시대 손그림 / 블랙코미디

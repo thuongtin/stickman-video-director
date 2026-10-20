@@ -32,9 +32,10 @@ Write every prompt in this order:
    - For Style 4 (Cozy Storytelling): full-color 2D cartoon environment and a segment-specific setting, with varied wide/close/moving shots; new segment means an intentional scene change unless otherwise approved
 3. Character lock:
    - For Style 1: repeat the concise frozen character anchor from `style-catalog.md`, including the chosen polarity and expression setting; no "same character" shortcuts, numeric anatomy recipes, skeleton/rig definitions or pen paths. Keep the circular head hollow, proportions and line weight stable, and only the current pose of each of the two arms and two legs. A raised arm replaces its old lowered line. Keep accents on props/graphics, never recolor the figure. Do not let action or camera wording redefine the drawing; preserve rich motion and effects separately.
-   - For Style 2 (Modern Beanie Zeke):
-     - Every clip, verbatim: `A minimalist 2D animated stick figure wearing a bright red beanie (smooth rounded knit, no pom-pom) and a yellow t-shirt, with simple black stick limbs and shorts. Simple black lines, vibrant colors, smooth 2D animation style.`
-     - No "the same figure" or ellipsis shortcut in clips 2–N.
+   - For Style 2 (Modern Pop):
+     - Every clip, verbatim, the default lead: `A minimalist 2D animated stick figure with a white round head, a very short dark buzz cut (close-cropped spiky black hair), thick dark rectangular eyeglasses over simple dot eyes, and a plain dark red crew-neck t-shirt, with simple black stick limbs and dark shorts. Simple black lines, vibrant colors, smooth 2D animation style.`
+     - Only when the user asked for the beanie character: the beanie alternative anchor from `style-catalog.md`, verbatim, instead. One lead per video.
+     - No "the same figure" or ellipsis shortcut in clips 2–N. The glasses stay on in every beat.
    - For Style 4: repeat its full frozen character anchor from `cozy-storytelling.md`, including white head/torso fill, dark limbs and simple facial marks. Location and expression changes do not redesign the character.
 4. Palette and accent roles (expressed only with ordinary color names, no hex or technical codes)
 5. Composition strategy for the chosen ratio (`16:9` or `9:16`)

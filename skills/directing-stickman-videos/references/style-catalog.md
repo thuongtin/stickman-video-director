@@ -9,8 +9,8 @@ This catalog defines the supported visual styles for `directing-stickman-videos`
 | Style Key | Style Name | Visual Theme | Best For | Character Design |
 |---|---|---|---|---|
 | **Style 1** | Classic Minimalist (Light / Dark) | Pure white or black canvas, monochrome lines, up to 3 saturated accent colors | High-density explainers, pure logic, mental models, fast-paced cognitive concepts | Hollow circle head, single-line body, no clothing, occasional simple line expressions |
-| **Style 2A** | Modern Beanie - Studio Tech (极简科技风) | Pure white high-key studio, subtle light-gray perspective grid, glowing cyan/blue glass UI | Tech tutorials, AI tool breakdowns, career insights, methodology breakthroughs | Red beanie (no pom-pom), yellow t-shirt, black stick limbs, smooth 2D animation |
-| **Style 2B** | Modern Beanie - Cinematic Story (彩色故事风) | Full-color narrative environments, cinematic lighting & depth (warm room, dusk, desert, summit) | Emotional storytelling, personal growth, motivational journeys, narrative hooks | Same red beanie & yellow t-shirt figure staged inside rich environmental lighting |
+| **Style 2A** | Modern Pop - Studio Tech (极简科技风) | Pure white high-key studio, subtle light-gray perspective grid, glowing cyan/blue glass UI | Tech tutorials, AI tool breakdowns, career insights, methodology breakthroughs | Default lead: dark buzz cut, dark rectangular glasses, dark red crew-neck tee, black stick limbs. Alternative: red beanie (no pom-pom), yellow t-shirt |
+| **Style 2B** | Modern Pop - Cinematic Story (彩色故事风) | Full-color narrative environments, cinematic lighting & depth (warm room, dusk, desert, summit) | Emotional storytelling, personal growth, motivational journeys, narrative hooks | Same Style 2 lead (default or beanie alternative) staged inside rich environmental lighting |
 | **Style 3** | Prehistoric Hand-Drawn / Dark Comedy (史前手绘 / 黑色幽默) | Earthy prehistoric environments, warm fire accents, subtle paper texture | Satirical stories, visual analogies, ironic callbacks | White filled heads, expressive cartoon faces, black stick limbs, variable story-specific cast |
 | **Style 4** | Cozy Storytelling (治愈故事风) | Full-color 2D cartoon locations, gentle atmospheric light, varied cinematic shots | Relatable life stories, emotional growth, educational storytelling | White filled round head and slim torso, dark stick limbs, simple expressive face |
 
@@ -24,6 +24,7 @@ Levels follow `style-pack-template.md`: a level covers only the samples behind i
 | Style 1 Light | core | Same story with the polarity swapped (`tests/reports/classic-character.md`); no separate acceptance |
 | Style 2A | core | Three-clip Flow run for the voice block (`tests/reports/shared-voice.md`); README demo |
 | Style 2B | core | README demo only; no written report |
+| Style 2 default lead (buzz cut, glasses) | gated | Code-rendered sheet and motion clip in `docs/lead-character/`, all poses through `posture_gate.py` (`tests/verify-lead-character.py`); not yet checked against generated video. The Style 2A/2B evidence above was made with the beanie alternative |
 | Style 3 | approved | Owner approved three clips of one story (`tests/reports/style-3.md`) |
 | Style 4 | approved | Owner selected two samples (`tests/reports/style-4.md`) |
 | chibi-anime | gated | `styles/chibi-anime.md`, sample `styles/samples/chibi-anime.md` with lint facts |
@@ -116,23 +117,35 @@ Occasional simple line expressions are allowed by default. Before freezing eithe
 
 ---
 
-## 3. Style 2: Modern Beanie Zeke
+## 3. Style 2: Modern Pop
+
+Style 2 has one recurring lead per video. The default is Nam (buzz cut, glasses, dark red tee). Upstream's red-beanie Zeke is kept as an alternative: use it only when the user asks for the beanie character or for Zeke by name. Never mix the two anchors in one video.
+
+Character sheet, expressions, poses and a motion clip of the default lead: `docs/lead-character/` at repository level (code-rendered from a posture-gated rig; no generated video).
 
 ### Character DNA Anchors (Anti-Deformation Lock)
 
-To prevent character drift, bug-eye deformations, or clothing loss across clips, use these exact character anchors:
+To prevent character drift, bug-eye deformations, or clothing loss across clips, use one of these exact character anchors:
 
 **Character Anchor (every clip, verbatim):**
+```text
+A minimalist 2D animated stick figure with a white round head, a very short dark buzz cut (close-cropped spiky black hair), thick dark rectangular eyeglasses over simple dot eyes, and a plain dark red crew-neck t-shirt, with simple black stick limbs and dark shorts. Simple black lines, vibrant colors, smooth 2D animation style.
+```
+
+**Alternative: Beanie Zeke anchor (every clip, verbatim, only when the user asks for it):**
 ```text
 A minimalist 2D animated stick figure wearing a bright red beanie (smooth rounded knit, no pom-pom) and a yellow t-shirt, with simple black stick limbs and shorts. Simple black lines, vibrant colors, smooth 2D animation style.
 ```
 
-Repeat this full anchor in clips 2–N as well. The earlier short form for later clips ("The same minimalist 2D animated stick figure in a bright red beanie and yellow shirt" followed by an ellipsis) dropped the no-pom-pom, limbs and shorts locks and is retired. The full-anchor-every-clip form follows the Style 1, Style 4 and voice rules; it has not yet had its own Flow comparison against the short form.
+Repeat the chosen full anchor in clips 2–N as well. The earlier short form for later clips ("The same minimalist 2D animated stick figure in a bright red beanie and yellow shirt" followed by an ellipsis) dropped the no-pom-pom, limbs and shorts locks and is retired; no shortened form of either anchor is allowed. The full-anchor-every-clip form follows the Style 1, Style 4 and voice rules.
 
 **Deformation Prevention Rules:**
-- **No Realistic Facial Features**: Hollow circular head or minimal dot eyes only. Never request detailed pupils, irises, or photorealistic facial contours (which trigger alien bug-eyes).
-- **No Pom-Poms**: Specify smooth rounded beanie top to prevent erratic pom-poms or winter tassels.
-- **Always Include Both Beanie and T-shirt**: Omitting the shirt results in naked stick bodies; omitting the beanie results in standard Style 1 characters.
+- **No Realistic Facial Features**: Round white head with minimal dot eyes only. Never request detailed pupils, irises, or photorealistic facial contours (which trigger alien bug-eyes).
+- **Glasses stay on** (default lead): in every shot, including jumps, bumps and close-ups, with clear lenses and the dot eyes behind them. No lens glare, no sunglasses, no glasses floating off the face. If a beat needs the glasses adjusted, the hand pushes them up and lets go; they never come off.
+- **Buzz cut stays close-cropped** (default lead): no long, swept or spiked-up hair, no hat, no beanie.
+- **Plain tee** (default lead): dark red, no logo, text or print; do not drift to orange, pink or bright red. Light stubble is not in the anchor: at stick-figure scale it reads as dirt or a beard. Add "faint light stubble dots along the jaw" to the anchor only when the user asks, and then in every clip.
+- **No Pom-Poms** (beanie alternative): Specify smooth rounded beanie top to prevent erratic pom-poms or winter tassels.
+- **Always include every clothing lock**: Omitting the shirt results in naked stick bodies; omitting the glasses and hair (or the beanie) results in standard Style 1 characters.
 
 ---
 
@@ -173,7 +186,7 @@ in a rich full-color cinematic environment [describe setting: e.g., a dimly lit 
 ```
 
 #### Character & Style Consistency
-- The character remains the same minimalist 2D stick figure in red beanie and yellow shirt.
+- The character remains the same minimalist 2D stick figure: the default lead's buzz cut, glasses and dark red tee (or the beanie alternative, if chosen).
 - Maintain smooth 2D vector animation aesthetics for the character even within a textured, atmospheric background.
 
 #### Negative Constraints
