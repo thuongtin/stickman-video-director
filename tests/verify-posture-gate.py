@@ -878,6 +878,15 @@ assert any("last beat with the rice cake" in p for p in hand_ledger.lint(
     cake.replace("lets go with his right hand and holds the rice cake against his chest in his left hand",
                  "holds the rice cake against his chest")))
 
+# a no-hands animal may have its own hoof lines without a warning, but still holds nothing in a hoof
+bo = ("### Clip 1\nBo, a stone buffalo with no hands. Lan, a girl.\n"
+      "Hands at start — Lan: right hand empty; left hand empty. Bo: right front hoof empty; left front hoof empty.\n"
+      "- [0-3s] Bo walks.\n"
+      "Hands at end — Lan: right hand empty; left hand empty. Bo: right front hoof empty; left front hoof empty.\n")
+w = []
+assert hand_ledger.lint(bo, w) == [] and w == [], w
+assert any("Bo has no hands" in p for p in hand_ledger.lint(bo.replace("Bo walks.", "Bo walks, the rice bundle held in its right front hoof.")))
+
 # front view: both elbows folded into the chest with the hands out past the shoulders bend the wrong way;
 # crossed arms (hands in) are a pose
 def folded(cross):

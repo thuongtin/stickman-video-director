@@ -767,7 +767,7 @@ def lint(text, warnings=None):
                         problems.append(f"Clip {n}: {c} holds the {q} in the {'right' if 'r' in sides else 'left'} hand "
                                         f"alone, but it is declared two-handed; use both hands: \"{excerpt(x)}\"")
         # a character outside the hands lines who has no hands ("Trâu Đá has no hands") holding something
-        for o in sorted({w for _, _, _, w, _ in rows if w and w not in everyone}):
+        for o in sorted({w for _, _, _, w, _ in rows if w}):  # in the hands lines with hooves too
             said = [x2 for x2 in sentences(text) if name_at(o, x2) >= 0
                     and NO_HANDS.search(x2[name_at(o, x2):]) and not re.search(r"\bhands?\b(?! *(?:lines?|ledger))", x2[:name_at(o, x2)])]
             for _, x, clause, w, hands in rows:
@@ -792,7 +792,10 @@ def lint(text, warnings=None):
                     if things:
                         problems.append(f"Clip {n}: {name} has no hands (\"{NO_HANDS.search(seg).group(0)}\"), "
                                         f"but the hands lines put the {', '.join(things)} in them")
-                    elif warnings is not None:
+                    elif warnings is not None and not any(re.search(
+                            rf"{re.escape(name)}\s*:\s*(?:right|left) {POS}(?:paw|flipper|wing|hoof|claw|fin|tentacle)s?\b",
+                            lines.get(k, ("", {}))[0], re.I) for k in ("start", "end")):
+                        # "Bo: right front hoof empty; ..." is the animal's own limb line, not hands
                         warnings.append(f"Clip {n}: {name} has no hands (\"{NO_HANDS.search(seg).group(0)}\"); "
                                         f"leave {name} out of the hands lines")
                     break
