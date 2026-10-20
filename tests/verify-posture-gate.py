@@ -683,7 +683,14 @@ a["snout"] = gap  # the snout tip reaches the other head's centre
 assert any("snout" in i["message"] for i in pg.check_scene([a, b]))
 b["frames"][2]["overlap_ok"] = True
 assert not any("snout" in i["message"] and i["frame"] == 2 for i in pg.check_scene([a, b]))
-del a["snout"]
+del b["frames"][2]["overlap_ok"]
+# a snout aimed down ("snout_dir") into the other character's chest, under its head
+jb0, ja0 = b["frames"][0]["joints"], a["frames"][0]["joints"]
+chest = [(jb0["neck"][0] + jb0["pelvis"][0]) / 2, (jb0["neck"][1] + jb0["pelvis"][1]) / 2]
+d = [chest[0] - ja0["head"][0], chest[1] - ja0["head"][1]]
+a["snout"], a["snout_dir"] = (d[0] ** 2 + d[1] ** 2) ** 0.5, d
+assert any("snout pokes into Heo's body" in i["message"] and i["frame"] == 0 for i in pg.check_scene([a, b]))
+del a["snout"], a["snout_dir"]
 assert not any(i["kind"] == "body_overlap" for i in pg.check_scene([a, b]))
 for f in b["frames"]:
     f["joints"] = {k: [v[0] - 2.8 * (a.get("head_radius") or 20), v[1]] for k, v in f["joints"].items()}

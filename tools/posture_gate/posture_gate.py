@@ -1085,15 +1085,23 @@ def check_scene(tracks):
             sn = fa.get("snout", ta.get("snout"))
             ja = fa.get("joints", {})
             ahead = {"right": 1, "left": -1}.get(fa.get("facing") or (infer_facing(ja) if ja else None))
-            if sn and ahead and "head" in ja and not fa.get("overlap_ok"):
-                tip = (ja["head"][0] + ahead * float(sn), ja["head"][1])
+            # "snout_dir": [dx, dy] (image axes, y down) when it does not point straight ahead
+            sd = fa.get("snout_dir", ta.get("snout_dir"))
+            if sn and (ahead or sd) and "head" in ja and not fa.get("overlap_ok"):
+                u = unit(tuple(float(x) for x in sd)) if sd else (ahead, 0.0)
+                tip = (ja["head"][0] + u[0] * float(sn), ja["head"][1] + u[1] * float(sn))
                 for b in range(len(tracks)):
                     jb, rb = fr[b].get("joints", {}), head_r(tracks[b], fr[b])
-                    if b != a and "head" in jb and rb and not fr[b].get("overlap_ok") \
-                            and _seg_dist(jb["head"], ja["head"], tip) < rb:
+                    if b == a or fr[b].get("overlap_ok"):
+                        continue
+                    if "head" in jb and rb and _seg_dist(jb["head"], ja["head"], tip) < rb:
                         add(fi, "head_overlap", f"{names[a]}'s snout pokes into {names[b]}'s head "
                             f"({rb - _seg_dist(jb['head'], ja['head'], tip):.0f} px inside; mark \"overlap_ok\": true "
                             "if one passes behind the other)")
+                    elif "neck" in jb and "pelvis" in jb and _seg_seg(ja["head"], tip, jb["neck"], jb["pelvis"]) < float(
+                            fr[b].get("body_width", tracks[b].get("body_width", 0.5 * (torso(fr[b]) or 0)))) / 2:
+                        add(fi, "head_overlap", f"{names[a]}'s snout pokes into {names[b]}'s body (mark \"overlap_ok\": "
+                            "true if one passes behind the other)", severity="warn")
             # bodies as solids ("solid_body": true on both tracks): a torso or limb of one passing through
             # the other's torso (a flying body through a standing one)
             for b in range(a + 1, len(tracks)):
