@@ -24,8 +24,8 @@ Phase B (prompts)
   B6 technical color notation (hex, RGB, HSL, Pantone)                       RED
   B7 quoted words outside the spoken dialogue (they tend to render on screen)  RED
   B8 a beat asks for morphing, melting or liquid shapes                      RED
-  B9 a clip has no [0–3s] / [3–7s] / [7–10s] beats                          RED
-  B10 a clip without the posture negative "no swapped left and right hands"   RED
+  B9 a clip has fewer than three timed beats covering 0 to about 10 s            RED
+  B10 a clip without the posture negative "swapped left and right hands"      RED
   B11 more than one accent camera move in a clip; weak "appears/fades in" beats   YELLOW
 
 --facts writes the measured facts (counts, results, sha256 of the package) with a fingerprint, so a
@@ -57,8 +57,10 @@ INWARD = re.compile(r"推近|推进|穿过|钻进|push(?:es|ing)?[- ](?:in|close
 WEAK = re.compile(r"\b(?:appears?|shows? up|is shown|fades? in|is displayed|displays?)\b|出现|浮现|显示|展示|淡入", re.I)
 TEXT_CARD = re.compile(r"\b(?:title card|text card|quote card|end card with (?:text|words)|caption card)\b|金句卡|字卡|标题卡", re.I)
 TECH_COLOR = re.compile(r"#[0-9a-f]{6}\b|#[0-9a-f]{3}\b|\brgba?\s*\(|\bhsla?\s*\(|\bpantone\b", re.I)
-MORPH = re.compile(r"\b(?:morph\w*|melt\w*|liquid|splits? into|separates? into|reshapes?|dissolves? into)\b", re.I)
-BEATS = ("[0–3s]", "[3–7s]", "[7–10s]")
+MORPH = re.compile(r"\b(?:morph\w*|melts? into|melting into|turns? (?:in)?to liquid|liquid (?:shapes?|forms?)|"
+                   r"splits? into|separates? into|reshapes?|dissolves? into)\b", re.I)
+BEAT = re.compile(r"^\s*(?:[-*]\s*)?\[(\d+(?:\.\d+)?)\s*[–-]\s*(\d+(?:\.\d+)?)\s*s\]")
+VOICE = re.compile(r"\b(?:accent|timbre|register|resonance|baritone|tenor|alto|soprano|pitch)\b", re.I)
 NUMBER_WORDS = {w: i for i, w in enumerate(
     "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen "
     "seventeen eighteen nineteen twenty".split())}
@@ -97,7 +99,11 @@ def column(head, *keys):
 
 
 def prompts(text):
-    return re.findall(r"```text\n(.*?)\n```", text, re.S)
+    """```text blocks; failing that, the bodies under "Clip N" headings that carry timed beats."""
+    found = re.findall(r"```text\n(.*?)\n```", text, re.S)
+    if found:
+        return found
+    return [body.strip() for _, body in hand_ledger.split_clips(text) if "[0–3s]" in body]
 
 
 def catalog_anchors():
@@ -169,10 +175,10 @@ def lint_phase_a(text, head, rows, clips):
 
 def spoken_free(p):
     """The prompt without spoken lines: '(VO: "...")', curly-quoted dialogue and the dialogue sentence itself."""
-    p = re.sub(r'\(VO:\s*"[^"\n]*"\)', "", p)
+    p = re.sub(r'\([^()"\n]{1,40}:\s*"[^"\n]*"\)', "", p)  # (VO: "...") and (Name: "...")
     p = re.sub(r"“[^”]*”", "", p)
     return "\n".join(l for l in p.splitlines()
-                     if not re.match(r"\s*(audio-only dialogue|dialogue|voiceover|vo)\b", l, re.I))
+                     if not re.match(r"\s*(audio-only dialogue|dialogue|voiceover|vo|voice|audio|music|sfx|sound)\b", l, re.I))
 
 
 def lint_phase_b(text, ps, clips, extra_anchors):
@@ -191,7 +197,7 @@ def lint_phase_b(text, ps, clips, extra_anchors):
                 out.append((RED, "B4", f"anchor \"{anchor[:60]}…\" is not repeated verbatim in clips {missing}"))
     voices = []
     for p in ps:
-        v = [para for para in re.split(r"\n\s*\n", p) if re.search(r"\bnarrator\b", para, re.I)]
+        v = [l for l in p.splitlines() if re.search(r"\b(?:narrator|voice)\b", l, re.I) and VOICE.search(l)]
         voices.append(v[0].strip() if v else None)
     if any(voices) and len({v for v in voices}) > 1:
         bad = [n for n, v in enumerate(voices, 1) if v != voices[0]]
@@ -205,17 +211,17 @@ def lint_phase_b(text, ps, clips, extra_anchors):
             q = q[0] or q[1]
             out.append((RED, "B7", f"clip {n}: quoted words \"{q[:40]}\" outside the dialogue can render on screen; "
                                    "move them to the post-production overlay note"))
-        beat_lines = [l for l in body.splitlines() if l.lstrip().startswith("[")]
+        beat_lines = [l for l in body.splitlines() if BEAT.match(l)]
         for l in beat_lines:
             m = MORPH.search(l)
             if m:
                 out.append((RED, "B8", f"clip {n}: beat asks for \"{m.group(0)}\"; drive change with a concrete action or a cut"))
             if WEAK.search(l):
                 out.append((YELLOW, "B11", f"clip {n}: beat only appears or fades in: \"{l.strip()[:70]}\""))
-        missing = [b for b in BEATS if b not in p]
-        if missing:
-            out.append((RED, "B9", f"clip {n}: missing beats {missing}"))
-        if "no swapped left and right hands" not in p.lower():
+        spans = [tuple(float(x) for x in BEAT.match(l).groups()) for l in p.splitlines() if BEAT.match(l)]
+        if len(spans) < 3 or spans[0][0] != 0 or spans[-1][1] < 9:
+            out.append((RED, "B9", f"clip {n}: needs at least three timed beats from [0–…s] to about [..–10s]; found {spans}"))
+        if "swapped left and right hands" not in p.lower():
             out.append((RED, "B10", f"clip {n}: posture negatives missing (\"no swapped left and right hands\" …)"))
         accents = sum(bool(ACCENT.search(l)) for l in beat_lines)
         if accents > 1:
