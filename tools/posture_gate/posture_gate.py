@@ -316,6 +316,13 @@ def check(track, profile=None):
         return scaled_len(pts, a, b, scale)
 
     scales = [float(f.get("scale", 1.0)) for f in track["frames"]]
+    # standing height, for "is this joint on the ground": a folded bow is short, its tolerance is not
+    spans = [max(y for _, y in p.values()) - min(y for _, y in p.values()) for p, _ in frames if len(p) >= 8]
+    tall = max(spans, default=0)
+    if "rest" in track:
+        rp, _ = load_frame({"joints": track["rest"], "facing": "right"}, 0)
+        if len(rp) >= 8:
+            tall = max(y for _, y in rp.values()) - min(y for _, y in rp.values())
     ref = {}
     if "rest" in track and not track.get("projected"):  # a projected rest pose is foreshortened too
         rest, _ = load_frame({"joints": track["rest"], "facing": "right"}, 0)
@@ -409,7 +416,14 @@ def check(track, profile=None):
                         side = math.degrees(math.asin(min(1.0, abs(dot(hinge, unit(fp))))))
                         angles[f"knee_lateral_{s_}"] = (side, 0, fro["knee_lateral"].get("max_3d", 40), {f"knee_{s_}", f"ankle_{s_}"},
                                                         ((f"knee_{s_}", f"ankle_{s_}"),))
+        # sitting cross-legged in a flat front view ("cross_legged": true, or both knees and the pelvis
+        # on the ground): the crossed shins and the spread thighs are the pose, not a sideways bend
+        sup = track["frames"][fi].get("supported") or []
+        crossed = facing == "front" and not j3 and (track["frames"][fi].get("cross_legged") or (
+            isinstance(sup, list) and {"pelvis", "knee_l", "knee_r"} <= set(sup)))
         for key, (v, lo, hi, inv, _) in angles.items():
+            if crossed and key.startswith(("knee_lateral", "hip_abduction")):
+                continue
             over = arc_violation(v, lo, hi)
             if over > P["angle_tolerance"]:
                 sev = "warn" if facing == "front" and front_ambiguous(key, pts) else "error"
@@ -475,12 +489,24 @@ def check(track, profile=None):
                 for k in listed:
                     if k in pts:
                         support.append(pts[k][0])
-                        # a kneeling knee must reach the ground; a joint resting on a prop lists the prop too
-                        # (12% of the height: a thick cartoon knee sits a little above the floor line)
-                        if k.startswith("knee") and all(x in pts for x in listed) and pts[k][1] - ground > 0.12 * height:
+                        # a joint holding the body up must reach the ground; a joint resting on a prop lists
+                        # the prop too (12% of the standing height: a thick cartoon knee or fist sits a little
+                        # above the floor line); a head is on the ground when its circle is
+                        # knees and a head on the floor; hands and elbows when the body is on the floor too
+                        # (a lone "wrist_r" can push a wall or a block, a lone "pelvis" sits on a chair)
+                        # ("floor" in the list: every listed joint, the pelvis of a floor sit too)
+                        part = k.split("_")[0]
+                        if not (part in ("knee", "head") or "floor" in listed or part in ("wrist", "elbow") and any(
+                                x.split("_")[0] in ("knee", "ankle", "toe", "heel") for x in listed)):
+                            continue
+                        low = pts[k][1] - ((fr.get("head_radius", track.get("head_radius")) or 0) if k == "head" else 0)
+                        # a drawn limb's thickness ("limb_width") is the tighter tolerance when given
+                        lw = fr.get("limb_width", track.get("limb_width"))
+                        tol = min(0.12 * max(height, tall), float(lw)) if lw else 0.12 * max(height, tall)
+                        if all(x in pts or x == "floor" for x in listed) and low - ground > tol:
                             add(fi, "warn", "support_floating", f"{k} is listed as holding the body up but is "
-                                f"{(pts[k][1] - ground) / height:.0%} of the figure's height above the ground "
-                                "(lower it to the ground, or list the prop it rests on)", {k})
+                                f"{(low - ground) / max(height, tall):.0%} of the figure's standing height above the "
+                                "ground (lower it to the ground, or list the prop it rests on)", {k})
                     elif k in fr.get("props", {}):
                         support.append(mirror * float(fr["props"][k][0]))
                 margin = P["balance_margin"] * height
@@ -635,6 +661,21 @@ def check_hands(track, P, usable=None):
                     add(fi, "prop_hand_switch", f"{prop} jumps from the {_side(sorted(before))} hand to the "
                         f"{_side(sorted(now))} hand (mark \"handoff\": true if it is passed on purpose)",
                         {f"wrist_{x}" for x in before | now})
+        # a planned change of hand: the taking hand must already be at the prop the frame before
+        # (not jump onto it from the hip in one frame)
+        if fi > 0 and f.get("handoff") and torso:
+            pf = frames[fi - 1]
+            ppts = raw_points(pf, P["min_confidence"])
+            tol_h = f.get("hold_tolerance", track.get("hold_tolerance", 0.6))
+            for prop, side in holds.items():
+                before, now = hands_of(pf.get("holds", {}).get(prop)), hands_of(side)
+                at = (pf.get("_props3d") or pf.get("props", {})).get(prop)
+                for x in sorted(now - before) if before else []:
+                    w = ppts.get(f"wrist_{x}")
+                    if at and w and norm(sub(at, w)) > tol_h * torso:
+                        add(fi, "prop_hand_switch", f"the {_side(x)} hand takes the {prop} from "
+                            f"{norm(sub(at, w)) / torso:.1f} torso-lengths away; bring it to the {prop} a frame "
+                            "before the hand-off", {f"wrist_{x}"})
 
         # A prop said to be in one hand must be drawn at that hand.
         # how far (in torso lengths) a held prop's point may sit from the wrist; put the prop's
@@ -734,6 +775,16 @@ def check_hands(track, P, usable=None):
         facing = f.get("facing") or (infer_facing(pts) if pts else None)
         bw = f.get("body_width", track.get("body_width"))
         if bw and not three_d and facing == "front" and not f.get("airborne") and "neck" in pts:
+            # a tilted body (a roly-poly rocking, a lean) is measured across its own neck-pelvis axis
+            pts0 = pts
+            if "pelvis" in pts:
+                dx, dy = sub(pts["pelvis"], pts["neck"])
+                tilt = math.atan2(dx, dy)
+                if abs(tilt) > math.radians(5):
+                    c, sn = math.cos(tilt), math.sin(tilt)
+                    nx, ny = pts["neck"]
+                    pts = {k: (nx + (x - nx) * c - (y - ny) * sn, ny + (x - nx) * sn + (y - ny) * c)
+                           for k, (x, y) in pts.items()}
             mid, half = pts["neck"][0], float(bw) / 2
             # the drawn body's half-width at a height: "body_profile" [[t, half_width], ...] from the
             # pelvis (t=0) to the neck (t=1), or a straight taper from "hip_width" to "body_width"
@@ -761,6 +812,8 @@ def check_hands(track, P, usable=None):
                 tip = hand_span(f, track, pts, ks[2][-1])[1]
                 return out + ([tip] if tip and tip != w else [])
             down = lambda a, b: math.degrees(math.atan2(abs(b[0] - a[0]), b[1] - a[1]))  # 0 = straight down
+            inside_elbow = lambda sd: f"elbow_{sd}" in pts and \
+                abs(pts[f"elbow_{sd}"][0] - mid) < 0.6 * half_at(pts[f"elbow_{sd}"][1])
             for side in SIDES:
                 ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
                 if ks[0] in pts and abs(pts[ks[0]][0] - mid) < 0.8 * half:
@@ -773,6 +826,18 @@ def check_hands(track, P, usable=None):
                         and any(abs(q[0] - mid) - lw < half_at(q[1]) for q in arm_points(ks)):
                     add(fi, "arm_over_body", f"the {_side(side)} arm hangs over the body, not beside it",
                         set(ks), severity="warn")
+                # an upper arm folded in across the chest ("chicken wing"): the elbow well inside the
+                # torso outline and the forearm angling down and back out to its own side while the hand
+                # reaches for nothing. A raised or inward forearm (think, facepalm, gasp) or both elbows
+                # folded in (crossed arms) is a pose.
+                elif not busy and all(k in pts for k in ks) and "pelvis" in pts \
+                        and inside_elbow(side) and not inside_elbow("lr"[side == "l"]) \
+                        and pts[ks[2]][1] - pts[ks[1]][1] > 0.25 * math.dist(pts[ks[1]], pts[ks[2]]) \
+                        and (pts[ks[2]][0] - mid) * (pts[ks[0]][0] - mid) > 0 \
+                        and abs(pts[ks[2]][0] - mid) > abs(pts[ks[1]][0] - mid) \
+                        and pts[ks[0]][1] < pts[ks[1]][1] < pts["pelvis"][1]:
+                    add(fi, "arm_over_body", f"the {_side(side)} upper arm folds in across the chest (elbow inside the "
+                        "torso outline)", {ks[0], ks[1]}, severity="warn")
                 # reaching past the body to the far side (both hands on a wheel rim with the forearms
                 # crossed over the chest): held or not, the grip is outside the torso but the arm is on it
                 elif all(k in pts for k in ks) and (pts[ks[1]][0] - mid) * (pts[ks[2]][0] - mid) < 0 \
@@ -781,6 +846,7 @@ def check_hands(track, P, usable=None):
                         and pts[ks[0]][1] <= (pts[ks[1]][1] + pts[ks[2]][1]) / 2 <= pts["pelvis"][1]:
                     add(fi, "arm_over_body", f"the {_side(side)} forearm crosses the chest to reach the far side; "
                         "grip on the near side of the body instead", {ks[1], ks[2]}, severity="warn")
+            pts = pts0
 
         # Side view: the near arm (the right arm when facing right) cutting across the head
         # hides the face; a hand holding a prop or touching something there is meant to.
@@ -809,6 +875,22 @@ def check_hands(track, P, usable=None):
                     add(fi, "arm_over_face", f"the {prop} covers the face in side view "
                         "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                         {f"wrist_{hs}", "head"}, severity="warn")
+
+        # Front view: a raised forearm lying across the face (a cheer drawn with the arms over a big
+        # head); a hand touching the face or holding something there is meant to be there
+        if not three_d and facing == "front" and not f.get("face_cover") and "head" in pts and "neck" in pts:
+            r = f.get("head_radius", track.get("head_radius")) or 0.5 * norm(sub(pts["head"], pts["neck"]))
+            for side in SIDES:
+                ks = (f"elbow_{side}", f"wrist_{side}")
+                busy = side in f.get("contacts", {}) or any(hs == side for _, hs, _ in held_points(f, both=True))
+                # only an arm raised past the head: a hand at the brow, the glasses or the face (salute,
+                # facepalm, think) is a pose
+                if r and not busy and all(k in pts for k in ks) and pts[ks[1]][1] < pts["head"][1] - 0.5 * r \
+                        and _seg_dist(pts["head"], *(pts[k] for k in ks)) < r + max(
+                            float(f.get("limb_width", track.get("limb_width", 0))) / 2, 0.1 * r):
+                    add(fi, "arm_over_face", f"the {_side(side)} forearm lies over the head in front view; raise it "
+                        "clear of the head (mark the frame \"face_cover\": true if the beat covers the face on purpose)",
+                        set(ks) | {"head"}, severity="warn")
 
         # Nothing goes through the floor: with "ground_y" (image y of the ground line, y down),
         # a head, hand or foot below it is an error (a roll or bow sinking into the ground).
@@ -860,6 +942,14 @@ def _seg_dist(p, a, b):
     ab, ap = sub(b, a), sub(p, a)
     t = max(0.0, min(1.0, (ap[0] * ab[0] + ap[1] * ab[1]) / max(ab[0] ** 2 + ab[1] ** 2, 1e-9)))
     return norm(sub(p, (a[0] + ab[0] * t, a[1] + ab[1] * t)))
+
+
+def _seg_seg(a, b, c, d):
+    """Distance between segments a-b and c-d (0 when they cross)."""
+    cross = lambda o, p, q: (p[0] - o[0]) * (q[1] - o[1]) - (p[1] - o[1]) * (q[0] - o[0])
+    if cross(a, b, c) * cross(a, b, d) < 0 and cross(c, d, a) * cross(c, d, b) < 0:
+        return 0.0
+    return min(_seg_dist(a, c, d), _seg_dist(b, c, d), _seg_dist(c, a, b), _seg_dist(d, a, b))
 
 
 def _side(s): return {"l": "left", "r": "right"}.get(s, s) if isinstance(s, str) else " and ".join(map(_side, s))
@@ -933,6 +1023,25 @@ def check_scene(tracks):
             if not T:
                 continue
             tol = fa.get("contact_tolerance", ta.get("contact_tolerance", 0.25))
+            # a prop held by both at once (the hand-off frames): the giver's and the receiver's hands
+            # meet, and the prop is drawn in one place
+            for prop, va in (fa.get("holds") or {}).items():
+                for b in range(a + 1, len(tracks)):
+                    fb = fr[b]
+                    if prop not in (fb.get("holds") or {}):
+                        continue
+                    pa, pb = (fa.get("props") or {}).get(prop), (fb.get("props") or {}).get(prop)
+                    if pa and pb and norm(sub(pa, pb)) > 0.35 * T:
+                        add(fi, "handoff_gap", f"{names[a]} and {names[b]} both hold the {prop}, but it is drawn "
+                            f"{norm(sub(pa, pb)) / T:.1f} torso-lengths apart in their hands")
+                        continue
+                    wa = [fa["joints"][f"wrist_{x}"] for x in hands_of(va) if f"wrist_{x}" in fa.get("joints", {})]
+                    wb = [fb["joints"][f"wrist_{x}"] for x in hands_of(fb["holds"][prop]) if f"wrist_{x}" in fb.get("joints", {})]
+                    gap = min((norm(sub(p, q)) for p in wa for q in wb), default=0)
+                    reach = (fa.get("hand_length", ta.get("hand_length")) or 0) + (fb.get("hand_length", tracks[b].get("hand_length")) or 0)
+                    if gap - reach > 0.35 * T:
+                        add(fi, "handoff_gap", f"{names[a]} and {names[b]} both hold the {prop}, but their hands are "
+                            f"{gap / T:.1f} torso-lengths apart; both hands must be on it")
             # a prop leaving this character's hand appears at the same place in the receiver's
             if fi:
                 for prop in (tracks[a]["frames"][fi - 1].get("holds") or {}):
@@ -951,9 +1060,11 @@ def check_scene(tracks):
                 who, joint = target.split(".", 1)
                 if who in names and f"wrist_{side}" in fa.get("joints", {}):
                     other = fr[names.index(who)].get("joints", {})
-                    if joint in other:
+                    # another character's joint, or a point of what they hold ("Mam.ladle.tip")
+                    at = other.get(joint) or (fr[names.index(who)].get("props") or {}).get(joint)
+                    if at:
                         span = hand_span(fa, ta, fa["joints"], side)
-                        d = _seg_dist(other[joint], *span) if span[0] != span[1] else norm(sub(span[0], other[joint]))
+                        d = _seg_dist(at, *span) if span[0] != span[1] else norm(sub(span[0], at))
                         if d > tol * T:
                             add(fi, "contact_miss", f"{names[a]}'s {_side(side)} hand should meet {who}'s "
                                 f"{joint.replace('_l', ' (left)').replace('_r', ' (right)')} but stops {d / T:.1f} torso-lengths away")
@@ -969,6 +1080,51 @@ def check_scene(tracks):
                     elif d < 0.97 * (ra + rb):  # drawn heads partly overlapping
                         add(fi, "head_overlap", f"{names[a]}'s and {names[b]}'s heads touch or partly overlap "
                             f"({d:.0f} apart, radii {ra:.0f} + {rb:.0f})", severity="warn")
+            # a snout, bill or beak ("snout": its length from the head centre, track units) pokes ahead
+            # of the head in the facing direction; its tip must stay out of another head
+            sn = fa.get("snout", ta.get("snout"))
+            ja = fa.get("joints", {})
+            ahead = {"right": 1, "left": -1}.get(fa.get("facing") or (infer_facing(ja) if ja else None))
+            if sn and ahead and "head" in ja and not fa.get("overlap_ok"):
+                tip = (ja["head"][0] + ahead * float(sn), ja["head"][1])
+                for b in range(len(tracks)):
+                    jb, rb = fr[b].get("joints", {}), head_r(tracks[b], fr[b])
+                    if b != a and "head" in jb and rb and not fr[b].get("overlap_ok") \
+                            and _seg_dist(jb["head"], ja["head"], tip) < rb:
+                        add(fi, "head_overlap", f"{names[a]}'s snout pokes into {names[b]}'s head "
+                            f"({rb - _seg_dist(jb['head'], ja['head'], tip):.0f} px inside; mark \"overlap_ok\": true "
+                            "if one passes behind the other)")
+            # bodies as solids ("solid_body": true on both tracks): a torso or limb of one passing through
+            # the other's torso (a flying body through a standing one)
+            for b in range(a + 1, len(tracks)):
+                fb, tb = fr[b], tracks[b]
+                ja, jb = fa.get("joints", {}), fb.get("joints", {})
+                if not (fa.get("solid_body", ta.get("solid_body")) and fb.get("solid_body", tb.get("solid_body"))) \
+                        or fa.get("overlap_ok") or fb.get("overlap_ok") or not all("neck" in j and "pelvis" in j for j in (ja, jb)):
+                    continue
+                Tb = torso(fb) or T
+                half = lambda f, t, T_: float(f.get("body_width", t.get("body_width", 0.5 * T_))) / 2
+                limb = lambda f, t, T_: float(f.get("limb_width", t.get("limb_width", 0.12 * T_))) / 2
+                def parts(j, f, t, T_):
+                    yield "body", (j["neck"], j["pelvis"]), half(f, t, T_)
+                    if "head" in j and head_r(t, f):
+                        yield "head", (j["head"], j["head"]), head_r(t, f)
+                    for x, y in (("shoulder", "elbow"), ("elbow", "wrist"), ("hip", "knee"), ("knee", "ankle"), ("ankle", "toe")):
+                        for sd in SIDES:
+                            if f"{x}_{sd}" in j and f"{y}_{sd}" in j:
+                                yield f"{_side(sd)} {'arm' if x in ('shoulder', 'elbow') else 'leg'}", \
+                                    (j[f"{x}_{sd}"], j[f"{y}_{sd}"]), limb(f, t, T_)
+                hit = None
+                for (pn, sa, wa) in parts(ja, fa, ta, T):
+                    for (qn, sb, wb) in parts(jb, fb, tb, Tb):
+                        if {pn, qn} & {"body", "head"} and not {pn, qn} == {"head"} and _seg_seg(*sa, *sb) < 0.9 * (wa + wb):
+                            hit = (pn, qn)
+                            break
+                    if hit:
+                        break
+                if hit:
+                    add(fi, "body_overlap", f"{names[a]}'s {hit[0]} passes through {names[b]}'s {hit[1]} (mark "
+                        "\"overlap_ok\": true if one passes behind the other)", severity="warn")
             # another character's held prop or body over this one's face (a raised ball, walking across)
             for b in range(len(tracks)):
                 jb = fr[b].get("joints", {})

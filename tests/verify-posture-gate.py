@@ -58,10 +58,15 @@ for bug, want in expect.items():
     r = pg.check(front_track(bug))
     assert not r["passed"] and want <= kinds(r), (bug.__name__, kinds(r))
 
-# a planned hand-off is allowed
+# a planned hand-off is allowed when the taking hand is at the prop the frame before
 t = front_track(ex.cup_switches_hand)
 t["frames"][6]["handoff"] = True
-assert "prop_hand_switch" not in kinds(pg.check(t))
+f5 = t["frames"][5]; new = (pg.hands_of(t["frames"][6]["holds"]["cup"]) - pg.hands_of(f5["holds"]["cup"])).pop()
+far = list(f5["joints"][f"wrist_{new}"])
+f5["joints"][f"wrist_{new}"] = list(f5["props"]["cup"])
+assert "prop_hand_switch" not in kinds(pg.check(t)), [i for i in pg.check(t)["issues"] if i["kind"] == "prop_hand_switch"]
+f5["joints"][f"wrist_{new}"] = far  # the taking hand jumps onto the cup from far away
+assert "prop_hand_switch" in kinds(pg.check(t))
 
 # prop must stay in the same hand across a cut
 c1, c2 = ex.two_clips()
@@ -570,6 +575,60 @@ assert "contact_miss" in kinds(pg.check(t))
 t["hand_length"] = 0.4 * T
 assert "contact_miss" not in kinds(pg.check(t))
 
+# a prop the beats only look at was never passed; "fanning" names the fan; "lets go" after the prop
+pkg = ("## Clip 1\nHands at start — Ba: right hand empty; left hand empty. Hu: right hand holds the red envelope; left hand empty.\n"
+       "- [0-3s] Hu places the red envelope into Ba's right hand with his right hand.\n"
+       "- [3-6s] Ba looks at the red envelope in her right hand, then slides her eyes to the viewer.\n"
+       "Hands at end — Ba: right hand holds the red envelope; left hand empty. Hu: right hand empty; left hand empty.\n")
+assert hand_ledger.lint(pkg) == [], hand_ledger.lint(pkg)
+assert any("no beat passes" in p for p in hand_ledger.lint(pkg.replace("- [0-3s] Hu places the red envelope into Ba's right hand with his right hand.\n", "")))
+fan = ("## Clip 1\nHands at start — Tu: right hand holds the palm-leaf fan; left hand empty.\n"
+       "- [0-3s] Tu sits on the stool, fanning with his right hand.\n"
+       "Hands at end — Tu: right hand holds the palm-leaf fan; left hand empty.\n")
+assert hand_ledger.lint(fan) == [], hand_ledger.lint(fan)
+assert any("left hand" in p for p in hand_ledger.lint(fan.replace("fanning with his right", "fanning with his left")))
+# a hand that still holds the axe cannot pick up the slipper; the axe must be put down by its holder
+axe = ("## Clip 1\nHands at start — Lam: right hand holds the axe; left hand holds the axe.\n"
+       "- [0-3s] Lam lowers the axe.\n"
+       "- [3-6s] Lam picks up the red slipper from the block with his right hand.\n"
+       "Hands at end — Lam: right hand holds the red slipper; left hand empty.\n")
+problems = hand_ledger.lint(axe)
+assert any("still holds the axe" in p for p in problems) and any("without the axe" in p for p in problems), problems
+assert hand_ledger.lint(axe.replace("Lam lowers the axe.", "Lam leans the axe against the block.")) == []
+# a long prop name between "sets" and "down"
+tea = ("## Clip 1\nHands at start — Vit: right hand empty; left hand holds the glass of iced tea.\n"
+       "- [0-3s] Vit sets the glass of iced tea down on the table with her left hand.\n"
+       "Hands at end — Vit: right hand empty; left hand empty.\n")
+assert hand_ledger.lint(tea) == [], hand_ledger.lint(tea)
+# a two-handed grip described hand by hand; "alone" against a two-hand ledger
+broom = ("## Clip 1\nHands at start — An: right hand holds the broom; left hand empty. Tu: right hand empty; left hand empty.\n"
+         "- [0-3s] An holds the broom out in his right hand.\n"
+         "- [3-6s] Tu takes the broom from An in his right hand and adds his left hand above it on the handle.\n"
+         "- [6-9s] Tu sweeps, holding the broom low in his right hand and high in his left hand.\n"
+         "Hands at end — An: right hand empty; left hand empty. Tu: right hand holds the broom; left hand holds the broom.\n")
+w = []
+assert hand_ledger.lint(broom, w) == [] and w == [], (hand_ledger.lint(broom), w)
+w = []
+hand_ledger.lint(broom.replace(" and adds his left hand above it on the handle", "").replace(" and high in his left hand", ""), w)
+assert any("in both hands" in x or "other hand" in x for x in w), w
+steady = ("## Clip 1\nHands at start — An: right hand holds the broom; left hand holds the broom.\n"
+          "- [0-3s] An lifts the broom in his left hand alone.\n"
+          "Hands at end — An: right hand holds the broom; left hand holds the broom.\n")
+assert any("alone" in p for p in hand_ledger.lint(steady))
+# waving with a hand that holds something all clip
+w = []
+hand_ledger.lint("## Clip 1\nHands at start — Coc: right hand holds the stool; left hand holds the stool.\n"
+                 "- [0-3s] Coc nods and waves at the viewer with his right hand.\n"
+                 "Hands at end — Coc: right hand holds the stool; left hand holds the stool.\n", w)
+assert any("waves" in x for x in w), w
+# "the drum stick" is not "the drum" when both are props
+drum = ("## Clip 1\nHands at start — Chot: right hand holds the drum stick; left hand empty. Bo: right hand empty; left hand holds the drum.\n"
+        "- [0-3s] Chot raises the drum stick in his right hand.\n"
+        "Hands at end — Chot: right hand holds the drum stick; left hand empty. Bo: right hand empty; left hand holds the drum.\n")
+w = []
+assert hand_ledger.lint(drum, w) == [] and w == [], (hand_ledger.lint(drum), w)
+assert hand_ledger.lint(drum.replace("Chot raises the drum stick in his right hand.", "Bo lifts the drum in his right hand."))
+
 # a scene: two characters in one shot, checked against each other
 import copy  # noqa: E402
 a, b = front_track(), front_track()
@@ -591,6 +650,14 @@ d = copy.deepcopy(b); fd = d["frames"][4]
 fa["holds"], fa["props"] = {"ball": "r"}, {"ball": list(fd["joints"]["head"])}
 assert any(i["kind"] == "face_covered" for i in pg.check_scene([a, d]))
 fa["holds"], fa["props"] = {}, {}
+# both characters hold the prop at the hand-off frame: their hands must meet
+e = copy.deepcopy(b); fe = e["frames"][4]
+fa["holds"], fe["holds"], fa["handoff"] = {"slipper": "r"}, {"slipper": "l"}, True
+fe["joints"]["wrist_l"] = [fa["joints"]["wrist_r"][0] + 200, fa["joints"]["wrist_r"][1]]
+assert any(i["kind"] == "handoff_gap" for i in pg.check_scene([a, e]))
+fe["joints"]["wrist_l"] = list(fa["joints"]["wrist_r"])
+assert not any(i["kind"] == "handoff_gap" for i in pg.check_scene([a, e]))
+fa["holds"], fa["handoff"] = {}, False
 # a prop handed from one character to the other must not jump between their hands
 a, b = front_track(), front_track()
 a["name"], b["name"] = "Sol", "Kip"
@@ -600,6 +667,57 @@ for i, (f, g) in enumerate(zip(a["frames"], b["frames"])):
     f["props"] = {"cup": f["joints"]["wrist_r"]} if i < 5 else {}
     g["props"] = {"cup": g["joints"]["wrist_l"]} if i >= 5 else {}
 assert any(i["kind"] == "handoff_gap" and i["frame"] == 5 for i in pg.check_scene([a, b]))
+# a snout reaching into the other character's head; bodies as solids
+a, b = front_track(), front_track()
+a["name"], b["name"] = "Vit", "Heo"
+for f, g in zip(a["frames"], b["frames"]):
+    f["facing"] = "right"; f["holds"], f["props"] = {}, {}
+    g["joints"] = {k: [v[0] + 3.2 * a.get("head_radius", 20), v[1]] for k, v in g["joints"].items()}
+    g["holds"], g["props"] = {}, {}
+r = pg.check_scene([a, b])
+hr = pg.check_scene([a, b])
+assert not any("snout" in i["message"] for i in hr)
+a["snout"] = 2.5 * (a.get("head_radius") or 20)
+gap = abs(b["frames"][0]["joints"]["head"][0] - a["frames"][0]["joints"]["head"][0])
+a["snout"] = gap  # the snout tip reaches the other head's centre
+assert any("snout" in i["message"] for i in pg.check_scene([a, b]))
+b["frames"][2]["overlap_ok"] = True
+assert not any("snout" in i["message"] and i["frame"] == 2 for i in pg.check_scene([a, b]))
+del a["snout"]
+assert not any(i["kind"] == "body_overlap" for i in pg.check_scene([a, b]))
+for f in b["frames"]:
+    f["joints"] = {k: [v[0] - 2.8 * (a.get("head_radius") or 20), v[1]] for k, v in f["joints"].items()}
+a["solid_body"] = b["solid_body"] = True
+assert any(i["kind"] == "body_overlap" for i in pg.check_scene([a, b]))
+del b["solid_body"]
+assert not any(i["kind"] == "body_overlap" for i in pg.check_scene([a, b]))
+
+# a tilted torso is measured across its own axis: a rocking roly-poly's shoulder is on its edge
+t = front_track()
+for f in t["frames"]:
+    f.pop("holds", None); f.pop("props", None)
+t["body_width"] = 2 * abs(t["frames"][0]["joints"]["shoulder_l"][0] - t["frames"][0]["joints"]["neck"][0]) / 0.9
+base = [i for i in pg.check(t)["issues"] if "shoulder sits inside" in i["message"]]
+import math as _m  # noqa: E402
+for f in t["frames"]:
+    n0 = f["joints"]["neck"]; c, s_ = _m.cos(_m.radians(30)), _m.sin(_m.radians(30))
+    f["joints"] = {k: [n0[0] + (v[0] - n0[0]) * c - (v[1] - n0[1]) * s_, n0[1] + (v[0] - n0[0]) * s_ + (v[1] - n0[1]) * c]
+                   for k, v in f["joints"].items()}
+assert len([i for i in pg.check(t)["issues"] if "shoulder sits inside" in i["message"]]) == len(base)
+
+# a supported wrist off the floor in a crouch warns; listing "floor" checks the seat too
+t = side_track(); f = t["frames"][2]; j = f["joints"]
+ys = [v[1] for v in j.values()]; ground, tall = max(ys), max(ys) - min(ys)
+j["wrist_r"] = [j["wrist_r"][0], ground - 0.3 * tall]
+f["supported"] = ["ankle_l", "ankle_r", "wrist_r"]
+assert any(i["kind"] == "support_floating" and "wrist_r" in i["joints"] for i in pg.check(t)["issues"])
+f["supported"] = ["wrist_r"]  # a lone wrist can push a wall
+assert not any(i["kind"] == "support_floating" for i in pg.check(t)["issues"])
+f["supported"] = ["pelvis"]  # a lone pelvis sits on a chair
+assert not any(i["kind"] == "support_floating" for i in pg.check(t)["issues"])
+f["supported"] = ["pelvis", "floor"]
+assert any(i["kind"] == "support_floating" and "pelvis" in i["joints"] for i in pg.check(t)["issues"])
+
 
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()
