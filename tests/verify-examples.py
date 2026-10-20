@@ -32,7 +32,7 @@ dark = re.findall(r"```text\n(.*?)\n```", catalog.split("**Classic Dark", 1)[1],
 assert all(dark in p for p in prompts(style1)), "Style 1 example must repeat the current Dark anchor"
 lead = re.findall(r"```text\n(.*?)\n```", catalog.split("**Character Anchor (every clip, verbatim):**", 1)[1], re.S)[0]
 beanie = re.findall(r"```text\n(.*?)\n```", catalog.split("**Alternative: Beanie Zeke anchor", 1)[1], re.S)[0]
-assert "white round head" in lead and "dot eyes" in lead and "buzz cut" in lead and "glasses" in lead and "flannel" in lead and "large simple check" in lead and "very short neck" in lead and "stick arms" in lead and "legs in dark blue jeans" in lead, "Style 2 default lead is the buzz-cut, glasses one"
+assert "white round head" in lead and "dot eyes" in lead and "buzz cut" in lead and "glasses" in lead and "flannel" in lead and "large simple check" in lead and "very short neck" in lead and "stick arms" in lead and "legs in dark blue jeans" in lead and "short wide sleeves" in lead and "cut like a t-shirt" in lead, "Style 2 default lead is the buzz-cut, glasses one"
 assert "red beanie" in beanie and "no pom-pom" in beanie, "the beanie lead stays documented as the alternative"
 assert all(f"Character: {lead}" in p for p in prompts(style2a)), "Style 2A example must repeat the full default anchor"
 assert not any(beanie in p for p in prompts(style2a)), "one lead per video"

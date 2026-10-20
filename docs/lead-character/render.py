@@ -189,11 +189,11 @@ def plaid(pen, pts, s, origin, ux):
     n = 2 * reach
     tile = Image.new("RGB", (n, n), FLANNEL)
     d = ImageDraw.Draw(tile, "RGBA")
-    step, band = 11 * s * SS, 3.6 * s * SS
+    step, band = 15 * s * SS, 4.4 * s * SS
     k = reach - math.ceil(reach / step) * step   # a band edge sits on the origin (tile centre)
     while k < n:
-        d.rectangle([k, 0, k + band, n], fill=PLAID + (150,))
-        d.rectangle([0, k, n, k + band], fill=PLAID + (150,))
+        d.rectangle([k, 0, k + band, n], fill=PLAID + (125,))
+        d.rectangle([0, k, n, k + band], fill=PLAID + (125,))
         k += step
     # tile "down" is the garment axis: rotate it from (0, 1) onto ux
     ang = math.degrees(math.atan2(ux[1], ux[0])) - 90
@@ -230,11 +230,13 @@ def draw_leg(pen, j, k, s, view):
 
 
 def sleeve_shape(sh, el, s):
+    """Short tee sleeve like the beanie lead's: narrow at the shoulder, flaring to a wide open end above the elbow."""
     ux, px = axis(sh, el)
-    end = lerp(sh, el, 0.82)
-    top = add(sh, ux, -2.5 * s)
-    pts = [add(top, px, 4.5 * s), add(lerp(top, end, 0.4), px, 5.6 * s), add(end, px, 5.0 * s),
-           add(end, px, -5.0 * s), add(lerp(top, end, 0.4), px, -5.6 * s), add(top, px, -4.5 * s)]
+    end = lerp(sh, el, 0.72)
+    top = add(sh, ux, -3.0 * s)
+    pts = [add(top, px, 4.4 * s), add(lerp(top, end, 0.55), px, 6.4 * s), add(end, px, 8.4 * s),
+           add(add(end, ux, 0.9 * s), px, 0.0), add(end, px, -8.4 * s), add(lerp(top, end, 0.55), px, -6.4 * s),
+           add(top, px, -4.4 * s)]
     return chaikin(pts, 1), end, px
 
 
@@ -249,7 +251,8 @@ def glove(pen, wr, el, s):
     pen.circle(th, 1.7 * s, fill=INK)
 
 
-def draw_arm(pen, j, k, s, prop=None):
+def draw_stick(pen, j, k, s, prop=None):
+    """Black stick arm from inside the sleeve opening to the glove, plus a held prop."""
     sh, el, wr = j[f"shoulder_{k}"], j[f"elbow_{k}"], j[f"wrist_{k}"]
     pen.line([lerp(sh, el, 0.6), el, wr], INK, LIMB * s)
     if prop == "pen":
@@ -257,31 +260,50 @@ def draw_arm(pen, j, k, s, prop=None):
         pen.line([add(wr, (tip[0] - wr[0], tip[1] - wr[1]), -0.25), tip], INK, 4.4 * s)
         pen.line([add(wr, (tip[0] - wr[0], tip[1] - wr[1]), -0.2), tip], PEN, 2.4 * s)
     glove(pen, wr, el, s)
-    # flannel sleeve rolled up to just above the elbow, so the forearm stays a stick
+
+
+def fill_sleeve(pen, j, k, s):
+    """Short flared flannel sleeve with a rolled cuff band at its open end; returns its outline."""
+    sh, el = j[f"shoulder_{k}"], j[f"elbow_{k}"]
     poly, end, px = sleeve_shape(sh, el, s)
-    plaid(pen, poly, s, sh, axis(sh, el)[0])
-    pen.poly(poly, None, INK, LINE * s)
-    pen.line([add(end, px, 4.6 * s), add(end, px, -4.6 * s)], CUFF, 2.6 * s)
+    ux = axis(sh, el)[0]
+    plaid(pen, poly, s, sh, ux)
+    pen.poly(chaikin([add(add(end, ux, -2.6 * s), px, 7.6 * s), add(end, px, 8.4 * s), add(end, px, -8.4 * s),
+                      add(add(end, ux, -2.6 * s), px, -7.6 * s)], 1), CUFF)
+    return poly
 
 
-def shirt_shape(neck, pelvis, s, half_top=14.5, half_hem=16.0):
-    """Boxy tee-shaped shirt like the beanie lead's: rounded shoulders, a slight flare, hem just below the hips."""
+def draw_arm(pen, j, k, s, prop=None):
+    """A whole arm drawn on top of everything else: stick, then a sleeve with its own outline."""
+    draw_stick(pen, j, k, s, prop)
+    pen.poly(fill_sleeve(pen, j, k, s), None, INK, LINE * s)
+
+
+def shirt_shape(neck, pelvis, s, half_top=13.0, half_hem=18.0):
+    """Loose tee-shaped shirt like the beanie lead's: rounded shoulders, an A-line flare, hem just below the hips."""
     ux, px = axis(neck, pelvis)
-    top = add(neck, ux, 0.5 * s); sh = add(neck, ux, 4 * s); hem = add(pelvis, ux, 4 * s)
+    top = add(neck, ux, 0.5 * s); sh = add(neck, ux, 4 * s); hem = add(pelvis, ux, 6 * s)
     # rounded shoulders, square hem
     pts = [add(top, px, half_top * 0.4 * s), add(add(top, ux, 0.8 * s), px, half_top * 0.85 * s), add(sh, px, half_top * s),
-           add(lerp(sh, hem, 0.45), px, (half_top + 0.6) * s), add(hem, px, half_hem * s)]
+           add(lerp(sh, hem, 0.45), px, (half_top + (half_hem - half_top) * 0.35) * s), add(hem, px, half_hem * s)]
     right = [add(top, px, -half_top * 0.4 * s), add(add(top, ux, 0.8 * s), px, -half_top * 0.85 * s), add(sh, px, -half_top * s),
-             add(lerp(sh, hem, 0.45), px, -(half_top + 0.6) * s), add(hem, px, -half_hem * s)]
+             add(lerp(sh, hem, 0.45), px, -(half_top + (half_hem - half_top) * 0.35) * s), add(hem, px, -half_hem * s)]
     return chaikin(pts + right[::-1], 1)
 
 
-def draw_shirt(pen, j, s, view):
+def draw_shirt(pen, j, s, view, sleeves=()):
+    """Shirt body. Sleeves listed in `sleeves` are joined to it under one outline, like a tee drawn in one piece."""
     side = view in ("right", "left")
-    body = shirt_shape(j["neck"], j["pelvis"], s, *((10.5, 12.0) if side else (14.5, 16.0)))
+    body = shirt_shape(j["neck"], j["pelvis"], s, *((10.5, 14.0) if side else (14.0, 19.5)))
+    # one silhouette: double-width strokes first, then every fill covers the inner half of each stroke
+    for k in sleeves:
+        pen.poly(sleeve_shape(j[f"shoulder_{k}"], j[f"elbow_{k}"], s)[0], None, INK, 2 * LINE * s)
+    pen.poly(body, None, INK, 2 * LINE * s)
+    for k in sleeves:
+        fill_sleeve(pen, j, k, s)
     plaid(pen, body, s, j["neck"], axis(j["neck"], j["pelvis"])[0])
     ux, px = axis(j["neck"], j["pelvis"])
-    top = add(j["neck"], ux, 0.5 * s); hem = add(j["pelvis"], ux, 4 * s)
+    top = add(j["neck"], ux, 0.5 * s); hem = add(j["pelvis"], ux, 6 * s)
     if view == "front":
         # open flannel: the white tee shows down the middle, collar points either side
         tee = chaikin([add(top, px, 4.6 * s), add(lerp(top, hem, 0.5), px, 3.6 * s), add(hem, px, 4.4 * s),
@@ -295,8 +317,8 @@ def draw_shirt(pen, j, s, view):
     elif view in ("right", "left"):
         sgn = 1 if view == "right" else -1
         f = 1 if (px[0] * sgn) > 0 else -1
-        tee = chaikin([add(top, px, f * 4.0 * s), add(add(top, ux, 6 * s), px, f * 8.6 * s), add(hem, px, f * 11.8 * s),
-                       add(hem, px, f * 8.6 * s), add(lerp(top, hem, 0.5), px, f * 6.8 * s)], 1)
+        tee = chaikin([add(top, px, f * 4.0 * s), add(add(top, ux, 6 * s), px, f * 8.6 * s), add(hem, px, f * 13.3 * s),
+                       add(hem, px, f * 9.8 * s), add(lerp(top, hem, 0.5), px, f * 6.8 * s)], 1)
         pen.poly(tee, TEE_WHITE, INK, 1.1 * s)
         pen.poly([add(top, px, f * 2.5 * s), add(top, px, f * 6.4 * s), add(add(top, ux, 6 * s), px, f * 4.6 * s)],
                  CUFF, INK, 1.1 * s)
@@ -443,11 +465,16 @@ def draw_figure(img, j, view, s=1.0, expr="smile", stubble=False, holds=None, ov
         draw_arm(pen, j, near, s, holds.get(near))
     else:
         draw_leg(pen, j, "l", s, view); draw_leg(pen, j, "r", s, view)
-        draw_shirt(pen, j, s, view)
         arms = ("l", "r")
         late = [k for k in arms if over_face == k]
+        # an arm hanging clear of the body shares the shirt's outline; one crossing the body is drawn on top
+        clear = lambda k: all(abs(j[f"{p}_{k}"][0] - j["neck"][0]) > 13 * s for p in ("elbow", "wrist"))
+        joined = [k for k in arms if k not in late and clear(k)]
+        for k in joined:
+            draw_stick(pen, j, k, s, holds.get(k))
+        draw_shirt(pen, j, s, view, joined)
         for k in arms:
-            if k not in late:
+            if k not in late and k not in joined:
                 draw_arm(pen, j, k, s, holds.get(k))
         draw_head(pen, j, s, view, expr, stubble)
         for k in late:
@@ -480,7 +507,7 @@ def text(img, xy, s, size=18, bold=False, fill=(40, 40, 40), anchor="mm"):
 
 
 # ---------------------------------------------------------------- tracks
-FIG = {"head_radius": HEAD_R, "limb_width": 2.4, "body_width": 30, "hand_length": 6}
+FIG = {"head_radius": HEAD_R, "limb_width": 2.4, "body_width": 34, "hand_length": 6}
 
 
 def track(name, frames, rest, scale=1.0, **meta):
@@ -633,7 +660,7 @@ def make_sheet(poses):
     px = 1180
     text(img, (px, 145), "Locks", 22, True, anchor="lm")
     rows = [(HAIR, "Very short dark buzz cut, spiky edge"), (FRAME, "Dark rectangular glasses, thick frame"),
-            (FLANNEL, "Open red-and-navy plaid flannel, sleeves rolled"), (TEE_WHITE, "Plain white crew-neck tee"),
+            (FLANNEL, "Open plaid flannel, tee cut, short wide sleeves"), (TEE_WHITE, "Plain white crew-neck tee"),
             (JEANS, "Dark blue jeans, black shoes"), (INK, "Black stick forearms, round hands")]
     for i, (c, lab) in enumerate(rows):
         y = 195 + i * 46
