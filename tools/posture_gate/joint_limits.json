@@ -14,7 +14,7 @@
   "frontal": {
     "neck_tilt":     {"max": 45, "label": "head tilts sideways at most 45"},
     "hip_abduction": {"max": 50, "label": "leg swings out sideways at most 50"},
-    "knee_lateral":  {"max": 15, "label": "knee never bends sideways"},
+    "knee_lateral":  {"max": 15, "max_3d": 40, "label": "knee never bends sideways"},
     "elbow_fold":    {"max": 150, "label": "forearm cannot fold flat onto the upper arm"}
   },
   "profiles": {
