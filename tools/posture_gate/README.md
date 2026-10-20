@@ -22,8 +22,8 @@ Only the Python standard library is needed, except `estimate_pose.py` (`pip inst
 - **Balance** (warning): center of mass outside whatever touches the ground (feet, knees, pelvis, hands), held for about a fifth of a second or longer, so a walk's single-support moments pass. Mark jumps and falls `"airborne": true`; list other supports per frame, `"supported": ["pelvis", "wrist_r", "chair"]` (joints or prop names), or `"supported": true`. A big-headed character can set `"mass": {"head": 0.3}` (segments: head, trunk, upper_arm, forearm, thigh, shank).
 - **Head yaw** (3D tracks with a `nose` joint): head turned more than 80° from the body.
 - **Left/right**: hands trading places, shoulders facing against the hips, a held prop jumping to the other hand (within a clip or across a cut), a prop drawn at the wrong hand, a left hand shape drawn on a right arm.
-- **Contact** (optional): `"contacts": {"r": "door"}` (a prop name or a point) fails when that hand stops short of it.
-- **Arm over face** (warning, front view): a forearm sweeping across the head. Mark intended moments `"face_cover": true`. Not checked: an arm crossing the face in side view, and a hand hidden behind a big head (2D occlusion).
+- **Contact** (optional): `"contacts": {"r": "door"}` (a prop name or a point) fails when that wrist stops more than 0.25 torso-lengths short of it. A big-handed character can widen this with `"contact_tolerance": 0.35` on the track or a frame.
+- **Arm over face** (warning): in front view a forearm sweeping across the head; in side view the near arm (the right arm when facing right) crossing the face half of the head, unless that hand holds a prop or has a contact there. Mark intended moments `"face_cover": true`. Not checked: a hand hidden behind a big head (2D occlusion).
 
 `fix` repairs a rig track by clamping joint angles into range and restoring limb lengths. It does not invent new key poses for pops, balance or hand mix-ups; those still fail after `fix`.
 

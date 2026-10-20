@@ -172,6 +172,20 @@ f["joints"]["elbow_l"] = [f["joints"]["head"][0] + 14, f["joints"]["head"][1] + 
 assert "arm_over_face" in kinds(pg.check(t), "warn")
 f["face_cover"] = True
 assert "arm_over_face" not in kinds(pg.check(t), "warn")
+# side view: the near arm across the head warns, unless it holds or touches something there
+t = ex.track(ex.frames_with(None))
+f = t["frames"][4]; hx, hy = f["joints"]["head"]
+f["joints"]["elbow_r"] = [hx + 25, hy + 20]; f["joints"]["wrist_r"] = [hx + 4, hy - 4]
+assert "arm_over_face" in kinds(pg.check(t), "warn")
+f["holds"] = {"mug": "r"}; f["props"] = {"mug": [hx - 10, hy]}
+assert "arm_over_face" not in kinds(pg.check(t), "warn")
+# contacts: a wrist 0.3 torso-lengths short of its target misses by default, passes with a looser tolerance
+t = front_track(); f = t["frames"][3]; j = f["joints"]
+torso = ((j["neck"][0] - j["pelvis"][0]) ** 2 + (j["neck"][1] - j["pelvis"][1]) ** 2) ** 0.5
+f["props"]["chin"] = [j["wrist_r"][0] + 0.3 * torso, j["wrist_r"][1]]; f["contacts"] = {"r": "chin"}
+assert "contact_miss" in kinds(pg.check(t))
+t["contact_tolerance"] = 0.35
+assert "contact_miss" not in kinds(pg.check(t))
 
 # mirrored figure: every joint labelled on the wrong side while facing the camera
 t = front_track()
@@ -212,6 +226,10 @@ assert hand_ledger.lint("### Clip 1\nNo props here. She holds her breath.\n") ==
 assert hand_ledger.lint("### Clip 1\n[0-3s] Mia grabs the phone from the table.\n")
 assert hand_ledger.lint("[0-3s] Mia grabs the phone from the table.\n")  # one prompt, no heading
 assert hand_ledger.lint("[0-3s] Mia waves.\n") == []
+problems = hand_ledger.lint("Style: the character holds clean key poses; speed lines carry the energy.\n"
+                            "[0-3s] Mia's right hand grabs the phone.\n")
+assert len(problems) == 1 and "grabs the phone" in problems[0], problems
+assert hand_ledger.lint("Style: the character holds clean key poses between snaps.\n") == []
 assert any("near arm" in p for p in hand_ledger.lint("[0-3s] Pip raises his near arm.\n"))
 # paws count as hands, and a sentence is checked against the character it names
 pkg = """### Clip 1

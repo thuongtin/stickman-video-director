@@ -526,7 +526,7 @@ def check_hands(track, P, usable=None):
             at = (f.get("_props3d") or f.get("props", {})).get(target) if isinstance(target, str) else target
             if at and f"wrist_{side}" in pts and torso:
                 d = norm(sub(at, pts[f"wrist_{side}"]))
-                if d > 0.35 * torso:
+                if d > f.get("contact_tolerance", track.get("contact_tolerance", 0.25)) * torso:
                     label = target if isinstance(target, str) else "its target"
                     add(fi, "contact_miss", f"the {_side(side)} hand should touch {label} but stops "
                         f"{d / torso:.1f} torso-lengths away", {f"wrist_{side}", f"elbow_{side}"})
@@ -545,6 +545,23 @@ def check_hands(track, P, usable=None):
                             "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                             {ks[1], ks[2], "head"}, severity="warn")
 
+        # Side view: the near arm (the right arm when facing right) cutting across the head
+        # hides the face; a hand holding a prop or touching something there is meant to.
+        facing = f.get("facing") or (infer_facing(pts) if pts else None)
+        if not three_d and facing in ("left", "right") and not f.get("face_cover") \
+                and "head" in pts and "neck" in pts:
+            side = facing[0]
+            ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
+            r = 0.5 * norm(sub(pts["head"], pts["neck"]))
+            busy = side in f.get("contacts", {}) or side in f.get("holds", {}).values()
+            ahead = 1 if facing == "right" else -1
+            if r and not busy and all(k in pts for k in ks) and any(
+                    _seg_dist(pts["head"], a, b) < r and (_closest(pts["head"], a, b)[0] - pts["head"][0]) * ahead > 0
+                    for a, b in ((pts[ks[0]], pts[ks[1]]), (pts[ks[1]], pts[ks[2]]))):  # the face half, not the back of the head
+                add(fi, "arm_over_face", f"the near ({_side(side)}) arm crosses the face in side view "
+                    "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
+                    {ks[1], ks[2], "head"}, severity="warn")
+
         # Hand shape (thumb side) must match the arm it is on.
         for side, h in f.get("hands", {}).items():
             if h and h.get("looks_like") in ("l", "r") and h["looks_like"] != side \
@@ -553,6 +570,13 @@ def check_hands(track, P, usable=None):
                     f"{_side(h['looks_like'])} hand (thumb on the wrong side)",
                     {f"wrist_{side}", f"elbow_{side}"})
     return issues
+
+
+def _closest(p, a, b):
+    """Point on segment a-b closest to p."""
+    ab = sub(b, a)
+    t = max(0.0, min(1.0, dot(sub(p, a), ab) / (dot(ab, ab) or 1.0)))
+    return tuple(x + t * y for x, y in zip(a, ab))
 
 
 def _seg_dist(p, a, b):

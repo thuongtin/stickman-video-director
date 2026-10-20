@@ -40,7 +40,7 @@ TRANSFER = re.compile(r"\b(pass(es|ed)?|hands? (it )?over|gives?|takes?|swaps?|s
                       r"throws?|releases?|lets? go|tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|receives?|"
                       r"accepts?|snatch(es)?|pulls? out|takes? out)\b", re.I)
 # Verbs of holding an object; "holds still", "holds her breath", "holds the pose" are not props.
-HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|the pose|(?:his|her|their|its) "
+HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|the pose|(?:\w+ )?(?:key )?poses?|(?:his|her|their|its) "
                      r"(?:breath|pose|gaze|ground|head|position)))|grab(?:s|bing|bed)?|grip(?:s|ping)?|"
                      r"clutch(?:es|ing)?|carr(?:y|ies|ying)|picks? up|picking up|wields?|"
                      r"(?:in|with) (?:his|her|their|its|one|both) (?:left |right )?(?:hand|paw|flipper|wing|hoof|claw|fin)s?)\b[^.\n]{0,40}", re.I)
@@ -90,7 +90,12 @@ def lint(text):
     if not any(lines for _, _, lines in ledgers):
         # No ledger at all is fine only when nobody holds anything.
         for n, body, _ in ledgers:
-            m = HOLDING.search(body)
+            # quote the beat that holds a real thing: a hand or a timed beat beats style text
+            # such as "holds clean key poses" or "speed lines carry the energy"
+            sents = [x for x in re.split(r"(?<=[.!?;])\s+", body) if HOLDING.search(x)]
+            best = sorted(sents, key=lambda x: (not re.search(rf"\b{LIMB}s?\b", x, re.I),
+                                                not re.match(r"\W*\[", x.strip())))
+            m = HOLDING.search(best[0]) if best else None
             if m:
                 problems.append(f"Clip {n}: a beat has a character holding something (\"{m.group(0).strip()}\") "
                                 f"but the package has no 'Hands at start' / 'Hands at end' lines")
