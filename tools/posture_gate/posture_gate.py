@@ -669,6 +669,28 @@ def check_hands(track, P, usable=None):
                             "(mark the frame \"face_cover\": true if the beat covers the face on purpose)",
                             {ks[1], ks[2], "head"}, severity="warn")
 
+        # Front view, standing: with "body_width" (the drawn torso's width at the chest, track units,
+        # on the track or a frame), a shoulder joint inside the torso outline or an arm hanging over
+        # the chest instead of beside it is a warning (every joint angle is legal, but the arms lie on
+        # the body). Joints alone cannot show this: the drawn torso can be wider than the shoulders.
+        facing = f.get("facing") or (infer_facing(pts) if pts else None)
+        bw = f.get("body_width", track.get("body_width"))
+        if bw and not three_d and facing == "front" and not f.get("airborne") and "neck" in pts:
+            mid, half = pts["neck"][0], float(bw) / 2
+            down = lambda a, b: math.degrees(math.atan2(abs(b[0] - a[0]), b[1] - a[1]))  # 0 = straight down
+            for side in SIDES:
+                ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
+                if ks[0] in pts and abs(pts[ks[0]][0] - mid) < 0.8 * half:
+                    add(fi, "arm_over_body", f"the {_side(side)} shoulder sits inside the torso outline; put it at "
+                        "the edge of the torso", {ks[0]}, severity="warn")
+                    continue
+                busy = side in f.get("contacts", {}) or any(side in hands_of(v) for v in f.get("holds", {}).values())
+                if not busy and all(k in pts for k in ks) and pts[ks[2]][1] > pts[ks[1]][1] > pts[ks[0]][1] \
+                        and down(pts[ks[0]], pts[ks[1]]) < 25 and down(pts[ks[1]], pts[ks[2]]) < 25 \
+                        and abs(pts[ks[2]][0] - mid) < half:
+                    add(fi, "arm_over_body", f"the {_side(side)} arm hangs over the body, not beside it",
+                        set(ks), severity="warn")
+
         # Side view: the near arm (the right arm when facing right) cutting across the head
         # hides the face; a hand holding a prop or touching something there is meant to.
         facing = f.get("facing") or (infer_facing(pts) if pts else None)

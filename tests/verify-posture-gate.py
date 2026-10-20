@@ -458,6 +458,15 @@ assert not any("knee_lateral" in i["message"] for i in pg.check({"fps": 12, "fra
 mirrored = {k: [-v[0], v[1], v[2]] for k, v in j.items()}
 assert pg.check({"fps": 12, "frames": [{"joints": mirrored}]}, "rig")["status"] == "FAIL"
 
+# front view with the drawn torso width: shoulders inside the torso outline warn
+t = front_track(); j = t["frames"][3]["joints"]
+assert "arm_over_body" not in kinds(pg.check(t), "warn")
+sw = abs(j["shoulder_l"][0] - j["shoulder_r"][0])
+t["body_width"] = sw * 0.9
+assert "arm_over_body" not in kinds(pg.check(t), "warn")
+t["body_width"] = sw * 1.6
+assert "arm_over_body" in kinds(pg.check(t), "warn")
+
 # a solid prop: the head inside a block fails, hands on its face pass
 t = front_track(); f = t["frames"][3]; j = f["joints"]
 f["props"] = {"block": list(j["head"])}; f["solids"] = {"block": [80, 80]}
