@@ -505,9 +505,11 @@ def sheet_poses():
     a = {"lean": 12, "neck": 2, "hip_r": 50, "knee_r": 75, "hip_l": -30, "knee_l": 75, "ankle_l": 10,
          "shoulder_r": -40, "elbow_r": 85, "shoulder_l": 45, "elbow_l": 80}
     out.append(("Run", "right", side_pose(a, 0, 0), {"airborne": True}, {}, None))
-    a = stand_side(); a["shoulder_r"] = -30; a["elbow_r"] = 105; a["shoulder_l"] = 55; a["elbow_l"] = 45
+    # own right hand on the right hip, at the front of the pelvis (angles solved for that contact)
+    a = stand_side(); a["shoulder_r"] = -20; a["elbow_r"] = 56
     j = side_pose(a, 0, 0)
-    out.append(("Hand on hip", "right", j, {"holds": {"pen": "l"}, "props": {"pen": j["wrist_l"]}}, {"l": "pen"}, None))
+    hip = [j["pelvis"][0] + 6, j["pelvis"][1] - 5]
+    out.append(("Hand on hip", "right", j, {"props": {"hip": hip}, "contacts": {"r": "hip"}}, {}, None))
     return out
 
 
