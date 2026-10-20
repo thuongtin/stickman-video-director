@@ -94,6 +94,8 @@
 
 <p align="center"><img src="docs/lead-character/motion.gif" alt="스포츠머리에 안경, 흰 셔츠와 청바지를 입은 막대 인간이 걸어와 손을 흔든다" width="480"></p>
 
+<p align="center"><img src="docs/lead-character/sheet.png" alt="남의 캐릭터 시트: 네 방향, 외형 고정, 표정, 포즈" width="760"></p>
+
 ---
 
 ### 스타일 3: 선사시대 손그림 / 블랙코미디
