@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the Style 2 default lead (buzz cut, dark rectangular glasses, open plaid flannel over a white tee, jeans;
+"""Draw the Style 2 default lead (buzz cut, dark rectangular glasses, white short-sleeved button-up shirt, jeans;
 same body as upstream's red-beanie lead) from a code rig.
 
 Writes, next to this file:
@@ -24,10 +24,8 @@ HEAD_R = 21
 INK = (24, 24, 24)
 HAIR = (34, 30, 30)
 FRAME = (40, 38, 38)
-FLANNEL = (176, 38, 40)    # open red flannel shirt
-PLAID = (34, 40, 78)       # navy check bands
-CUFF = (128, 26, 30)       # rolled cuffs and collar
-TEE_WHITE = (250, 250, 248)
+SHIRT = (252, 252, 250)    # white button-up shirt, flat colour like the beanie lead's tee
+CUFF = (226, 228, 232)     # rolled cuffs, a touch greyer so the roll reads
 JEANS = (46, 74, 120)      # dark blue jeans
 SKIN = (255, 255, 255)     # the head stays white like every Style 2 figure
 STUBBLE = (150, 150, 150)
@@ -178,32 +176,6 @@ def axis(p, q):
     return ux, (-ux[1], ux[0])
 
 
-def plaid(pen, pts, s, origin, ux):
-    """Fill a polygon with a large, simple red-and-navy check (few, wide bands so it cannot shimmer).
-    The bands are laid out from `origin` along the garment axis `ux`, so the check moves and turns with the garment."""
-    xs = [x * SS for x, _ in pts]; ys = [y * SS for _, y in pts]
-    box = (int(min(xs)) - 2, int(min(ys)) - 2, int(max(xs)) + 3, int(max(ys)) + 3)
-    w, h = box[2] - box[0], box[3] - box[1]
-    ox, oy = round(origin[0] * SS), round(origin[1] * SS)
-    reach = int(math.hypot(max(abs(box[0] - ox), abs(box[2] - ox)), max(abs(box[1] - oy), abs(box[3] - oy)))) + 4
-    n = 2 * reach
-    tile = Image.new("RGB", (n, n), FLANNEL)
-    d = ImageDraw.Draw(tile, "RGBA")
-    step, band = 15 * s * SS, 4.4 * s * SS
-    k = reach - math.ceil(reach / step) * step   # a band edge sits on the origin (tile centre)
-    while k < n:
-        d.rectangle([k, 0, k + band, n], fill=PLAID + (125,))
-        d.rectangle([0, k, n, k + band], fill=PLAID + (125,))
-        k += step
-    # tile "down" is the garment axis: rotate it from (0, 1) onto ux
-    ang = math.degrees(math.atan2(ux[1], ux[0])) - 90
-    tile = tile.rotate(-ang, resample=Image.BICUBIC, center=(reach, reach), fillcolor=FLANNEL)
-    tile = tile.crop((box[0] - (ox - reach), box[1] - (oy - reach), box[2] - (ox - reach), box[3] - (oy - reach)))
-    mask = Image.new("L", (w, h), 0)
-    ImageDraw.Draw(mask).polygon([(x - box[0], y - box[1]) for x, y in zip(xs, ys)], fill=255)
-    pen.img.paste(tile, box[:2], mask)
-
-
 def chaikin(pts, n=2):
     """Round a closed outline (corner cutting), so garments read as soft cartoon shapes."""
     for _ in range(n):
@@ -263,13 +235,14 @@ def draw_stick(pen, j, k, s, prop=None):
 
 
 def fill_sleeve(pen, j, k, s):
-    """Short flared flannel sleeve with a rolled cuff band at its open end; returns its outline."""
+    """Short flared shirt sleeve with a rolled cuff band at its open end; returns its outline."""
     sh, el = j[f"shoulder_{k}"], j[f"elbow_{k}"]
     poly, end, px = sleeve_shape(sh, el, s)
     ux = axis(sh, el)[0]
-    plaid(pen, poly, s, sh, ux)
+    pen.poly(poly, SHIRT)
     pen.poly(chaikin([add(add(end, ux, -2.6 * s), px, 7.6 * s), add(end, px, 8.4 * s), add(end, px, -8.4 * s),
                       add(add(end, ux, -2.6 * s), px, -7.6 * s)], 1), CUFF)
+    pen.line([add(add(end, ux, -2.6 * s), px, 7.4 * s), add(add(end, ux, -2.6 * s), px, -7.4 * s)], INK, 0.9 * s)
     return poly
 
 
@@ -301,30 +274,30 @@ def draw_shirt(pen, j, s, view, sleeves=()):
     pen.poly(body, None, INK, 2 * LINE * s)
     for k in sleeves:
         fill_sleeve(pen, j, k, s)
-    plaid(pen, body, s, j["neck"], axis(j["neck"], j["pelvis"])[0])
+    pen.poly(body, SHIRT)
     ux, px = axis(j["neck"], j["pelvis"])
     top = add(j["neck"], ux, 0.5 * s); hem = add(j["pelvis"], ux, 6 * s)
     if view == "front":
-        # open flannel: the white tee shows down the middle, collar points either side
-        tee = chaikin([add(top, px, 4.6 * s), add(lerp(top, hem, 0.5), px, 3.6 * s), add(hem, px, 4.4 * s),
-                       add(hem, px, -4.4 * s), add(lerp(top, hem, 0.5), px, -3.6 * s), add(top, px, -4.6 * s)], 1)
-        pen.poly(tee, TEE_WHITE, INK, 1.1 * s)
-        c = add(j["neck"], (0, 1.0 * s))
-        pen.arc([c[0] - 4.6 * s, c[1] - 3.2 * s, c[0] + 4.6 * s, c[1] + 3.2 * s], 15, 165, INK, 1.1 * s)
+        # buttoned white shirt: placket line with button dots, small pointed collar either side of the neck
+        pen.line([add(top, ux, 4 * s), add(hem, ux, -0.6 * s)], INK, 0.9 * s)
+        for t in (0.22, 0.45, 0.68, 0.9):
+            pen.circle(add(add(lerp(top, hem, t), px, 1.6 * s), ux, 0), 0.75 * s, fill=INK)
         for side in (1, -1):
-            pen.poly([add(top, px, side * 4.6 * s), add(top, px, side * 8.5 * s), add(add(top, ux, 6.5 * s), px, side * 5.2 * s)],
-                     CUFF, INK, 1.1 * s)
+            pen.poly([add(top, px, side * 0.6 * s), add(top, px, side * 7.5 * s), add(add(top, ux, 5.5 * s), px, side * 1.6 * s)],
+                     SHIRT, INK, 1.1 * s)
     elif view in ("right", "left"):
         sgn = 1 if view == "right" else -1
         f = 1 if (px[0] * sgn) > 0 else -1
-        tee = chaikin([add(top, px, f * 4.0 * s), add(add(top, ux, 6 * s), px, f * 8.6 * s), add(hem, px, f * 13.3 * s),
-                       add(hem, px, f * 9.8 * s), add(lerp(top, hem, 0.5), px, f * 6.8 * s)], 1)
-        pen.poly(tee, TEE_WHITE, INK, 1.1 * s)
-        pen.poly([add(top, px, f * 2.5 * s), add(top, px, f * 6.4 * s), add(add(top, ux, 6 * s), px, f * 4.6 * s)],
-                 CUFF, INK, 1.1 * s)
+        # placket near the front edge, one collar point
+        pen.line([add(add(top, ux, 4 * s), px, f * 6.5 * s), add(add(hem, ux, -0.6 * s), px, f * 10.5 * s)], INK, 0.9 * s)
+        for t in (0.25, 0.5, 0.75):
+            q = lerp(add(add(top, ux, 4 * s), px, f * 6.5 * s), add(add(hem, ux, -0.6 * s), px, f * 10.5 * s), t)
+            pen.circle(add(q, px, -f * 1.6 * s), 0.75 * s, fill=INK)
+        pen.poly([add(top, px, f * 1.5 * s), add(top, px, f * 7.4 * s), add(add(top, ux, 5.5 * s), px, f * 4.0 * s)],
+                 SHIRT, INK, 1.1 * s)
     else:
         pen.poly(chaikin([add(top, px, 6.5 * s), add(top, px, -6.5 * s), add(add(top, ux, 3.2 * s), px, -5.5 * s),
-                          add(add(top, ux, 3.2 * s), px, 5.5 * s)], 1), CUFF, INK, 1.1 * s)
+                          add(add(top, ux, 3.2 * s), px, 5.5 * s)], 1), SHIRT, INK, 1.1 * s)
     pen.poly(body, None, INK, LINE * s)
 
 
@@ -626,7 +599,7 @@ def make_gif(walk_frames, wave_frames, s_walk, s_wave):
         draw_figure(img, j, "front", s_wave, expr=f["_expr"], over_face="l" if f.get("face_cover") or
                     j["wrist_l"][1] < j["neck"][1] else None)
         out.append(finish(img))
-    # one shared palette for every frame, so the plaid and the jeans keep their colours
+    # one shared palette for every frame, so the shirt and the jeans keep their colours
     probe = Image.new("RGB", (W, H * 4))
     for i, k in enumerate((0, len(walk_frames) // 2, len(walk_frames) + 6, len(out) - 10)):
         probe.paste(out[k], (0, H * i))
@@ -638,7 +611,7 @@ def make_gif(walk_frames, wave_frames, s_walk, s_wave):
 def make_sheet(poses):
     W, H = 1600, 1180
     img = canvas(W, H, (252, 251, 248))
-    text(img, (60, 52), "Style 2 lead Nam: buzz cut, glasses, plaid flannel", 34, True, anchor="lm")
+    text(img, (60, 52), "Style 2 lead Nam: buzz cut, glasses, white shirt", 34, True, anchor="lm")
     text(img, (60, 92), "Code-rendered from a posture-gated rig. Default lead for Style 2A/2B; the red-beanie Zeke stays as an alternative.",
          17, anchor="lm", fill=(90, 90, 90))
     # row 1: turnaround
@@ -660,7 +633,7 @@ def make_sheet(poses):
     px = 1180
     text(img, (px, 145), "Locks", 22, True, anchor="lm")
     rows = [(HAIR, "Very short dark buzz cut, spiky edge"), (FRAME, "Dark rectangular glasses, thick frame"),
-            (FLANNEL, "Open plaid flannel, tee cut, short wide sleeves"), (TEE_WHITE, "Plain white crew-neck tee"),
+            (SHIRT, "White button-up shirt, small collar, buttoned"), (CUFF, "Tee cut, short wide sleeves rolled up"),
             (JEANS, "Dark blue jeans, black shoes"), (INK, "Black stick forearms, round hands")]
     for i, (c, lab) in enumerate(rows):
         y = 195 + i * 46
