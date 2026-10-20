@@ -15,7 +15,9 @@ This script reads the package (Markdown, clips headed "Clip N") and reports:
   * a hand change inside a clip with no beat that passes, swaps, drops or picks it up,
   * a beat sentence that puts a ledger prop in the other hand,
   * a package with no hands lines at all while a beat holds, grabs or carries something,
-  * "near hand" / "far arm" wording, which flips meaning when the character turns.
+  * "near hand" / "far arm" wording, which flips meaning when the character turns,
+  * a hand taking or holding "it"/"them" in the wrong hand (read as the prop named last),
+    or before any prop is named.
 Paw, flipper, wing, hoof, claw and fin count as hands for animal characters.
 
 Usage: hand_ledger.py package.md     Exit 0 = consistent, 1 = problems, 2 = bad input.
@@ -43,6 +45,7 @@ HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|
                      r"clutch(?:es|ing)?|carr(?:y|ies|ying)|picks? up|picking up|wields?|"
                      r"(?:in|with) (?:his|her|their|its|one|both) (?:left |right )?(?:hand|paw|flipper|wing|hoof|claw|fin)s?)\b[^.\n]{0,40}", re.I)
 NEAR_FAR = re.compile(rf"\b(near|far|upstage|downstage) (?:arm|{LIMB[3:-1]})s?\b", re.I)
+PRONOUN = re.compile(r"\b(it|them)\b", re.I)
 CLAUSE = re.compile(r",\s*|;\s*|\s+(?:and|then|while|before|after)\s+", re.I)
 SIDE = re.compile(rf"\b(left|right) {LIMB}s?\b", re.I)
 
@@ -140,6 +143,39 @@ def lint(text):
                                             f"{'left' if 'l' in sides else 'right'} hand, but the hands lines "
                                             f"keep it in the {'right' if 'r' in allowed else 'left'} hand: "
                                             f"\"{sent.strip()[:90]}\"")
+        # "catches it with her left paw": "it" is the ledger prop named last before it in the clip;
+        # check that prop's hand, and ask for the name when no prop was named yet
+        owners = {}
+        for name in everyone:
+            for led in (start[1], end[1]):
+                for side, p in led.get(name, {}).items():
+                    if p:
+                        owners.setdefault(p.split()[-1].rstrip("s"), {}).setdefault(name, set()).add(side)
+        low_beats, cursor = beats.lower(), 0
+        for sent in re.split(r"(?<=[.!?;])\s+", beats):
+            for clause in CLAUSE.split(sent):
+                at = low_beats.find(clause.lower(), cursor) if clause else -1
+                cursor = at if at >= 0 else cursor
+                low = clause.lower()
+                pron = PRONOUN.search(clause)
+                if not (pron and SIDE.search(clause) and (HOLDING.search(clause) or TRANSFER.search(clause))) \
+                        or any(k in low for k in owners) or (n, sent) in seen:
+                    continue
+                before = low_beats[:cursor + pron.start()]
+                key = max(owners, key=before.rfind, default=None)
+                if key is None or before.rfind(key) < 0:
+                    seen.add((n, sent))
+                    problems.append(f"Clip {n}: name the prop instead of \"{pron.group(0)}\" "
+                                    f"when a hand takes or holds it: \"{sent.strip()[:90]}\"")
+                    continue
+                named = {c for c in owners[key] if c.lower() in sent.lower()}
+                allowed = set().union(*(owners[key][c] for c in (named or owners[key])))
+                sides = {m.group(1).lower()[0] for m in SIDE.finditer(clause)}
+                if not sides & allowed:
+                    seen.add((n, sent))
+                    problems.append(f"Clip {n}: \"{pron.group(0)}\" (the {key}) goes in the "
+                                    f"{'left' if 'l' in sides else 'right'} hand, but the hands lines keep it in the "
+                                    f"{'right' if 'r' in allowed else 'left'} hand: \"{sent.strip()[:90]}\"")
         prev_end = end[1] or None
     return problems
 

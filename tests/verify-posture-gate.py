@@ -242,6 +242,28 @@ Hands at end — Nori: left hand empty; right hand holds the milk tea.
 """
 problems = hand_ledger.lint(pkg)
 assert len(problems) == 1 and "milk tea in Nori's right hand" in problems[0], problems
+# "it" is read as the prop named last before it; with no prop named yet, the lint asks for the name
+pkg = """### Clip 1
+Hands at start — Miso: right paw empty; left paw empty.
+[0-3s] Kaka slides the blue folder to Miso. Miso catches it with her left paw.
+Hands at end — Miso: right paw holds the blue folder; left paw empty.
+"""
+problems = hand_ledger.lint(pkg)
+assert len(problems) == 1 and "(the folder) goes in the left hand" in problems[0], problems
+assert hand_ledger.lint(pkg.replace("her left paw.", "her right paw.")) == []
+assert hand_ledger.lint(pkg.replace("Miso catches it", "Miso blows on the folder and catches it")
+                        .replace("her left paw.", "her right paw.")) == []
+problems = hand_ledger.lint(pkg.replace("Kaka slides the blue folder to Miso. ", ""))
+assert len(problems) == 1 and "name the prop" in problems[0], problems
+
+# 3D axes as documented: facing +z, the character's right is at -x; an arm reaching forward passes
+j = {"head": [0, 1.7, 0], "neck": [0, 1.5, 0], "pelvis": [0, 1, 0], "shoulder_r": [-.2, 1.45, 0],
+     "elbow_r": [-.2, 1.45, .25], "wrist_r": [-.2, 1.45, .45], "shoulder_l": [.2, 1.45, 0], "elbow_l": [.2, 1.2, 0],
+     "wrist_l": [.2, 1, 0], "hip_r": [-.1, 1, 0], "knee_r": [-.1, .55, .02], "ankle_r": [-.1, .1, 0],
+     "toe_r": [-.1, .02, .12], "hip_l": [.1, 1, 0], "knee_l": [.1, .55, .02], "ankle_l": [.1, .1, 0], "toe_l": [.1, .02, .12]}
+assert pg.check({"fps": 12, "frames": [{"joints": j}]}, "rig")["status"] == "PASS"
+mirrored = {k: [-v[0], v[1], v[2]] for k, v in j.items()}
+assert pg.check({"fps": 12, "frames": [{"joints": mirrored}]}, "rig")["status"] == "FAIL"
 
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()

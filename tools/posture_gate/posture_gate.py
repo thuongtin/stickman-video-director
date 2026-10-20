@@ -96,8 +96,8 @@ def to_2d(track):
     """Project a 3D rig track onto each frame's own side view (the body's sagittal plane),
     so a limb pointing at a camera never looks short or bent. True 3D bone lengths, joints
     and props are kept for the length and left/right checks. Coordinates: "up_axis"
-    (default [0, 1, 0]) is up; the character's right is +x when it faces +z, as in
-    Blender/three.js. A left-handed engine (Unity) sets "handedness": "left"."""
+    (default [0, 1, 0]) is up; a character facing +z has its own right side at -x,
+    as in three.js/glTF (right-handed coordinates). A left-handed engine (Unity) sets "handedness": "left"."""
     up = unit(tuple(float(x) for x in track.get("up_axis", (0, 1, 0))))
     hand = -1 if track.get("handedness") == "left" else 1
     out = json.loads(json.dumps(track))
