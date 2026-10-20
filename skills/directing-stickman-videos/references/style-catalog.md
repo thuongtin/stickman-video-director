@@ -204,6 +204,9 @@ One off-screen adult male narrator throughout. General American accent, warm cle
 This is the user-accepted male example, not a compulsory voice for every project. For female, older, youthful or other approved voices, resolve a complete coherent profile using `voice-continuity.md`, then repeat it verbatim across every clip. Do not use only "same narrator" or inherit a prior clip by name. Keep narration audio-only, voice-first, with no speech bubbles or dialogue boxes. Actual listening acceptance exists for the Style 2A Hope sample; other profiles/styles remain untested for audio matching.
 
 ### BGM Continuity Lock
+
+This piano-and-synth wording is the Style 1/2 default. Other styles choose their own instruments but keep the same continuity sentence in clips 2–N (`core-contract.md` C3).
+
 - **Clip 1**:
   ```text
   Audio: Voiceover clearly audible over quiet, thoughtful piano and subtle soft ambient synth, building gentle optimistic momentum.
