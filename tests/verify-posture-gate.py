@@ -887,6 +887,13 @@ w = []
 assert hand_ledger.lint(bo, w) == [] and w == [], w
 assert any("Bo has no hands" in p for p in hand_ledger.lint(bo.replace("Bo walks.", "Bo walks, the rice bundle held in its right front hoof.")))
 
+# a busy hand (here holding the cup) still needs its upper arm beside the body, not down over it
+t = front_track()
+t["body_width"] = 2 * abs(t["frames"][0]["joints"]["shoulder_l"][0] - t["frames"][0]["joints"]["neck"][0]) / 0.9
+assert not any("upper arm runs down" in i["message"] for i in pg.check(t)["issues"])
+t["limb_width"] = 12
+assert any("left upper arm runs down" in i["message"] for i in pg.check(t)["issues"])
+
 # front view: both elbows folded into the chest with the hands out past the shoulders bend the wrong way;
 # crossed arms (hands in) are a pose
 def folded(cross):

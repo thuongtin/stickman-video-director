@@ -976,6 +976,14 @@ def check_hands(track, P, usable=None):
                         and pts[ks[0]][1] <= (pts[ks[1]][1] + pts[ks[2]][1]) / 2 <= pts["pelvis"][1]:
                     add(fi, "arm_over_body", f"the {_side(side)} forearm crosses the chest to reach the far side; "
                         "grip on the near side of the body instead", {ks[1], ks[2]}, severity="warn")
+                # a busy hand (resting on a knee, holding a cup) still needs its upper arm beside the body:
+                # a sitter's arms running down the torso edge read as fused onto it
+                if busy and all(k in pts for k in ks[:2]) and pts[ks[1]][1] > pts[ks[0]][1] \
+                        and down(pts[ks[0]], pts[ks[1]]) < 25 and any(
+                            abs(q[0] - mid) - lw < half_at(q[1])
+                            for q in (pts[ks[1]], tuple((a + b) / 2 for a, b in zip(pts[ks[0]], pts[ks[1]])))):
+                    add(fi, "arm_over_body", f"the {_side(side)} upper arm runs down over the body, not beside it",
+                        {ks[0], ks[1]}, severity="warn")
             pts = pts0
 
         # Side view: the near arm (the right arm when facing right) cutting across the head
