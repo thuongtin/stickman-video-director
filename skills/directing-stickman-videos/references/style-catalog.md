@@ -14,6 +14,21 @@ This catalog defines the supported visual styles for `directing-stickman-videos`
 | **Style 3** | Prehistoric Hand-Drawn / Dark Comedy (史前手绘 / 黑色幽默) | Earthy prehistoric environments, warm fire accents, subtle paper texture | Satirical stories, visual analogies, ironic callbacks | White filled heads, expressive cartoon faces, black stick limbs, variable story-specific cast |
 | **Style 4** | Cozy Storytelling (治愈故事风) | Full-color 2D cartoon locations, gentle atmospheric light, varied cinematic shots | Relatable life stories, emotional growth, educational storytelling | White filled round head and slim torso, dark stick limbs, simple expressive face |
 
+### Status
+
+Levels follow `style-pack-template.md`: a level covers only the samples behind it.
+
+| Style | Status | Evidence |
+|---|---|---|
+| Style 1 Dark | approved | Owner accepted the Dark samples, 2026-10-12/13 (`tests/reports/classic-character.md`) |
+| Style 1 Light | flow-tested | Same story with the polarity swapped (`tests/reports/classic-character.md`); no separate acceptance |
+| Style 2A | flow-tested | Three-clip Flow run for the voice block (`tests/reports/shared-voice.md`); README demo |
+| Style 2B | flow-tested | README demo only; no written report |
+| Style 3 | approved | Owner approved three clips of one story (`tests/reports/style-3.md`) |
+| Style 4 | approved | Owner selected two samples (`tests/reports/style-4.md`) |
+
+New styles are drafted with `style-pack-template.md` and named by slug.
+
 For Style 3 read `prehistoric-dark-comedy.md`. It overrides this catalog's generic motion and piano rules. Fix the drawing grammar across stories, not one universal face; fix each approved character within a story.
 
 For Style 4 read `cozy-storytelling.md`. Treat locations as story beats, not one universal room. Its English display name is **Cozy Storytelling**; do not rename it Sketchbook Stories, hand-drawn, or prehistoric.
