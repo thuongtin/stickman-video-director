@@ -935,6 +935,15 @@ def check_hands(track, P, usable=None):
             down = lambda a, b: math.degrees(math.atan2(abs(b[0] - a[0]), b[1] - a[1]))  # 0 = straight down
             inside_elbow = lambda sd: f"elbow_{sd}" in pts and \
                 abs(pts[f"elbow_{sd}"][0] - mid) < 0.6 * half_at(pts[f"elbow_{sd}"][1])
+            # both upper arms folded into the chest with the hands out past the shoulders: the elbows bend
+            # the wrong way (an IK solver picked the inner elbow); crossed arms keep the hands in
+            arm = [f"{k}_{sd}" for sd in SIDES for k in ("shoulder", "elbow", "wrist")]
+            if all(k in pts for k in arm) and inside_elbow("l") and inside_elbow("r") and all(
+                    (pts[f"wrist_{sd}"][0] - mid) * (pts[f"shoulder_{sd}"][0] - mid) > 0
+                    and abs(pts[f"wrist_{sd}"][0] - mid) > abs(pts[f"shoulder_{sd}"][0] - mid) for sd in SIDES):
+                add(fi, "elbow_inverted", "both elbows fold into the chest while the hands sit out past the shoulders, "
+                    "so the elbows bend the wrong way; put the elbows at the sides and bring the hands in front",
+                    set(arm))
             for side in SIDES:
                 ks = (f"shoulder_{side}", f"elbow_{side}", f"wrist_{side}")
                 if ks[0] in pts and abs(pts[ks[0]][0] - mid) < 0.8 * half:

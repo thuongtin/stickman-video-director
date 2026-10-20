@@ -41,7 +41,10 @@ EXCUSE = re.compile(r"\b(handoff|hand-off|time cut)\b[.:,]?\s*", re.I)
 LIMB = r"(?:hand|paw|flipper|wing|hoof|claw|fin|glove|mitten|mitt|fist|palm)"
 # "right front hoof", "left hind paw": a four-legged character's limb is still that side's hand
 POS = r"(?:(?:front|fore|back|hind|rear)\s+)?"
-ENTRY = re.compile(rf"(?P<name>\s*(?:(?:Mr|Mrs|Ms|Dr|St)\.\s*)?[^:;.]+?):\s*(?P<a>(?:right|left) {POS}{LIMB}\s+[^;]+?);\s*(?P<b>(?:right|left) {POS}{LIMB}\s+[^.;\n]+)", re.I)
+# one entry per character; a lone hand ("Drawing hand: right hand holds the marker.") lists one side,
+# and its entry ends at its period so the next character's entry is not swallowed
+ENTRY = re.compile(rf"(?P<name>\s*(?:(?:Mr|Mrs|Ms|Dr|St)\.\s*)?[^:;.]+?):\s*(?P<a>(?:right|left) {POS}{LIMB}\s+(?:(?!\.\s)[^;\n])+?)"
+                   rf"(?:;\s*(?P<b>(?:right|left) {POS}{LIMB}\s+[^.;\n]+)|(?=\.(?:\s|$)|\s*$))", re.I)
 HAND = re.compile(rf"(right|left) {POS}{LIMB}\s+(.+)", re.I | re.S)
 TRANSFER = re.compile(r"\b(opens? (?:his|her|their|its) (?:left |right )?(?:hand|paw|fist|fingers)|closes? (?:his|her|their|its) "
                       r"(?:left |right )?(?:hand|paw|fingers) (?:around|on|over)|lets? (?:\S+ ){0,3}?go|pass(es|ed)?|hands (it )?over|hand it over|(?<!both )(?<!his )(?<!her )(?<!their )(?<!its )(?<!two )(?<!the )(?<!with )hands (?:\w+ )?(?:the|a|an|it|her|his|them)\b|gives?|takes?|swaps?|switch(es)?|moves? .* to (his|her|their|its) "
@@ -272,8 +275,11 @@ def parse_ledger(line):
     for m in ENTRY.finditer(line):
         hands = {}
         for part in (m["a"], m["b"]):
-            side, what = HAND.match(part).groups()
-            hands[side[0].lower()] = held(what)
+            if part:
+                side, what = HAND.match(part).groups()
+                hands[side[0].lower()] = held(what)
+        if not m["b"] and len(hands) == 1:  # a lone hand: the other side does not exist
+            hands.setdefault("l" if "r" in hands else "r", None)
         if set(hands) == {"r", "l"}:
             out[m["name"].strip()] = hands
     return out
@@ -530,6 +536,8 @@ def lint(text, warnings=None):
                 want = {sd for sd in ("r", "l") if end[1][name][sd] == p}
                 last, ctx = None, None
                 for si, x, clause, _, hands in rows:
+                    if si >= timed_n and last:  # the final frame restates the end; a beat must get there
+                        break
                     sides = {sd for sd, o in hands if sd != "b" and o == name}
                     # one grip described hand by hand in one sentence: "holding the broom low in his
                     # right hand and high in his left hand", "takes the broom in his right hand and
@@ -542,7 +550,15 @@ def lint(text, warnings=None):
                     if not (named or bare):
                         ctx = None if any(mentions(clause, q) for q in LISTED) else ctx
                         continue
-                    if sides:
+                    # "passes the kite from her left hand into her right hand": only the right one ends up with it
+                    move = re.search(rf"\bfrom (?:his|her|their|its|the) (left|right) {POS}{LIMB}\b.*?\b(?:in)?to "
+                                     rf"(?:his|her|their|its|the) (left|right) {POS}{LIMB}", clause, re.I)
+                    if move and sides:
+                        sides = {move.group(2).lower()[0]}
+                    if sides and LETGO.search(clause):  # "lets go of the jar with his left hand"
+                        if last:
+                            last = (last[0] - sides, x) if last[0] - sides else None
+                    elif sides:
                         joins = bare or re.search(r"\b(?:too|also|adds?|joins?|together)\b", clause, re.I)
                         last = (last[0] | sides, x) if last and ctx == si and joins else (sides, x)
                     ctx = si
@@ -623,6 +639,18 @@ def lint(text, warnings=None):
                 # laid on the table, then lifted again: "lifts her folded sheet with her left hand"
                 for q in [q for (c2, q) in released if c2 == who and mentions(clause, q)]:
                     del released[(who, q)]
+            # "Ông Đồ takes it": a take of a ledger prop must name the hand that takes it
+            if took and who in everyone and not final and (n, x) not in seen and not UNSIDED.search(clause) \
+                    and not any(o == who for s2, _, _, _, h2 in rows[max(0, idx - 4):idx + 1] if s2 == si for _, o in h2) \
+                    and not re.search(r"\b(?:from|off|out of)\b[^,;]*\b(?:table|floor|ground|shelf|stack|pile|tray|basket)\b", clause, re.I):
+                before = " ".join(c2 for s2, _, c2, _, _ in rows[max(0, idx - 4):idx] if s2 >= si - 1)
+                q = got or (PRONOUN.search(clause[took.end():]) and next(
+                    (t for t in sorted(listed, key=lambda t: before.lower().rfind(t.split()[-1]), reverse=True)
+                     if mentions(before, t)), None))
+                if q and q in (end[1].get(who) or {}).values():
+                    seen.add((n, x))
+                    problems.append(f"Clip {n}: {who} takes the {q} without naming the hand; say which hand takes it "
+                                    f"(\"with the left hand\", \"with both hands\"): \"{excerpt(x)}\"")
             # a prop held in both hands, used with one: "lifts the broom in his left hand alone"
             for c, p in two:
                 sides = {sd for sd, o in hands if o == c}

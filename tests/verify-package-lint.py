@@ -54,6 +54,18 @@ assert "B5" not in codes(duo), pl.lint(duo)[0]
 assert "B5" in codes(duo.replace("Scottish accent, light tenor.\nNo", "Irish accent, light tenor.\nNo").replace(
     "Voice — Ana: adult woman, General American accent, warm alto.\nVoice — Ben", "Voice — Ana: adult woman, General American accent, bright alto.\nVoice — Ben")), "speaker drift not caught"
 
+# Every one of the five posture negatives is required, not only the left/right one.
+for phrase in ("No knees or elbows bending backward, ", "no limbs changing length, ", "no head turned past the shoulders, ",
+               "no prop switching hands without a visible pass"):
+    broken = style1.replace(phrase, "", 1)
+    assert broken != style1 and "B10" in codes(broken), f"missing \"{phrase}\" not caught"
+
+# Music continuity and logos are flagged for a look (the bundled Style 1 example scores an arc on purpose).
+yellow = lambda text: {c for level, c, _ in pl.lint(text)[0] if level == pl.YELLOW}
+assert "B12" not in yellow(style2a), [x for x in pl.lint(style2a)[0] if x[1] == "B12"]
+assert "B12" in yellow(style2a.replace("synth from clip 1", "synth", 1))
+assert "B13" not in yellow(style1) and "B13" in yellow(style1.replace("logos, or watermarks", "or watermarks"))
+
 # Yellow checks: camera grammar and weak beats.
 cam = style1.replace("低机位固定镜头", "低机位推近", 1).replace("侧向跟拍、摔倒拆解", "快速推近、摔倒拆解", 1)
 assert any(c == "A3" for _, c, _ in pl.lint(cam)[0]), "three inward rows not flagged"

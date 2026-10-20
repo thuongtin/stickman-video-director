@@ -26,8 +26,12 @@ Phase B (prompts)
   B7 quoted words outside the spoken dialogue (they tend to render on screen)  RED
   B8 a beat asks for morphing, melting or liquid shapes                      RED
   B9 a clip has fewer than three timed beats covering 0 to about 10 s            RED
-  B10 a clip without the posture negative "swapped left and right hands"      RED
+  B10 a clip missing any of the five posture negatives (knees or elbows bending backward, limbs
+      changing length, head turned past the shoulders, swapped left and right hands, a prop
+      switching hands without a visible pass)                                  RED
   B11 more than one accent camera move in a clip; weak "appears/fades in" beats   YELLOW
+  B12 clips 2–N whose Audio/Music line does not say the score continues from clip 1   YELLOW
+  B13 a clip whose negatives never forbid logos                                YELLOW
 
 --facts writes the measured facts (counts, results, sha256 of the package) with a fingerprint, so a
 delivery note can quote them instead of claiming a pass; --verify reports whether the block was edited.
@@ -61,6 +65,16 @@ TECH_COLOR = re.compile(r"#[0-9a-f]{6}\b|#[0-9a-f]{3}\b|\brgba?\s*\(|\bhsla?\s*\
 MORPH = re.compile(r"\b(?:morph\w*|melts? into|melting into|turns? (?:in)?to liquid|liquid (?:shapes?|forms?)|"
                    r"splits? into|separates? into|reshapes?|dissolves? into)\b", re.I)
 BEAT = re.compile(r"^\s*(?:[-*]\s*)?\[(\d+(?:\.\d+)?)\s*[–-]\s*(\d+(?:\.\d+)?)\s*s\]")
+# the five posture negatives every clip carries (posture-gate.md)
+POSTURE_NEGATIVES = {
+    "knees or elbows bending backward": re.compile(r"\b(?:knees?|elbows?)\b[^.\n]{0,40}\bbend\w*\s+backwards?\b", re.I),
+    "limbs changing length": re.compile(r"\blimbs?\s+(?:chang|stretch|shrink)\w*\s+(?:in\s+)?length\b|\blimbs?\b[^.\n]{0,30}\bkeep\w* (?:their|its) length\b", re.I),
+    "head turned past the shoulders": re.compile(r"\bheads?\b[^.\n]{0,30}\bturn\w*\s+past\s+the\s+shoulders?\b", re.I),
+    "swapped left and right hands": re.compile(r"\bswapped left and right hands\b", re.I),
+    "prop switching hands without a visible pass": re.compile(r"\bswitch\w*\s+hands\s+without\s+a\s+visible\s+pass\b", re.I),
+}
+MUSIC_LINE = re.compile(r"^\W*(?:audio|music(?:/sfx)?|bgm|score|soundtrack)\b[^:\n]{0,20}:.*$", re.I | re.M)
+FROM_CLIP1 = re.compile(r"\b(?:from|of|in|as in)\s+(?:clip\s*(?:1|one)|the first clip)\b", re.I)
 SPEAKER = re.compile(r"^\s*Voice\s*(?:[—–-]\s*|\()([^:()\n]{1,40})\)?:\s*(.+)$", re.M)
 VOICE = re.compile(r"\b(?:accent|timbre|register|resonance|baritone|tenor|alto|soprano|pitch)\b", re.I)
 NUMBER_WORDS = {w: i for i, w in enumerate(
@@ -234,8 +248,15 @@ def lint_phase_b(text, ps, clips, extra_anchors):
         spans = [tuple(float(x) for x in BEAT.match(l).groups()) for l in p.splitlines() if BEAT.match(l)]
         if len(spans) < 3 or spans[0][0] != 0 or spans[-1][1] < 9:
             out.append((RED, "B9", f"clip {n}: needs at least three timed beats from [0–…s] to about [..–10s]; found {spans}"))
-        if "swapped left and right hands" not in p.lower():
-            out.append((RED, "B10", f"clip {n}: posture negatives missing (\"no swapped left and right hands\" …)"))
+        missing = [k for k, rx in POSTURE_NEGATIVES.items() if not rx.search(p)]
+        if missing:
+            out.append((RED, "B10", f"clip {n}: posture negatives missing: no {'; no '.join(missing)}"))
+        music = [l for l in MUSIC_LINE.findall(p) if not re.match(r"\W*audio[- ]only dialogue", l, re.I)]
+        if n > 1 and not any(FROM_CLIP1.search(l) for l in music):
+            out.append((YELLOW, "B12", f"clip {n}: the Audio line does not say the score continues from clip 1 "
+                                       "(\"seamlessly continues the identical ... from clip 1, same tempo and instrumentation\")"))
+        if not re.search(r"\blogos?\b", body, re.I):
+            out.append((YELLOW, "B13", f"clip {n}: the negatives never forbid logos (\"no logos or watermarks\")"))
         accents = sum(bool(ACCENT.search(l)) for l in beat_lines)
         if accents > 1:
             out.append((YELLOW, "B11", f"clip {n}: {accents} beats with an accent camera move; keep one per clip"))

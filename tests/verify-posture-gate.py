@@ -854,6 +854,46 @@ for bad in ("the rice bundle held in its right front hoof", "the rice bundle ste
 assert hand_ledger.lint("### Clip 1\nHands at start — Bo: right front hoof empty; left front hoof empty.\n"
                         "Hands at end — Bo: right front hoof empty; left front hoof empty.\n") == []
 
+# "her left hand" belongs to the clause's subject, not the last name in the sentence; a lone hand
+# has a one-hand entry that does not swallow the next character's
+apple = ("### Clip 1\nHands at start — Juno: right hand holds the red apple; left hand empty. Vega: right hand empty; left hand empty.\n"
+         "- [0-3s] Juno lets go of the red apple.\n"
+         "- [3-7s] Vega catches the red apple with her left hand, grabs the rail with her right hand and stops beside Juno, a hand's width apart.\n"
+         "- [7-10s] Vega floats beside Juno, the red apple in her left hand.\n"
+         "Hands at end — Juno: right hand empty; left hand empty. Vega: right hand empty; left hand holds the red apple.\n")
+assert hand_ledger.lint(apple) == [], hand_ledger.lint(apple)
+assert hand_ledger.parse_ledger("Drawing hand: right hand holds the black marker. Bean: right hand empty; left hand empty.") == {
+    "Drawing hand": {"r": "black marker", "l": None}, "Bean": {"r": None, "l": None}}
+
+# a take names its hand; a two-hand take needs a beat that frees one hand before a one-hand end line
+cake = ("### Clip 1\nHands at start — Man: right hand holds the rice cake; left hand holds the rice cake. Do: right hand empty; left hand empty.\n"
+        "- [0-3s] Man holds the rice cake out with both hands; Do takes the rice cake with both hands; Man's hands are now empty.\n"
+        "- [3-7s] Do lets go with his right hand and holds the rice cake against his chest in his left hand.\n"
+        "- [7-10s] Man bows.\n"
+        "Final frame: Do holds the rice cake in his left hand.\n"
+        "Hands at end — Man: right hand empty; left hand empty. Do: right hand empty; left hand holds the rice cake.\n")
+assert hand_ledger.lint(cake) == [], hand_ledger.lint(cake)
+assert any("without naming the hand" in p for p in hand_ledger.lint(cake.replace("takes the rice cake with both hands", "takes it")))
+assert any("last beat with the rice cake" in p for p in hand_ledger.lint(
+    cake.replace("lets go with his right hand and holds the rice cake against his chest in his left hand",
+                 "holds the rice cake against his chest")))
+
+# front view: both elbows folded into the chest with the hands out past the shoulders bend the wrong way;
+# crossed arms (hands in) are a pose
+def folded(cross):
+    t = front_track()
+    t["body_width"] = 2 * abs(t["frames"][0]["joints"]["shoulder_l"][0] - t["frames"][0]["joints"]["neck"][0]) / 0.9
+    for f in t["frames"]:
+        f["holds"], f["props"] = {}, {}
+        j, n = f["joints"], f["joints"]["neck"]
+        for sd, o in (("l", 1), ("r", -1)):
+            sh = j[f"shoulder_{sd}"]
+            j[f"elbow_{sd}"] = [n[0] + o * 3, sh[1] + 20]
+            j[f"wrist_{sd}"] = [n[0] - o * 8, sh[1] + 12] if cross else [sh[0] + o * 14, sh[1] + 22]
+    return t
+assert "elbow_inverted" in kinds(pg.check(folded(False)))
+assert "elbow_inverted" not in kinds(pg.check(folded(True)))
+
 # four-legged tracks (points at the frame's top level) are read: bones, legs, pops, a stick tail
 def cat(i, sit=False):
     j = {"hip": [100, 50], "shoulder": [60, 50], "neck": [52, 42], "head": [45, 36],
