@@ -1,6 +1,6 @@
 # Style 2 default lead
 
-Nam is the default lead of Style 2 (Modern Pop): a very short dark buzz cut, thick dark rectangular glasses over dot eyes, a plain dark red crew-neck tee, dark shorts and black stick limbs. Upstream's red-beanie Zeke stays available as the alternative lead; the skill uses it only when asked. The prompt anchors for both live in `skills/directing-stickman-videos/references/style-catalog.md`.
+Nam is the default lead of Style 2 (Modern Pop): a very short dark buzz cut, thick dark rectangular glasses, an open red-and-navy plaid flannel shirt with rolled sleeves over a plain white tee, dark blue jeans and black stick limbs. The body (big round white head, short neck, boxy shirt, thin stick limbs, simple face) is the same as upstream's red-beanie lead; only the hair, glasses and clothes differ. Upstream's red-beanie Zeke stays available as the alternative lead; the skill uses it only when asked. The prompt anchors for both live in `skills/directing-stickman-videos/references/style-catalog.md`.
 
 ![Character sheet](sheet.png)
 

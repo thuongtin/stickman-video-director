@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Draw the Style 2 default lead (buzz cut, dark rectangular glasses, dark red crew-neck tee) from a code rig.
+"""Draw the Style 2 default lead (buzz cut, dark rectangular glasses, open plaid flannel over a white tee, jeans;
+same body as upstream's red-beanie lead) from a code rig.
 
 Writes, next to this file:
   sheet.png          character sheet: turnaround, expressions, poses, palette
@@ -18,14 +19,16 @@ HERE = Path(__file__).resolve().parent
 SS = 3  # supersampling
 
 # rest lengths at scale 1 (track units = pixels at scale 1)
-LEN = {"torso": 58, "head": 30, "upper_arm": 30, "forearm": 28, "thigh": 38, "shin": 36, "foot": 11}
-HEAD_R = 21
+LEN = {"torso": 56, "head": 25, "upper_arm": 28, "forearm": 27, "thigh": 37, "shin": 35, "foot": 11}
+HEAD_R = 24
 INK = (24, 24, 24)
 HAIR = (34, 30, 30)
 FRAME = (40, 38, 38)
-TEE = (139, 45, 42)        # dark red / maroon
-TEE_DARK = (104, 30, 29)
-SHORTS = (58, 62, 72)      # charcoal
+FLANNEL = (176, 38, 40)    # open red flannel shirt
+PLAID = (34, 40, 78)       # navy check bands
+CUFF = (128, 26, 30)       # rolled cuffs and collar
+TEE_WHITE = (250, 250, 248)
+JEANS = (46, 74, 120)      # dark blue jeans
 SKIN = (255, 255, 255)     # the head stays white like every Style 2 figure
 STUBBLE = (150, 150, 150)
 PEN = (40, 200, 230)
@@ -137,6 +140,7 @@ def ik_front(a, k, target_math):
 # ---------------------------------------------------------------- drawing
 class Pen:
     def __init__(self, img):
+        self.img = img
         self.d = ImageDraw.Draw(img)
 
     def line(self, pts, fill, w):
@@ -153,7 +157,8 @@ class Pen:
 
     def poly(self, pts, fill, outline=None, w=0):
         p = [(x * SS, y * SS) for x, y in pts]
-        self.d.polygon(p, fill=fill)
+        if fill:
+            self.d.polygon(p, fill=fill)
         if outline:
             self.d.line(p + [p[0]], fill=outline, width=round(w * SS), joint="curve")
 
@@ -168,52 +173,98 @@ def lerp(p, q, t):
     return (p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t)
 
 
-def tee_shape(neck, pelvis, s, half_top=11.0, half_hem=13.0):
-    ax = (pelvis[0] - neck[0], pelvis[1] - neck[1]); n = math.hypot(*ax); ux = (ax[0] / n, ax[1] / n)
-    px = (-ux[1], ux[0])
-    top = add(neck, ux, 3 * s); sh = add(neck, ux, 9 * s); hem = add(pelvis, ux, 3 * s)
-    return [add(top, px, half_top * 0.75 * s), add(sh, px, half_top * s), add(hem, px, half_hem * s),
-            add(hem, px, -half_hem * s), add(sh, px, -half_top * s), add(top, px, -half_top * 0.75 * s)]
+def axis(p, q):
+    ax = (q[0] - p[0], q[1] - p[1]); n = math.hypot(*ax) or 1.0; ux = (ax[0] / n, ax[1] / n)
+    return ux, (-ux[1], ux[0])
+
+
+def shirt_shape(neck, pelvis, s, half_top=12.0, half_hem=13.5):
+    """Boxy shirt body like the beanie lead's tee: square shoulders, straight sides, hem just below the hips."""
+    ux, px = axis(neck, pelvis)
+    top = add(neck, ux, 1 * s); sh = add(neck, ux, 6 * s); hem = add(pelvis, ux, 5 * s)
+    return [add(top, px, half_top * 0.6 * s), add(sh, px, half_top * s), add(hem, px, half_hem * s),
+            add(hem, px, -half_hem * s), add(sh, px, -half_top * s), add(top, px, -half_top * 0.6 * s)]
+
+
+def plaid(pen, pts, s):
+    """Fill a polygon with a large, simple red-and-navy check (few, wide bands so it cannot shimmer)."""
+    img = pen.img
+    xs = [x * SS for x, _ in pts]; ys = [y * SS for _, y in pts]
+    box = (int(min(xs)) - 2, int(min(ys)) - 2, int(max(xs)) + 3, int(max(ys)) + 3)
+    w, h = box[2] - box[0], box[3] - box[1]
+    tile = Image.new("RGB", (w, h), FLANNEL)
+    d = ImageDraw.Draw(tile, "RGBA")
+    step, band = 11 * s * SS, 3.6 * s * SS
+    k = -(box[0] % step) - step
+    while k < w + step:
+        d.rectangle([k, 0, k + band, h], fill=PLAID + (150,))
+        k += step
+    k = -(box[1] % step) - step
+    while k < h + step:
+        d.rectangle([0, k, w, k + band], fill=PLAID + (150,))
+        k += step
+    mask = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(mask).polygon([(x - box[0], y - box[1]) for x, y in zip(xs, ys)], fill=255)
+    img.paste(tile, box[:2], mask)
 
 
 def draw_leg(pen, j, k, s, view):
-    pen.line([j[f"hip_{k}"], j[f"knee_{k}"], j[f"ankle_{k}"]], INK, 4.2 * s)
-    if view in ("front", "back"):
-        pen.line([j[f"ankle_{k}"], j[f"toe_{k}"]], INK, 6 * s)
-    else:
-        pen.line([j[f"ankle_{k}"], j[f"toe_{k}"]], INK, 6.5 * s)
+    """Stick leg in slim dark blue jeans, with a black shoe."""
+    pts = [j[f"hip_{k}"], j[f"knee_{k}"], j[f"ankle_{k}"]]
+    pen.line([j[f"ankle_{k}"], j[f"toe_{k}"]], INK, 6 * s)
+    pen.line(pts, INK, 7.6 * s)
+    pen.line(pts, JEANS, 5.0 * s)
 
 
-def draw_shorts(pen, j, s):
-    for k in ("l", "r"):
-        pen.line([j["pelvis"], lerp(j[f"hip_{k}"], j[f"knee_{k}"], 0.42)], INK, 14 * s)
-    for k in ("l", "r"):
-        pen.line([j["pelvis"], lerp(j[f"hip_{k}"], j[f"knee_{k}"], 0.40)], SHORTS, 10.5 * s)
+def sleeve_shape(sh, el, s):
+    ux, px = axis(sh, el)
+    end = lerp(sh, el, 0.86)
+    return [add(sh, px, 5.6 * s), add(end, px, 4.6 * s), add(end, px, -4.6 * s), add(sh, px, -5.6 * s)], end, px
 
 
 def draw_arm(pen, j, k, s, prop=None):
     sh, el, wr = j[f"shoulder_{k}"], j[f"elbow_{k}"], j[f"wrist_{k}"]
-    pen.line([sh, el, wr], INK, 4.2 * s)
+    pen.line([el, wr], INK, 3.4 * s)
     if prop == "pen":
         tip = add(wr, (math.cos(math.radians(-35)), math.sin(math.radians(-35))), 18 * s)
         pen.line([add(wr, (tip[0] - wr[0], tip[1] - wr[1]), -0.25), tip], INK, 5 * s)
         pen.line([add(wr, (tip[0] - wr[0], tip[1] - wr[1]), -0.2), tip], PEN, 2.6 * s)
-    pen.circle(wr, 5.2 * s, fill=INK)
-    # short sleeve over the top of the upper arm
-    sl = lerp(sh, el, 0.48)
-    pen.line([sh, sl], INK, 11.5 * s)
-    pen.line([sh, sl], TEE, 8 * s)
+    pen.circle(wr, 4.8 * s, fill=INK)
+    # flannel sleeve rolled up to just above the elbow, so the forearm stays a stick
+    poly, end, px = sleeve_shape(sh, el, s)
+    plaid(pen, poly, s)
+    pen.poly(poly, None, INK, 1.8 * s)
+    pen.line([add(end, px, 4.8 * s), add(end, px, -4.8 * s)], CUFF, 3.2 * s)
 
 
-def draw_tee(pen, j, s, view):
-    pen.poly(tee_shape(j["neck"], j["pelvis"], s), TEE, INK, 2.4 * s)
+def draw_shirt(pen, j, s, view):
+    body = shirt_shape(j["neck"], j["pelvis"], s)
+    plaid(pen, body, s)
+    ux, px = axis(j["neck"], j["pelvis"])
+    top = add(j["neck"], ux, 1 * s); hem = add(j["pelvis"], ux, 5 * s)
     if view == "front":
-        c = add(j["neck"], (0, 2.5 * s))
-        pen.arc([c[0] - 7 * s, c[1] - 5 * s, c[0] + 7 * s, c[1] + 5 * s], 10, 170, TEE_DARK, 2.6 * s)
+        # open flannel: the white tee shows down the middle, collar points either side
+        tee = [add(top, px, 5 * s), add(hem, px, 4.2 * s), add(hem, px, -4.2 * s), add(top, px, -5 * s)]
+        pen.poly(tee, TEE_WHITE, INK, 1.4 * s)
+        c = add(j["neck"], (0, 1.2 * s))
+        pen.arc([c[0] - 5 * s, c[1] - 3.5 * s, c[0] + 5 * s, c[1] + 3.5 * s], 10, 170, INK, 1.4 * s)
+        for side in (1, -1):
+            pen.poly([add(top, px, side * 5 * s), add(top, px, side * 10 * s), add(add(top, ux, 7 * s), px, side * 6 * s)],
+                     CUFF, INK, 1.4 * s)
     elif view in ("right", "left"):
         sgn = 1 if view == "right" else -1
-        c = add(j["neck"], (sgn * 4 * s, 3.5 * s))
-        pen.line([add(c, (-sgn * 6 * s, -1.5 * s)), c], TEE_DARK, 2.4 * s)
+        # the open front edge: a slim strip of white tee on the side the character faces
+        f = 1 if (px[0] * sgn) > 0 else -1
+        tee = [add(top, px, f * 7 * s), add(hem, px, f * 9.5 * s), add(hem, px, f * 13.5 * s), add(top, px, f * 7.2 * s)]
+        tee = [add(top, px, f * 6.4 * s), add(add(top, ux, 5 * s), px, f * 12 * s), add(hem, px, f * 13.5 * s),
+               add(hem, px, f * 10 * s)]
+        pen.poly(tee, TEE_WHITE, INK, 1.4 * s)
+        pen.poly([add(top, px, f * 3 * s), add(top, px, f * 7 * s), add(add(top, ux, 6 * s), px, f * 5 * s)],
+                 CUFF, INK, 1.4 * s)
+    else:
+        pen.poly([add(top, px, 7 * s), add(top, px, -7 * s), add(add(top, ux, 3.5 * s), px, -6 * s),
+                  add(add(top, ux, 3.5 * s), px, 6 * s)], CUFF, INK, 1.4 * s)
+    pen.poly(body, None, INK, 1.9 * s)
 
 
 def spiky_hair(cx, cy, r, s, a0, a1, cut):
@@ -223,15 +274,15 @@ def spiky_hair(cx, cy, r, s, a0, a1, cut):
     n = round(abs(a1 - a0) / 3.2)
     for i in range(n + 1):
         a = math.radians(a0 + (a1 - a0) * i / n)
-        rr = r + (2.6 if i % 2 else 0.9) * s
+        rr = r + (2.4 if i % 2 else 0.8) * s
         pts.append((cx + rr * math.cos(a), cy + rr * math.sin(a)))
     return pts + cut
 
 
 def draw_head(pen, j, s, view, expr="smile", stubble=False):
     cx, cy = j["head"]; r = HEAD_R * s
-    pen.line([j["neck"], lerp(j["neck"], j["head"], 0.4)], INK, 4.2 * s)
-    pen.circle((cx, cy), r, fill=SKIN, outline=INK, w=2.6 * s)
+    pen.line([j["neck"], lerp(j["neck"], j["head"], 0.5)], INK, 3.4 * s)
+    pen.circle((cx, cy), r, fill=SKIN, outline=INK, w=2.0 * s)
     if view == "back":
         cut = [(cx + r * 0.8, cy + r * 0.58), (cx, cy + r * 0.74), (cx - r * 0.8, cy + r * 0.58)]
         pen.poly(spiky_hair(cx, cy, r, s, 144, 396, cut), HAIR)
@@ -239,7 +290,7 @@ def draw_head(pen, j, s, view, expr="smile", stubble=False):
         pen.line([(cx + r * 0.8, cy - 1 * s), (cx + r * 0.98, cy - 1 * s)], FRAME, 2.4 * s)
         return
     if view == "front":
-        hl = cy - r * 0.48
+        hl = cy - r * 0.5
         cut = [(cx + r * 0.86, hl + 2 * s), (cx + r * 0.45, hl - 1.5 * s), (cx, hl - 0.5 * s),
                (cx - r * 0.45, hl - 1.5 * s), (cx - r * 0.86, hl + 2 * s)]
         pen.poly(spiky_hair(cx, cy, r, s, 192, 348, cut), HAIR)
@@ -254,95 +305,98 @@ def draw_head(pen, j, s, view, expr="smile", stubble=False):
         draw_face_front(pen, cx, cy, r, s, expr)
     else:
         sgn = 1 if view == "right" else -1
-        # close-cropped: a band hugging the skull from the forehead over the crown to the nape
-        a0, a1 = (150, 318) if sgn == 1 else (222, 390)
-        inner = []
-        for i in range(25):
-            a = math.radians(a1 - (a1 - a0) * i / 24)
-            depth = 0.70 if 0.25 < i / 24 < 0.8 else 0.80
-            inner.append((cx + r * depth * math.cos(a), cy + r * depth * math.sin(a)))
-        pen.poly(spiky_hair(cx, cy, r, s, a0, a1, inner), HAIR)
+        # three-quarter head like the beanie lead: hairline across the forehead, crown and nape behind
+        cut = [(cx + sgn * r * 0.9, cy - r * 0.4), (cx + sgn * r * 0.35, cy - r * 0.56), (cx - sgn * r * 0.3, cy - r * 0.5),
+               (cx - sgn * r * 0.55, cy - r * 0.1), (cx - sgn * r * 0.72, cy + r * 0.38)]
+        if sgn == 1:
+            pen.poly(spiky_hair(cx, cy, r, s, 148, 337, cut), HAIR)
+        else:
+            pen.poly(spiky_hair(cx, cy, r, s, 203, 392, cut[::-1]), HAIR)
         draw_face_side(pen, cx, cy, r, s, sgn, expr)
+
+
+def eye(pen, x, y, s, expr):
+    if expr == "happy":
+        pen.arc([x - 2.6 * s, y - 1.5 * s, x + 2.6 * s, y + 2.5 * s], 200, 340, INK, 1.6 * s)
+    else:
+        k = 1.25 if expr == "surprised" else 1.0
+        pen.d.ellipse([(x - 1.7 * k * s) * SS, (y - 2.7 * k * s) * SS, (x + 1.7 * k * s) * SS, (y + 2.7 * k * s) * SS], fill=INK)
 
 
 def brows(pen, cx, cy, r, s, expr, xs):
     for i, x in enumerate(xs):
         side = -1 if i == 0 else 1
-        y = cy - r * 0.3
+        y = cy - r * 0.32
         if expr == "surprised":
-            pen.arc([x - 4 * s, y - 6 * s, x + 4 * s, y], 200, 340, INK, 1.8 * s)
+            pen.arc([x - 4 * s, y - 6 * s, x + 4 * s, y], 200, 340, INK, 1.6 * s)
         elif expr == "determined":
-            pen.line([(x - side * 4 * s, y - 4 * s), (x + side * 4 * s, y - 1.5 * s)], INK, 2 * s)
+            pen.line([(x - side * 4 * s, y - 4 * s), (x + side * 4 * s, y - 1.5 * s)], INK, 1.8 * s)
         elif expr == "sad":
-            pen.line([(x - side * 4 * s, y - 1.5 * s), (x + side * 4 * s, y - 4.5 * s)], INK, 2 * s)
+            pen.line([(x - side * 4 * s, y - 1.5 * s), (x + side * 4 * s, y - 4.5 * s)], INK, 1.8 * s)
         elif expr == "thinking" and i == 1:
-            pen.arc([x - 4 * s, y - 7 * s, x + 4 * s, y - 1 * s], 200, 340, INK, 1.8 * s)
+            pen.arc([x - 4 * s, y - 7 * s, x + 4 * s, y - 1 * s], 200, 340, INK, 1.6 * s)
         elif expr == "thinking":
-            pen.line([(x - 4 * s, y - 2.5 * s), (x + 4 * s, y - 2.5 * s)], INK, 1.8 * s)
+            pen.line([(x - 4 * s, y - 2.5 * s), (x + 4 * s, y - 2.5 * s)], INK, 1.6 * s)
+        else:
+            pen.arc([x - 3 * s, y - 4.5 * s, x + 3 * s, y - 0.5 * s], 220, 320, INK, 1.4 * s)
+
+
+def mouth(pen, mx, my, s, expr):
+    if expr == "smile":
+        pen.arc([mx - 6 * s, my - 5 * s, mx + 6 * s, my + 2 * s], 20, 160, INK, 1.7 * s)
+    elif expr == "thinking":
+        pen.line([(mx - 3 * s, my), (mx + 4 * s, my - 1 * s)], INK, 1.7 * s)
+    elif expr == "happy":
+        pen.poly([(mx - 7 * s, my - 2 * s), (mx + 7 * s, my - 2 * s), (mx, my + 5 * s)], (200, 70, 70), INK, 1.6 * s)
+    elif expr == "surprised":
+        pen.circle((mx, my + 1 * s), 3 * s, fill=None, outline=INK, w=1.7 * s)
+    elif expr == "determined":
+        pen.line([(mx - 4 * s, my), (mx + 4 * s, my)], INK, 1.8 * s)
+    elif expr == "sad":
+        pen.arc([mx - 5 * s, my - 0.5 * s, mx + 5 * s, my + 6 * s], 200, 340, INK, 1.7 * s)
 
 
 def draw_face_front(pen, cx, cy, r, s, expr):
     ey = cy - 1 * s
-    xs = (cx - 9 * s, cx + 9 * s)
+    xs = (cx - 9.5 * s, cx + 9.5 * s)
     for x in xs:
-        if expr == "happy":
-            pen.arc([x - 2.5 * s, ey - 1 * s, x + 2.5 * s, ey + 3 * s], 200, 340, INK, 1.6 * s)
-        else:
-            pen.circle((x, ey + 0.5 * s), (2.1 if expr == "surprised" else 1.7) * s, fill=INK)
+        eye(pen, x, ey + 0.5 * s, s, expr)
     for x in xs:
-        pen.rrect([x - 7.5 * s, ey - 5.5 * s, x + 7.5 * s, ey + 5.5 * s], 2.5 * s, FRAME, 2.4 * s)
+        pen.rrect([x - 7.5 * s, ey - 5.5 * s, x + 7.5 * s, ey + 5.5 * s], 2.2 * s, FRAME, 2.4 * s)
     pen.line([(xs[0] + 7.5 * s, ey - 2 * s), (xs[1] - 7.5 * s, ey - 2 * s)], FRAME, 2.2 * s)
     pen.line([(xs[0] - 7.5 * s, ey - 3 * s), (cx - r * 0.99, ey - 4 * s)], FRAME, 2.2 * s)
     pen.line([(xs[1] + 7.5 * s, ey - 3 * s), (cx + r * 0.99, ey - 4 * s)], FRAME, 2.2 * s)
     brows(pen, cx, cy, r, s, expr, xs)
-    my = cy + 10 * s
-    if expr in ("smile", "thinking") :
-        if expr == "smile":
-            pen.arc([cx - 6 * s, my - 5 * s, cx + 6 * s, my + 2 * s], 20, 160, INK, 1.9 * s)
-        else:
-            pen.line([(cx - 3 * s, my), (cx + 4 * s, my - 1 * s)], INK, 1.9 * s)
-    elif expr == "happy":
-        pen.poly([(cx - 7 * s, my - 2 * s), (cx + 7 * s, my - 2 * s), (cx, my + 5 * s)], (200, 70, 70), INK, 1.8 * s)
-    elif expr == "surprised":
-        pen.circle((cx, my + 1 * s), 3 * s, fill=None, outline=INK, w=1.9 * s)
-    elif expr == "determined":
-        pen.line([(cx - 4 * s, my), (cx + 4 * s, my)], INK, 2 * s)
-    elif expr == "sad":
-        pen.arc([cx - 5 * s, my - 0.5 * s, cx + 5 * s, my + 6 * s], 200, 340, INK, 1.9 * s)
+    mouth(pen, cx, cy + 11 * s, s, expr)
 
 
 def draw_face_side(pen, cx, cy, r, s, sgn, expr):
     ey = cy - 1 * s
-    ex = cx + sgn * r * 0.6
-    pen.circle((ex, ey + 0.5 * s), 1.7 * s, fill=INK)
-    pen.rrect([ex - 4.5 * s, ey - 5.5 * s, ex + 4.5 * s, ey + 5.5 * s], 2 * s, FRAME, 2.4 * s)
-    pen.line([(ex - sgn * 4.5 * s, ey - 3 * s), (cx - sgn * 3 * s, ey - 2 * s)], FRAME, 2.2 * s)
-    mx = cx + sgn * r * 0.55; my = cy + 10 * s
-    if expr == "surprised":
-        pen.circle((mx, my), 2.5 * s, outline=INK, w=1.8 * s)
-    else:
-        a0, a1 = (20, 120) if sgn == 1 else (60, 160)
-        pen.arc([mx - 5 * s, my - 5 * s, mx + 5 * s, my + 2 * s], a0, a1, INK, 1.9 * s)
-    brows(pen, cx, cy, r, s, expr if expr != "thinking" else "smile", (ex,) if sgn == 1 else (ex,))
+    near, far = cx + sgn * r * 0.1, cx + sgn * r * 0.64
+    for x in (near, far):
+        eye(pen, x, ey + 0.5 * s, s, expr)
+    pen.rrect([near - 6.5 * s, ey - 5.5 * s, near + 6.5 * s, ey + 5.5 * s], 2.2 * s, FRAME, 2.4 * s)
+    pen.rrect([far - 4.5 * s, ey - 5.5 * s, far + 4.5 * s, ey + 5.5 * s], 2 * s, FRAME, 2.4 * s)
+    pen.line([(near + sgn * 6.5 * s, ey - 2 * s), (far - sgn * 4.5 * s, ey - 2 * s)], FRAME, 2.2 * s)
+    pen.line([(near - sgn * 6.5 * s, ey - 3 * s), (cx - sgn * r * 0.62, ey - 4 * s)], FRAME, 2.2 * s)
+    brows(pen, cx, cy, r, s, "smile" if expr == "thinking" else expr, (near, far))
+    mouth(pen, cx + sgn * r * 0.38, cy + 11 * s, s, "smile" if expr == "thinking" else expr)
 
 
 def draw_figure(img, j, view, s=1.0, expr="smile", stubble=False, holds=None, over_face=None):
     """view: front | back | right | left (the way the character faces). holds: {'r': 'pen'}."""
     pen = Pen(img)
     holds = holds or {}
-    gx = (j["toe_l"][1] + j["toe_r"][1]) / 2
     if view in ("right", "left"):
         near = "r" if view == "right" else "l"; far = "l" if near == "r" else "r"
         draw_arm(pen, j, far, s, holds.get(far))
         draw_leg(pen, j, far, s, view); draw_leg(pen, j, near, s, view)
-        draw_shorts(pen, j, s)
-        draw_tee(pen, j, s, view)
+        draw_shirt(pen, j, s, view)
         draw_head(pen, j, s, view, expr, stubble)
         draw_arm(pen, j, near, s, holds.get(near))
     else:
         draw_leg(pen, j, "l", s, view); draw_leg(pen, j, "r", s, view)
-        draw_shorts(pen, j, s)
-        draw_tee(pen, j, s, view)
+        draw_shirt(pen, j, s, view)
         arms = ("l", "r")
         late = [k for k in arms if over_face == k]
         for k in arms:
@@ -379,7 +433,7 @@ def text(img, xy, s, size=18, bold=False, fill=(40, 40, 40), anchor="mm"):
 
 
 # ---------------------------------------------------------------- tracks
-FIG = {"head_radius": HEAD_R, "limb_width": 4.2, "body_width": 24, "hand_length": 5}
+FIG = {"head_radius": HEAD_R, "limb_width": 3.4, "body_width": 25, "hand_length": 4.8}
 
 
 def track(name, frames, rest, scale=1.0, **meta):
@@ -390,7 +444,7 @@ def track(name, frames, rest, scale=1.0, **meta):
 def sheet_poses():
     """(label, view, joints, frame extras, holds, over_face) for the pose row, all at x=0, ground=0, scale 1."""
     out = []
-    a = stand_front(); a["abd_r"] = 145; a["elb_r"] = 55
+    a = stand_front(); a["abd_r"] = 125; a["elb_r"] = 60
     out.append(("Wave", "front", front_pose(a, 0, 0), {}, {}, None))
     a = stand_side(); a["shoulder_r"] = 88; a["elbow_r"] = 6; a["lean"] = 4
     out.append(("Point", "right", side_pose(a, 0, 0), {}, {}, None))
@@ -401,7 +455,7 @@ def sheet_poses():
     out.append(("Light-pen", "right", j, {"holds": {"pen": "r"}, "props": {"pen": j["wrist_r"]}}, {"r": "pen"}, None))
     a = {"abd_l": 150, "elb_l": 10, "abd_r": 150, "elb_r": 10, "leg_l": 14, "leg_r": 14}
     out.append(("Cheer jump", "front", front_pose(a, 0, 0, lift=16), {"airborne": True}, {}, None))
-    a = {"lean": 12, "neck": 2, "hip_r": 50, "knee_r": 75, "hip_l": -22, "knee_l": 45, "ankle_l": 10,
+    a = {"lean": 12, "neck": 2, "hip_r": 50, "knee_r": 75, "hip_l": -30, "knee_l": 75, "ankle_l": 10,
          "shoulder_r": -40, "elbow_r": 85, "shoulder_l": 45, "elbow_l": 80}
     out.append(("Run", "right", side_pose(a, 0, 0), {"airborne": True}, {}, None))
     return out
@@ -493,14 +547,19 @@ def make_gif(walk_frames, wave_frames, s_walk, s_wave):
         draw_figure(img, j, "front", s_wave, expr=f["_expr"], over_face="l" if f.get("face_cover") or
                     j["wrist_l"][1] < j["neck"][1] else None)
         out.append(finish(img))
-    pal = [o.convert("P", palette=Image.ADAPTIVE, colors=48) for o in out]
+    # one shared palette for every frame, so the plaid and the jeans keep their colours
+    probe = Image.new("RGB", (W, H * 4))
+    for i, k in enumerate((0, len(walk_frames) // 2, len(walk_frames) + 6, len(out) - 10)):
+        probe.paste(out[k], (0, H * i))
+    ref = probe.quantize(colors=128, method=Image.Quantize.FASTOCTREE)
+    pal = [o.quantize(palette=ref, dither=Image.Dither.NONE) for o in out]
     pal[0].save(HERE / "motion.gif", save_all=True, append_images=pal[1:], duration=83, loop=0, optimize=True, disposal=1)
 
 
 def make_sheet(poses):
     W, H = 1600, 1180
     img = canvas(W, H, (252, 251, 248))
-    text(img, (60, 52), "Style 2 lead Nam: buzz cut, glasses, dark red tee", 34, True, anchor="lm")
+    text(img, (60, 52), "Style 2 lead Nam: buzz cut, glasses, plaid flannel", 34, True, anchor="lm")
     text(img, (60, 92), "Code-rendered from a posture-gated rig. Default lead for Style 2A/2B; the red-beanie Zeke stays as an alternative.",
          17, anchor="lm", fill=(90, 90, 90))
     # row 1: turnaround
@@ -522,15 +581,15 @@ def make_sheet(poses):
     px = 1180
     text(img, (px, 145), "Locks", 22, True, anchor="lm")
     rows = [(HAIR, "Very short dark buzz cut, spiky edge"), (FRAME, "Dark rectangular glasses, thick frame"),
-            (TEE, "Plain dark red crew-neck tee"), (SHORTS, "Dark shorts"), (INK, "Black stick limbs, round hands"),
-            ((255, 255, 255), "White round head, dot eyes")]
+            (FLANNEL, "Open red-and-navy plaid flannel, sleeves rolled"), (TEE_WHITE, "Plain white crew-neck tee"),
+            (JEANS, "Dark blue jeans, black shoes"), (INK, "Black stick forearms, round hands")]
     for i, (c, lab) in enumerate(rows):
         y = 195 + i * 46
         ImageDraw.Draw(img).rounded_rectangle([px * SS, (y - 15) * SS, (px + 30) * SS, (y + 15) * SS], radius=6 * SS,
                                               fill=c, outline=(120, 120, 120), width=SS)
         text(img, (px + 44, y), lab, 16, anchor="lm")
-    text(img, (px, 480), "Not in the anchor: logos, text on the tee,", 15, anchor="lm", fill=(110, 110, 110))
-    text(img, (px, 502), "pupils, reflections on the lenses, a hat.", 15, anchor="lm", fill=(110, 110, 110))
+    text(img, (px, 480), "Body and head as the beanie lead. Not in the anchor:", 15, anchor="lm", fill=(110, 110, 110))
+    text(img, (px, 502), "logos, text, pupils, lens glare, a hat.", 15, anchor="lm", fill=(110, 110, 110))
     # row 2: expressions
     text(img, (60, 560), "Expressions (glasses stay on)", 22, True, anchor="lm")
     exprs = ["smile", "happy", "surprised", "thinking", "determined", "sad"]

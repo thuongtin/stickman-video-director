@@ -18,7 +18,7 @@ Require these before planning:
 - target duration: in multiples of 10 seconds (e.g. `30s`, `60s`, `90s`, `3min`, `5min`; default: `60s` / 6 clips if unspecified)
 - visual style and theme:
   - `Style 1 (Classic Minimalist)`: light (white background, black figure) or dark (black background, white figure)
-  - `Style 2 (Modern Pop)`: default lead Nam (dark buzz cut, dark rectangular glasses, dark red tee); upstream's red-beanie Zeke only when the user asks for it
+  - `Style 2 (Modern Pop)`: default lead Nam (dark buzz cut, dark rectangular glasses, open red plaid flannel over a white tee, jeans; same body as the beanie lead); upstream's red-beanie Zeke only when the user asks for it
     - `Style 2A (Modern Studio Tech)`: pure white high-key studio, subtle light-gray perspective grid, floating cyan/blue glass UI
     - `Style 2B (Cinematic Story)`: full-color narrative environments, cinematic lighting & depth
   - `Style 3 (Prehistoric Hand-Drawn / Dark Comedy)`: expressive white filled heads, black stick limbs, animal-hide costumes and earthy prehistoric settings; story-specific casting
@@ -59,7 +59,7 @@ For Style 4, read `references/cozy-storytelling.md` before planning and prompt a
 - For Style 1, freeze the concise character anchor from `references/style-catalog.md` and repeat it verbatim in every clip. Keep two arms and two legs, one current pose per limb, stable proportions and uniform medium line weight; a moving arm replaces its previous pose rather than adding another arm. Keep the figure monochrome and saturated accents on props/graphics. Do not replace the anchor with "same character", ellipses, numeric anatomy recipes, skeleton/path instructions or clip-specific appearance descriptions. Occasional simple line expressions are allowed; the head remains hollow. Keep rich actions and effects separate from character design. Treat generated consistency as a visual acceptance check, not a guarantee from repeated text.
 - For Style 1, limit the video to three saturated accent colors named with ordinary descriptive words (e.g. vivid red, electric blue, warm gold). For light theme, enforce a flat, digitally pure-white canvas with no textures, gradients, or 3D depth.
 - For Style 2 (Modern Pop), enforce character consistency:
-  - Every clip, 1 through N, repeats this default anchor verbatim: `A minimalist 2D animated stick figure with a white round head, a very short dark buzz cut (close-cropped spiky black hair), thick dark rectangular eyeglasses over simple dot eyes, and a plain dark red crew-neck t-shirt, with simple black stick limbs and dark shorts. Simple black lines, vibrant colors, smooth 2D animation style.`
+  - Every clip, 1 through N, repeats this default anchor verbatim: `A minimalist 2D animated stick figure with a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.`
   - Use the beanie alternative from `references/style-catalog.md` instead only when the user asks for the beanie character or Zeke; never mix the two leads in one video.
   - Never shorten the anchor to "the same figure" or an ellipsis in later clips; that drops the clothing, glasses and limb locks.
   - No detailed eyes, pupils, or photorealistic features (avoids bug-eye deformation). The glasses stay on in every shot.
