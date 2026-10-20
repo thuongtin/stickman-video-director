@@ -102,6 +102,8 @@ NOT_THINGS = {"step", "steps", "breath", "look", "seat", "bow", "turn", "sip", "
 NO_HANDS = re.compile(r"\b(?:no (?:arms|hands)|armless|handless|without (?:arms|hands))\b", re.I)
 NOT_PROPS = {"side", "shoulder", "coat", "sleeve", "back", "front", "air", "way", "place", "time", "face", "chin", "head", "cheek", "hair", "pocket", "hand", "paw", "arm", "nose", "mouth", "ear", "eye",
              "hip", "waist", "lap", "chest", "belly", "tail", "string", "handle", "strap"}
+# "Two-hand props: red brick, crate" / "Two-hand holders: Bông, Thiếc": always held in both hands
+TWO_HAND = re.compile(r"^\W*two[- ]hand(?:ed)?(?: props?| holders?| characters?| only)?\s*:\s*(.+)$", re.I | re.M)
 # capitalized words that open a clause without naming a character
 NOT_NAMES = {"The", "A", "An", "At", "In", "On", "Behind", "Then", "Now", "She", "He", "They", "It", "Her", "His",
              "Their", "Its", "Camera", "Medium", "Close", "Wide", "Push", "Cut", "Both", "One", "Each", "Everyone",
@@ -217,9 +219,15 @@ def acts_on(sent, verb, prop, cast, prev=""):
             continue
         # "lifts the gear onto the shaft and lets go": a verb with no object of its own acts on the
         # thing just before it
-        if i and not re.search(r"\b(?:the|a|an|his|her|their|its|it|them)\b", c[m.end():], re.I) \
-                and mentions(clauses[i - 1], prop):
-            return True
+        # (back through "presses it down" to "sets the brick onto the wall")
+        if i and not re.search(r"\b(?:the|a|an|his|her|their|its|it|them)\b", c[m.end():], re.I):
+            for d in reversed(clauses[:i]):
+                if any(name_at(x, d) >= 0 for x in cast) and not mentions(d, prop):
+                    break
+                if mentions(d, prop):
+                    return True
+                if not PRONOUN.search(d):
+                    break
         for j, d in enumerate(clauses[i:]):
             if j and any(name_at(x, d) >= 0 for x in cast):
                 break
@@ -298,6 +306,8 @@ def lint(text, warnings=None):
         return problems
     last_seen = {}
     seen = set()
+    two_names = {w.strip().rstrip(".").lower() for m in TWO_HAND.finditer(text)
+                 for w in re.split(r",|;|\band\b", re.sub(r"\([^)]*\)", "", m.group(1))) if w.strip()}
     for n, body, lines in ledgers:
         for k in ("start", "end"):
             if k not in lines:
@@ -586,6 +596,7 @@ def lint(text, warnings=None):
                     if c != who and re.search(rf"\bfrom {re.escape(c)}(?!\w)", clause):
                         for key in [k for k in now if k[0] == c and now[k] == got]:
                             del now[key]
+                        released[(c, got)] = (x, set())
                 released.pop((who, got), None)
             # a prop held in both hands, used with one: "lifts the broom in his left hand alone"
             for c, p in two:
@@ -675,8 +686,33 @@ def lint(text, warnings=None):
         for (c, q), (x, sds) in sorted(released.items()):
             if any(end[1].get(c, {}).get(sd) == q for sd in (sds or ("r", "l"))) and (n, x) not in seen:
                 seen.add((n, x))
-                problems.append(f"Clip {n}: {c} lets go of the {q}, but the end line still has it in {c}'s hand; "
+                problems.append(f"Clip {n}: {c} lets go of the {q} (or hands it over), but the end line still has it in {c}'s hand; "
                                 f"empty that hand in the end line or pick it up again in a beat: \"{excerpt(x)}\"")
+        # declared two-hand props and holders: never one hand, in the hands lines or in a beat
+        if two_names:
+            cast_low = {c.lower(): c for c in everyone}
+            for k in ("start", "end"):
+                for c, h in lines.get(k, ("", {}))[1].items():
+                    for sd in ("r", "l"):
+                        q = h[sd]
+                        if q and h["l" if sd == "r" else "r"] != q and (c.lower() in two_names or any(
+                                mentions(q, t) or q == t for t in two_names if t not in cast_low)):
+                            problems.append(f"Clip {n}: the {k} line has {c} hold the {q} in one hand, but it is declared "
+                                            f"two-handed; list it in both hands")
+            for si, x, clause, w, hands in rows:
+                if (n, x, "two") in seen or si >= timed_n or not (GRASP.search(clause) or HOLDING.search(clause)
+                                                         or PICKUP.search(clause) or TRANSFER.search(clause)):
+                    continue
+                for c in {o for _, o in hands if o}:
+                    sides = {sd for sd, o in hands if o == c}
+                    if len(sides) != 1 or "b" in sides:
+                        continue
+                    q = next((t for t in sorted(listed, key=len, reverse=True) if mentions(clause, t)), None) \
+                        or next((t for t in two_names if t not in cast_low and re.search(rf"(?<!\w){re.escape(t)}(?!\w)", clause.lower())), None)
+                    if q and (c.lower() in two_names or any(t not in cast_low and (mentions(q, t) or q == t) for t in two_names)):
+                        seen.add((n, x, "two"))
+                        problems.append(f"Clip {n}: {c} holds the {q} in the {'right' if 'r' in sides else 'left'} hand "
+                                        f"alone, but it is declared two-handed; use both hands: \"{excerpt(x)}\"")
         # a character outside the hands lines who has no hands ("Trâu Đá has no hands") holding something
         for o in sorted({w for _, _, _, w, _ in rows if w and w not in everyone}):
             said = [x2 for x2 in sentences(text) if name_at(o, x2) >= 0

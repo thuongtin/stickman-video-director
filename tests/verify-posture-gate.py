@@ -769,6 +769,62 @@ with _tf.TemporaryDirectory() as d:
     assert out.returncode == 1 and not res["passed"]
     assert all(c["status"] == "FAIL" and c["scene_issues"] for c in res["clips"]), res["clips"]
 
+# a projected 3D arm swinging through the camera axis pops only as a warning
+def arm_jump(i, a, f):
+    if i == 6:
+        a["abd_l"] += 150
+t = ex.track(ex.front_frames(arm_jump), rest=ex.front_pose(ex.wave(0)))
+assert "pop" in kinds(pg.check(t))
+t["projected"] = True
+assert "pop" not in kinds(pg.check(t)) and "pop" in kinds(pg.check(t), "warn")
+
+# grip points copied from the wrists warn, unless the two grips sit one behind the other
+def two_hand_grips(stack):
+    t = ex.track(ex.front_frames(), rest=ex.front_pose(ex.wave(0)))
+    for f in t["frames"]:
+        j = f["joints"]
+        if stack:
+            j["wrist_r"] = [j["wrist_l"][0] + 1, j["wrist_l"][1]]
+        f["holds"] = {"cup": "both"}
+        f["props"] = {"cup": [(a + b) / 2 for a, b in zip(j["wrist_l"], j["wrist_r"])],
+                      "cup.l": list(j["wrist_l"]), "cup.r": list(j["wrist_r"])}
+    return [i for i in pg.check(t)["issues"] if "wrist itself" in i["message"]]
+assert two_hand_grips(False) and not two_hand_grips(True)
+
+# "Two-hand props:" / "Two-hand holders:" lines: a one-hand hold of a declared prop or by a declared holder fails
+brick = ("### Clip 1\nTwo-hand props: red brick.\nProps: one red brick.\n"
+         "Hands at start — Vua: right hand holds the red brick; left hand holds the red brick. "
+         "Nut: right hand empty; left hand empty.\n"
+         "- [0-3s] Vua sets the red brick onto the wall, presses it down and lets go.\n"
+         "- [3-7s] Nut picks up the red brick with both hands.\n"
+         "- [7-10s] Nut holds the red brick out with both hands.\n"
+         "Hands at end — Vua: right hand empty; left hand empty. "
+         "Nut: right hand holds the red brick; left hand holds the red brick.\n")
+assert hand_ledger.lint(brick) == [], hand_ledger.lint(brick)
+assert any("declared two-handed" in p for p in hand_ledger.lint(
+    brick.replace("picks up the red brick with both hands", "picks up the red brick with his right hand")))
+assert any("declared two-handed" in p for p in hand_ledger.lint(
+    brick.replace("Nut: right hand holds the red brick; left hand holds the red brick.",
+                  "Nut: right hand holds the red brick; left hand empty.")))
+plush = ("### Clip 1\nTwo-hand holders: Bong.\nProps: one red block.\n"
+         "Hands at start — Kit: right hand empty; left hand empty. Bong: right paw empty; left paw empty.\n"
+         "- [0-3s] Bong catches the red block against his belly with both paws.\n"
+         "- [3-7s] Bong holds the red block out in both paws. Kit takes the red block from Bong with both hands.\n"
+         "Hands at end — Kit: right hand holds the red block; left hand holds the red block. "
+         "Bong: right paw empty; left paw empty.\n")
+assert hand_ledger.lint(plush) == [], hand_ledger.lint(plush)
+assert any("declared two-handed" in p for p in hand_ledger.lint(
+    plush.replace("against his belly with both paws", "in his right paw")))
+
+# a take "from" someone empties their hand: the end line may not keep the prop there
+mug = ("### Clip 1\nProps: one blue mug.\n"
+       "Hands at start — Kit: right hand empty; left hand empty. Mo: right hand holds the blue mug; left hand empty.\n"
+       "- [0-3s] Kit takes the blue mug from Mo with his right hand.\n"
+       "Hands at end — Kit: right hand holds the blue mug; left hand empty. Mo: right hand empty; left hand empty.\n")
+assert hand_ledger.lint(mug) == [], hand_ledger.lint(mug)
+assert any("Mo lets go of the blue mug" in p for p in hand_ledger.lint(
+    mug.replace("Mo: right hand empty; left hand empty.\n", "Mo: right hand holds the blue mug; left hand empty.\n")))
+
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()
 contract = (ROOT / "skills/directing-stickman-videos/references/omni-flash-prompt-contract.md").read_text()

@@ -461,8 +461,12 @@ def check(track, profile=None):
                     pv = prev[0][key][0]
                     speed = abs(wrap(v - pv)) * fps
                     if speed > P["max_joint_speed"]:
-                        add(fi, "error" if P["blocking"] else "warn", "pop",
-                            f"{key} jumps {abs(wrap(v - pv)):.0f}° in one frame ({speed:.0f}°/s)", angles[key][3])
+                        # a projected 3D arm swinging through the camera axis sweeps a big flat angle
+                        # for a small real move: only a warning there
+                        axis = track.get("projected") and facing in ("front", "back") and key.startswith(("arm_swing", "forearm_swing"))
+                        add(fi, "error" if P["blocking"] and not axis else "warn", "pop",
+                            f"{key} jumps {abs(wrap(v - pv)):.0f}° in one frame ({speed:.0f}°/s)"
+                            + (" (projected: check it is not a swing toward the camera)" if axis else ""), angles[key][3])
                     elif key.split("_")[0] in ("elbow", "knee") and facing in ("left", "right") \
                             and pv * v < 0 and min(abs(pv), abs(v)) > 15:
                         add(fi, "error", "snap", f"{key} flips bend direction ({pv:.0f}° -> {v:.0f}°)",
@@ -700,7 +704,9 @@ def check_hands(track, P, usable=None):
                         if g and torso and not just_passed and f"wrist_{x}" in pts:
                             span = hand_span(f, track, pts, x)
                             d = _seg_dist(g, *span) if span[0] != span[1] else norm(sub(g, span[0]))
-                            if d < 1e-6 * torso and fi == 0:
+                            o = grips.get(f"{prop}.{'r' if x == 'l' else 'l'}")
+                            stacked = o and norm(sub(g[:2], o[:2])) < max(float(f.get("limb_width", track.get("limb_width", 0))), 0.05 * torso)
+                            if d < 1e-6 * torso and fi == 0 and not stacked:  # grips one behind the other in side view
                                 add(fi, "prop_wrong_hand", f"{prop}.{x} is the {_side(x)} wrist itself, so the grip "
                                     "check is empty; take the grip points from the prop's shape",
                                     {f"wrist_{x}"}, severity="warn")
