@@ -77,7 +77,7 @@ Vài nét vẽ đủ để giải thích một ý lớn. Trên nền trắng tin
 
 ### Phong cách 2: Hiện đại, vui mắt
 
-Ở bản fork này, nhân vật chính để tóc đinh sẫm màu, đeo kính cận gọng chữ nhật đậm và mặc áo thun đỏ sẫm; nhân vật mũ len đỏ, áo vàng của upstream vẫn dùng được khi bạn yêu cầu. Dùng bối cảnh công nghệ gọn gàng để giải thích một sản phẩm, hoặc đưa nhân vật vào phòng ngủ, đường phố, cảnh thiên nhiên rộng để kể chuyện.
+Ở bản fork này, nhân vật chính để tóc đinh sẫm màu, đeo kính cận gọng chữ nhật đậm, mặc sơ mi trắng ngắn tay và quần jeans, giữ nguyên dáng người của nhân vật upstream; nhân vật mũ len đỏ, áo vàng của upstream vẫn dùng được khi bạn yêu cầu. Dùng bối cảnh công nghệ gọn gàng để giải thích một sản phẩm, hoặc đưa nhân vật vào phòng ngủ, đường phố, cảnh thiên nhiên rộng để kể chuyện.
 
 - **Trông thế nào:** Một nhân vật dễ nhớ, hai kiểu thế giới. 2A là khoảng trắng, lưới mờ, giao diện kính trôi nổi và ánh xanh lam. 2B là bối cảnh nhiều màu, ánh sáng điện ảnh và chiều sâu.
 - **Hợp với:** 2A cho công cụ AI, sản phẩm công nghệ, hướng dẫn và demo tính năng. 2B cho phát triển bản thân, tình huống đời thường, phiêu lưu và chuyện truyền động lực.
@@ -90,7 +90,7 @@ Vài nét vẽ đủ để giải thích một ý lớn. Trên nền trắng tin
 
 Hai clip trên do upstream làm với nhân vật mũ len đỏ. Đây là nhân vật chính mặc định của bản fork, vẽ từ khung xương bằng code và đã qua gate tư thế ([character sheet](docs/lead-character/sheet.png)):
 
-<p align="center"><img src="docs/lead-character/motion.gif" alt="Nhân vật chính mặc định của Phong cách 2, người que tóc đinh, đeo kính, áo thun đỏ sẫm, đi vào và vẫy tay" width="480"></p>
+<p align="center"><img src="docs/lead-character/motion.gif" alt="Nhân vật chính mặc định của Phong cách 2, người que tóc đinh, đeo kính, sơ mi trắng và quần jeans, đi vào và vẫy tay" width="480"></p>
 
 ---
 
@@ -349,7 +349,7 @@ Giai đoạn đầu của kịch bản, Golden Hook, giờ có thẻ riêng tron
 
 ### Nhân vật chính của Phong cách 2
 
-Phong cách 2 giờ mặc định dùng nhân vật tóc đinh ngắn sẫm màu, kính cận gọng chữ nhật đậm và áo thun cổ tròn đỏ sẫm, không in chữ. Kính luôn ở trên mặt trong mọi cảnh. Nhân vật mũ len đỏ Zeke của upstream vẫn được giữ làm lựa chọn thay thế: hãy yêu cầu nhân vật mũ len, Skill sẽ dùng anchor của nhân vật đó. Character sheet, các tư thế và clip chuyển động nằm trong `docs/lead-character/`; mọi tư thế đều đã qua gate tư thế và không có gì được tạo bằng mô hình AI.
+Phong cách 2 giờ mặc định dùng nhân vật tóc đinh ngắn sẫm màu, kính cận gọng chữ nhật đậm, sơ mi trắng trơn ngắn tay, cổ bẻ nhỏ, cài cúc, tay áo xắn, và quần jeans xanh đậm. Dáng người và khuôn mặt theo nhân vật mũ len của upstream. Kính luôn ở trên mặt trong mọi cảnh. Nhân vật mũ len đỏ Zeke của upstream vẫn được giữ làm lựa chọn thay thế: hãy yêu cầu nhân vật mũ len, Skill sẽ dùng anchor của nhân vật đó. Character sheet, các tư thế và clip chuyển động nằm trong `docs/lead-character/`; mọi tư thế đều đã qua gate tư thế và không có gì được tạo bằng mô hình AI.
 
 <!-- readme:advantages -->
 

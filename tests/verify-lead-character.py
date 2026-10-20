@@ -27,9 +27,14 @@ for t in tracks:
     assert out.returncode == 0 and clip["errors"] == 0 and clip["warnings"] == 0, \
         f"{t.name}: {[i['message'] for i in clip['issues']]}"
 
-# the glasses push is the only planned face cover, and the pen stays in the right hand
+# the glasses are pushed up from the side of the head, so the clip needs no face-cover waiver; the pen stays right-handed
 wave = json.loads((LEAD / "tracks/shot2_wave_glasses.json").read_text())
-assert any(f.get("face_cover") for f in wave["frames"])
+assert not any(f.get("face_cover") for f in wave["frames"]), "the glasses push must not cross the face"
 pen = json.loads((LEAD / "tracks/pose_light_pen.json").read_text())
 assert pen["frames"][0]["holds"] == {"pen": "r"}
+for t in tracks:  # no pose may put the pen in the left hand
+    for f in json.loads(t.read_text())["frames"]:
+        assert f.get("holds", {}).get("pen", "r") == "r", f"{t.name}: pen in the left hand"
+hip = json.loads((LEAD / "tracks/pose_hand_on_hip.json").read_text())["frames"][0]
+assert hip["contacts"] == {"r": "hip"}, "hand-on-hip is gated as a real contact"
 print(f"Lead character: {len(tracks)} rig tracks pass the posture gate with no warnings.")

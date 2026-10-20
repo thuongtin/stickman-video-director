@@ -32,12 +32,13 @@ dark = re.findall(r"```text\n(.*?)\n```", catalog.split("**Classic Dark", 1)[1],
 assert all(dark in p for p in prompts(style1)), "Style 1 example must repeat the current Dark anchor"
 lead = re.findall(r"```text\n(.*?)\n```", catalog.split("**Character Anchor (every clip, verbatim):**", 1)[1], re.S)[0]
 beanie = re.findall(r"```text\n(.*?)\n```", catalog.split("**Alternative: Beanie Zeke anchor", 1)[1], re.S)[0]
-assert "buzz cut" in lead and "glasses" in lead and "dark red crew-neck" in lead, "Style 2 default lead is the buzz-cut, glasses one"
+assert "white round head" in lead and "dot eyes" in lead and "buzz cut" in lead and "glasses" in lead and "white short-sleeved button-up shirt" in lead and "small pointed collar" in lead and "very short neck" in lead and "stick arms" in lead and "legs in dark blue jeans" in lead and "short wide sleeves" in lead and "cut like a t-shirt" in lead, "Style 2 default lead is the buzz-cut, glasses one"
 assert "red beanie" in beanie and "no pom-pom" in beanie, "the beanie lead stays documented as the alternative"
 assert all(f"Character: {lead}" in p for p in prompts(style2a)), "Style 2A example must repeat the full default anchor"
 assert not any(beanie in p for p in prompts(style2a)), "one lead per video"
 for path in (SKILL / "SKILL.md", REFS / "omni-flash-prompt-contract.md"):
     assert lead in path.read_text(), f"{path.name} must carry the same default Style 2 anchor"
+assert "shorts" not in style2a.replace("never shorts", ""), "the default lead wears jeans, not shorts"
 for path in [SKILL / "SKILL.md", *REFS.glob("*.md")]:
     assert "The same minimalist 2D animated stick figure" not in path.read_text().replace(
         '("The same minimalist 2D animated stick figure in a bright red beanie and yellow shirt" followed by an ellipsis)', ""), \
@@ -62,4 +63,7 @@ assert "| Motion, camera, and transition | Hands |" in story
 assert "shape morph," not in story and "fluid," not in story
 assert "Posture budget per beat" in story
 assert "手（以角色自身左右为准）" in style1
+# the old flannel outfit is gone everywhere the default lead is described
+for path in [SKILL / "SKILL.md", *REFS.glob("*.md")]:
+    assert "flannel" not in path.read_text().lower(), f"{path.name} still describes the old flannel outfit"
 print("Examples follow the hands, anchor, hook, no-text and no-morph rules; no generated-video score claimed.")

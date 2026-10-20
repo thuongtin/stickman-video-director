@@ -77,7 +77,7 @@ A few lines can explain a big idea. On a pure-white or pure-black canvas, charac
 
 ### Style 2: Modern Pop
 
-In this fork the lead has a short dark buzz cut, dark rectangular glasses and a dark red T-shirt; upstream's red-beanie, yellow-shirt character is still there if you ask for it. Use a clean tech setting to explain a product, or take the character into bedrooms, streets, and open landscapes for a story.
+In this fork the lead has a short dark buzz cut, dark rectangular glasses, a white short-sleeved button-up shirt, and jeans, on the same body as upstream's lead; upstream's red-beanie, yellow-shirt character is still there if you ask for it. Use a clean tech setting to explain a product, or take the character into bedrooms, streets, and open landscapes for a story.
 
 - **The look:** One recognizable character, two kinds of world. 2A pairs white space and a faint grid with floating glass interfaces and cyan-blue light. 2B uses colorful settings, cinematic lighting, and depth.
 - **Best for:** 2A suits AI tools, tech products, tutorials, and feature demos. 2B suits personal growth, everyday situations, adventures, and motivational stories.
@@ -90,7 +90,7 @@ In this fork the lead has a short dark buzz cut, dark rectangular glasses and a 
 
 The two clips above were made upstream with the red-beanie lead. Here is this fork's default lead, drawn from a code rig that passed the posture gate ([character sheet](docs/lead-character/sheet.png)):
 
-<p align="center"><img src="docs/lead-character/motion.gif" alt="The default Style 2 lead, a stick figure with a buzz cut, glasses and a dark red T-shirt, walks in and waves" width="480"></p>
+<p align="center"><img src="docs/lead-character/motion.gif" alt="The default Style 2 lead, a stick figure with a buzz cut, glasses, a white shirt and jeans, walks in and waves" width="480"></p>
 
 ---
 
@@ -349,7 +349,7 @@ The first stage of the script, the Golden Hook, now has its own card in the dire
 
 ### Style 2 lead
 
-Style 2 now defaults to a lead with a short dark buzz cut, thick dark rectangular glasses and a plain dark red crew-neck T-shirt. The glasses stay on in every shot. Upstream's red-beanie Zeke stays as the alternative: ask for the beanie character and the Skill uses its anchor instead. The character sheet, poses and motion clip are in `docs/lead-character/`; every pose passed the posture gate, and none of it was made with an AI model.
+Style 2 now defaults to a lead with a short dark buzz cut, thick dark rectangular glasses, a plain white short-sleeved button-up shirt with rolled sleeves, and dark blue jeans. The body and face follow upstream's red-beanie lead. The glasses stay on in every shot. Upstream's red-beanie Zeke stays as the alternative: ask for the beanie character and the Skill uses its anchor instead. The character sheet, poses and motion clip are in `docs/lead-character/`; every pose passed the posture gate, and none of it was made with an AI model.
 
 <!-- readme:advantages -->
 

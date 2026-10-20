@@ -90,9 +90,9 @@ O gorro vermelho e a camiseta amarela são a marca do personagem. Ele pode expli
 | <img src="assets/readme/previews/style-2a-demo.gif" alt="Animação em um ambiente tecnológico minimalista" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="Personagem em um cenário colorido com iluminação cinematográfica" width="360"> |
 | Espaço branco · Grade discreta · Brilho ciano | Cenários coloridos · Luz de cinema · Clima de história |
 
-Os dois clipes acima foram feitos no upstream com o personagem de gorro vermelho. Neste fork, o protagonista padrão tem cabelo raspado escuro, óculos retangulares escuros e camiseta vermelho-escura ([ficha do personagem](docs/lead-character/sheet.png), [detalhes](README.en.md#fork-additions)).
+Os dois clipes acima foram feitos no upstream com o personagem de gorro vermelho. Neste fork, o protagonista padrão tem cabelo raspado escuro, óculos retangulares escuros, camisa social branca de manga curta e jeans, com o mesmo corpo do protagonista do upstream ([ficha do personagem](docs/lead-character/sheet.png), [detalhes](README.en.md#fork-additions)).
 
-<p align="center"><img src="docs/lead-character/motion.gif" alt="Boneco de palito com cabelo raspado, óculos e camiseta vermelho-escura entra andando e acena" width="480"></p>
+<p align="center"><img src="docs/lead-character/motion.gif" alt="Boneco de palito com cabelo raspado, óculos, camisa branca e jeans entra andando e acena" width="480"></p>
 
 ---
 
