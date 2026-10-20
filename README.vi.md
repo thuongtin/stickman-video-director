@@ -50,7 +50,7 @@ Dự án thử các phong cách hoạt hình người que phổ biến trên m�
 
 ⭐ **Bấm Star ngay. Lần sau làm hoạt hình, khỏi phải đi tìm prompt.**
 
-[Bắt đầu](#quick-start) · [Bản fork này thêm gì](#fork-additions) · [Cập nhật mới](#recent-updates) · [Hướng dẫn đầy đủ (tiếng Trung)](https://x.com/CrazyKaomei/status/2102311241046008268)
+[Bắt đầu](#quick-start) · [22 phong cách mới](#experimental-styles) · [Bản fork này thêm gì](#fork-additions) · [Cập nhật mới](#recent-updates) · [Hướng dẫn đầy đủ (tiếng Trung)](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
 
@@ -118,6 +118,149 @@ Chiếc cốc bạn để dành cho một dịp đặc biệt. Tin nhắn bạn 
 | <img src="assets/readme/previews/style-4-cozy-station.gif" alt="Nhân vật lo lắng vì tin nhắn ở ga tàu" width="360"> | <img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="Nghỉ ngơi ở quán cà phê ngoài trời đầy nắng" width="360"> |
 | Ga tàu · Máy chạy theo · Cận cảnh cảm xúc | Quán cà phê ngoài trời · Ánh sáng ấm · Cử chỉ đời thường |
 
+---
+
+<a id="experimental-styles"></a>
+
+### Phong cách thử nghiệm: 22 phong cách mới
+
+Bản fork này thêm 22 phong cách. Mỗi phong cách có dàn nhân vật gốc riêng, luật riêng và một gói prompt mẫu ba clip đã qua gate tư thế và kiểm tra gói. Muốn dùng, hãy hỏi một phong cách thử nghiệm hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Các phong cách này đang ở mức `gated`: chưa được kiểm tra trên video tạo ra. Ảnh dưới đây là dàn nhân vật vẽ bằng code của từng phong cách. [Cách chọn và các công cụ kiểm tra](#fork-additions).
+
+<table width="100%">
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/chibi-anime.jpg" alt="Dàn nhân vật phong cách Anime chibi" width="300"><br>
+<strong>Anime chibi</strong> · <code>chibi-anime</code><br>
+Hợp với: Hài đời thường, mẹo học tập, chuyện tình cảm, nội dung trẻ em, video nhiều phản ứng
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/paper-cutout.jpg" alt="Dàn nhân vật phong cách Cắt dán giấy" width="300"><br>
+<strong>Cắt dán giấy</strong> · <code>paper-cutout</code><br>
+Hợp với: Hài mặt lạnh; chuyện nhẹ nhàng và tiếng Anh cho trẻ em
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/whiteboard-doodle.jpg" alt="Dàn nhân vật phong cách Vẽ tay trên bảng trắng" width="300"><br>
+<strong>Vẽ tay trên bảng trắng</strong> · <code>whiteboard-doodle</code><br>
+Hợp với: Giải thích từng bước, thói quen và ý tưởng dựng dần từng phần, chuyện xã hội nhẹ
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/watercolor-storybook.jpg" alt="Dàn nhân vật phong cách Sách tranh màu nước" width="300"><br>
+<strong>Sách tranh màu nước</strong> · <code>watercolor-storybook</code><br>
+Hợp với: Truyện trước giờ ngủ, giáo dục trẻ em, ngụ ngôn, gia đình và hoài niệm
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/ink-wash.jpg" alt="Dàn nhân vật phong cách Tranh thủy mặc" width="300"><br>
+<strong>Tranh thủy mặc</strong> · <code>ink-wash</code><br>
+Hợp với: Giải thích mang tính suy ngẫm, thói quen và sự kiên nhẫn, nghề thủ công, chuyện kiểu cổ tích
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/mid-century.jpg" alt="Dàn nhân vật phong cách Hoạt hình giản lược thập niên 1950" width="300"><br>
+<strong>Hoạt hình giản lược thập niên 1950</strong> · <code>mid-century</code><br>
+Hợp với: Giải thích châm biếm, chuyện công sở và tiền bạc, nhóm nhỏ nhân vật điển hình
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/dong-ho.jpg" alt="Dàn nhân vật phong cách Tranh Đông Hồ" width="300"><br>
+<strong>Tranh Đông Hồ</strong> · <code>dong-ho</code><br>
+Hợp với: Văn hóa Việt, chuyện Tết và làng quê, ngụ ngôn nhẹ nhàng
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/science-lab.jpg" alt="Dàn nhân vật phong cách Phòng thí nghiệm khoa học" width="300"><br>
+<strong>Phòng thí nghiệm khoa học</strong> · <code>science-lab</code><br>
+Hợp với: Giải thích khoa học và cách mọi thứ vận hành cho trẻ em và gia đình, thí nghiệm thực hành
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/blueprint.jpg" alt="Dàn nhân vật phong cách Bản vẽ kỹ thuật" width="300"><br>
+<strong>Bản vẽ kỹ thuật</strong> · <code>blueprint</code><br>
+Hợp với: Giải thích khoa học, kỹ thuật, phát minh và cách máy móc vận hành
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/cell-biology.jpg" alt="Dàn nhân vật phong cách Thế giới tế bào" width="300"><br>
+<strong>Thế giới tế bào</strong> · <code>cell-biology</code><br>
+Hợp với: Giải thích miễn dịch, máu, lành vết thương và nhiễm trùng cho trẻ em và gia đình
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/retro-space.jpg" alt="Dàn nhân vật phong cách Thiên văn kiểu thời đại vũ trụ" width="300"><br>
+<strong>Thiên văn kiểu thời đại vũ trụ</strong> · <code>retro-space</code><br>
+Hợp với: Giải thích khoa học vũ trụ: quỹ đạo, trọng lực và rơi tự do, Mặt Trăng, các hành tinh
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/youtube-storytime.jpg" alt="Dàn nhân vật phong cách Hoạt hình kể chuyện" width="300"><br>
+<strong>Hoạt hình kể chuyện</strong> · <code>youtube-storytime</code><br>
+Hợp với: Chuyện thật, hài hước, người dẫn kể về chính đời mình
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/us-sitcom.jpg" alt="Dàn nhân vật phong cách Sitcom giờ vàng" width="300"><br>
+<strong>Sitcom giờ vàng</strong> · <code>us-sitcom</code><br>
+Hợp với: Hài khô về đời thường, gia đình và công sở
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/modern-tv-cartoon.jpg" alt="Dàn nhân vật phong cách Hoạt hình truyền hình hiện đại" width="300"><br>
+<strong>Hoạt hình truyền hình hiện đại</strong> · <code>modern-tv-cartoon</code><br>
+Hợp với: Giải thích hài hước, chuyện trẻ em và gia đình, phiêu lưu thị trấn nhỏ với cả nhóm nhân vật
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/stylized-3d-family.jpg" alt="Dàn nhân vật phong cách Phim gia đình 3D cách điệu" width="300"><br>
+<strong>Phim gia đình 3D cách điệu</strong> · <code>stylized-3d-family</code><br>
+Hợp với: Chuyện gia đình ấm áp, giải thích cho trẻ em, chuyện ngày lễ
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/superhero.jpg" alt="Dàn nhân vật phong cách Hoạt hình siêu anh hùng" width="300"><br>
+<strong>Hoạt hình siêu anh hùng</strong> · <code>superhero</code><br>
+Hợp với: Chuyện hành động ngắn, gag hợp sức, giải thích qua anh hùng, nội dung trẻ em (một người dẫn, nhân vật không nói)
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/dino-world.jpg" alt="Dàn nhân vật phong cách Thế giới khủng long" width="300"><br>
+<strong>Thế giới khủng long</strong> · <code>dino-world</code><br>
+Hợp với: Khoa học khủng long cho trẻ em, hóa thạch, chuyện “làm sao ta biết?”
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/toys.jpg" alt="Dàn nhân vật phong cách Đồ chơi sống dậy" width="300"><br>
+<strong>Đồ chơi sống dậy</strong> · <code>toys</code><br>
+Hợp với: Chuyện nhẹ nhàng cho trẻ em, làm việc nhóm và chia sẻ, vật lý đơn giản (thăng bằng, xếp tháp)
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/chu-tieu.jpg" alt="Dàn nhân vật phong cách Chú tiểu" width="300"><br>
+<strong>Chú tiểu</strong> · <code>chu-tieu</code><br>
+Hợp với: Bài học chánh niệm và lòng tốt, chuyện đời thường mang tinh thần Phật giáo, mẹo sống chậm
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/vn-webcomic.jpg" alt="Dàn nhân vật phong cách Truyện tranh mạng Việt chuyển động" width="300"><br>
+<strong>Truyện tranh mạng Việt chuyển động</strong> · <code>vn-webcomic</code><br>
+Hợp với: Gag một câu dễ đồng cảm, chơi chữ theo nghĩa đen, chuyện xóm ngõ
+</td>
+</tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/voxel-world.jpg" alt="Dàn nhân vật phong cách Thế giới khối voxel" width="300"><br>
+<strong>Thế giới khối voxel</strong> · <code>voxel-world</code><br>
+Hợp với: Chuyện xây dựng và làm việc nhóm, nguyên nhân và kết quả, lắp ráp từng bước
+</td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/brick-build.jpg" alt="Dàn nhân vật phong cách Thị trấn gạch ráp" width="300"><br>
+<strong>Thị trấn gạch ráp</strong> · <code>brick-build</code><br>
+Hợp với: Các bộ phận khớp với nhau thế nào, nguyên nhân và kết quả, chuyện nhẹ nhàng cho trẻ em, đùa vật lý nhỏ
+</td>
+</tr>
+</table>
+
 <a id="fork-additions"></a>
 
 ## Bản fork này thêm gì
@@ -131,6 +274,8 @@ Ngoài Phong cách 1–4, Skill có thể dùng 22 phong cách thử nghiệm. M
 - **Cách chọn:** hỏi một phong cách thử nghiệm, hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Skill chỉ gợi ý các phong cách này khi bạn hỏi, và sẽ nói rõ mỗi phong cách đang ở mức `gated`.
 - **`gated` nghĩa là gì:** khung xương nhân vật đã qua gate tư thế, và gói prompt mẫu đã qua các bước kiểm tra gói bên dưới. Các phong cách này chưa được kiểm tra trên video tạo ra.
 - **Nằm ở đâu:** `skills/directing-stickman-videos/references/styles/<mã>.md`, gói mẫu ở `styles/samples/<mã>.md`. Danh sách đầy đủ nằm trong bảng “Experimental styles” của `references/style-catalog.md`.
+
+Bảng dưới đây liệt kê lại cả 22 phong cách. Ảnh và mô tả từng phong cách nằm ở [Phong cách thử nghiệm](#experimental-styles).
 
 | Mã | Phong cách | Hợp với |
 |---|---|---|
