@@ -725,6 +725,23 @@ assert not any(i["kind"] == "support_floating" for i in pg.check(t)["issues"])
 f["supported"] = ["pelvis", "floor"]
 assert any(i["kind"] == "support_floating" and "pelvis" in i["joints"] for i in pg.check(t)["issues"])
 
+# --scene --json: a scene error fails the clip of each character it names, not only the scene
+import json as _json, tempfile as _tf  # noqa: E402
+a, b = front_track(), front_track()
+a["name"], b["name"] = "Sol", "Kip"
+for f in b["frames"]:
+    f["joints"] = {k: [v[0] + 5, v[1]] for k, v in f["joints"].items()}
+    f["props"], f["holds"] = {}, {}
+for f in a["frames"]:
+    f["props"], f["holds"] = {}, {}
+with _tf.TemporaryDirectory() as d:
+    pa, pb = Path(d) / "a.json", Path(d) / "b.json"
+    pa.write_text(_json.dumps(a)); pb.write_text(_json.dumps(b))
+    out = subprocess.run([sys.executable, str(GATE / "posture_gate.py"), "check", "--scene", "--json", pa, pb],
+                         capture_output=True, text=True)
+    res = _json.loads(out.stdout)
+    assert out.returncode == 1 and not res["passed"]
+    assert all(c["status"] == "FAIL" and c["scene_issues"] for c in res["clips"]), res["clips"]
 
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()

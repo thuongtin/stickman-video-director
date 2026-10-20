@@ -17,6 +17,7 @@ import argparse
 import json
 import math
 import statistics
+import re
 import sys
 from pathlib import Path
 
@@ -1338,6 +1339,14 @@ def main(argv=None):
         for r in results:
             r["status"] = "PASS" if r["passed"] else "FAIL"
     seq = check_scene(tracks) if a.scene else check_sequence(tracks)
+    if a.scene:
+        # each character's result carries the scene issues that name it, and fails on a scene error,
+        # so a summary that reads only the clips does not miss them
+        for k, (t, r) in enumerate(zip(tracks, results)):
+            name = t.get("name") or (t.get("character") or "").split(" (")[0] or f"track {k + 1}"
+            r["scene_issues"] = [i for i in seq if re.search(rf"(?<!\w){re.escape(name)}(?!\w)", i["message"])]
+            if any(i.get("severity", "error") == "error" for i in r["scene_issues"]):
+                r["status"], r["passed"] = "FAIL", False
     passed = all(r["status"] != "FAIL" for r in results) and not any(i.get("severity", "error") == "error" for i in seq)
     if a.report:
         for n, (t, r) in enumerate(zip(tracks, results)):
