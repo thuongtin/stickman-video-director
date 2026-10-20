@@ -64,6 +64,8 @@ NEAR_FAR = re.compile(rf"\b(near|far|upstage|downstage) (?:arm|{LIMB[3:-1]})s?\b
 PRONOUN = re.compile(r"\b(it|them)\b", re.I)
 CLAUSE = re.compile(r",\s*|;\s*|\s+(?:and|then|while|before|after|as|when|until|but)\s+", re.I)
 SIDE = re.compile(rf"\b(left|right) {LIMB}s?\b", re.I)
+# a prop tucked under or carried in an arm is on that side: "tucks the box under his left arm"
+ARM_SIDE = re.compile(r"\b(?:under|in|with|beneath) (?:his|her|their|its|the|one) (left|right) (?:arm|armpit|elbow)s?\b", re.I)
 # what may come before a clause's subject: list marks, "[3-7s]", a stripped "(VO: ...)", ", and then"
 LEAD = re.compile(r'^[\W_]*(?:\[[^\]]*\][\W_]*)?(?:""[\W_]*)?(?:(?:and|but|so|then|now|finally|meanwhile|suddenly)\s+)*')
 NOT_BEAT = re.compile(r"^\W*(?:negative|negatives|avoid|do not|don't)\b.*$|[^.!?\n]*\?", re.I | re.M)
@@ -100,7 +102,8 @@ def mentions(text, prop):
     low = text.lower()
     ks = keys(prop)
     # "the phone" names the smartphone, "the ball" the basketball
-    return any(k in low for k in ks) or any(len(w) >= 4 and k.endswith(w) and k != w
+    # whole words only ("mug" is not in "smug"), allowing plural and short endings ("cups", "glasses")
+    return any(re.search(rf"(?<!\w){re.escape(k)}\w{{0,3}}(?!\w)", low) for k in ks) or any(len(w) >= 4 and k.endswith(w) and k != w
                                            for w in set(re.findall(r"\w+", low)) for k in ks)
 
 
@@ -132,7 +135,7 @@ def hand_owners(sent, cast, state=None):
         if found:
             last = found[-1][1]
         hands = []
-        for m in SIDE.finditer(clause):
+        for m in sorted([*SIDE.finditer(clause), *ARM_SIDE.finditer(clause)], key=lambda m: m.start()):
             owner = next((c for c in cast if re.search(rf"(?<!\w){re.escape(c)}'s(?:\s+[\w-]+){{0,2}}$",
                                                        clause[:m.start()].rstrip())),
                          subject or state.get("subject"))
@@ -275,7 +278,7 @@ def lint(text, warnings=None):
                     problems.append(f"Clip {n}: {name}'s hands end without the {', '.join(unreleased)}, but no beat "
                                     f"puts it down, drops or gives it away")
                 elif warnings is not None and any(end[1][name][sd] in moved for sd in ("r", "l")) \
-                        and not any(SIDE.search(x) or BOTH.search(x) for x in passes):
+                        and not any(SIDE.search(x) or ARM_SIDE.search(x) or BOTH.search(x) for x in passes):
                     # "Bao hands Mira the loaf": the model picks the receiving hand itself
                     warnings.append(f"Clip {n}: the beat that gives {name} the "
                                     f"{next(end[1][name][sd] for sd in ('r', 'l') if end[1][name][sd] in moved)} "

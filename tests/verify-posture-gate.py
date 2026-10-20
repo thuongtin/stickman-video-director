@@ -439,6 +439,14 @@ assert any("never name the scroll" in x for x in w), w
 w = []; hand_ledger.lint(pkg.replace("Man receives the red paper with both hands", "Man takes it"), w)
 assert w == [], w  # the receiving hands are named in the first sentence ("with both hands")
 assert hand_ledger.mentions("drops the phone", "smartphone")
+one = """## Clip 1
+Hands at start — Ray: right hand holds the cereal box; left hand empty.
+- [0-3s] Ray walks in and tucks the cereal box under his right arm.
+Hands at end — Ray: right hand holds the cereal box; left hand empty.
+"""
+assert hand_ledger.lint(one) == []
+assert any("left hand" in p for p in hand_ledger.lint(one.replace("under his right arm", "under his left arm")))
+assert not hand_ledger.mentions("a small smug smile", "coffee mug") and hand_ledger.mentions("two mugs", "coffee mug")
 
 # 3D axes as documented: facing +z, the character's right is at -x; an arm reaching forward passes
 j = {"head": [0, 1.7, 0], "neck": [0, 1.5, 0], "pelvis": [0, 1, 0], "shoulder_r": [-.2, 1.45, 0],
