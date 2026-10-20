@@ -63,4 +63,7 @@ assert "| Motion, camera, and transition | Hands |" in story
 assert "shape morph," not in story and "fluid," not in story
 assert "Posture budget per beat" in story
 assert "手（以角色自身左右为准）" in style1
+# the old flannel outfit is gone everywhere the default lead is described
+for path in [SKILL / "SKILL.md", *REFS.glob("*.md")]:
+    assert "flannel" not in path.read_text().lower(), f"{path.name} still describes the old flannel outfit"
 print("Examples follow the hands, anchor, hook, no-text and no-morph rules; no generated-video score claimed.")
