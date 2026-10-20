@@ -356,9 +356,7 @@ def draw_head(pen, j, s, view, expr="smile", stubble=False):
 
 
 def eye(pen, x, y, s, expr, k=1.0):
-    if expr == "happy":
-        pen.arc([x - 2.4 * s, y - 1.5 * s, x + 2.4 * s, y + 2.5 * s], 200, 340, INK, 1.4 * s)
-        return
+    # every expression keeps the locked dot eyes; mood comes from the brows and mouth
     k *= 1.2 if expr == "surprised" else 1.0
     pen.d.ellipse([(x - 1.5 * k * s) * SS, (y - 2.1 * k * s) * SS, (x + 1.5 * k * s) * SS, (y + 2.1 * k * s) * SS], fill=INK)
 
