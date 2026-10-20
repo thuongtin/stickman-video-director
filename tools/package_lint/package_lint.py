@@ -73,7 +73,8 @@ POSTURE_NEGATIVES = {
     "swapped left and right hands": re.compile(r"\bswapped left and right hands\b", re.I),
     "prop switching hands without a visible pass": re.compile(r"\bswitch\w*\s+hands\s+without\s+a\s+visible\s+pass\b", re.I),
 }
-MUSIC_LINE = re.compile(r"^\W*(?:audio|music(?:/sfx)?|bgm|score|soundtrack)\b[^:\n]{0,20}:.*$", re.I | re.M)
+# "Audio: ...", "Music/SFX: ..." or a sentence that opens with it ("Music seamlessly continues ...")
+MUSIC_LINE = re.compile(r"^\W*(?:audio|music(?:/sfx)?|bgm|score|soundtrack)\b.*$", re.I | re.M)
 FROM_CLIP1 = re.compile(r"\b(?:from|of|in|as in)\s+(?:clip\s*(?:1|one)|the first clip)\b", re.I)
 SPEAKER = re.compile(r"^\s*Voice\s*(?:[—–-]\s*|\()([^:()\n]{1,40})\)?:\s*(.+)$", re.M)
 VOICE = re.compile(r"\b(?:accent|timbre|register|resonance|baritone|tenor|alto|soprano|pitch)\b", re.I)

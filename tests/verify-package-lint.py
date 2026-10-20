@@ -64,6 +64,7 @@ for phrase in ("No knees or elbows bending backward, ", "no limbs changing lengt
 yellow = lambda text: {c for level, c, _ in pl.lint(text)[0] if level == pl.YELLOW}
 assert "B12" not in yellow(style2a), [x for x in pl.lint(style2a)[0] if x[1] == "B12"]
 assert "B12" in yellow(style2a.replace("synth from clip 1", "synth", 1))
+assert "B12" not in yellow(style2a.replace("Audio: Voiceover seamlessly continues", "Music seamlessly continues"))
 assert "B13" not in yellow(style1) and "B13" in yellow(style1.replace("logos, or watermarks", "or watermarks"))
 
 # Yellow checks: camera grammar and weak beats.
