@@ -130,8 +130,14 @@ def ik_front(a, k, target_math):
     inner = math.degrees(math.acos((u * u + d * d - f * f) / (2 * u * d)))
     # angle of the target from straight down, measured away from the body
     ang = math.degrees(math.atan2(out * dx, -dy))
-    a[f"abd_{k}"] = ang + inner
-    a[f"elb_{k}"] = -(180 - math.degrees(math.acos((u * u + f * f - d * d) / (2 * u * f))))
+    bend = 180 - math.degrees(math.acos((u * u + f * f - d * d) / (2 * u * f)))
+    # two elbow solutions: never across the chest; of those clear of it, the lower elbow (a relaxed arm, no chicken wing)
+    opts = []
+    for abd, elb in ((ang + inner, -bend), (ang - inner, bend)):
+        a[f"abd_{k}"], a[f"elb_{k}"] = abd, elb
+        el = front_pose(a, 0.0, 0.0)[f"elbow_{k}"]
+        opts.append((el[0] * (-1 if k == "r" else 1) < 12, -el[1], abd, elb))  # image y grows downward
+    _, _, a[f"abd_{k}"], a[f"elb_{k}"] = min(opts)
     return a
 
 
@@ -530,14 +536,8 @@ def wave_shot(s=1.0, x=320.0, ground=344.0):
     rest = stand_front()
     up = {"abd_r": 125, "elb_r": 75}
     T, Hh = LEN["torso"], LEN["head"]
-    path = [(16.0, -2.0), (36.0, T - 10), (22.0, T + Hh - 4), (0.0, T + Hh + 1.0)]  # rest wrist -> out -> up -> glasses
-    path[0] = tuple(front_pose(rest, 0, 0)["wrist_l"])  # placeholder, replaced below
-    rj = front_pose(rest, 0.0, 0.0); pv = rj["pelvis"]
-    path[0] = (rj["wrist_l"][0] - pv[0], -(rj["wrist_l"][1] - pv[1]))
-
-    def along(t):
-        t = max(0.0, min(1.0, t)) * (len(path) - 1); i = min(int(t), len(path) - 2); u = t - i
-        return lerp(path[i], path[i + 1], u)
+    # fingertips on the glasses' hinge at the side of the head, elbow out (never a forearm across the face)
+    hi = ik_front(dict(rest), "l", (22.0, T + Hh + 0.5)); hinge = (hi["abd_l"], hi["elb_l"])
     for i in range(48):
         a = dict(rest); f = {"facing": "front"}; expr = "smile"
         if 4 <= i < 12:
@@ -556,9 +556,12 @@ def wave_shot(s=1.0, x=320.0, ground=344.0):
         elif 41 <= i:
             t = 1 - ease((i - 40) / 7)
         if t is not None and t > 0:
-            w = along(t); ik_front(a, "l", w)
-            if w[1] > T + Hh - 16:
-                f["face_cover"] = True
+            # joint-angle keys (no IK between them, so the elbow never flips): rest -> hand up beside the shoulder,
+            # elbow out and low -> fingertips on the glasses' hinge at the side of the head
+            keys = [(rest["abd_l"], rest["elb_l"]), (55.0, 95.0), hinge]
+            u = t * (len(keys) - 1); i0 = min(int(u), len(keys) - 2); u -= i0
+            a["abd_l"] = keys[i0][0] + (keys[i0 + 1][0] - keys[i0][0]) * u
+            a["elb_l"] = keys[i0][1] + (keys[i0 + 1][1] - keys[i0][1]) * u
         f["joints"] = front_pose(a, x, ground, s)
         f["_expr"] = "smile" if i >= 26 and i < 36 else ("determined" if 36 <= i < 44 else expr)
         frames.append(f)
