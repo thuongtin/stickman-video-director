@@ -157,6 +157,9 @@ Do not include final model prompts. A global change invalidates approval and req
 
 ## Phase A checks
 
+`tools/package_lint/package_lint.py proposal.md --clips N` checks the storyboard table mechanically (rows, Hands column, camera accents and inward pushes, a closing text card, beats that only appear, overlay numbers the VO never says). The rest of this list stays a reading check.
+
+
 - Source, aspect ratio (`16:9` or `9:16`), duration, and style/theme are known.
 - Script strictly implements the 5-Stage High-Completion Heartbeat Engine.
 - The hook card is complete and passes the hook checks in `opening-hook.md`; its open loop is paid off in a named clip.

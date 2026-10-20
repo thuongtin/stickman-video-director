@@ -5,14 +5,15 @@ This reads the `Motion, camera, and transition` column only; it does not judge g
 """
 from pathlib import Path
 import re
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "skills/directing-stickman-videos"
 TEMPLATE = SKILL / "references/storyboard-template.md"
 EXAMPLES = SKILL / "references/examples.md"
+sys.path.insert(0, str(ROOT / "tools/package_lint"))
+from package_lint import ACCENT, INWARD  # noqa: E402
 
-ACCENT = re.compile(r"快速推近|快推|震动|晃动|甩镜|砸入|环绕|fast push|shake|whip|slam|orbit", re.I)
-INWARD = re.compile(r"推近|推进|穿过|钻进|push(?:es|ing)?[- ](?:in|closer)|zoom(?:s|ing)? in|fly(?:ing)? through", re.I)
 
 
 def camera_cells(text):
@@ -59,7 +60,7 @@ assert not lint(cells), "examples.md breaks camera grammar: " + "; ".join(lint(c
 
 # The lint must actually fail on bad tables.
 assert lint(["slow push-in", "push in on the cup", "zoom in on the door"]), "three inward pushes not caught"
-assert lint(["fast push-in", "whip pan", "hold", "slam zoom", "orbit", "pull back"]), "accent overuse not caught"
+assert lint(["fast push-in", "whip pan", "hold", "slam zoom", "camera orbits the hero", "pull back"]), "accent overuse not caught"
 assert not lint(["slow push-in", "pull back", "lateral track", "fast push-in", "hold", "pull back"]), "good table rejected"
 
 print("camera grammar: PASS")
