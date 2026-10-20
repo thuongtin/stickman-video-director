@@ -1,6 +1,6 @@
 # Voxel world sample package: “The last stone” (3 clips, 16:9, ~30 s)
 
-Six original blocky characters of one village, Xóm Khối; this story uses Gạch, Bấc, Than, Bà Lúa, Tí Mầm and Trâu Đá. Anchors are the `look` fields of src/cast.py, pasted in full. Hands are named from each character's own side; every character wears the lemon-yellow band on the right wrist (Bấc on its right leg, Trâu Đá on its right foreleg). Bấc and Trâu Đá have no hands and stay out of the hands lines. The score is set once in clip 1 and continues unchanged; each beat names its camera move. The hook follows references/opening-hook.md (pattern: Physics break). The prompts never name any existing game. Not yet tested on Flow.
+Six original blocky characters of one village, Xóm Khối; this story uses Gạch, Bấc, Than, Bà Lúa, Tí Mầm and Trâu Đá. Anchors are the `look` fields of src/cast.py, pasted in full. Hands are named from each character's own side; every character wears the lemon-yellow band on the right wrist (Bấc on its right leg, Trâu Đá on its right foreleg). Bấc and Trâu Đá have no hands and stay out of the hands lines. The score is set once in clip 1 and continues unchanged; each beat names its camera move. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Physics break). The prompts never name any existing game. Not yet tested on Flow.
 
 ## Global continuity block
 

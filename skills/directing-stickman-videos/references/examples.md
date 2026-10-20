@@ -2,7 +2,7 @@
 
 Load this reference only when a concrete end-to-end example resolves ambiguity. Reuse its workflow and level of detail, not its topic, wording, metaphors, or palette.
 
-All examples follow the shared `voice-continuity.md` contract. Freeze one complete profile per video; different examples may choose different voices. The male block has user listening acceptance for the separate Style 2A Hope test; the female profile below is an illustrative adaptation, not a provider-tested voice. Both examples follow the current character anchors, `opening-hook.md` (Clip 1) and `posture-gate.md` (hands named from each character's own side, `Hands at start` / `Hands at end` lines in every clip). `tests/verify-examples.py` runs `tools/posture_gate/hand_ledger.py` on each example.
+All examples follow the shared `voice-continuity.md` contract. Freeze one complete profile per video; different examples may choose different voices. The male block has user listening acceptance for the separate Style 2A Hope test; the female profile below is an illustrative adaptation, not a provider-tested voice. Both examples follow the current character anchors, the Golden Hook section of `storyboard-template.md` (Clip 1) and `posture-gate.md` (hands named from each character's own side, `Hands at start` / `Hands at end` lines in every clip). `tests/verify-examples.py` runs `tools/posture_gate/hand_ledger.py` on each example.
 
 ## User source
 

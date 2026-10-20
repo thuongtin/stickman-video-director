@@ -198,7 +198,7 @@ feet, except a skirt figure, which stands on one sloped skirt brick and has no l
 ## Hooks that fit
 
 Physics break (a row pops off its studs), Sudden event (a piece falls into frame), Reveal (pull back from one brick to
-the whole town), Question (the VO asks which figure to build next). See `references/opening-hook.md`. The hit stays
+the whole town), Question (the VO asks which figure to build next). See the Golden Hook section of `references/storyboard-template.md`. The hit stays
 toy-sized: a cascade of plastic clicks and a short clatter, no explosion, no camera shake.
 
 ## Acceptance checklist

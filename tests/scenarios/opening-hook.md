@@ -1,6 +1,6 @@
 # Opening hook behavioral cases
 
-These are review cases, not records of completed model/provider runs. Score them against `references/opening-hook.md` and rubric items PLAN-6 and PACK-7.
+These are review cases, not records of completed model/provider runs. Score them against the Golden Hook section of `references/storyboard-template.md` and rubric items PLAN-6 and PACK-7.
 
 1. Style 1 Dark, 60s, overthinking copy (the `examples.md` source): Phase A gives a complete hook card. The first frame shows the figure already under the thought tangle instead of standing beside a dot that appears; the first spoken line is a statement of about four to ten words, not "Do you ever…".
 2. Style 1 Light, 30s money explainer asking for a "shocking number" opener: the hook uses Scale shock or Accent ignition with icon-only symbols; the number goes to the post-production overlay list at the hook timestamp, never into the prompt.

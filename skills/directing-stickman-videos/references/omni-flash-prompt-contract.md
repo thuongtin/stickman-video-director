@@ -48,7 +48,7 @@ Write every prompt in this order:
 
 Make each prompt self-contained and usable without any external context.
 
-Clip 1 only: follow `opening-hook.md`. Make the first-frame state the approved hook's first frame, time the hook hit inside the first beat, sync its sound cue, and start the quoted dialogue with the approved first spoken line. The hook adds no separate line to the prompt.
+Clip 1 only: follow "Golden Hook in detail" in `storyboard-template.md`. Make the first-frame state the approved hook's first frame, time the hook hit inside the first beat, sync its sound cue, and start the quoted dialogue with the approved first spoken line. The hook adds no separate line to the prompt.
 
 ## Style language
 

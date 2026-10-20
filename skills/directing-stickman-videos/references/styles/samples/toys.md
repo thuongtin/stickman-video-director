@@ -1,6 +1,6 @@
 # Toys sample package: “Tower before morning” (3 clips, 16:9, ~30 s)
 
-Six original toys from one toy box; this story uses Kit, Bông, Đật, Thiếc, Chốt and Mây. Hands are named from each toy's own side; every toy wears its lime-green band on the right wrist (Đật on its right stub arm). Plush paws and the tin robot's knob hands cannot grip, so they only hold with both hands. The first spoken line, the hook and the joint rules follow references/opening-hook.md and the toys style reference. Not yet tested on Flow.
+Six original toys from one toy box; this story uses Kit, Bông, Đật, Thiếc, Chốt and Mây. Hands are named from each toy's own side; every toy wears its lime-green band on the right wrist (Đật on its right stub arm). Plush paws and the tin robot's knob hands cannot grip, so they only hold with both hands. The first spoken line, the hook and the joint rules follow the Golden Hook section of references/storyboard-template.md and the toys style reference. Not yet tested on Flow.
 
 ## Clip 1 — The tower wobbles
 

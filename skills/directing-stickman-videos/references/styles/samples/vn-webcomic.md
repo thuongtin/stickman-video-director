@@ -1,6 +1,6 @@
 # Xóm Ao — "Save my seat" (vn-webcomic, 3 clips, 16:9, ~30 s)
 
-Sample package for the vn-webcomic style draft. **Not tested on Flow / Omni Flash.** Hook pattern: Reaction before cause (references/opening-hook.md). Post-production overlay (optional, not in prompts): none needed, the joke reads muted.
+Sample package for the vn-webcomic style draft. **Not tested on Flow / Omni Flash.** Hook pattern: Reaction before cause (Golden Hook section, references/storyboard-template.md). Post-production overlay (optional, not in prompts): none needed, the joke reads muted.
 
 ## Clip 1 — Hook: the guarded stool
 

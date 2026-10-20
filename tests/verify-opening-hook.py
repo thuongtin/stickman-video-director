@@ -6,7 +6,12 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "skills/directing-stickman-videos"
-REF = SKILL / "references/opening-hook.md"
+STORYBOARD = SKILL / "references/storyboard-template.md"
+
+
+def golden_hook():
+    """The Golden Hook detail section of the storyboard template (the only hook reference)."""
+    return STORYBOARD.read_text().split("### Golden Hook in detail", 1)[1].split("\n### ", 1)[0]
 
 GREETINGS = ("hi ", "hello", "hey ", "welcome", "in this video", "today we", "today i",
              "let's talk", "let me tell")
@@ -18,7 +23,7 @@ BANNED_EFFECTS = ("morph", "strobe", "subliminal", "liquid")
 
 
 def patterns():
-    table = REF.read_text().split("## Pattern menu", 1)[1].split("### ", 1)[0]
+    table = golden_hook().split("#### Pattern menu", 1)[1].split("####", 1)[0]
     return {row.split("|")[1].strip() for row in table.splitlines()
             if row.startswith("| ") and not row.startswith("| Pattern")}
 
@@ -110,22 +115,24 @@ for bad in (
     else:
         raise AssertionError("Bad package hook placement was not rejected")
 
-# Routing: every planning and prompt contract points at the hook reference.
+# Routing: one hook system, Stage 1 of the storyboard template; no separate hook reference.
+assert not (SKILL / "references/opening-hook.md").exists(), "Hook detail belongs in the Golden Hook stage"
 skill = (SKILL / "SKILL.md").read_text()
-assert "references/opening-hook.md" in skill and "adds no extra prompt line" in skill
-storyboard = (SKILL / "references/storyboard-template.md").read_text()
-assert "hook card from `opening-hook.md`" in storyboard and "`0–2s` hook" in storyboard
-assert "passes the hook checks in `opening-hook.md`" in storyboard
+assert '"Golden Hook in detail"' in skill and "adds no extra prompt line" in skill
+storyboard = STORYBOARD.read_text()
+assert "complete Golden Hook card" in storyboard and "`0–2s` hook" in storyboard
+assert "passes the hook checks in \"Golden Hook in detail\"" in storyboard
+assert storyboard.count("Golden Hook in detail") >= 3 and "Stage 1: Golden Hook" in storyboard
 contract = (SKILL / "references/omni-flash-prompt-contract.md").read_text()
-assert "Clip 1 only: follow `opening-hook.md`" in contract
+assert 'Clip 1 only: follow "Golden Hook in detail"' in contract
 assert "The hook adds no separate line to the prompt." in contract
 
-ref = REF.read_text()
+ref = golden_hook()
 for style in ("Style 1:", "Style 2A:", "Style 2B:", "Style 3:", "Style 4:"):
     assert style in ref, f"Missing style override: {style}"
 assert "MIT-licensed" in ref, "Source attribution missing"
-assert "nothing to do with Flow" in ref and "Only its hook technique is taken" in ref, "Source scope must stay explicit"
-assert "Prompt placement" not in ref and "weight the start of a prompt" not in ref, "Borrowed prompt-order claim is back"
+assert "not a second hook system" in ref and "Only the hook technique is taken" in ref, "Source scope must stay explicit"
+assert "Opening hook:" not in ref and "weight the start of a prompt" not in ref, "Borrowed prompt-order claim is back"
 assert len(patterns()) >= 10
 
 if len(sys.argv) > 1:

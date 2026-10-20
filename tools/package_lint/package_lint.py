@@ -18,7 +18,7 @@ Phase A (storyboard table)
 Phase B (prompts)
   B1 prompt count = N (with --clips), and Phase A rows = prompts when both exist   RED
   B2 a prompt carries a separate `Opening hook:` line (the hook lives in Clip 1's first frame and first beat)   RED;
-     Clip 1's first beat does not time a hit at about 2 s or earlier (opening-hook.md)   YELLOW
+     Clip 1's first beat does not time a hit at about 2 s or earlier (storyboard-template.md, Golden Hook)   YELLOW
   B3 tools/posture_gate/hand_ledger.py on the whole package                  RED
   B4 a catalog anchor (style-catalog.md) or --anchor used in Clip 1 is missing from a later clip   RED
   B5 the narrator paragraph differs between clips; with approved dialogue written as one

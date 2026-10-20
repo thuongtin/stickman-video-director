@@ -1,6 +1,6 @@
 # Brick-build sample package: "The top row pops" (3 clips, 16:9, ~30 s)
 
-Six original brick-built townsfolk of Phố Khối; this story uses Bác Vữa, Bé Nút, Cô Bột, Ông Tạ and Bà Rêu. Hands are named from each figure's own side; every figure wears its lime-green ring on the right wrist. A knob hand holds only a prop with a round bar (the baguette, the wick pole, the watering can handle); a brick has no bar, so it is clamped between both knob hands. The hook follows references/opening-hook.md (pattern: Physics break; payoff in Clip 3). The brand name of toy bricks is never written in the prompts. Not yet tested on Flow.
+Six original brick-built townsfolk of Phố Khối; this story uses Bác Vữa, Bé Nút, Cô Bột, Ông Tạ and Bà Rêu. Hands are named from each figure's own side; every figure wears its lime-green ring on the right wrist. A knob hand holds only a prop with a round bar (the baguette, the wick pole, the watering can handle); a brick has no bar, so it is clamped between both knob hands. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Physics break; payoff in Clip 3). The brand name of toy bricks is never written in the prompts. Not yet tested on Flow.
 
 ## Global continuity block
 

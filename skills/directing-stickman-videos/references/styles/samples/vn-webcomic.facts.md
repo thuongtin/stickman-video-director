@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `vn-webcomic.md` sha256 b8c21382046439b8
+- package: `vn-webcomic.md` sha256 51278c172c75e6ec
 - checked: 2026-10-20
 - storyboard rows: none
 - prompts: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=9e01f7f502aa1e5a4695f2acbcc65941ed89520daf00485de815af8e86fcf440 -->
+<!-- package_lint facts end sha256=202bcb63ed1d3e6320621370f61be8149279a09510f882c9d094803d349448c7 -->

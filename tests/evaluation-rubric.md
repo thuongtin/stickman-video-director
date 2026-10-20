@@ -14,7 +14,7 @@
 - PLAN-3: Gives every row three timed beats and at least four relevant visual devices.
 - PLAN-4: Includes title, message, format, theme, palette, voice, BGM, tone, VO, translation, SFX, and transitions.
 - PLAN-5: Ends by requesting approval instead of producing final model prompts.
-- PLAN-6: Gives a complete hook card (pattern, first frame mid-action, hit by about 2s, sound cue, first spoken line of about four to ten words with no greeting, payoff clip, sound-off check) per `opening-hook.md`.
+- PLAN-6: Gives a complete hook card (pattern, first frame mid-action, hit by about 2s, sound cue, first spoken line of about four to ten words with no greeting, payoff clip, sound-off check) per "Golden Hook in detail" in `storyboard-template.md`.
 
 ## Revision gate
 
