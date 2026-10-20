@@ -5,7 +5,7 @@ Six original blocky characters of one village, Xóm Khối; this story uses Gạ
 ## Global continuity block
 
 - Ratio and length: 16:9, three clips of about ten seconds (about 30 s).
-- Style: `voxel-world` (draft pack `voxel-world.md`, status gated, not tried on Flow). The style paragraph and the box rule after the character anchors are repeated verbatim in every clip.
+- Style: `voxel-world` (draft pack `voxel-world.md`, status gated). The style paragraph and the box rule after the character anchors are repeated verbatim in every clip.
 - Cast: Gạch (clips 1–3), Bấc (clips 1–2), Than (clip 2), Bà Lúa, Tí Mầm and Trâu Đá (clip 3). Each anchor is the `look` text from `src/cast.py`, repeated verbatim in every clip the character appears in; a clip lists exactly who is in it. Movement lines (Bà Lúa, Bấc, Trâu Đá) follow the box rule, apart from the anchors.
 - Locks: lemon-yellow band on the right wrist (Bấc right leg, Trâu Đá right foreleg); Gạch's wooden mallet stays in her right hand in all three clips; small blocks and tools sit in one box hand; no elbows, no knees.
 - Palette: moss green ground, grey stone, warm tan and brown wood, straw gold, brick red, indigo, red lantern paper, clear sky blue, lemon yellow for the right-side band.
@@ -117,7 +117,7 @@ Negative constraints: no text, no letters or numbers anywhere, no signs with wor
 
 1. Clip 1 → Clip 2: clip 1 ends with Gạch beside the gap, mallet in her right hand, looking left; clip 2 opens with Gạch at the same spot facing left as Than walks in from the left edge. Hard cut on Than's first step; 4–6 frame audio crossfade on the marimba.
 2. Clip 2 → Clip 3: approved time cut to golden hour at the same wall. What continues: Gạch, her mallet in the right hand, the finished wall. What changes: light, Than and Bấc leave, Bà Lúa, Tí Mầm and Trâu Đá join. Hard cut; no dissolve (a dissolve between block worlds smears the texel grid).
-3. If Flow blurs the small stone growing into the full block, trim clip 2 to cut on the click.
+3. If the model blurs the small stone growing into the full block, trim clip 2 to cut on the click.
 4. Inspect each real join: if a clip ends on a different hand or side of the frame, trim to the last frame that matches the Hands at end line rather than trusting the prompt. Check every frame for game UI, text, a familiar green mob or a green-lip-over-dirt block before publishing.
 
 ## Voice and music continuity note

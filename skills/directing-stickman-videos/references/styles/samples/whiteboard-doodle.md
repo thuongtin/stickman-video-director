@@ -1,4 +1,4 @@
-# Multi-character prompt package — Whiteboard Doodle, 30s, 16:9 (gated, not tried on Flow)
+# Multi-character prompt package — Whiteboard Doodle, 30s, 16:9 (gated)
 
 Built by `make_cast_package.py` from the frozen blocks in `whiteboard-doodle.md` and the cast cards in `gallery/cast/cast_meta.json`. Lint facts: [`cast-prompts-30s.facts.md`](cast-prompts-30s.facts.md).
 
@@ -151,7 +151,7 @@ Negative constraints: no painted or full-color backgrounds, no paper texture, no
 
 Optional overlays in the upper-right blank zone: clip 1 "Bad moods spread", clip 2 "Small kindness", clip 3 "Pass it on".
 
-## What the first Flow test should check
+## What to check in a generated clip
 
 1. Can a viewer tell the three apart in every frame without color?
 2. Does the balloon move only through the two visible passes, and is there ever more than one balloon?

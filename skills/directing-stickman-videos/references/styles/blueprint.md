@@ -7,7 +7,7 @@ Status: gated (2026-10-20). Covers: 3 clips, 16:9, up to four characters on scre
 Quill posed in the gallery only), a two-hand big-gear handoff, one-hand wrench and clipboard holds, a two-hand box
 carry on the back row, a part plotted onto a cutaway machine, side and front views on two ground lines.
 Not covered: 9:16, Theo or Quill in a clip, more than four characters, crowds, turns while carrying, night or
-coloured scenes, any shot where the camera leaves the blueprint sheet. Not tried on Flow.
+coloured scenes, any shot where the camera leaves the blueprint sheet.
 ```
 
 Evidence for `gated` (paths relative to `/mnt/project-files/style-research/blueprint/`):
@@ -238,7 +238,7 @@ Style matrix:
 Status:
 
 ```text
-| blueprint | gated | Gate and lint evidence in /mnt/project-files/style-research/blueprint/ (blueprint.md); not tried on Flow |
+| blueprint | gated | Gate and lint evidence in /mnt/project-files/style-research/blueprint/ (blueprint.md) |
 ```
 
 Setup gate (experimental styles only):
@@ -247,7 +247,7 @@ Setup gate (experimental styles only):
   - `blueprint (Engineering Blueprint, experimental: gated)`: white-line technical drawings on cyanotype blue for how-it-works explainers
 ```
 
-## Acceptance (Flow test still needed)
+## Acceptance
 
 - Only Prussian blue and white in every frame; the grid, border and title block stay put across clips.
 - Pin joints, centre lines and hatching are present on characters and machines.

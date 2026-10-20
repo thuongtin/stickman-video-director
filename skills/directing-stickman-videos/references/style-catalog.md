@@ -16,44 +16,44 @@ This catalog defines the supported visual styles for `directing-stickman-videos`
 
 ### Status
 
-Levels follow `style-pack-template.md`: a level covers only the samples behind it.
+Levels follow `style-pack-template.md`: a level covers only the samples behind it. `core` marks the styles that ship with the skill; their evidence is the upstream demos and reports.
 
 | Style | Status | Evidence |
 |---|---|---|
 | Style 1 Dark | approved | Owner accepted the Dark samples, 2026-10-12/13 (`tests/reports/classic-character.md`) |
-| Style 1 Light | flow-tested | Same story with the polarity swapped (`tests/reports/classic-character.md`); no separate acceptance |
-| Style 2A | flow-tested | Three-clip Flow run for the voice block (`tests/reports/shared-voice.md`); README demo |
-| Style 2B | flow-tested | README demo only; no written report |
+| Style 1 Light | core | Same story with the polarity swapped (`tests/reports/classic-character.md`); no separate acceptance |
+| Style 2A | core | Three-clip Flow run for the voice block (`tests/reports/shared-voice.md`); README demo |
+| Style 2B | core | README demo only; no written report |
 | Style 3 | approved | Owner approved three clips of one story (`tests/reports/style-3.md`) |
 | Style 4 | approved | Owner selected two samples (`tests/reports/style-4.md`) |
-| chibi-anime | gated | `styles/chibi-anime.md`, sample `styles/samples/chibi-anime.md` with lint facts; not tried on Flow |
-| paper-cutout | gated | `styles/paper-cutout.md`, sample `styles/samples/paper-cutout.md` with lint facts; not tried on Flow |
-| whiteboard-doodle | gated | `styles/whiteboard-doodle.md`, sample `styles/samples/whiteboard-doodle.md` with lint facts; not tried on Flow |
-| watercolor-storybook | gated | `styles/watercolor-storybook.md`, sample `styles/samples/watercolor-storybook.md` with lint facts; not tried on Flow |
-| ink-wash | gated | `styles/ink-wash.md`, sample `styles/samples/ink-wash.md` with lint facts; not tried on Flow |
-| mid-century | gated | `styles/mid-century.md`, sample `styles/samples/mid-century.md` with lint facts; not tried on Flow |
-| dong-ho | gated | `styles/dong-ho.md`, sample `styles/samples/dong-ho.md` with lint facts; not tried on Flow |
-| science-lab | gated | `styles/science-lab.md`, sample `styles/samples/science-lab.md` with lint facts; not tried on Flow |
-| blueprint | gated | `styles/blueprint.md`, sample `styles/samples/blueprint.md` with lint facts; not tried on Flow |
-| cell-biology | gated | `styles/cell-biology.md`, sample `styles/samples/cell-biology.md` with lint facts; not tried on Flow |
-| retro-space | gated | `styles/retro-space.md`, sample `styles/samples/retro-space.md` with lint facts; not tried on Flow |
-| youtube-storytime | gated | `styles/youtube-storytime.md`, sample `styles/samples/youtube-storytime.md` with lint facts; not tried on Flow |
-| us-sitcom | gated | `styles/us-sitcom.md`, sample `styles/samples/us-sitcom.md` with lint facts; not tried on Flow |
-| modern-tv-cartoon | gated | `styles/modern-tv-cartoon.md`, sample `styles/samples/modern-tv-cartoon.md` with lint facts; not tried on Flow |
-| stylized-3d-family | gated | `styles/stylized-3d-family.md`, sample `styles/samples/stylized-3d-family.md` with lint facts; not tried on Flow |
-| superhero | gated | `styles/superhero.md`, sample `styles/samples/superhero.md` with lint facts; not tried on Flow |
-| dino-world | gated | `styles/dino-world.md`, sample `styles/samples/dino-world.md` with lint facts; not tried on Flow |
-| toys | gated | `styles/toys.md`, sample `styles/samples/toys.md` with lint facts; not tried on Flow |
-| chu-tieu | gated | `styles/chu-tieu.md`, sample `styles/samples/chu-tieu.md` with lint facts; not tried on Flow |
-| vn-webcomic | gated | `styles/vn-webcomic.md`, sample `styles/samples/vn-webcomic.md` with lint facts; not tried on Flow |
-| voxel-world | gated | `styles/voxel-world.md`, sample `styles/samples/voxel-world.md` with lint facts; not tried on Flow |
-| brick-build | gated | `styles/brick-build.md`, sample `styles/samples/brick-build.md` with lint facts; not tried on Flow |
+| chibi-anime | gated | `styles/chibi-anime.md`, sample `styles/samples/chibi-anime.md` with lint facts |
+| paper-cutout | gated | `styles/paper-cutout.md`, sample `styles/samples/paper-cutout.md` with lint facts |
+| whiteboard-doodle | gated | `styles/whiteboard-doodle.md`, sample `styles/samples/whiteboard-doodle.md` with lint facts |
+| watercolor-storybook | gated | `styles/watercolor-storybook.md`, sample `styles/samples/watercolor-storybook.md` with lint facts |
+| ink-wash | gated | `styles/ink-wash.md`, sample `styles/samples/ink-wash.md` with lint facts |
+| mid-century | gated | `styles/mid-century.md`, sample `styles/samples/mid-century.md` with lint facts |
+| dong-ho | gated | `styles/dong-ho.md`, sample `styles/samples/dong-ho.md` with lint facts |
+| science-lab | gated | `styles/science-lab.md`, sample `styles/samples/science-lab.md` with lint facts |
+| blueprint | gated | `styles/blueprint.md`, sample `styles/samples/blueprint.md` with lint facts |
+| cell-biology | gated | `styles/cell-biology.md`, sample `styles/samples/cell-biology.md` with lint facts |
+| retro-space | gated | `styles/retro-space.md`, sample `styles/samples/retro-space.md` with lint facts |
+| youtube-storytime | gated | `styles/youtube-storytime.md`, sample `styles/samples/youtube-storytime.md` with lint facts |
+| us-sitcom | gated | `styles/us-sitcom.md`, sample `styles/samples/us-sitcom.md` with lint facts |
+| modern-tv-cartoon | gated | `styles/modern-tv-cartoon.md`, sample `styles/samples/modern-tv-cartoon.md` with lint facts |
+| stylized-3d-family | gated | `styles/stylized-3d-family.md`, sample `styles/samples/stylized-3d-family.md` with lint facts |
+| superhero | gated | `styles/superhero.md`, sample `styles/samples/superhero.md` with lint facts |
+| dino-world | gated | `styles/dino-world.md`, sample `styles/samples/dino-world.md` with lint facts |
+| toys | gated | `styles/toys.md`, sample `styles/samples/toys.md` with lint facts |
+| chu-tieu | gated | `styles/chu-tieu.md`, sample `styles/samples/chu-tieu.md` with lint facts |
+| vn-webcomic | gated | `styles/vn-webcomic.md`, sample `styles/samples/vn-webcomic.md` with lint facts |
+| voxel-world | gated | `styles/voxel-world.md`, sample `styles/samples/voxel-world.md` with lint facts |
+| brick-build | gated | `styles/brick-build.md`, sample `styles/samples/brick-build.md` with lint facts |
 
 New styles are drafted with `style-pack-template.md` and named by slug.
 
 ### Experimental styles
 
-Each style below is a slug-named pack in `styles/<slug>.md` with a gated sample package in `styles/samples/`. All are `gated`: rigs pass the posture gate and the sample passes `package_lint.py`, but none has been tried on Flow. Offer them only when the user asks for an experimental style or names one, and say it is `gated`. Before planning, read the style's pack: its anchors, overrides, bans and acceptance list win over the generic rules here, as for Styles 3 and 4.
+Each style below is a slug-named pack in `styles/<slug>.md` with a gated sample package in `styles/samples/`. All are `gated`: rigs pass the posture gate and the sample passes `package_lint.py`. Offer them only when the user asks for an experimental style or names one, and say it is `gated`. Before planning, read the style's pack: its anchors, overrides, bans and acceptance list win over the generic rules here, as for Styles 3 and 4.
 
 | Style Key | Style Name | Visual Theme | Best For | Character Design |
 |---|---|---|---|---|

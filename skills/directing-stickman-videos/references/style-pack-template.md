@@ -10,15 +10,15 @@ A style's status is the lowest level whose evidence exists. A level covers only 
 |---|---|---|
 | `research` | References studied, signature checklist written, cast sheets or poses drawn | Sources, checklist, gallery |
 | `gated` | Rigs or poses pass `tools/posture_gate/posture_gate.py`; the sample package passes `tools/package_lint/package_lint.py` | Gate report, the lint facts block (`--facts`) |
-| `flow-tested` | At least three Flow clips generated from the sample package and reviewed at the risky moments (hand passes, turns, two characters) | Asset IDs, contact sheet or frames, what failed |
 | `approved` | The owner accepted named samples | The owner's words, the date and what the acceptance covers |
+| `core` | Styles 1–4, shipped with the skill (catalog only; a new pack never uses this level) | The upstream demo or report |
 
-- The setup gate offers `flow-tested` and `approved` styles. Offer `research` or `gated` styles only when the user asks for an experimental style, and say which level it is.
+- The setup gate offers the core styles (Styles 1–4, marked `core` in the catalog) and `approved` styles. Offer `research` or `gated` styles only when the user asks for an experimental style, and say which level it is.
 - Write the status block at the top of the pack:
 
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, two characters, cup handoff, 16:9.
-Not covered: 9:16, crowds, night scenes. Not tried on Flow.
+Not covered: 9:16, crowds, night scenes.
 ```
 
 - When a pack is scored, the self-score and an independent reviewer's score are both written down and the lower one counts. A reviewer who did not make the style reads only the samples. Any veto in section 3 keeps the style at `gated` or below.

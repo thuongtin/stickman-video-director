@@ -5,7 +5,7 @@
 ```text
 Status: gated (2026-10-20). Covers: 3 clips of 16:9, 2 to 4 characters on screen, a small-block handoff between two
 box hands, placing a block in a wall, a walking lantern and a four-legged buffalo, daylight on one village set.
-Not covered: 9:16, night or interiors, crowds of more than 4, fast action, character dialogue. Not tried on Flow.
+Not covered: 9:16, night or interiors, crowds of more than 4, fast action, character dialogue.
 ```
 
 Evidence: 86 v2 poses pass `posture_gate.py` (shared PR #4 copy: 3D, front with `body_width`, side, and pixel-snapped
@@ -46,7 +46,6 @@ into prompts.
 - **T2 and T4 are kept as `must`.** They define the textured-cube branch of the genre, the branch the famous game
   and its spin-off show. Cube World, Teardown and Dragon Quest Builders 2 are other branches: untextured voxels,
   micro-voxels and smooth bevelled blocks.
-- **No Flow results.** No Veo or Omni Flash voxel test was found, so every Flow risk below is still inferred.
 
 ### Five signature traits
 
@@ -206,7 +205,7 @@ Following the camera grammar in `storyboard-template.md`:
 
 ## Post-production
 
-1. Trim each clip to the beat boundaries. Cut on the stone click in clip 2 if Flow blurs the block growing to full
+1. Trim each clip to the beat boundaries. Cut on the stone click in clip 2 if the model blurs the block growing to full
    size.
 2. Stitch the clips with hard cuts only; no dissolves (see Location changes).
 3. Check every frame at full size for UI, text, a familiar green mob or a grass-lip block. Cut or regenerate any such
@@ -252,7 +251,7 @@ Mutation tests are in `prompt-package/ledger-tests.md`: 8 of 8 seeded hand error
 - [ ] Bấc and Trâu Đá never hold anything in a "hand".
 - [ ] Every frame has been watched by eye; the gates pass postures that still look wrong.
 
-## Flow risks (inferred, not yet tested)
+## Generation risks
 
 - **Pixel grid loss.** Expect softening and texel size drift, worst on wide shots and fast moves.
 - **IP pull.** Even without the name, the genre may bring a hotbar, a crosshair, a green mob or a grass-lip block.
@@ -267,5 +266,5 @@ Mutation tests are in `prompt-package/ledger-tests.md`: 8 of 8 seeded hand error
 |---|---|---|---|---|
 | `voxel-world` | Voxel Block World | A cube-built Vietnamese river village, crisp 16×16 pixel textures, flat block lighting | Building and teamwork stories, cause and effect, step-by-step assembly | Rigid box characters with cube heads and painted pixel faces; straight limbs swing only at shoulder and hip; right-wrist lemon band |
 
-Status row: `voxel-world | gated | 86 poses + motion test gated, package_lint PASS; not tried on Flow`.
-Setup-gate line: "voxel-world (gated, experimental): cozy blocky voxel village, box characters, no Flow test yet".
+Status row: `voxel-world | gated | 86 poses + motion test gated, package_lint PASS`.
+Setup-gate line: "voxel-world (gated, experimental): cozy blocky voxel village, box characters".

@@ -5,7 +5,7 @@ Four recurring characters: Mận, Tí, Ông Đồ, Cô Thắm. Hands are named f
 ## Global continuity block
 
 - Ratio and length: 16:9, three clips of about ten seconds (about 30 s).
-- Style: `dong-ho` (Đông Hồ folk woodblock print, draft pack `dong-ho.md`, status gated, not tried on Flow). The style paragraph and the line after the character anchors are repeated verbatim in every clip.
+- Style: `dong-ho` (Đông Hồ folk woodblock print, draft pack `dong-ho.md`, status gated). The style paragraph and the line after the character anchors are repeated verbatim in every clip.
 - Cast: Mận (clips 1–3), Tí (clips 1 and 3), Ông Đồ (clips 2–3), Cô Thắm (clip 3). Each anchor is the frozen text from `src/rig.py`, repeated verbatim in every clip the character appears in; a clip lists exactly who is in it.
 - Palette: paper white plus cinnabar red, pagoda-flower yellow, leaf green, indigo blue, soft brick pink and charcoal black.
 - Narrator: one off-screen adult female narrator, gentle Northern Vietnamese accent speaking English, chosen for this video (the style does not fix a narrator). The voice block is identical in all three clips.

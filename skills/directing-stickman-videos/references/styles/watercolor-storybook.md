@@ -6,7 +6,7 @@ Draft style pack for `skills/directing-stickman-videos/references/`, written to 
 
 ```text
 Status: gated (2026-10-20). Covers: 3 clips at 16:9, six recurring characters (two children, a mother, a grandfather with a cane, a rabbit, a bear cub), two character-to-character hand-offs (lantern, carrot), parallax trucks, holds, one slow push-in, one slow pull back.
-Not covered: 9:16, crowds, fast action, rain or water in motion, close-ups of hands, any Flow output. Not tried on Flow.
+Not covered: 9:16, crowds, fast action, rain or water in motion, close-ups of hands.
 ```
 
 Evidence: 105 cast pose tracks and 2 two-character `--scene` shots pass `posture_gate.py` with no warnings (`gallery/cast/gate-results.txt`); the sample package `samples/watercolor-storybook.md` passes `tools/package_lint/package_lint.py` (facts block `samples/watercolor-storybook.facts.md`). No independent review score yet, so no score is claimed.
@@ -146,7 +146,7 @@ Matrix row in `style-catalog.md`:
 Status row:
 
 ```text
-| watercolor-storybook | gated | 105 pose tracks and 2 `--scene` hand-offs pass the posture gate; the 3-clip sample package passes package_lint (`watercolor-storybook.md`). Not tried on Flow |
+| watercolor-storybook | gated | 105 pose tracks and 2 `--scene` hand-offs pass the posture gate; the 3-clip sample package passes package_lint (`watercolor-storybook.md`) |
 ```
 
 Setup-gate line in `SKILL.md` (offered only when the user asks for an experimental style, naming its level):
@@ -154,7 +154,3 @@ Setup-gate line in `SKILL.md` (offered only when the user asks for an experiment
 ```text
   - `watercolor-storybook (Watercolor Storybook / 水彩绘本风, experimental: gated)`: transparent watercolor washes on paper, painted picture-book characters with a thin sepia ink outline, slow parallax pages
 ```
-
-## Test plan before `flow-tested`
-
-Three clips from the sample package at 16:9, reviewed at the risky moments: texture crawl, outline stability, outfit and fur colour drift (Toby's teal vest, Pip's lilac scarf), Ông Bảo's cane staying in his right hand, both hand-offs, and unwanted text.

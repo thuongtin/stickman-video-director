@@ -7,7 +7,7 @@ Status: gated (2026-10-20). Covers: 3 clips of 16:9, up to four crew members on 
 cabin (a released object that stays put, a catch, a hand-to-hand apple pass, a somersault, stopping on a handrail),
 a standing throw on a tiny planet, location cuts cabin -> space -> cabin.
 Not covered: 9:16, Moon-surface walking in a package, more than four on screen, character dialogue, night-side
-lighting. Not tried on Flow.
+lighting.
 ```
 
 Evidence: 53 v2 pose tracks (`gallery/tracks/v2/`) pass the shared `posture_gate.py` (rig profile) plus this style's
@@ -226,10 +226,10 @@ on the gauge line): 0 RED, 0 YELLOW. Facts block (`samples/retro-space.facts.md`
 |---|---|---|---|---|
 | **retro-space** | Retro Space-Age Astronomy | 1960s space-poster illustration: flat grainy screen-print shapes, thin navy outline, halftone-dot shading, limited navy, orange, mustard, teal, coral and cream palette, dot stars, ringed planets | Space science explainers: orbits, gravity and free fall, the Moon, planets | One original crew in one suit system: rounded padded suits, clear bubble helmets with faces inside, a mustard gauge on every right wrist |
 
-Status row: `| retro-space | gated | 53 gated pose tracks, 3-shot microgravity animatic with scene check, linted 3-clip package; not tried on Flow |`.
+Status row: `| retro-space | gated | 53 gated pose tracks, 3-shot microgravity animatic with scene check, linted 3-clip package |`.
 Setup-gate line (offer only when the user asks for an experimental style): `` `retro-space (Retro Space-Age Astronomy, gated, experimental)`: 1960s space-poster astronauts in bubble helmets for space science ``.
 
-## Flow risks (inferred, not yet tested)
+## Generation risks
 
 - The released apple drops to the floor, or floating characters "swim".
 - The gauge jumps to the left wrist, or faces move outside the helmets.

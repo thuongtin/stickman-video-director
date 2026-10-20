@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `dong-ho.md` sha256 49fa25e52bd13b10
+- package: `dong-ho.md` sha256 73990877ece0c558
 - checked: 2026-10-20
 - storyboard rows: none
 - prompts: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=a6bf0d7d11c6c99e7106c2ba46039b1dd97e7ffe8446bfe18965c14e252e9b23 -->
+<!-- package_lint facts end sha256=95171a80644a4d65e4c234f70dbdba7b30e111ab555c5e31089ff65f4bf9fb88 -->

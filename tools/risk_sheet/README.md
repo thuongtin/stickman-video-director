@@ -15,7 +15,7 @@ The time is taken from "at about 1.5s" when a beat gives one; otherwise it is sp
 ```bash
 python3 tools/risk_sheet/risk_sheet.py package.md --clip 2                      # the plan only
 python3 tools/risk_sheet/risk_sheet.py package.md --clip 2 --video clip2.mp4 -o out/
-python3 tools/risk_sheet/risk_sheet.py package.md --batch flow-clips/ -o out/   # files named ...clip1.mp4
+python3 tools/risk_sheet/risk_sheet.py package.md --batch clips/ -o out/   # files named ...clip1.mp4
 ```
 
 Each clip gets two files:

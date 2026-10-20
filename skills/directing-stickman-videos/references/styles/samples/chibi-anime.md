@@ -3,7 +3,7 @@
 ## Global continuity block
 
 - Ratio and length: 16:9, three clips of about ten seconds (about 30 s).
-- Style: `chibi-anime` (draft pack `chibi-anime.md`, status gated, not tried on Flow). The frozen style block opens Style and environment in every clip, word for word; the location sentence follows it.
+- Style: `chibi-anime` (draft pack `chibi-anime.md`, status gated). The frozen style block opens Style and environment in every clip, word for word; the location sentence follows it.
 - Cast and locks: Bo and Kai (clips 1–3), Mimi (clips 1–3), Nori (clip 3 only). Each anchor is the frozen text from `prototype/cast.py`, repeated verbatim in every clip the character is in; every clip says exactly how many characters appear and forbids anyone else and any outfit swap. Anchors hold design only; props live in the Props and Hands lines. Model sheets: `gallery/cast/model-<name>.png`, with each signature prop in the hand the prompts use (Kai's basketball in his right hand).
 - Props and hands: the teddy bear travels Bo → Kai (clip 1) → Mimi (clip 2) → Bo (clip 3); Kai's basketball stays in his right hand, Mimi's bubble tea in her right hand, Nori's phone in her right hand. Each clip's Hands at start line repeats the previous clip's Hands at end line.
 - Palette: soft pastel park colours (sand, hedge green, sky blue, warm golden-hour light in clip 3); the outfit colours stay the most saturated things on screen (Bo's yellow, Kai's green, Mimi's lavender, Nori's orange).

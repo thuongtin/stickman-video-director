@@ -5,7 +5,7 @@ Three standalone Phase B prompts. Each prompt carries the output spec, the envir
 ## Global continuity block
 
 - Ratio and length: 16:9, three clips of about ten seconds (about 30 s).
-- Style: `watercolor-storybook` (style pack `../../../watercolor-storybook.md`, status gated, not tried on Flow). The environment paragraph is repeated verbatim in every clip, followed by that clip's one-sentence page setting.
+- Style: `watercolor-storybook` (style pack `../../../watercolor-storybook.md`, status gated). The environment paragraph is repeated verbatim in every clip, followed by that clip's one-sentence page setting.
 - Cast and locks: Ông Bảo (clip 1), Mia (clips 1–3), Tí (clips 1 and 3), Pip and Toby (clip 2), Cô Lan (clip 3). Each anchor is the frozen text from `../characters.md`, repeated verbatim in every clip the character is in, after "Cast on screen, exactly these characters and no others:". Props stay out of the anchors and are listed per clip; Ông Bảo's walking cane stays in his right hand.
 - Palette: warm off-white paper with sky blue, sage green, warm ochre, dusty rose and soft brown; Mia's mustard yellow and red are the strongest colors. Signature colors, one per character: Mia mustard and red, Tí pale blue, Pip lilac, Toby deep teal, Cô Lan dusty rose, Ông Bảo sage green.
 - Narrator: one off-screen adult female narrator, General American, the bright profile from `voice-continuity.md`. The voice paragraph is identical in all three clips.

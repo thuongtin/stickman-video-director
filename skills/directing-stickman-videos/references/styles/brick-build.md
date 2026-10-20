@@ -5,7 +5,7 @@
 ```text
 Status: gated (2026-10-20). Covers: 3 clips of 16:9, up to 3 figures on screen, a two-hand brick clamp, a bar-prop
 handoff between two figures (baguette), a stick touching a set piece (wick pole to lamp), a legless skirt figure.
-Not covered: 9:16, night or interiors, crowds of more than 4, fast action, dialogue by characters. Not tried on Flow.
+Not covered: 9:16, night or interiors, crowds of more than 4, fast action, dialogue by characters.
 ```
 
 Evidence: 60 v2 pose tracks in `gallery/tracks/v2/` pass `posture_gate.py` (shared PR #4 copy, 0 FAIL, 0 WARN) and
@@ -233,10 +233,10 @@ Sample: `samples/brick-build.md` ("The top row pops", 3 clips). `hand_ledger.py`
 |---|---|---|---|---|
 | **brick-build** | Brick-Built Town (stop-motion) | A tabletop town of glossy plastic toy bricks on studded baseplates, macro lens, shallow depth of field, stop-motion on twos | Explainers about how parts fit together, cause and effect, gentle kids' stories, small physics jokes | Original brick figures: rounded-cube head with no stud, neck peg, box torso, hinged two-piece limbs, round knob hands, lime ring on the right wrist |
 
-Status row: `| brick-build | gated | 60 gated pose tracks, 4-figure scene, linted 3-clip package; not tried on Flow |`.
+Status row: `| brick-build | gated | 60 gated pose tracks, 4-figure scene, linted 3-clip package |`.
 Setup-gate line (offer only when the user asks for an experimental style): `` `brick-build (Brick-Built Town, gated, experimental)`: glossy plastic brick figures and a brick town filmed as tabletop stop-motion ``.
 
-## Flow risks (inferred, not yet tested)
+## Generation risks
 
 - Drift back to the famous minifigure (yellow cylinder head, C hands) even without the brand word: anchors spell out
   the head, neck peg and knob hands, negatives ban the rest.

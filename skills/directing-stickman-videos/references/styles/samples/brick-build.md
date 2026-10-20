@@ -5,7 +5,7 @@ Six original brick-built townsfolk of Phố Khối; this story uses Bác Vữa, 
 ## Global continuity block
 
 - Ratio and length: 16:9, three clips of about ten seconds (about 30 s), 24 FPS, 720p target.
-- Style: `brick-build` (real brick stop-motion on a studded baseplate, draft pack `brick-build.md`, status gated, not tried on Flow). The style paragraph, the figure rule, the joint rule and the ring line are repeated verbatim in every clip.
+- Style: `brick-build` (real brick stop-motion on a studded baseplate, draft pack `brick-build.md`, status gated). The style paragraph, the figure rule, the joint rule and the ring line are repeated verbatim in every clip.
 - Cast: Bác Vữa (clips 1 and 3), Bé Nút (clips 1–3), Cô Bột (clip 2), Ông Tạ (clip 2), Bà Rêu (clip 3). Each anchor is the frozen text from `src/rig.py`, repeated verbatim in every clip the figure appears in; a clip lists exactly who is in it.
 - Locks: one lime-green ring on the right wrist of every figure; knob hands hold only round bars (baguette, wick pole, watering-can handle); a brick is clamped between both knob hands and is listed on the clip's "Two-hand props" line; joints click only where the joint rule says; Bà Rêu has no legs.
 - Palette: glossy primary plastic (brick red, tan, lime green, dark grey, pale blue backdrop) on a green baseplate with a grey road; each figure keeps the colours of its anchor in every clip.

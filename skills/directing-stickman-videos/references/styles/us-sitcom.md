@@ -5,7 +5,7 @@
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, 3–5 characters on screen, a couch TV-remote handoff and a hand-to-hand
 pass to a standing character, one living-room set, 16:9. Not covered: kitchen or car sets as full clips, 9:16,
-crowds (6+), character dialogue. Not tried on Flow.
+crowds (6+), character dialogue.
 ```
 
 Slug: `us-sitcom`. Evidence: posture gate on 54 pose tracks and a 5-character motion test ([README.md](README.md), `gallery/gate-v2.txt`, `motion-test/gate-v2.txt`); the sample package [samples/us-sitcom.md](samples/us-sitcom.md) passes `package_lint.py` with 0 red, 0 yellow ([facts block](samples/us-sitcom.facts.md)) and `hand_ledger.py`; `tests/verify-opening-hook.py` passes on it. The style audit of 2026-10-20 (`/mnt/project-files/style-audit/styles/us-sitcom.md`) and its fixes are in the README.
@@ -165,11 +165,11 @@ Style matrix row:
 Status row:
 
 ```text
-| us-sitcom | gated | Posture gate and package lint (`style-research/us-sitcom/`); not tried on Flow |
+| us-sitcom | gated | Posture gate and package lint (`style-research/us-sitcom/`) |
 ```
 
 Setup gate line (offered only when the user asks for an experimental style):
 
 ```text
-us-sitcom (gated, experimental): American prime-time animated sitcom look with a family ensemble on a couch stage; not tried on Flow.
+us-sitcom (gated, experimental): American prime-time animated sitcom look with a family ensemble on a couch stage.
 ```
