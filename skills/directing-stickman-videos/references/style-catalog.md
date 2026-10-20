@@ -26,8 +26,59 @@ Levels follow `style-pack-template.md`: a level covers only the samples behind i
 | Style 2B | flow-tested | README demo only; no written report |
 | Style 3 | approved | Owner approved three clips of one story (`tests/reports/style-3.md`) |
 | Style 4 | approved | Owner selected two samples (`tests/reports/style-4.md`) |
+| chibi-anime | gated | `styles/chibi-anime.md`, sample `styles/samples/chibi-anime.md` with lint facts; not tried on Flow |
+| paper-cutout | gated | `styles/paper-cutout.md`, sample `styles/samples/paper-cutout.md` with lint facts; not tried on Flow |
+| whiteboard-doodle | gated | `styles/whiteboard-doodle.md`, sample `styles/samples/whiteboard-doodle.md` with lint facts; not tried on Flow |
+| watercolor-storybook | gated | `styles/watercolor-storybook.md`, sample `styles/samples/watercolor-storybook.md` with lint facts; not tried on Flow |
+| ink-wash | gated | `styles/ink-wash.md`, sample `styles/samples/ink-wash.md` with lint facts; not tried on Flow |
+| mid-century | gated | `styles/mid-century.md`, sample `styles/samples/mid-century.md` with lint facts; not tried on Flow |
+| dong-ho | gated | `styles/dong-ho.md`, sample `styles/samples/dong-ho.md` with lint facts; not tried on Flow |
+| science-lab | gated | `styles/science-lab.md`, sample `styles/samples/science-lab.md` with lint facts; not tried on Flow |
+| blueprint | gated | `styles/blueprint.md`, sample `styles/samples/blueprint.md` with lint facts; not tried on Flow |
+| cell-biology | gated | `styles/cell-biology.md`, sample `styles/samples/cell-biology.md` with lint facts; not tried on Flow |
+| retro-space | gated | `styles/retro-space.md`, sample `styles/samples/retro-space.md` with lint facts; not tried on Flow |
+| youtube-storytime | gated | `styles/youtube-storytime.md`, sample `styles/samples/youtube-storytime.md` with lint facts; not tried on Flow |
+| us-sitcom | gated | `styles/us-sitcom.md`, sample `styles/samples/us-sitcom.md` with lint facts; not tried on Flow |
+| modern-tv-cartoon | gated | `styles/modern-tv-cartoon.md`, sample `styles/samples/modern-tv-cartoon.md` with lint facts; not tried on Flow |
+| stylized-3d-family | gated | `styles/stylized-3d-family.md`, sample `styles/samples/stylized-3d-family.md` with lint facts; not tried on Flow |
+| superhero | gated | `styles/superhero.md`, sample `styles/samples/superhero.md` with lint facts; not tried on Flow |
+| dino-world | gated | `styles/dino-world.md`, sample `styles/samples/dino-world.md` with lint facts; not tried on Flow |
+| toys | gated | `styles/toys.md`, sample `styles/samples/toys.md` with lint facts; not tried on Flow |
+| chu-tieu | gated | `styles/chu-tieu.md`, sample `styles/samples/chu-tieu.md` with lint facts; not tried on Flow |
+| vn-webcomic | gated | `styles/vn-webcomic.md`, sample `styles/samples/vn-webcomic.md` with lint facts; not tried on Flow |
+| voxel-world | gated | `styles/voxel-world.md`, sample `styles/samples/voxel-world.md` with lint facts; not tried on Flow |
+| brick-build | gated | `styles/brick-build.md`, sample `styles/samples/brick-build.md` with lint facts; not tried on Flow |
 
 New styles are drafted with `style-pack-template.md` and named by slug.
+
+### Experimental styles
+
+Each style below is a slug-named pack in `styles/<slug>.md` with a gated sample package in `styles/samples/`. All are `gated`: rigs pass the posture gate and the sample passes `package_lint.py`, but none has been tried on Flow. Offer them only when the user asks for an experimental style or names one, and say it is `gated`. Before planning, read the style's pack: its anchors, overrides, bans and acceptance list win over the generic rules here, as for Styles 3 and 4.
+
+| Style Key | Style Name | Visual Theme | Best For | Character Design |
+|---|---|---|---|---|
+| `chibi-anime` | Chibi Anime | Flat cel-shaded 2D anime, thick soft dark-brown outline, soft pastel settings simpler than the characters | Everyday-life comedy, study tips, relationship sketches, children's content, reaction-heavy shorts | About two heads tall, big highlighted eyes, stubby limbs with mitten hands; a frozen cast told apart by hair and outfit |
+| `paper-cutout` | Paper Cutout / Collage | Flat matte paper pieces with fibre, cut or torn edges and contact shadows on layered paper sets; stepped stop motion | Deadpan comedy; gentle stories and children's English | Rigid two-piece paper limbs on pins, paper-dot eyes, replacement mouths; story-specific cast from frozen cards |
+| `whiteboard-doodle` | Whiteboard Doodle | Matte white board, black marker line art drawn on by a hand, red/blue/green marker accents, faint ghosting | Step-by-step explainers, habits and ideas built up piece by piece, light social stories | Đậu: big round head with a hair curl, bean body, noodle arms; optional cast of five shape-distinct doodles |
+| `watercolor-storybook` | Watercolor Storybook | Transparent watercolor washes on warm off-white paper, unpainted highlights, paler backgrounds, slow multiplane parallax | Bedtime stories, children's education, fables, family and nostalgia | Painted picture-book characters (children, adults, small animals) with a thin sepia ink outline, dot eyes, rosy cheeks |
+| `ink-wash` | Ink-Wash / Sumi-e | Black ink and gray wash on warm rice paper, misty mountains, large empty paper, one vermilion accent per character | Reflective explainers, habits and patience, craft, folk-tale style stories | Open brush-circle head, dot eyes, ink-blot hands, gray-wash clothing; each character's red accent in a different place |
+| `mid-century` | 1950s Mid-Century Limited Animation | Sparse flat colour fields, hairpin-leg furniture, starburst shapes; unshaded fills printed slightly off-register from a thin line; held poses on twos | Satirical explainers, workplace and money topics, small ensembles of character types | Angular geometric torsos on stick-thin limbs, one fixed left/right marker each |
+| `dong-ho` | Đông Hồ Folk Print | Flat natural-pigment blocks on shimmering điệp paper, black woodblock key line, off-register colour | Vietnamese culture, Tết and village stories, gentle fables | Round-faced villagers in folk costume, children four heads tall, adults six |
+| `science-lab` | Science Lab Explainer | Bright flat 2D lab cartoon, steady navy outlines, mint-green school lab with coloured glassware | Science and how-it-works explainers for kids and families, hands-on demos | Team of six scientists in white lab coats and goggles, full cartoon faces, yellow band on the right wrist |
+| `blueprint` | Engineering Blueprint | White construction lines on Prussian-blue cyanotype paper, drafting grid, blank dimension capsules, cutaway machines | Science, engineering, invention and how-it-works explainers | Six inventors and engineers as white-line figures with pin joints and centre lines, a solid white cuff on the right wrist |
+| `cell-biology` | Cell-Biology Micro-World | Inside a blood vessel: translucent jelly cells on a pink lining-cell floor, pale peach plasma, histology-stain palette | Immunity, blood, wound-healing and infection explainers for kids and families | Six cell creatures with a rounded membrane body, visible nucleus, small face, tube arms, navy band on the right wrist; limbless germs |
+| `retro-space` | Retro Space-Age Astronomy | 1960s space-poster illustration: flat grainy screen-print shapes, thin navy outline, halftone shading, dot stars, ringed planets | Space science explainers: orbits, gravity and free fall, the Moon, planets | One crew in rounded padded suits and clear bubble helmets, a mustard gauge on every right wrist |
+| `youtube-storytime` | Storytime Animation | Flat 2D first-person storytime cartoon, even medium-weight outline, flat fills, radial-stripe cutaways to the narrator | Funny true stories told by a narrator about their own life | Big round heads, small bodies, thin limbs; the narrator appears as an avatar; text post-overlay; stepped motion |
+| `us-sitcom` | Prime-Time Sitcom | Flat cel fills, one uniform black outline on everything, a locked-off front-facing living-room stage, no shading | Dry comedy about everyday life, family and office dynamics | Family-and-neighbour ensemble with natural skin tones, separate oval eyes, distinct silhouettes, one right-wrist marker each |
+| `modern-tv-cartoon` | Modern TV Cartoon | Flat bright fills, one thin even outline, simple indoor sets, no shading | Comedy explainers, kids and family stories, small-town adventure told by an ensemble | Bean bodies, big round heads with dot eyes, noodle limbs that keep their length, one right-wrist marker each |
+| `stylized-3d-family` | Stylized 3D Family Film | Warm stylized 3D homes and porches, soft three-light setup, satin skin, sculpted hair | Warm family stories, kids' explainers, holiday stories | Big-eyed stylized 3D humans, kids 2.5–4 heads and adults 4–5.5 heads tall, three-fingered hands, yellow band on the right wrist |
+| `superhero` | Superhero Action Cartoon | Bright flat city skyline with a halftone-dot sky, cel shading with one hard shadow tone, speed lines and impact stars | Short action stories, team-up gags, hero explainers, kids' content (one narrator, no character voices) | Costumed cast with heroic proportions, one non-letter emblem each, white cuff band on the right wrist |
+| `dino-world` | Dino World | Sunny Cretaceous valley, flat cel colour with one soft shade, thick warm dark-brown outline | Kids' dinosaur science, fossils, "how do we know?" stories | Cartoon dinosaurs with real body plans (level back, tail counterweight, pillar legs), yellow band on the right, plus kid explorer Lan |
+| `toys` | Toys Come Alive | Real toys on a child's bedroom floor at dusk, floor-level macro lens, warm lamp and blue window light | Gentle kids' stories, teamwork and sharing, simple physics (balance, towers) | Six different toys, each bending only at its built joints, lime-green band on the right wrist |
+| `chu-tieu` | Chú Tiểu Little Monks | Calm, near-empty temple yard in flat pastels with one thin warm brown-grey outline; no statues, altar or writing | Mindfulness and kindness lessons, Buddhist-inspired everyday stories, slow-living tips | Chibi temple cast (novices, a novice nun, an old monk teacher, a lay grandmother, a temple cat); bead bracelet on every right wrist |
+| `vn-webcomic` | Vietnamese Web-Comic in Motion | Flat pastel Vietnamese alley, thick even outline, comic-strip hold-and-snap timing | One-joke relatable gags, literal wordplay, neighbourhood slice-of-life | Round animals about two heads tall, dot eyes that snap to empty white circles, red rubber band on the right wrist |
+| `voxel-world` | Voxel Block World | A cube-built Vietnamese river village, crisp 16×16 pixel textures, flat block lighting | Building and teamwork stories, cause and effect, step-by-step assembly | Rigid box characters with cube heads and painted pixel faces; straight limbs swing only at shoulder and hip; right-wrist lemon band |
+| `brick-build` | Brick-Built Town | A tabletop town of glossy plastic toy bricks on studded baseplates, macro lens, shallow depth of field, stop-motion on twos | How parts fit together, cause and effect, gentle kids' stories, small physics jokes | Brick figures: rounded-cube head with no stud, box torso, hinged two-piece limbs, round knob hands, lime ring on the right wrist |
 
 For Style 3 read `prehistoric-dark-comedy.md`. It overrides this catalog's generic motion and piano rules. Fix the drawing grammar across stories, not one universal face; fix each approved character within a story.
 
