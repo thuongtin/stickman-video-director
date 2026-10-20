@@ -33,7 +33,7 @@ Urgency, generation cost, client pressure, and requests to "pick normal settings
 1. Read `references/storyboard-template.md`, `references/style-catalog.md` and `references/voice-continuity.md`. Structure the narrative using the **5-Stage High-Completion Heartbeat Engine** (Golden Hook → Disrupting Assumptions → Unveiling Insider Secrets → Ultimate Truth Revelation → Elevation & Interactive Discussion), with timing dynamically scaled to the target duration. Produce Phase A in the user's language, with English VO and a reference translation.
 2. Stop after the director's proposal and request explicit approval.
 3. If the user changes ratio, duration, style, theme, narration, scene structure, or global direction, recompose Phase A and request approval again.
-4. Only after approval of the current Phase A, read `references/omni-flash-prompt-contract.md` and produce Phase B.
+4. Only after approval of the current Phase A, read `references/omni-flash-prompt-contract.md` and `references/posture-gate.md` and produce Phase B.
 5. Use `references/examples.md` only when a concrete end-to-end example would resolve ambiguity.
 
 Topic approval, schedule pressure, or approval of an older draft is not approval of the current Phase A.
@@ -69,6 +69,7 @@ For Style 4, read `references/cozy-storytelling.md` before planning and prompt a
 - Default generated clips to no visible words, letters, numbers, or interface copy. Put optional two-to-five-word overlays in a separate post-production note.
 - Match every clip ending to the next clip opening through action, an important prop, screen direction or a planned cut. Style 4 uses deliberate scene changes or approved time jumps; it does not require the same background in adjacent clips.
 - Do not invent unsupported facts, statistics, quotations, or product claims.
+- For all styles, apply `references/posture-gate.md`: name hands from the character's own side, keep each held prop in one named hand unless a beat visibly passes it, carry `Hands at start` / `Hands at end` ledger lines in every Phase B prompt that holds something, and run `tools/posture_gate/hand_ledger.py` on the package. Check generated footage or code-rendered rigs with `tools/posture_gate/posture_gate.py`; report generated-clip results as a review with the share of frames that had a usable pose, not as certification.
 
 ## Revision rules
 

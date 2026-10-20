@@ -38,12 +38,12 @@ Write every prompt in this order:
    - For Style 4: repeat its full frozen character anchor from `cozy-storytelling.md`, including white head/torso fill, dark limbs and simple facial marks. Location and expression changes do not redesign the character.
 4. Palette and accent roles (expressed only with ordinary color names, no hex or technical codes)
 5. Composition strategy for the chosen ratio (`16:9` or `9:16`)
-6. First-frame state inherited from the previous clip
+6. First-frame state inherited from the previous clip, including the `Hands at start` ledger line from `posture-gate.md` whenever a character holds something
 7. `[0–3s]`, `[3–7s]`, and `[7–10s]` visual beats tied to spoken ideas
 8. Exact audio-only English dialogue in quotation marks (strictly no speech bubbles or dialogue boxes)
 9. Complete frozen English voice block from `voice-continuity.md`, verbatim in every clip: identity/age, accent, timbre, register, resonance, texture, delivery, pace and recording treatment; no "same narrator" shortcuts or clip-specific recasting
 10. BGM, synchronized SFX, and voice-first mixing (subsequent clips mandate seamless BGM continuity from clip 1)
-11. Final-frame transition state inherited by the next clip
+11. Final-frame transition state inherited by the next clip, including the `Hands at end` ledger line
 12. Negative constraints (including style-specific clutter/deformation bans)
 
 Make each prompt self-contained and usable without any external context.
@@ -99,6 +99,7 @@ Forbid:
 - photorealism and unwanted 3D humanoid rendering
 - facial features (pupils, realistic eyes, lips) or hair unless approved
 - extra limbs, malformed anatomy, disconnected lines, or changed proportions
+- knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, or a prop switching hands without a visible pass
 - broken or changing line weight
 - **For Style 1**: do not reject allowed occasional simple line expressions as character drift; filled heads, sudden head/body proportion changes, duplicated/retained limb poses, body silhouettes, separate hand/foot shapes and detached body lines remain failures. Inspect actual footage at reaches, releases, turns and walking poses, and compare clips. State the scope of inspection: sparse keyframes cannot prove the absence of brief errors.
 - inverted theme polarity or unexplained colors
@@ -135,3 +136,4 @@ Start with prompt-level consistency, rather than immediately routing voice drift
 - Style 2 prompts feature the verified character anchor, BGM continuity lock, and anti-clutter negative constraints.
 - All styles repeat an identical complete voice block per video (or per approved recurring speaker); no unresolved profile fields, abbreviated voice references or contradictory per-scene vocal directions remain. Actual audio acceptance is recorded separately from prompt compliance.
 - Generated scenes contain no visible writing; optional overlay phrases are listed separately for post-production.
+- Every held prop is named with the character's own hand; `Hands at start` / `Hands at end` lines are present and `tools/posture_gate/hand_ledger.py` reports no problems for the package.

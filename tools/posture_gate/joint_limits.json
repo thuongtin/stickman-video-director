@@ -1,0 +1,62 @@
+{
+  "_source": "Active range of motion norms from the American Academy of Orthopaedic Surgeons (Greene & Heckman, The Clinical Measurement of Joint Motion, 1994); knee and ankle widened to loaded deep-flexion values (kneeling on the heels, deep squat). Angles in degrees, measured in the character's own side view (sagittal) or front view (frontal). Positive sagittal values are flexion, negative values are extension.",
+  "sagittal": {
+    "neck":     {"min": -60, "max": 50,  "label": "neck bends forward 50 / back 60"},
+    "shoulder": {"min": -60, "max": 180, "label": "arm swings forward up to overhead / back 60"},
+    "elbow":    {"min": 0,   "max": 150, "label": "elbow only folds forward, never backward"},
+    "hip":      {"min": -30, "max": 125, "label": "thigh lifts forward 125 / back 30"},
+    "knee":     {"min": 0,   "max": 160, "label": "knee only folds backward, never forward (160 = sitting on the heels)"},
+    "ankle":    {"min": -50, "max": 35,  "label": "toes point down 50 / up 35 (deep squat under body weight)"}
+  },
+  "yaw": {
+    "neck_yaw": {"max": 80, "label": "head turns at most 80 to either side (3D tracks with a nose joint)"}
+  },
+  "frontal": {
+    "neck_tilt":     {"max": 45, "label": "head tilts sideways at most 45"},
+    "hip_abduction": {"max": 50, "label": "leg swings out sideways at most 50"},
+    "knee_lateral":  {"max": 15, "label": "knee never bends sideways"},
+    "elbow_fold":    {"max": 150, "label": "forearm cannot fold flat onto the upper arm"}
+  },
+  "profiles": {
+    "rig": {
+      "_note": "Code-rendered characters: exact joint positions, strict checks.",
+      "angle_tolerance": 8,
+      "bone_stretch": 0.06,
+      "bone_shrink": 0.06,
+      "left_right_mismatch": 0.12,
+      "max_joint_speed": 1440,
+      "balance_margin": 0.12,
+      "min_confidence": 0.0,
+      "blocking": true,
+      "min_figure_px": 0,
+      "ref_percentile": 0.5
+    },
+    "pixel": {
+      "_note": "Rigs snapped to a pixel grid: bones only a few pixels long, so allow 1.5 px of rounding on lengths. Angles stay strict; gate angles on the pre-snap joints if rounding trips them.",
+      "angle_tolerance": 8,
+      "bone_stretch": 0.06,
+      "bone_shrink": 0.06,
+      "abs_tolerance_px": 1.5,
+      "left_right_mismatch": 0.25,
+      "max_joint_speed": 1440,
+      "balance_margin": 0.15,
+      "min_confidence": 0.0,
+      "blocking": true,
+      "min_figure_px": 0,
+      "ref_percentile": 0.5
+    },
+    "video": {
+      "_note": "Pose estimated from generated frames: noisy points and 3D foreshortening. Off-the-shelf estimators are trained on real people and often misplace joints on cartoon figures, so by default this profile sends flagged frames to human review instead of failing (use --strict to fail).",
+      "blocking": false,
+      "angle_tolerance": 20,
+      "bone_stretch": 0.35,
+      "bone_shrink": null,
+      "left_right_mismatch": null,
+      "max_joint_speed": 2880,
+      "balance_margin": 0.2,
+      "min_confidence": 0.6,
+      "min_figure_px": 160,
+      "ref_percentile": 0.9
+    }
+  }
+}

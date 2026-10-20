@@ -1,0 +1,44 @@
+# Posture and Hand Gate
+
+Video models break bodies in repeatable ways: knees or elbows folding the wrong way, limbs stretching like rubber, heads twisting past the neck, an arm teleporting for one frame, and above all **left/right mix-ups**: hands trading places, a prop jumping to the other hand, a left hand drawn on the right arm. This reference covers how to prevent those in prompts and how to check output with `tools/posture_gate/` at repository level.
+
+## In Phase A and Phase B (prevention)
+
+- Name hands from the character's own side, never the viewer's: "her right hand". When the character faces the camera, add the screen side once in the beat that matters: "her right hand (on screen left)".
+- Keep every held prop in one named hand. A change of hand is its own visible beat ("passes the cup to his left hand"), never implied.
+- Phase A lists which hand holds each recurring prop. A late request to switch a lead hand is a global change: update it once before freezing, never clip by clip.
+- Every Phase B prompt where a character holds or uses something carries two ledger lines, in the first-frame and final-frame states:
+
+  ```text
+  Hands at start — Pip: right hand holds the red paper card; left hand empty.
+  Hands at end — Pip: right hand empty; left hand holds the red paper card.
+  ```
+
+  One entry per character, separated by a period; either hand may come first, and an animal's paw, flipper, wing, hoof, claw or fin counts as its hand. The next clip's start line equals the previous end line; for an approved change across the cut, mark the line itself: `Hands at start (time cut) — ...` or `Hands at start (handoff) — ...`. Any package where a beat holds, grabs or carries something needs these lines in every clip. Never write "near hand" or "far arm": they swap when the character turns.
+- Add posture negatives to every prompt: `no knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass`. Keep them in the negative list, not in the character anchor. (A rubber-hose or noodle-arm character may bend smoothly; it still keeps its limb length.)
+
+Before delivering Phase B, save the package as Markdown and run:
+
+```bash
+python3 tools/posture_gate/hand_ledger.py package.md
+```
+
+Repair every reported problem before responding.
+
+## After generation (acceptance)
+
+**Code-rendered characters** (paper cutout, flat vector, low-poly rigs): export a pose track (2D joints per frame, see `tools/posture_gate/README.md`) and gate it strictly. This blocks: joints past human range of motion, limbs changing length, one-frame pops, knees/elbows snapping direction, shoulders facing against the hips, hands trading places, props in or jumping to the wrong hand, mirrored hands. `fix` clamps joint angles and restores limb lengths; pops and balance need a new key pose. Mark seated, kneeling, leaning or pushing frames with what holds the body up (`"supported": ["pelvis"]`), use the `pixel` profile for pixel-snapped rigs, and export 3D rigs as 3D joints rather than a camera projection.
+
+```bash
+python3 tools/posture_gate/posture_gate.py check track.json --report out/
+python3 tools/posture_gate/posture_gate.py fix track.json -o fixed.json
+```
+
+**Generated clips** (Flow): estimate poses, then review the flagged frames.
+
+```bash
+python3 tools/posture_gate/estimate_pose.py clip.mp4 -o track.json --fps 4 --hands
+python3 tools/posture_gate/posture_gate.py check track.json --report out/
+```
+
+The video gate reports `REVIEW`, not `FAIL`: MediaPipe Pose is trained on real people, finds a pose in only part of the frames of stick figures and cartoons, and sometimes draws a skeleton on scenery or a hat. Look at `out/report.svg`, confirm or dismiss each flagged frame, and say how many frames had a usable pose. A clean video report is not proof the clip is clean. For several clips in story order, pass all tracks to one `check` to also catch props changing hands across cuts.
