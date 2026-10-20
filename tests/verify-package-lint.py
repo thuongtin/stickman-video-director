@@ -67,6 +67,10 @@ assert "B12" in yellow(style2a.replace("synth from clip 1", "synth", 1))
 assert "B12" not in yellow(style2a.replace("Audio: Voiceover seamlessly continues", "Music seamlessly continues"))
 assert "B13" not in yellow(style1) and "B13" in yellow(style1.replace("logos, or watermarks", "or watermarks"))
 
+# A named studio, franchise or artist is RED even inside a negative (core-contract.md C11).
+assert "B14" in codes(style2a.replace("no 3D humanoid models", "no Pixar-style 3D humanoid models", 1))
+assert "B14" in codes(style1.replace("no clothing,", "no LEGO bricks, no clothing,", 1))
+
 # Yellow checks: camera grammar and weak beats.
 cam = style1.replace("低机位固定镜头", "低机位推近", 1).replace("侧向跟拍、摔倒拆解", "快速推近、摔倒拆解", 1)
 assert any(c == "A3" for _, c, _ in pl.lint(cam)[0]), "three inward rows not flagged"

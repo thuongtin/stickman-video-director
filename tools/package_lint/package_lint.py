@@ -32,6 +32,7 @@ Phase B (prompts)
   B11 more than one accent camera move in a clip; weak "appears/fades in" beats   YELLOW
   B12 clips 2–N whose Audio/Music line does not say the score continues from clip 1   YELLOW
   B13 a clip whose negatives never forbid logos                                YELLOW
+  B14 a prompt names a studio, franchise, brand or artist (core-contract.md C11), even in a negative   RED
 
 --facts writes the measured facts (counts, results, sha256 of the package) with a fingerprint, so a
 delivery note can quote them instead of claiming a pass; --verify reports whether the block was edited.
@@ -54,6 +55,12 @@ sys.path.insert(0, str(REPO / "tools/posture_gate"))
 import hand_ledger  # noqa: E402
 
 RED, YELLOW = "RED", "YELLOW"
+# Names a prompt must not carry, even as "no X": naming a studio, franchise or artist pulls the model toward it.
+# Not exhaustive; the rule in core-contract.md C11 covers every such name.
+NAMED_SOURCE = re.compile(r"\b(Pixar|Disney|Ghibli|Miyazaki|DreamWorks|Aardman|Laika|Cartoon Network|Nickelodeon|"
+                          r"LEGO|Lego|Minecraft|Roblox|Mario|Nintendo|Pok[eé]mon|Marvel|DC Comics|Simpsons|Family Guy|"
+                          r"Bob's Burgers|Futurama|South Park|Toy Story|Barbie|Funko|Playmobil|Peppa Pig|Bluey|Doraemon|"
+                          r"Tintin|Wes Anderson|Tim Burton|Van Gogh|Picasso)\b")
 
 # Camera accents only: "panels slam down" or "vines whip up" are object actions, not camera moves.
 ACCENT = re.compile(r"快速推近|快推|镜头震动|震动|晃动|甩镜|砸入|环绕|fast push|(?:slam|crash|snap) zoom|whip[- ]?pan|"
@@ -256,6 +263,10 @@ def lint_phase_b(text, ps, clips, extra_anchors):
         if n > 1 and not any(FROM_CLIP1.search(l) for l in music):
             out.append((YELLOW, "B12", f"clip {n}: the Audio line does not say the score continues from clip 1 "
                                        "(\"seamlessly continues the identical ... from clip 1, same tempo and instrumentation\")"))
+        m = NAMED_SOURCE.search(p)
+        if m:
+            out.append((RED, "B14", f"clip {n}: names \"{m.group(0)}\"; describe how it is drawn instead of naming "
+                                    "a studio, franchise, brand or artist (also not as a negative)"))
         if not re.search(r"\blogos?\b", body, re.I):
             out.append((YELLOW, "B13", f"clip {n}: the negatives never forbid logos (\"no logos or watermarks\")"))
         accents = sum(bool(ACCENT.search(l)) for l in beat_lines)

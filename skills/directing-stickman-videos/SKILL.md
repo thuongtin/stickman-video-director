@@ -1,6 +1,6 @@
 ---
 name: directing-stickman-videos
-description: "Use when turning copy, notes, articles, or topics into customizable-length English stick-figure videos (in 10-second multiples: 30s, 60s, 3min, 5min, default 60s), kinetic line-animation explainers, motivational shorts, or Gemini Omni Flash prompt packages."
+description: "Use when turning copy, notes, articles, or topics into customizable-length English stick-figure or illustrated-character videos (classic stickman plus experimental styles such as paper cutout, chibi, watercolor or Vietnamese folk prints) (in 10-second multiples: 30s, 60s, 3min, 5min, default 60s), kinetic line-animation explainers, motivational shorts, or Gemini Omni Flash prompt packages."
 ---
 
 # Directing Stickman Videos
@@ -31,7 +31,7 @@ Urgency, generation cost, client pressure, and requests to "pick normal settings
 
 ## Workflow
 
-1. Read `references/storyboard-template.md`, `references/style-catalog.md`, `references/voice-continuity.md` and `references/opening-hook.md`. Structure the narrative using the **5-Stage High-Completion Heartbeat Engine** (Golden Hook → Disrupting Assumptions → Unveiling Insider Secrets → Ultimate Truth Revelation → Elevation & Interactive Discussion), with timing dynamically scaled to the target duration. Produce Phase A in the user's language, with English VO and a reference translation.
+1. Read `references/core-contract.md`, `references/storyboard-template.md`, `references/style-catalog.md`, `references/voice-continuity.md` and `references/opening-hook.md`. Structure the narrative using the **5-Stage High-Completion Heartbeat Engine** (Golden Hook → Disrupting Assumptions → Unveiling Insider Secrets → Ultimate Truth Revelation → Elevation & Interactive Discussion), with timing dynamically scaled to the target duration. Produce Phase A in the user's language, with English VO and a reference translation.
 2. Stop after the director's proposal and request explicit approval.
 3. If the user changes ratio, duration, style, theme, narration, scene structure, or global direction, recompose Phase A and request approval again.
 4. Only after approval of the current Phase A, read `references/omni-flash-prompt-contract.md` and `references/posture-gate.md` and produce Phase B.
@@ -65,14 +65,21 @@ For Style 4, read `references/cozy-storytelling.md` before planning and prompt a
 - For Style 2A (Modern Studio Tech), enforce: `in a modern bright white studio space with subtle light-gray perspective grid lines on the floor plane. High-key studio lighting, clean white negative space, sleek glowing cyan and electric blue glass holographic UI elements.` Always include negative constraint: `STRICTLY MINIMALIST, NO CIRCUIT BOARD TEXTURES, NO SCI-FI WALL PANELS, NO CRACKED CONCRETE.`
 - For Style 2B (Cinematic Story), specify full-color narrative setting and cinematic lighting while preserving the 2D animated stick-figure character design.
 - For Style 4, freeze each approved character's complete anchor and repeat it in every clip where that role appears. Separate static design from first-frame positions, timed prop transfers and final states; changing scene does not reset prop ownership or the narrator. Read its reference for shot variety and visual acceptance checks.
-- For all styles, avoid abstract liquid/shape morphing. Drive motion with concrete character actions (leaping, touching glass, drawing luminous lines, opening doors) with timed beats across `[0–3s]`, `[3–7s]`, and `[7–10s]`. Never leave the character idle.
-- For **all styles**, apply `references/voice-continuity.md`: choose a complete video-level voice profile in Phase A, then repeat its full frozen English block verbatim in every clip. Different videos may choose different voices; a scene/style/character change must not recast the narrator. Lock timbre, register, accent, texture, delivery, pace and recording treatment, not just "same narrator". Keep emotional progression in visuals/music. Style-specific music rules never override this shared voice contract. Mandate BGM continuity from clip 1.
-- Treat narration as audio-only (`Audio voiceover only, strictly no speech bubbles, no dialogue boxes`). Quote exact dialogue and forbid alteration, repetition, captions, subtitles, or visual transcription.
-- Never place technical color notation (hex, RGB, Pantone) inside generation prompts.
-- Default generated clips to no visible words, letters, numbers, or interface copy. Put optional two-to-five-word overlays in a separate post-production note.
-- Match every clip ending to the next clip opening through action, an important prop, screen direction or a planned cut. Style 4 uses deliberate scene changes or approved time jumps; it does not require the same background in adjacent clips.
-- Do not invent unsupported facts, statistics, quotations, or product claims.
-- For all styles, apply `references/posture-gate.md`: name hands from the character's own side, keep each held prop in one named hand unless a beat visibly passes it, carry `Hands at start` / `Hands at end` ledger lines in every Phase B prompt that holds something, and run `tools/posture_gate/hand_ledger.py` on the package. Before delivering Phase B, run `tools/package_lint/package_lint.py` on the package (Phase A storyboard included when available) and fix every RED. Check generated footage or code-rendered rigs with `tools/posture_gate/posture_gate.py`; report generated-clip results as a review with the share of frames that had a usable pose, not as certification.
+
+- For all styles, apply `references/core-contract.md`. It states each shared rule once, with the file that owns its wording and what checks it:
+  - one narrator block repeated verbatim (`references/voice-continuity.md`) and a score that continues from clip 1;
+  - hands named from the character's own side with `Hands at start` / `Hands at end` lines and the posture negatives (`references/posture-gate.md`), plus the posture budget;
+  - anchors verbatim in every clip;
+  - no morphing;
+  - no generated text: overlays go to post-production;
+  - plain colour words;
+  - no studio, franchise, brand or artist names;
+  - planned cast only;
+  - planned joins between clips;
+  - no invented facts.
+
+  Style 3, Style 4 and slug packs override only the rules its table marks as overridable.
+- Before delivering Phase B, run `tools/package_lint/package_lint.py` on the package (Phase A storyboard included when available) and fix every RED; it runs `tools/posture_gate/hand_ledger.py` as check B3. After generation, review each clip with `tools/risk_sheet/risk_sheet.py` (`references/posture-gate.md`); report generated-clip results as a review, not as certification.
 
 ## Revision rules
 

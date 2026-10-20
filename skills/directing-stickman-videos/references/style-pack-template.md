@@ -43,7 +43,7 @@ Not covered: 9:16, crowds, night scenes. Not tried on Flow.
 ## 4. Sections every pack fills
 
 - Character anchor and cast cards, verbatim text repeated in every clip
-- Core rules this style overrides, each with the reason
+- Core rules this style overrides, named by their ID in `core-contract.md` (C1–C18), each with the reason; rules marked "never" there cannot be overridden
 - Text policy: `none`, `blank-zone` or `post-overlay`
 - Motion cadence: `smooth`, `on-twos` or `stepped`
 - Camera moves allowed, following the camera grammar in `storyboard-template.md`
