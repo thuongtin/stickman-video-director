@@ -170,6 +170,7 @@ Gating 114 rig-drawn pose tracks (6 characters × 19 actions; walk and run from 
 - **Lean back with the legs.** Laughing or recoiling backward with the feet left forward tips the centre of mass behind the heels. Ask for "leans back with the feet under the body".
 - **Kneel with the shins on the floor.** A fall onto all fours drafted with the toes down left the knees 20% of the body height in the air. Ask for "lands on hands and knees, shins flat on the floor".
 - **In profile, a prop in the far hand reads as in the near hand** whenever the near arm passes it. Carry it in the near hand, or swing it back behind the hip.
+- **A hand to the face keeps its elbow on its own side.** A facepalm aimed at the middle of the face made the long-armed teen's elbow cross the chest, laying the forearm diagonally over his face. Ask for "puts his palm on his forehead, elbow out to his own side".
 - **Keep the prop's tail clear of the wrist marker.** A dark flashlight tail below the fist read as Marco's black watch on the wrong wrist. Props are light grey or coloured, never the colour of a wrist marker.
 
 Negatives, verbatim in every clip. They include the five shared posture negatives from `posture-gate.md`:
