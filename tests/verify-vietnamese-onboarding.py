@@ -33,8 +33,13 @@ assert len(slugs) == 22
 for lang in ("vi", "en"):
     text = (root / f"README.{lang}.md").read_text()
     fork = text.split('<a id="fork-additions"></a>', 1)[1].split("<!-- readme:advantages -->", 1)[0]
+    gallery = text.split('<a id="experimental-styles"></a>', 1)[1].split('<a id="fork-additions"></a>', 1)[0]
+    assert text.index('<a id="experimental-styles"></a>') < text.index("<!-- readme:advantages -->"), "Styles sit in the style section"
     for slug in slugs:
         assert f"| `{slug}` |" in fork, (lang, slug)
+        assert f'src="docs/style-previews/{slug}.jpg"' in gallery and f"<code>{slug}</code>" in gallery, (lang, slug)
+        preview = root / "docs/style-previews" / f"{slug}.jpg"
+        assert preview.exists() and preview.stat().st_size < 60_000, (slug, "keep previews small")
     for command in ("tools/posture_gate/hand_ledger.py", "tools/package_lint/package_lint.py",
                     "tools/posture_gate/posture_gate.py check", "tools/risk_sheet/risk_sheet.py", "references/storyboard-template.md"):
         assert command in fork, (lang, command)
