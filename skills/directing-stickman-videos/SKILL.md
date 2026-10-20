@@ -30,7 +30,7 @@ Urgency, generation cost, client pressure, and requests to "pick normal settings
 
 ## Workflow
 
-1. Read `references/storyboard-template.md`, `references/style-catalog.md` and `references/voice-continuity.md`. Structure the narrative using the **5-Stage High-Completion Heartbeat Engine** (Golden Hook → Disrupting Assumptions → Unveiling Insider Secrets → Ultimate Truth Revelation → Elevation & Interactive Discussion), with timing dynamically scaled to the target duration. Produce Phase A in the user's language, with English VO and a reference translation.
+1. Read `references/storyboard-template.md`, `references/style-catalog.md`, `references/voice-continuity.md` and `references/opening-hook.md`. Structure the narrative using the **5-Stage High-Completion Heartbeat Engine** (Golden Hook → Disrupting Assumptions → Unveiling Insider Secrets → Ultimate Truth Revelation → Elevation & Interactive Discussion), with timing dynamically scaled to the target duration. Produce Phase A in the user's language, with English VO and a reference translation.
 2. Stop after the director's proposal and request explicit approval.
 3. If the user changes ratio, duration, style, theme, narration, scene structure, or global direction, recompose Phase A and request approval again.
 4. Only after approval of the current Phase A, read `references/omni-flash-prompt-contract.md` and `references/posture-gate.md` and produce Phase B.
@@ -45,7 +45,7 @@ For Style 3, read `references/prehistoric-dark-comedy.md` before planning. Its c
 For Style 4, read `references/cozy-storytelling.md` before planning and prompt assembly. Default each new ten-second segment to a different recognizable story setting, unless the user explicitly requests one location or approves a deliberate return. Preserve characters, drawing grammar, important props, movement direction and narrator—not an identical table or background across the whole video. Name the location cuts and any time jumps in Phase A. This is full-color cartoon storytelling, not a hand-drawn/sketchbook mode and not a claim of photorealistic 3D backgrounds.
 
 - Structure every script using the 5-stage high-completion flow:
-  1. **Golden Hook**: Instant curiosity trigger via a counter-intuitive question or visual paradox. Timing is flexible based on duration (e.g. within the first 2–5 seconds in short videos, up to 10–15s in long videos); never open with generic platitudes.
+  1. **Golden Hook**: Instant curiosity trigger via a counter-intuitive question or visual paradox. Timing is flexible based on duration (e.g. within the first 2–5 seconds in short videos, up to 10–15s in long videos); never open with generic platitudes. Apply `references/opening-hook.md` for every style: a complete hook card in Phase A, a first frame that already shows the character mid-action with a visible tension, one hook hit by about 2s that reads with the sound off, a first spoken line of about four to ten words with no greeting, and one `Opening hook:` sentence in the Clip 1 prompt only.
   2. **Disrupting Assumptions**: State what everyone thinks is true, then shatter it in one sentence to build cognitive conflict.
   3. **Unveiling Insider Secrets**: Pull back the curtain on hidden mechanics, counter-intuitive details, or the real obstacle.
   4. **Ultimate Truth Revelation**: Deliver the underlying business logic or human psychology truth with maximum cognitive payoff.
