@@ -621,6 +621,24 @@ hand_ledger.lint("## Clip 1\nHands at start — Coc: right hand holds the stool;
                  "- [0-3s] Coc nods and waves at the viewer with his right hand.\n"
                  "Hands at end — Coc: right hand holds the stool; left hand holds the stool.\n", w)
 assert any("waves" in x for x in w), w
+# a take from someone empties their hand; a prop taken and never let go of, or let go of and still in the end line
+stone = ("## Clip 1\nHands at start — Than: right hand holds the stone; left hand empty. Gach: right hand holds the mallet; left hand empty.\n"
+         "- [0-3s] Than holds out the stone. Gach takes the stone from Than with her left hand. Than lowers his empty right hand.\n"
+         "- [3-6s] Gach turns to the wall. Gach places the stone in the gap and lets go.\n"
+         "Final frame: Gach stands at the wall with her left hand empty.\n"
+         "Hands at end — Than: right hand empty; left hand empty. Gach: right hand holds the mallet; left hand empty.\n")
+assert hand_ledger.lint(stone) == [], hand_ledger.lint(stone)
+assert any("Than's hands end without" in p for p in hand_ledger.lint(stone.replace(" Gach takes the stone from Than with her left hand.", "")))
+assert any("ends without it" in p for p in hand_ledger.lint(stone.replace("- [3-6s] Gach turns to the wall. Gach places the stone in the gap and lets go.\n", "")))
+assert any("lets go of the stone" in p for p in hand_ledger.lint(stone.replace("Gach: right hand holds the mallet; left hand empty.\n", "Gach: right hand holds the mallet; left hand holds the stone.\n")))
+# a character outside the hands lines who has no hands
+ox = ("## Clip 1\nCharacters: Lua, a farmer; Trau Da, a stone ox. Trau Da has no hands and stays out of the hands lines.\n"
+      "Hands at start — Lua: right hand empty; left hand empty.\n"
+      "- [0-3s] Trau Da walks along the wall, the rice bundle on its back. Lua waves at it with her right hand.\n"
+      "Hands at end — Lua: right hand empty; left hand empty.\n")
+assert hand_ledger.lint(ox) == [], hand_ledger.lint(ox)
+assert any("Trau Da has no hands" in p for p in hand_ledger.lint(ox.replace("the rice bundle on its back", "holding the rice bundle in its right hoof")))
+
 # "the drum stick" is not "the drum" when both are props
 drum = ("## Clip 1\nHands at start — Chot: right hand holds the drum stick; left hand empty. Bo: right hand empty; left hand holds the drum.\n"
         "- [0-3s] Chot raises the drum stick in his right hand.\n"

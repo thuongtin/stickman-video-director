@@ -55,6 +55,8 @@ HOLDING = re.compile(r"\b(?:hold(?:s|ing)?(?! (?:still|on|tight|steady|position|
 RELEASE = re.compile(r"\b(opens? (?:his|her|their|its) (?:left |right )?(?:hand|paw|fist|fingers)|lets? (?:\S+ ){0,3}?go|pass(es|ed)?|hands (it )?over|hand it over|(?<!both )(?<!his )(?<!her )(?<!their )(?<!its )(?<!two )(?<!the )(?<!with )hands (?:\w+ )?(?:the|a|an|it|her|his|them)\b|gives?|"
                      r"swaps?|switch(es)?|moves?|drops?|puts?|sets?|places?|toss(es)?|throws?|releases?|lets? go|"
                      r"tucks?|hangs?|pockets?|stows?|slides?|lays?|leaves?|rests?|leans?|lowers? .* (?:onto|on|into)|offers?)\b", re.I)
+# letting go of a prop where it stays (not a hand-over, a tuck or a switch of hands)
+LETGO = re.compile(r"\b(?:drops?(?! (?:into|onto|down|to|in|on|back|low)\b)|lets? (?:\S+ ){0,3}?go|releases?)\b", re.I)
 BOTH = re.compile(rf"\b(?:both|two) {LIMB}s\b", re.I)
 # description lines that are not actions ("Props: ... wrapped in green leaves")
 STATIC = re.compile(r"^\W*(?:output|style(?: and environment)?|characters?|props?|composition|audio|voice|dialogue|"
@@ -100,6 +102,10 @@ NOT_THINGS = {"step", "steps", "breath", "look", "seat", "bow", "turn", "sip", "
 NO_HANDS = re.compile(r"\b(?:no (?:arms|hands)|armless|handless|without (?:arms|hands))\b", re.I)
 NOT_PROPS = {"side", "shoulder", "coat", "sleeve", "back", "front", "air", "way", "place", "time", "face", "chin", "head", "cheek", "hair", "pocket", "hand", "paw", "arm", "nose", "mouth", "ear", "eye",
              "hip", "waist", "lap", "chest", "belly", "tail", "string", "handle", "strap"}
+# capitalized words that open a clause without naming a character
+NOT_NAMES = {"The", "A", "An", "At", "In", "On", "Behind", "Then", "Now", "She", "He", "They", "It", "Her", "His",
+             "Their", "Its", "Camera", "Medium", "Close", "Wide", "Push", "Cut", "Both", "One", "Each", "Everyone",
+             "Final", "First", "Audio", "Music", "Voiceover", "VO", "Slowly", "Suddenly", "Meanwhile", "Finally"}
 # sentence breaks, but not after "Mr." / "Dr." in a name
 SENT = re.compile(r"(?<!\bMr\.)(?<!\bMs\.)(?<!\bDr\.)(?<!\bSt\.)(?<!\bMrs\.)(?<=[.!?;])\s+|\s*\n\s*")
 
@@ -161,10 +167,24 @@ def hand_owners(sent, cast, state=None):
     for clause in CLAUSE.split(sent):
         low = clause.lower()
         found = sorted((name_at(c, clause), c) for c in cast if name_at(c, clause) >= 0)
+        # a named character the hands lines never list (a hoofed ox, a passer-by) opening the clause
+        # is its subject, so "holding the bundle in its right hoof" is not pinned on someone else
+        lead = re.match(r"[^\w\[]*(?:\[[^\]]*\][\W_]*)?(?:(?:and|but|so|then|now|finally|meanwhile|suddenly)\s+)*",
+                        clause).end()
+        words = re.findall(r"[^\W\d_][\w'-]*", clause[lead:])[:4]
+        caps = []
+        for w in words:
+            if not w[0].isupper() or w in NOT_NAMES:
+                break
+            caps.append(w)
+        outsider = " ".join(caps) if caps and len(caps) < len(words) and words[len(caps)][0].islower() \
+            and re.fullmatch(r"\w+s", words[len(caps)]) and not any(name_at(c, clause) == lead for c in cast) else None
         if re.match(r"\s*(?:who|whose)\b", low) and last:  # "passes it to Bo, who takes it" is Bo
             subject = last
         elif found and (subject is None or found[0][0] <= LEAD.match(low).end()):
             subject = found[0][1]  # a name opening the clause; "takes the bear from Kai" keeps its subject
+        elif outsider:
+            subject = outsider
         if found:
             last = found[-1][1]
         hands = []
@@ -336,10 +356,14 @@ def lint(text, warnings=None):
                     hand_owners(x, cast, st)
                     subjects.append({w for _, w in st["clauses"][k:]})
                 held_end = {p for led in end[1].values() for p in led.values() if p}
+                said = lambda k: re.search(rf"(?<!\w){re.escape(name)}(?!\w)", sents[k], re.I)
+                # let go by this character, or taken from them by someone else ("takes the stone from Than")
                 unreleased = sorted(p for p in gone if not any(
-                    acts_on(x, verb, p, cast, sents[i - 1] if i else "")
-                    and (p not in held_end or any(name in subjects[k] or name_at(name, sents[k]) >= 0 for k in {i, max(i - 1, 0)}))
-                    for i, x in enumerate(sents) for verb in ((RELEASE, TRANSFER) if p in held_end else (RELEASE,))))
+                    (RELEASE.search(x) and acts_on(x, RELEASE, p, cast, sents[i - 1] if i else "")
+                     and any(name in subjects[k] or said(k) for k in {i, max(i - 1, 0)}))
+                    or (TRANSFER.search(x) and acts_on(x, TRANSFER, p, cast, sents[i - 1] if i else "")
+                        and (said(i) or (i and said(i - 1))) and (name not in subjects[i] or p in held_end))
+                    for i, x in enumerate(sents)))
                 if not passes:
                     problems.append(f"Clip {n}: {name}'s hands change between start and end "
                                     f"({', '.join(sorted(moved))}), but no beat passes, swaps, drops or picks it up")
@@ -524,15 +548,27 @@ def lint(text, warnings=None):
         two = {(c, p) for led in (start[1], end[1]) for c in led for p in set(led[c].values())
                if p and led[c]["r"] == led[c]["l"]}
         steady = {(c, p) for c, p in two if all(c in led and led[c]["r"] == led[c]["l"] == p for led in (start[1], end[1]))}
+        released = {}
         for idx, (si, x, clause, who, hands) in enumerate(rows):
             final = si >= timed_n or re.match(r"\W*final frame\b", x, re.I)
             if who and RELEASE.search(clause) and not final:
                 prev = " ".join(c2 for s2, _, c2, _, _ in rows[max(0, idx - 3):idx] if s2 == si)
-                for key in [k for k in now if k[0] == who and (EMPTIED.search(clause) or PRONOUN.search(clause)
+                for key in [k for k in now if k[0] == who and (PRONOUN.search(clause)
                                                                or acts_on(prev + ", " + clause, RELEASE, now[k], everyone))]:
                     del now[key]
-            elif who and EMPTIED.search(clause):
-                for key in [k for k in now if k[0] == who]:
+                # put down out of reach ("places the block in the gap and lets go"): the end line can't keep it
+                for q in listed:
+                    if LETGO.search(clause) and acts_on(prev + ", " + clause, LETGO, q, everyone) \
+                            and not any(name_at(c, clause) >= 0 for c in everyone if c != who):
+                        released[(who, q)] = (x, {sd for sd, o in hands if o == who and sd != "b"})
+            if TRANSFER.search(clause) and not final:
+                for c in everyone:  # handed to someone ("gives the cup back to Mia"): theirs again
+                    if c != who and name_at(c, clause) >= 0:
+                        for q in [q for (c2, q) in released if c2 == c and mentions(clause, q)]:
+                            del released[(c, q)]
+            elif who and EMPTIED.search(clause) and not final:
+                named = {sd for sd, o in hands if o == who and sd != "b"}
+                for key in [k for k in now if k[0] == who and (not named or k[1] in named)]:
                     del now[key]
             took = PICKUP.search(clause) or re.search(r"\b(?:takes?|receives?|accepts?|grabs?|catch(?:es)?)\b", clause, re.I)
             got = next((p for p in sorted(listed, key=len, reverse=True) if mentions(clause, p)), None)
@@ -545,6 +581,11 @@ def lint(text, warnings=None):
                                         f"while it still holds the {old}; add a beat that puts the {old} down first: "
                                         f"\"{excerpt(x)}\"")
                     now[(who, sd)] = got
+                for c in everyone:  # "takes the stone from Than": out of Than's hand
+                    if c != who and re.search(rf"\bfrom {re.escape(c)}(?!\w)", clause):
+                        for key in [k for k in now if k[0] == c and now[k] == got]:
+                            del now[key]
+                released.pop((who, got), None)
             # a prop held in both hands, used with one: "lifts the broom in his left hand alone"
             for c, p in two:
                 sides = {sd for sd, o in hands if o == c}
@@ -623,6 +664,28 @@ def lint(text, warnings=None):
             if u and warnings is not None and not hands and not POINTING.search(clause) and \
                     (GRASP.search(clause) or PICKUP.search(clause) or TRANSFER.search(clause)):
                 warnings.append(f"Clip {n}: say which hand (\"{u.group(0)}\"): \"{excerpt(x)}\"")
+        # a prop a beat put in a hand and never let go of, missing from the end line
+        for (c, sd), q in sorted(now.items()):
+            if c in end[1] and q not in end[1][c].values() and not (start[1].get(c) or {}).get(sd) == q \
+                    and not any(q in h.values() for h in end[1].values()) and (n, c, q) not in seen:
+                seen.add((n, c, q))
+                problems.append(f"Clip {n}: {c} takes the {q} in a beat but ends without it, and no later beat puts "
+                                f"it down, drops or gives it away")
+        for (c, q), (x, sds) in sorted(released.items()):
+            if any(end[1].get(c, {}).get(sd) == q for sd in (sds or ("r", "l"))) and (n, x) not in seen:
+                seen.add((n, x))
+                problems.append(f"Clip {n}: {c} lets go of the {q}, but the end line still has it in {c}'s hand; "
+                                f"empty that hand in the end line or pick it up again in a beat: \"{excerpt(x)}\"")
+        # a character outside the hands lines who has no hands ("Trâu Đá has no hands") holding something
+        for o in sorted({w for _, _, _, w, _ in rows if w and w not in everyone}):
+            said = [x2 for x2 in sentences(text) if name_at(o, x2) >= 0
+                    and NO_HANDS.search(x2[name_at(o, x2):]) and not re.search(r"\bhands?\b(?! *(?:lines?|ledger))", x2[:name_at(o, x2)])]
+            for _, x, clause, w, hands in rows:
+                if w == o and said and (n, x) not in seen and any(sd != "b" for sd, ow in hands if ow == o) \
+                        and (OBJ_IN_HAND.search(clause) or HOLDING.search(clause) or GRASP.search(clause)):
+                    seen.add((n, x))
+                    problems.append(f"Clip {n}: {o} has no hands (\"{NO_HANDS.search(said[0][name_at(o, said[0]):]).group(0)}\"), "
+                                    f"but a beat has {o} hold something in one: \"{excerpt(x)}\"")
         # a character drawn without hands
         for name in everyone:
             for x in sentences(text):  # "Bacillo has no hands", "Bacillo: a rod-shaped germ with no arms"
