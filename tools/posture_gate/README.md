@@ -1,0 +1,59 @@
+# Posture gate
+
+Catches the body and left/right-hand errors video models make, at three points in the pipeline:
+
+| When | Tool | Blocks? |
+|---|---|---|
+| Phase B prompts, before generating | `hand_ledger.py package.md` | yes |
+| Code-rendered characters (SVG/JS/3D rigs) | `posture_gate.py check track.json` | yes |
+| Generated clips (Flow) | `estimate_pose.py` then `posture_gate.py check` | review only |
+
+Only the Python standard library is needed, except `estimate_pose.py` (`pip install mediapipe opencv-python-headless`).
+
+![Posture errors the gate catches, and the result of fix](docs/posture-before-after.svg)
+
+![Left/right hand errors the gate catches](docs/hands-before-after.svg)
+
+## What it checks
+
+- **Joint limits** in side view (knee and elbow only fold one way, hip, shoulder, neck, ankle) and front view (knee never bends sideways, leg/head tilt), from clinical range-of-motion norms in [`joint_limits.json`](joint_limits.json). A track can widen a limit with `"limits_override": {"sagittal": {"hip": {"max": 170}}}`, e.g. for a dancer's high kick.
+- **Limb length**: a limb stretching or shrinking against its rest length (rigs), or stretching against the longest length seen (video).
+- **Pops and snaps**: a joint turning faster than a person can in one frame; a knee or elbow flipping bend direction.
+- **Balance** (warning): center of mass outside the feet while standing. Mark jumps and falls `"airborne": true`.
+- **Left/right**: hands trading places, shoulders facing against the hips, a held prop jumping to the other hand (within a clip or across a cut), a prop drawn at the wrong hand, a left hand shape drawn on a right arm.
+
+`fix` repairs a rig track by clamping joint angles into range and restoring limb lengths. It does not invent new key poses for pops, balance or hand mix-ups; those still fail after `fix`.
+
+## Pose track format
+
+```json
+{
+  "fps": 12,
+  "profile": "rig",
+  "rest": {"neck": [0, -60], "...": "joints of the rest pose"},
+  "frames": [
+    {
+      "facing": "right",
+      "joints": {"head": [x, y], "neck": [x, y], "pelvis": [x, y],
+                 "shoulder_l": [x, y], "elbow_l": [x, y], "wrist_l": [x, y],
+                 "hip_l": [x, y], "knee_l": [x, y], "ankle_l": [x, y], "toe_l": [x, y],
+                 "shoulder_r": "...", "...": "..."},
+      "holds": {"cup": "l"},
+      "props": {"cup": [x, y]},
+      "hands": {"l": {"looks_like": "l", "score": 0.95}}
+    }
+  ]
+}
+```
+
+Image coordinates, y down. `_l` / `_r` are the **character's** left and right. `facing` is `left`, `right`, `front` or `side`; when omitted it is inferred from the feet and shoulder width. Missing joints skip the checks that need them. `holds`, `props`, `hands`, `handoff`, `airborne` and `scale` (camera zoom on a rig) are optional.
+
+[`examples/make_examples.py`](examples/make_examples.py) builds a walk cycle, a front-facing wave with a cup, and one track per bug; [`examples/make_figures.py`](examples/make_figures.py) redraws the figures above.
+
+## Generated clips: what to expect
+
+`estimate_pose.py` uses MediaPipe Pose Landmarker (Apache-2.0). It is trained on real people. On this repository's own Flow demo clips (sampled at 4 fps) it found a usable pose in 3 to 16 of 40 frames per clip, and 5 of 113 for the Style 3 demo. The poses it found were often drawn on scenery, a giant gavel or a beanie rather than the character: in the Style 1 Light, Style 2B and Style 4 café clips we inspected, every flag was an estimator mistake, not a character mistake. That is why the `video` profile reports `REVIEW` and exits 0: open `report.svg`, keep the flags that are real. Use `--strict` to fail instead.
+
+The checks themselves were run on eight CMU Motion Capture clips projected to side view (walking, running, jumping and dance). The six everyday clips pass with no errors; two dance/gymnastics clips trip the hip and ankle limits on high kicks and pivots, which `limits_override` covers.
+
+Pose models that may do better on cartoons (not tested here): RTMPose / DWPose (Apache-2.0, via `rtmlib`) and SDPose (MIT). Their keypoints map to the same track format. Avoid OpenPose (non-commercial licence), Ultralytics YOLO-pose (AGPL) and the AGPL anime pose weights unless that licence fits.
