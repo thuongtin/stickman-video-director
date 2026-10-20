@@ -226,6 +226,11 @@ assert hand_ledger.lint("### Clip 1\nNo props here. She holds her breath.\n") ==
 assert hand_ledger.lint("### Clip 1\n[0-3s] Mia grabs the phone from the table.\n")
 assert hand_ledger.lint("[0-3s] Mia grabs the phone from the table.\n")  # one prompt, no heading
 assert hand_ledger.lint("[0-3s] Mia waves.\n") == []
+# spoken narration is not a beat: neither a VO "carrying" nor a VO "it" counts as a hand action
+assert hand_ledger.lint('Audio-only dialogue: “Your mind is already carrying a hundred disasters.”\n[0-3s] Mia waves.\n') == []
+assert hand_ledger.lint('### Clip 1\nHands at start — Mia: right hand empty; left hand empty.\n'
+                        '[3-7s] (VO: "Push and it begins to open."): Mia places her right hand on the door.\n'
+                        'Hands at end — Mia: right hand empty; left hand empty.\n') == []
 problems = hand_ledger.lint("Style: the character holds clean key poses; speed lines carry the energy.\n"
                             "[0-3s] Mia's right hand grabs the phone.\n")
 assert len(problems) == 1 and "grabs the phone" in problems[0], problems

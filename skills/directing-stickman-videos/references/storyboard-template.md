@@ -75,8 +75,10 @@ To break through the 60%+ video completion rate threshold, structure every scrip
 
 Produce exactly N approximately ten-second rows (where N = target duration in seconds / 10; default: 6 rows for 60s):
 
-| Time | Narrative purpose | Stick-figure scene | Motion, camera, and transition | English VO | Reference translation | BGM / SFX |
-|---|---|---|---|---|---|---|
+| Time | Narrative purpose | Stick-figure scene | Motion, camera, and transition | Hands | English VO | Reference translation | BGM / SFX |
+|---|---|---|---|---|---|---|---|
+
+The Hands column names, from each character's own side, what each hand holds at the start and end of the row and any visible pass, grab or drop in between ("start: right hand holds the cup; 7–10s passes it to the left hand; end: left hand holds the cup", or "both hands empty"). Phase B copies it into the `Hands at start` / `Hands at end` lines of `posture-gate.md`.
 
 Give each row a different narrative job aligned with the 5-stage engine. Allocate approximately 18–25 English words per row while keeping sentence boundaries natural.
 
@@ -94,13 +96,19 @@ Use at least four relevant devices per row:
 - environmental transformation
 - concrete visual metaphor
 - diagram, arrow, or icon-only symbol
-- particles, energy, fluid, explosion, or light
+- particles, energy, explosion, or light
 - camera push, pull, pan, orbit, shake, or tracking move
 - foreground wipe or object crossing the lens
-- match cut, shape morph, or motion-matched transition
+- match cut, foreground wipe, or motion-matched transition (a prop is swapped by a cut, never melted or reshaped on screen)
 - interaction with another figure or oversized object
 
-Require a perceptible visual change every two to three seconds. Make every effect clarify or intensify the spoken idea; omit unrelated spectacle. Avoid abstract liquid morphing.
+Require a perceptible visual change every two to three seconds. Make every effect clarify or intensify the spoken idea; omit unrelated spectacle. Avoid abstract liquid or shape morphing.
+
+Spend the density on effects, camera and cuts, not on the body. Posture budget per beat (`posture-gate.md`):
+
+- At most one demanding body action per character per beat: turning around, reaching overhead, crossing the arms over the body, passing a prop between hands, falling and getting up. Simple walking, pointing or holding a pose does not count.
+- Do not pair a demanding body action with a camera shake, orbit or tilt in the same beat; let the camera move before or after it.
+- A visual change can be a prop, effect, cut or camera move; the character does not have to change pose every two seconds.
 
 ## Palette and text
 
@@ -141,6 +149,7 @@ Do not include final model prompts. A global change invalidates approval and req
 - Exactly N storyboard rows have distinct narrative purposes (N = duration / 10).
 - Every row has three beats, at least four visual devices, audio, and a transition.
 - Visual change occurs approximately every two to three seconds.
+- Every row fills the Hands column from the character's own side, and no beat spends more than one demanding body action per character or pairs one with a camera shake, orbit or tilt.
 - No more than three saturated accent colors are used (for Style 1) or clean palette rules followed (for Style 2).
 - No technical color notation is present.
 - Any proposed text is clearly separated as a post-production overlay and absent from generated scenes.

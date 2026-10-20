@@ -18,6 +18,7 @@ This script reads the package (Markdown, clips headed "Clip N") and reports:
   * "near hand" / "far arm" wording, which flips meaning when the character turns,
   * a hand taking or holding "it"/"them" in the wrong hand (read as the prop named last),
     or before any prop is named.
+Spoken narration ("(VO: "...")" and curly-quoted dialogue) is not read as a beat.
 Paw, flipper, wing, hoof, claw and fin count as hands for animal characters.
 
 Usage: hand_ledger.py package.md     Exit 0 = consistent, 1 = problems, 2 = bad input.
@@ -48,6 +49,9 @@ NEAR_FAR = re.compile(rf"\b(near|far|upstage|downstage) (?:arm|{LIMB[3:-1]})s?\b
 PRONOUN = re.compile(r"\b(it|them)\b", re.I)
 CLAUSE = re.compile(r",\s*|;\s*|\s+(?:and|then|while|before|after)\s+", re.I)
 SIDE = re.compile(rf"\b(left|right) {LIMB}s?\b", re.I)
+# Spoken lines are heard, not acted: "(VO: "...")" and curly-quoted dialogue are left out of the check,
+# so "your mind is already carrying a hundred disasters" or "it begins to open" is not read as a beat.
+SPOKEN = re.compile(r'\(VO:\s*"[^"\n]*"\)|“[^”\n]*”', re.I)
 
 
 def held(text):
@@ -76,6 +80,7 @@ def split_clips(text):
 
 def lint(text):
     problems = []
+    text = SPOKEN.sub('""', text)
     clips = split_clips(text) or [(1, text)]  # a single prompt without a heading is clip 1
     ledgers = []
     for n, body in clips:
