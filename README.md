@@ -2,11 +2,11 @@
 
 <div align="center">
 
-[**简体中文**](README.zh-CN.md) · [English](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Português do Brasil](README.pt-BR.md)
+[**Tiếng Việt**](README.vi.md) · [English](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Português do Brasil](README.pt-BR.md)
 
-# AI 火柴人动画画风大全
+# Thư viện phong cách hoạt hình người que bằng AI
 
-**将任何想法变成一部高质量的、稳定画风火柴人视频。**
+**Biến một ý tưởng thành video người que chỉn chu, giữ một phong cách hình ảnh nhất quán.**
 
 [![GitHub Stars](https://img.shields.io/github/stars/kaomei/stickman-video-director?style=flat-square)](https://github.com/kaomei/stickman-video-director/stargazers)
 ![MIT License](https://img.shields.io/badge/License-MIT-16a34a?style=flat-square)
@@ -15,42 +15,42 @@
 
 <div align="center">
 
-我把全网所有热门的火柴人画风，逐个实测并整理开源出来。安装好 Skill 后，你只需要给一个话题，就能拿到动画脚本、动态分镜，以及配音和音效提示词。
+Dự án thử các phong cách hoạt hình người que phổ biến trên mạng và chia sẻ quy trình làm ở đây, miễn phí và mã nguồn mở. Cài Skill, đưa cho AI một chủ đề, bạn sẽ nhận kịch bản, phân cảnh động và prompt cho lời dẫn và hiệu ứng âm thanh.
 
-<strong>以后想做火柴人动画，来这里挑画风就够了——</strong>适用于 **YouTube 知识讲解、TikTok、职场励志、教育科普和快节奏情感故事。**
+<strong>Lần tới muốn làm hoạt hình người que, hãy bắt đầu từ đây.</strong> Dùng cho **video giải thích trên YouTube, video TikTok, chuyện công sở và truyền động lực, nội dung giáo dục, và video ngắn về đời thường.**
 
 </div>
 
 <table width="100%">
 <tr>
 <td width="50%" align="center">
-<strong>黑白极简</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/dark-theme-demo.gif" alt="黑白极简火柴人动画：黑底白线、动态科普" width="90%"></a>
+<strong>Tối giản đơn sắc</strong><br>
+<a href="#style-gallery"><img src="assets/readme/previews/dark-theme-demo.gif" alt="Hoạt hình người que tối giản, nét trắng trên nền đen" width="90%"></a>
 </td>
 <td width="50%" align="center">
-<strong>潮酷科技</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/style-2a-demo.gif" alt="潮酷科技火柴人动画：红帽角色、科技光效" width="90%"></a>
+<strong>Công nghệ hiện đại</strong><br>
+<a href="#style-gallery"><img src="assets/readme/previews/style-2a-demo.gif" alt="Người que đội mũ len đỏ trong khung cảnh công nghệ gọn gàng" width="90%"></a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center">
-<strong>史前黑色幽默</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/style-3-demo.gif" alt="史前黑色幽默火柴人动画：洞穴故事、反转短片" width="90%"></a>
+<strong>Hài đen thời tiền sử</strong><br>
+<a href="#style-gallery"><img src="assets/readme/previews/style-3-demo.gif" alt="Chuyện người que thời tiền sử có cú twist hài hước" width="90%"></a>
 </td>
 <td width="50%" align="center">
-<strong>治愈故事</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="治愈故事火柴人动画：彩色场景、生活共鸣" width="90%"></a>
+<strong>Chuyện đời thường ấm áp</strong><br>
+<a href="#style-gallery"><img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="Nhân vật que biểu cảm trong khung cảnh đời thường đầy màu sắc" width="90%"></a>
 </td>
 </tr>
 </table>
 
 <div align="center">
 
-**4 大画风 · 6 种视觉方案 · 实测样片 · 免费开源**
+**4 phong cách · 6 lựa chọn hình ảnh · 22 phong cách thử nghiệm · Gate tư thế · Miễn phí, mã nguồn mở**
 
-⭐ **先收藏，下次做火柴人动画不用再到处找提示词。**
+⭐ **Bấm Star ngay. Lần sau làm hoạt hình, khỏi phải đi tìm prompt.**
 
-[开始使用](#quick-start) · [最近更新](#recent-updates) · [完整制作教程](https://x.com/CrazyKaomei/status/2102311241046008268)
+[Bắt đầu](#quick-start) · [Bản fork này thêm gì](#fork-additions) · [Cập nhật mới](#recent-updates) · [Hướng dẫn đầy đủ (tiếng Trung)](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
 
@@ -58,200 +58,259 @@
 
 <a id="style-gallery"></a>
 
-## 全部画风一览
+## Chọn phong cách
 
-### 风格 1：基础黑白风
+### Phong cách 1: Tối giản đơn sắc
 
-用最少的线条，把一个概念讲清楚。纯白或纯黑的画布上，人物、道具和强调色承担主要信息，适合做节奏明快的知识解说。
+Vài nét vẽ đủ để giải thích một ý lớn. Trên nền trắng tinh hoặc đen tuyền, nhân vật, đạo cụ và màu nhấn tự kể chuyện. Hợp với video giải thích nhanh, rõ.
 
-- **画面特点**：简洁圆头、线条肢体与统一线宽，可偶尔加入简单表情；最多三种高饱和强调色，用来区分情绪、风险或行动。抽象内容可以变成具体画面，比如把焦虑画成牢笼，把注意力画成进度条。
-- **适合内容**：科学常识、心理成长、励志、自我管理、商业拆解与概念解释。
-- **怎么选**：白底黑火柴人清爽直观，适合教学和日常科普；黑底白火柴人对比更强，适合悬念、冲突和情绪表达。
+- **Trông thế nào:** Đầu tròn, tay chân bằng nét, độ dày nét đều, thỉnh thoảng có biểu cảm đơn giản. Tối đa ba màu nhấn rực để phân biệt cảm xúc, rủi ro hay hành động. Biến nỗi lo thành cái lồng, sự tập trung thành thanh tiến độ.
+- **Hợp với:** Khoa học, tâm lý, truyền động lực, tự quản lý bản thân, phân tích kinh doanh, giải thích khái niệm.
+- **Chọn bản nào?** Nền trắng cho cảm giác sạch và thẳng thắn; chọn nền đen khi cần tương phản mạnh, căng thẳng và cảm xúc rõ hơn.
 
-| 风格 1A：白底黑火柴人 | 风格 1B：黑底白火柴人 |
+| Phong cách 1A: Đen trên trắng | Phong cách 1B: Trắng trên đen |
 |:---:|:---:|
-| <!-- demo:light:start --><img src="assets/readme/previews/light-theme-demo.gif" alt="风格 1A：白底黑火柴人动态演示" width="360"><!-- demo:light:end --> | <!-- demo:dark:start --><img src="assets/readme/previews/dark-theme-demo.gif" alt="风格 1B：黑底白火柴人动态演示" width="360"><!-- demo:dark:end --> |
-| 纯白画布 · 黑色人物 | 纯黑画布 · 白色人物 |
+| <!-- demo:light:start --><img src="assets/readme/previews/light-theme-demo.gif" alt="Người que đen trên nền trắng tinh" width="360"><!-- demo:light:end --> | <!-- demo:dark:start --><img src="assets/readme/previews/dark-theme-demo.gif" alt="Người que trắng trên nền đen tuyền" width="360"><!-- demo:dark:end --> |
+| Nền trắng · Nhân vật đen | Nền đen · Nhân vật trắng |
 
 ---
 
-### 风格 2：现代潮酷风
+### Phong cách 2: Hiện đại, vui mắt
 
-红色冷帽、黄色 T 恤，是这套画风最鲜明的角色标记。既可以在干净的科技空间里讲产品，也可以走进卧室、街道和荒野，演一段有起伏的故事。
+Mũ len đỏ và áo thun vàng giúp nhân vật dễ nhận ra. Dùng bối cảnh công nghệ gọn gàng để giải thích một sản phẩm, hoặc đưa nhân vật vào phòng ngủ, đường phố, cảnh thiên nhiên rộng để kể chuyện.
 
-- **画面特点**：固定红帽黄衣的极简角色，搭配两种环境。2A 用纯白空间、极淡网格、悬浮玻璃界面和青蓝光效表现科技感；2B 用彩色场景、光影和空间纵深营造故事氛围。
-- **适合内容**：2A 适合 AI 工具、科技产品、方法教学与功能解说；2B 适合成长经历、生活话题、冒险与励志故事。
-- **怎么选**：重点是“讲清一个工具或方法”，选 2A；重点是“跟着角色经历一件事”，选 2B。
+- **Trông thế nào:** Một nhân vật dễ nhớ, hai kiểu thế giới. 2A là khoảng trắng, lưới mờ, giao diện kính trôi nổi và ánh xanh lam. 2B là bối cảnh nhiều màu, ánh sáng điện ảnh và chiều sâu.
+- **Hợp với:** 2A cho công cụ AI, sản phẩm công nghệ, hướng dẫn và demo tính năng. 2B cho phát triển bản thân, tình huống đời thường, phiêu lưu và chuyện truyền động lực.
+- **Chọn bản nào?** Chọn 2A để giải thích một công cụ hay phương pháp; chọn 2B để theo chân nhân vật qua một trải nghiệm.
 
-| 风格 2A：极简科技 | 风格 2B：彩色故事 |
+| Phong cách 2A: Công nghệ tối giản | Phong cách 2B: Câu chuyện điện ảnh |
 |:---:|:---:|
-| <img src="assets/readme/previews/style-2a-demo.gif" alt="风格 2A：极简科技风动态演示" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="风格 2B：彩色故事风动态演示" width="360"> |
-| 纯白空间 · 极淡网格 · 青蓝微光 | 彩色场景 · 电影光影 · 叙事氛围 |
+| <img src="assets/readme/previews/style-2a-demo.gif" alt="Hoạt hình công nghệ tối giản với nhân vật mũ len đỏ" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="Nhân vật mũ len đỏ trong bối cảnh điện ảnh nhiều màu" width="360"> |
+| Khoảng trắng · Lưới mờ · Ánh xanh lam | Bối cảnh nhiều màu · Ánh sáng điện ảnh · Không khí kể chuyện |
 
 ---
 
-### 风格 3：史前手绘 / 黑色幽默
+### Phong cách 3: Phác họa tiền sử / Hài đen
 
-把今天的烦恼，搬回没有手机和办公室的史前世界。洞穴、兽皮、篝火和夸张表情，让职场、人性与生活里的荒诞，变成一段带反转的小故事。
+Mang những rắc rối hôm nay về một thế giới chưa có điện thoại hay văn phòng. Hang động, da thú, lửa trại và biểu cảm cường điệu biến nỗi bực mình nơi công sở và những tật quen của con người thành chuyện có cú twist.
 
-- **画面特点**：粗手绘线条、白色实心头部、深色肢体、兽皮服饰和土色环境，强调角色互动、表情反应与喜剧停顿。角色按故事设计，男女老幼都可以出现，不同故事不必共用一张脸。
-- **适合内容**：史前脑洞、职场讽刺、人性观察、黑色幽默、寓言与儿童英语故事。
-- **怎么选**：想用一个小情节讲出“原来如此”或“怎么会这样”的反转，可以选这一风格；尤其适合把现代关系放进原始部落，做出熟悉又意外的笑点。
+- **Trông thế nào:** Nét viền vẽ tay thô, đầu tô trắng, tay chân que màu tối, quần áo da thú và cảnh sắc màu đất. Tương tác giữa nhân vật, cảnh phản ứng và nhịp hài rất quan trọng. Chọn người lớn, trẻ em hay người già tùy câu chuyện; không cần câu chuyện nào cũng dùng cùng một khuôn mặt.
+- **Hợp với:** Giả tưởng thời tiền sử, châm biếm công sở, quan sát về bản tính con người, hài đen, ngụ ngôn và truyện tiếng Anh cho trẻ em.
+- **Vì sao chọn nó?** Khi cần một đoạn dẫn ngắn và một cái kết bất ngờ, nhất là khi những mối quan hệ hiện đại hiện ra quen thuộc đến buồn cười trong một bộ lạc tiền sử.
 
-| 案例 1：《人类的第一份工作是怎么来的？》 | 案例 2：《人类第一次发现火源》 |
+| Ví dụ 1: “Con người có công việc đầu tiên như thế nào?” | Ví dụ 2: “Con người tìm ra lửa” |
 |:---:|:---:|
-| <img src="assets/readme/previews/style-3-demo.gif" alt="《人类的第一份工作是怎么来的？》动态预览" width="360"> | <img src="assets/readme/previews/style-3-community-fire.gif" alt="《人类第一次发现火源》——粉丝作品" width="360"> |
-| 史前故事 · 职场反转 | 火源主题 · 粉丝作品 |
+| <img src="assets/readme/previews/style-3-demo.gif" alt="Xem trước hoạt hình Con người có công việc đầu tiên như thế nào?" width="360"> | <img src="assets/readme/previews/style-3-community-fire.gif" alt="Con người tìm ra lửa, hoạt hình do cộng đồng làm" width="360"> |
+| Hài công sở thời tiền sử | Tìm ra lửa · Tác phẩm cộng đồng |
 
 ---
 
-### 风格 4：治愈故事风
+### Phong cách 4: Chuyện đời thường ấm áp
 
-一只舍不得用的杯子，一条忍不住秒回的消息，一个终于留给自己的下午。让极简角色走进彩色的日常场景，用动作、表情和镜头讲普通人能共鸣的小事。
+Chiếc cốc bạn để dành cho một dịp đặc biệt. Tin nhắn bạn thấy mình buộc phải trả lời. Một buổi chiều cuối cùng cũng giữ được cho riêng mình. Những nhân vật đơn giản bước vào khung cảnh đời thường đầy màu sắc; hành động, biểu cảm và máy quay kể câu chuyện.
 
-- **画面特点**：白色实心圆头与细长躯干、深色细肢体和自然的小表情，搭配完整的 2D 卡通环境。全景交代地点，近景捕捉犹豫或释然，跟拍带着角色继续向前。
-- **适合内容**：生活共鸣、心理成长、人际关系、温暖故事、习惯养成与儿童英语。
-- **怎么选**：想让观众从一个具体生活片段里认出自己，可以选这一风格。色彩和光影随主题变化，既能表达温暖，也能讲焦虑、疲惫和重新出发。
+- **Trông thế nào:** Đầu tròn tô trắng, thân mảnh, tay chân que màu tối, biểu cảm nhỏ và tự nhiên trong bối cảnh hoạt hình 2D đủ màu. Cảnh rộng giới thiệu nơi chốn; cận cảnh bắt khoảnh khắc ngập ngừng hay nhẹ nhõm; cảnh máy chạy theo giữ cho câu chuyện tiếp diễn.
+- **Hợp với:** Chuyện đời thường dễ đồng cảm, phát triển bản thân, các mối quan hệ, khoảnh khắc ấm áp, xây dựng thói quen và nội dung tiếng Anh cho trẻ em.
+- **Vì sao chọn nó?** Để người xem thấy mình trong một khoảnh khắc nhỏ. Màu sắc và ánh sáng đi theo chủ đề: ấm áp, lo âu, kiệt sức hay một khởi đầu mới.
 
-| 案例 1：通勤路上的消息焦虑 | 案例 2：把时间留给自己 |
+| Ví dụ 1: Lo lắng vì tin nhắn trên đường đi làm | Ví dụ 2: Dành thời gian cho chính mình |
 |:---:|:---:|
-| <img src="assets/readme/previews/style-4-cozy-station.gif" alt="治愈故事风：地铁站里的消息焦虑" width="360"> | <img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="治愈故事风：露天咖啡座的休息时刻" width="360"> |
-| 地铁站 · 行走跟拍 · 情绪近景 | 露天咖啡座 · 暖光树影 · 日常动作 |
+| <img src="assets/readme/previews/style-4-cozy-station.gif" alt="Nhân vật lo lắng vì tin nhắn ở ga tàu" width="360"> | <img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="Nghỉ ngơi ở quán cà phê ngoài trời đầy nắng" width="360"> |
+| Ga tàu · Máy chạy theo · Cận cảnh cảm xúc | Quán cà phê ngoài trời · Ánh sáng ấm · Cử chỉ đời thường |
+
+<a id="fork-additions"></a>
+
+## Bản fork này thêm gì
+
+Bản fork này của [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) giữ nguyên mọi thứ ở trên và thêm ba phần: nhiều phong cách hơn, gate kiểm tra tư thế, và Golden Hook chi tiết hơn.
+
+### 22 phong cách thử nghiệm
+
+Ngoài Phong cách 1–4, Skill có thể dùng 22 phong cách thử nghiệm. Mỗi phong cách có một dàn nhân vật gốc cố định, luật riêng và một gói prompt mẫu ba clip.
+
+- **Cách chọn:** hỏi một phong cách thử nghiệm, hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Skill chỉ gợi ý các phong cách này khi bạn hỏi, và sẽ nói rõ mỗi phong cách đang ở mức `gated`.
+- **`gated` nghĩa là gì:** khung xương nhân vật đã qua gate tư thế, và gói prompt mẫu đã qua các bước kiểm tra gói bên dưới. Các phong cách này chưa được kiểm tra trên video tạo ra.
+- **Nằm ở đâu:** `skills/directing-stickman-videos/references/styles/<mã>.md`, gói mẫu ở `styles/samples/<mã>.md`. Danh sách đầy đủ nằm trong bảng “Experimental styles” của `references/style-catalog.md`.
+
+| Mã | Phong cách | Hợp với |
+|---|---|---|
+| `chibi-anime` | Anime chibi | Hài đời thường, mẹo học tập, chuyện tình cảm, nội dung trẻ em, video nhiều phản ứng |
+| `paper-cutout` | Cắt dán giấy | Hài mặt lạnh; chuyện nhẹ nhàng và tiếng Anh cho trẻ em |
+| `whiteboard-doodle` | Vẽ tay trên bảng trắng | Giải thích từng bước, thói quen và ý tưởng dựng dần từng phần, chuyện xã hội nhẹ |
+| `watercolor-storybook` | Sách tranh màu nước | Truyện trước giờ ngủ, giáo dục trẻ em, ngụ ngôn, gia đình và hoài niệm |
+| `ink-wash` | Tranh thủy mặc | Giải thích mang tính suy ngẫm, thói quen và sự kiên nhẫn, nghề thủ công, chuyện kiểu cổ tích |
+| `mid-century` | Hoạt hình giản lược thập niên 1950 | Giải thích châm biếm, chuyện công sở và tiền bạc, nhóm nhỏ nhân vật điển hình |
+| `dong-ho` | Tranh Đông Hồ | Văn hóa Việt, chuyện Tết và làng quê, ngụ ngôn nhẹ nhàng |
+| `science-lab` | Phòng thí nghiệm khoa học | Giải thích khoa học và cách mọi thứ vận hành cho trẻ em và gia đình, thí nghiệm thực hành |
+| `blueprint` | Bản vẽ kỹ thuật | Giải thích khoa học, kỹ thuật, phát minh và cách máy móc vận hành |
+| `cell-biology` | Thế giới tế bào | Giải thích miễn dịch, máu, lành vết thương và nhiễm trùng cho trẻ em và gia đình |
+| `retro-space` | Thiên văn kiểu thời đại vũ trụ | Giải thích khoa học vũ trụ: quỹ đạo, trọng lực và rơi tự do, Mặt Trăng, các hành tinh |
+| `youtube-storytime` | Hoạt hình kể chuyện | Chuyện thật, hài hước, người dẫn kể về chính đời mình |
+| `us-sitcom` | Sitcom giờ vàng | Hài khô về đời thường, gia đình và công sở |
+| `modern-tv-cartoon` | Hoạt hình truyền hình hiện đại | Giải thích hài hước, chuyện trẻ em và gia đình, phiêu lưu thị trấn nhỏ với cả nhóm nhân vật |
+| `stylized-3d-family` | Phim gia đình 3D cách điệu | Chuyện gia đình ấm áp, giải thích cho trẻ em, chuyện ngày lễ |
+| `superhero` | Hoạt hình siêu anh hùng | Chuyện hành động ngắn, gag hợp sức, giải thích qua anh hùng, nội dung trẻ em (một người dẫn, nhân vật không nói) |
+| `dino-world` | Thế giới khủng long | Khoa học khủng long cho trẻ em, hóa thạch, chuyện “làm sao ta biết?” |
+| `toys` | Đồ chơi sống dậy | Chuyện nhẹ nhàng cho trẻ em, làm việc nhóm và chia sẻ, vật lý đơn giản (thăng bằng, xếp tháp) |
+| `chu-tieu` | Chú tiểu | Bài học chánh niệm và lòng tốt, chuyện đời thường mang tinh thần Phật giáo, mẹo sống chậm |
+| `vn-webcomic` | Truyện tranh mạng Việt chuyển động | Gag một câu dễ đồng cảm, chơi chữ theo nghĩa đen, chuyện xóm ngõ |
+| `voxel-world` | Thế giới khối voxel | Chuyện xây dựng và làm việc nhóm, nguyên nhân và kết quả, lắp ráp từng bước |
+| `brick-build` | Thị trấn gạch ráp | Các bộ phận khớp với nhau thế nào, nguyên nhân và kết quả, chuyện nhẹ nhàng cho trẻ em, đùa vật lý nhỏ |
+
+Không prompt nào nêu tên hãng phim, thương hiệu hay nhân vật nổi tiếng. Phong cách nào gợi nhớ một kiểu hình quen thuộc thì chỉ bám theo thể loại và chất liệu.
+
+### Gate tư thế và kiểm tra gói prompt
+
+Mô hình video hay bẻ đầu gối sai chiều, kéo dài tay chân, hoặc chuyển đồ đang cầm sang nhầm tay. Các công cụ dưới đây bắt những lỗi đó trước và sau khi tạo video. Chỉ cần Python 3; muốn đọc tư thế từ video thì cài thêm `pip install mediapipe opencv-python-headless`.
+
+| Công cụ | Kiểm tra gì | Chạy |
+|---|---|---|
+| Sổ theo dõi tay (hand ledger) | Mỗi đồ vật đang cầm ở yên trong một tay có tên (trái hay phải theo chính nhân vật) trừ khi một nhịp chuyền nó đi; các dòng `Hands at start` / `Hands at end` nối tiếp từ clip này sang clip sau. | `python3 tools/posture_gate/hand_ledger.py package.md` |
+| Kiểm tra gói (package lint) | Cả gói prompt: vị trí hook, cùng mô tả nhân vật và khối giọng đọc ở mọi clip, năm câu cấm tư thế, nhạc nối liền, không logo hay chữ viết, cộng thêm sổ theo dõi tay. | `python3 tools/package_lint/package_lint.py package.md` |
+| Gate tư thế | Dữ liệu tư thế từ khung xương vẽ bằng code hoặc từ video: giới hạn khớp, độ dài tay chân, giật một khung hình, thăng bằng, tay đè lên thân hoặc mặt, tay trái và tay phải đổi chỗ. `--scene` kiểm tra nhiều nhân vật trong một cảnh, ví dụ khi chuyền đồ. | `python3 tools/posture_gate/posture_gate.py check track.json` |
+| Bảng soi rủi ro (risk sheet) | Mỗi clip đã tạo một ảnh, gồm các khung hình quanh những khoảnh khắc prompt đánh dấu là rủi ro (chuyền đồ, quay người, ngã), để người xem lại. | `python3 tools/risk_sheet/risk_sheet.py package.md --clip 2 --video clip2.mp4 -o out/` |
+
+Skill tự chạy sổ theo dõi tay và kiểm tra gói trước khi giao prompt. Chi tiết: `tools/posture_gate/README.md` và `references/posture-gate.md`.
+
+### Golden Hook chi tiết
+
+Giai đoạn đầu của kịch bản, Golden Hook, giờ có thẻ riêng trong đề xuất đạo diễn: một kiểu hook, khung hình đầu đã thấy nhân vật đang hành động với một căng thẳng rõ ràng, một khoảnh khắc hook trước khoảng giây thứ hai mà tắt tiếng vẫn hiểu, và câu nói đầu tiên dài bốn đến mười chữ, không chào hỏi. Hook nằm trong khung hình đầu và nhịp đầu của Clip 1; prompt không có thêm dòng riêng nào. Xem “Golden Hook in detail” trong `references/storyboard-template.md`.
 
 <!-- readme:advantages -->
 
-## 它帮你做什么
+## Skill làm được gì
 
-把选题、脚本和画面一起考虑，不只是给火柴人套一个外观。
+Skill lên kế hoạch cho cả lời lẫn hình, không chỉ vẻ ngoài của một người que.
 
-| 环节 | Skill 输出 |
+| Phần | Bạn nhận được |
 |---|---|
-| **文案** | 开场、递进、结尾，英文旁白与中文参考。 |
-| **画面** | 动作、道具、运镜、转场与音效。 |
-| **衔接** | 人物、道具与声线设定，跨段转场。 |
-| **画幅** | 按横竖屏调整构图和镜头。 |
-| **调整** | 先确认提案，再输出提示词。 |
+| **Kịch bản** | Hook, diễn tiến và cái kết, kèm lời dẫn và bản dịch tham khảo khi cần. |
+| **Hình ảnh** | Hành động nhân vật, đạo cụ, chuyển động máy quay, chuyển cảnh và gợi ý âm thanh. |
+| **Tính liên tục** | Hồ sơ nhân vật, đạo cụ và người dẫn, cùng cách nối giữa các clip. |
+| **Khung hình** | Bố cục và lựa chọn cảnh quay theo khổ ngang hay dọc. |
+| **Chỉnh sửa** | Một bản đề xuất để duyệt trước khi ra prompt cuối. |
 
 <!-- readme:output -->
 
-先拿到**导演提案**：英文旁白、中文参考、场景、运镜和声音设计。确认后再拿到逐段独立的 **Gemini Omni Flash 视频提示词**，以及转场、拼接与字幕建议。
+Trước hết, bạn xem **đề xuất đạo diễn**: lời dẫn, cảnh, máy quay và thiết kế âm thanh. Khi bạn duyệt, Skill đưa **prompt video Gemini Omni Flash** độc lập cho từng đoạn, kèm ghi chú ghép clip, chuyển cảnh và phụ đề.
 
-Skill 负责提案和提示词，Flow 等工具负责生成视频，最后用剪映等软件完成字幕与剪辑。无需为 Skill 配置 API 或 MCP。
+Skill lên kế hoạch video và viết prompt. Flow hoặc một công cụ video khác tạo clip; phần mềm dựng video lo việc ghép cuối và phụ đề. Skill không cần cài API hay MCP.
 
 <!-- readme:install -->
 
 <a id="quick-start"></a>
 
-## 开始使用
+## Bắt đầu
 
-### 1. 安装 Skill
+### 1. Cài Skill
 
-把下面这句话发给你使用的 AI：
+Gửi cho trợ lý AI của bạn:
 
 ```text
-帮我安装这个 Skill：
+Cài Skill này giúp tôi:
 https://github.com/kaomei/stickman-video-director
 ```
 
 <!-- readme:workflow -->
 
-### 2. 给一个话题
+### 2. Đưa cho nó một chủ đề
 
-安装后，把话题、文案或文章直接发给 AI，例如：
+Gửi một chủ đề, bản nháp hay bài viết. Ví dụ:
 
 ```text
-帮我做一个《人类的第一份工作是怎么来的？》的火柴人视频。
+Làm một video người que tên “Con người có công việc đầu tiên như thế nào?”
 ```
 
-### 3. 跟着引导，确认提案
+### 3. Làm theo hướng dẫn và duyệt kế hoạch
 
-**选设置 → 看导演提案 → 按需修改 → 确认后拿提示词。**
+**Chọn thiết lập → Xem đề xuất → Yêu cầu chỉnh → Duyệt và nhận prompt.**
 
-画幅、画风没选，Skill 会主动询问；时长可指定，默认 60 秒。你只要跟着引导，选横屏 `16:9` 或竖屏 `9:16`，再从上面的画风中选一种即可；已经提供的设置不会重复询问。想先试一小段，也可以直接说“先做 30 秒”。
+Nếu bạn chưa chọn khổ hình hay phong cách, Skill sẽ hỏi. Chọn khổ ngang `16:9` hoặc dọc `9:16`, rồi chọn một phong cách trong thư viện. Thiết lập nào bạn đã đưa thì Skill không hỏi lại. Video mặc định dài 60 giây; nói “thử 30 giây trước đã” nếu muốn bản ngắn.
 
-选好设置后，它会先给你导演提案，列出故事结构、分段旁白、画面动作、镜头和声音设计。你可以先看整体方案，修改不满意的部分，确认后再拿到用于生成视频的分段提示词。
+Tiếp theo là đề xuất đạo diễn: cấu trúc câu chuyện, lời dẫn từng đoạn, hành động nhân vật, máy quay và thiết kế âm thanh. Xem cả kế hoạch và yêu cầu chỉnh trước khi duyệt prompt video cuối cùng.
 
-**《人类的第一份工作是怎么来的？》｜横屏 16:9 · 风格 3 史前黑色幽默 · 30 秒**
+**“Con người có công việc đầu tiên như thế nào?” | Khổ ngang 16:9 · Phong cách 3: Hài đen thời tiền sử · 30 giây**
 
-下面是这支样片制作前确认的分镜提案：
+Đây là phân cảnh đã được duyệt trước khi làm ví dụ ở trên. Lời dẫn gốc của bản mẫu được giữ nguyên:
 
-| 时间 | 画面与动作 | 配音文案 |
+| Thời gian | Cảnh và hành động | Lời dẫn |
 |---|---|---|
-| **0–10s：拒绝生存压力** | 原始人拖着石棒回到洞穴，瘫倒在草床上。洞口出现剑齿虎的巨大影子。他睁开一只眼，一脸“又来？”；起身滚动巨石堵住洞口，拍掉手上的灰，回床睡觉。最后定格在他满意的脸上。 | **“Ten thousand years ago, one man finally solved all his problems. He shut them outside.”** |
-| **10–20s：老板找到你了** | 接上一段：他刚闭眼，洞口传来三声敲击。巨石被推开一条缝，族长探头进来，笑着递给他一根长矛。他摆手拒绝。族长随即拿出一条烤肉腿；他的鼻子抽动，眼睛瞬间睁大。切到洞外：他已经握着长矛，被族长推向猛兽脚印。 | **“Then someone offered him food… in exchange for a small favor. Congratulations. Employment was invented.”** |
-| **20–30s：文明的代价** | 他满身灰尘回到同一个洞穴，把长矛扔下，伸手等烤肉。族长面带职业微笑，只递给他一小块肉；然后把一大捆长矛塞进他怀里，拍拍他的肩膀离开。他看着小肉块，再看长矛，缓缓转头直视镜头。最后躺回草床，却被怀里的长矛硌得坐起来。 | **“The reward got smaller. The workload got bigger. And somehow… they called that progress.”** |
+| **0–10s: Đóng cửa ngăn rắc rối** | Một người tiền sử kéo cây chùy đá vào hang rồi đổ vật xuống ổ rơm. Bóng một con hổ răng kiếm khổng lồ hiện ở cửa hang. Anh mở một mắt: “Lại nữa à?” Anh lăn một tảng đá chặn cửa, phủi tay rồi ngủ tiếp. Kết bằng khuôn mặt mãn nguyện. | **“Ten thousand years ago, one man finally solved all his problems. He shut them outside.”** |
+| **10–20s: Sếp tìm đến** | Vừa nhắm mắt thì có ba tiếng gõ ở cửa hang. Tảng đá hé ra một khe. Tù trưởng ghé vào, mỉm cười, đưa một cây giáo. Người tiền sử xua tay. Tù trưởng liền lấy ra một đùi thịt nướng. Người tiền sử hít hà, mắt bỗng mở to. Cắt ra ngoài: tay cầm giáo, anh bị đẩy dần về phía những dấu chân thú khổng lồ. | **“Then someone offered him food… in exchange for a small favor. Congratulations. Employment was invented.”** |
+| **20–30s: Cái giá của tiến bộ** | Anh trở về đúng cái hang ấy, người đầy bụi, thả cây giáo xuống và chìa tay xin thịt. Tù trưởng đưa một miếng bé xíu kèm nụ cười chuyên nghiệp, rồi dúi cả bó giáo vào tay anh, vỗ vai và bỏ đi. Người tiền sử nhìn miếng thịt, nhìn bó giáo, rồi chậm rãi nhìn vào máy quay. Anh nằm xuống lại, nhưng mấy cây giáo chọc anh bật dậy. | **“The reward got smaller. The workload got bigger. And somehow… they called that progress.”** |
 
-提案不满意，直接说要改哪里；你确认后，它才输出最终分段提示词。这个 30 秒示例对应 3 条约 10 秒的提示词，包含人物、动作、镜头、旁白和声音要求。
+Không thích một câu hay một cảnh? Cứ nói muốn đổi gì. Prompt cuối chỉ ra sau khi bạn duyệt. Ví dụ 30 giây này cho ra ba prompt khoảng mười giây, gồm nhân vật, hành động, máy quay, lời dẫn và âm thanh.
 
-### 4. 生成视频，剪辑成片
+### 4. Tạo clip và dựng video
 
-将提示词按顺序提交到 [Google Flow](https://flow.google.com/)，再把生成片段导入剪映，调整衔接并添加字幕。30 秒通常对应 3 条约 10 秒的提示词，60 秒对应 6 条。
+Đưa lần lượt các prompt vào [Google Flow](https://flow.google.com/). Ghép các clip trong CapCut hoặc phần mềm dựng khác, chỉnh chỗ nối và thêm phụ đề. Video 30 giây thường dùng ba prompt khoảng mười giây; video 60 giây dùng sáu.
 
-第一次做，跟着这篇[完整制作教程：选题、脚本、Flow 生成与剪映成片](https://x.com/CrazyKaomei/status/2102311241046008268)跑一遍。Flow 操作见[使用教程](https://x.com/CrazyKaomei/status/2093893997223923822?s=20)。Skill 免费开源，视频生成费用和可选模型以平台当前界面为准。
+Lần đầu làm, hãy xem [hướng dẫn sản xuất đầy đủ](https://x.com/CrazyKaomei/status/2102311241046008268). Cũng có [hướng dẫn dùng Flow](https://x.com/CrazyKaomei/status/2093893997223923822?s=20). Cả hai đều bằng tiếng Trung. Skill miễn phí; chi phí tạo video và mô hình có sẵn hay không tùy nền tảng.
 
 <!-- readme:reliability -->
 
-## 使用小贴士
+## Vài mẹo thực tế
 
 <!-- readme:platforms -->
 
-**选横屏还是竖屏？**
+**Ngang hay dọc?**
 
-| 比例 | 适合平台 | 构图重点 |
+| Khổ | Hợp với | Bố cục |
 |---|---|---|
-| `9:16` | YouTube Shorts、TikTok、Instagram Reels、抖音、小红书 | 纵向动作、中央主体、手机画面安全区 |
-| `16:9` | YouTube、B 站、横屏教育视频 | 横向调度、场景展开、左右对比 |
+| `9:16` | YouTube Shorts, TikTok, Instagram Reels | Hành động theo chiều dọc, chủ thể ở giữa, khung hình an toàn cho điện thoại |
+| `16:9` | YouTube và video giáo dục khổ ngang | Chuyển động ngang, cảnh rộng hơn, so sánh đặt cạnh nhau |
 
-适合不露脸的知识解说、历史商业科普、心理成长、生活故事和产品讲解；英文旁白配后期双语字幕，也能做儿童英语、生活短剧或知识精读。支持 30 秒、60 秒、90 秒、3 分钟等 10 秒整数倍时长。
+Dùng cho video giải thích không lộ mặt, chủ đề lịch sử và kinh doanh, phát triển bản thân, chuyện đời thường và demo sản phẩm. Lời dẫn tiếng Anh kèm phụ đề song ngữ thêm sau cũng hợp với nội dung học tiếng Anh, phim ngắn và video đọc hiểu. Độ dài có thể là bất kỳ bội số nào của mười giây: 30 giây, 60 giây, 90 giây, ba phút hoặc hơn.
 
-- 人物、道具和旁白设定按整支视频统一；需要换声音时，先在提案里确定。
-- 发现某段人物、道具或声音明显偏离时，针对该段调整和复测，不用重做所有片段。
-- 文案可以改得更有吸引力，但不凭空添加事实、数据或产品效果。
+- Giữ hồ sơ nhân vật, đạo cụ và người dẫn nhất quán suốt video. Muốn đổi giọng thì chọn ngay trong đề xuất.
+- Nếu nhân vật, đạo cụ hay giọng của một clip bị lệch, chỉnh và thử lại riêng clip đó thay vì làm lại tất cả.
+- Viết hay hơn nhưng không bịa sự kiện, số liệu hay tuyên bố về sản phẩm.
 
 <a id="recent-updates"></a>
 
-## 最近更新
+## Cập nhật mới
 
-- **2026-10-15**：优化中文首页、安装入口和案例说明，加入轻量动图预览与 Star 增长曲线；Skill 规则不变。
-- **2026-10-14**：新增风格 4「治愈故事风」，加入地铁站与咖啡座两个样片。
-- **2026-10-13**：优化风格 1 的人物描述与当前姿态约束。
-- **2026-10-12**：完善全风格共用的语音一致性规则，补充史前风格案例。
+- **2026-10-20:** Bản fork thêm 22 phong cách thử nghiệm, gate tư thế cùng sổ theo dõi tay và kiểm tra gói prompt, và thẻ Golden Hook chi tiết. Xem [Bản fork này thêm gì](#fork-additions).
+- **2026-10-15:** Chỉnh lại trang chủ, các bước cài đặt và ví dụ; thêm ảnh xem trước nhẹ hơn và biểu đồ Star History. Luật của Skill không đổi.
+- **2026-10-14:** Thêm Phong cách 4, Chuyện đời thường ấm áp, với ví dụ ở ga tàu và quán cà phê.
+- **2026-10-13:** Chỉnh mô tả nhân vật và ràng buộc tư thế hiện tại của Phong cách 1.
+- **2026-10-12:** Cải thiện luật giữ giọng đọc nhất quán, thêm ví dụ tiền sử và ví dụ của cộng đồng.
 
-已有用户：最近的首页调整不需要重装。想用风格 4，或安装的是人物／声音规则更新前的版本，再更新 Skill 即可。[查看更新记录](CHANGELOG.zh-CN.md)。
+Đã cài rồi? Chỉ đổi trang chủ thì không cần cài lại. Hãy cập nhật Skill nếu bạn muốn dùng Phong cách 4, các phong cách thử nghiệm và gate tư thế, hoặc đã cài trước các thay đổi về nhân vật và giọng đọc. [Nhật ký thay đổi chi tiết (tiếng Trung)](CHANGELOG.zh-CN.md).
 
 <!-- readme:contribute -->
 
-## 下一种火柴人，你来点
+## Nên thêm gì tiếp theo?
 
-下面这些画风正在计划中，尚未上线：
+Các phong cách này đang lên kế hoạch, chưa có:
 
-- **虚实融合场景** — 继续探索 2D 火柴人与更丰富环境的搭配。
-- **风格 5：讲台解说** — 黑板互动与知识讲解。
-- **风格 6：手绘绘本** — 童话、寓言与儿童故事。
-- **风格 7：涂鸦打斗** — 动作短片与连招对决。
-- **风格 8：双人情景喜剧** — 对话、互怼与日常反转。
-- **风格 9：卡牌闯关** — 升级、打怪与游戏叙事。
+- **Thế giới chất liệu hỗn hợp** — Thử người que 2D trong môi trường phong phú hơn.
+- **Phong cách 5: Giải thích trên bảng đen** — Bài giảng và bài nói có tương tác với bảng đen.
+- **Phong cách 6: Sách tranh minh họa** — Cổ tích, ngụ ngôn và truyện thiếu nhi.
+- **Phong cách 7: Hành động graffiti** — Cảnh đánh nhau, phim hành động ngắn và combo.
+- **Phong cách 8: Sitcom hai nhân vật** — Đối đáp, hiểu lầm đời thường và twist công sở.
+- **Phong cách 9: Phiêu lưu đấu bài** — Lên cấp, đánh quái và kể chuyện kiểu trò chơi.
 
-想看新画风、分享作品或反馈问题，都欢迎到 [Issues](https://github.com/kaomei/stickman-video-director/issues) 留言。画风建议请附参考和想做的主题；投稿请附作品、所用风格与作者链接，方便展示和署名。
+Đề xuất phong cách, chia sẻ tác phẩm hoặc báo lỗi trong [Issues](https://github.com/kaomei/stickman-video-director/issues). Khi đề xuất phong cách, kèm một hình tham khảo và chủ đề bạn muốn thử. Khi gửi tác phẩm, kèm video, phong cách đã dùng và đường link tác giả để được ghi công.
 
-## Star 增长曲线
+## Star History
 
-⭐ **如果这份画风库帮你省下了找提示词、反复试错的时间，欢迎点个 Star，留着下次做动画时用。**
+⭐ **Nếu thư viện này giúp bạn bớt thời gian tìm prompt hay sửa lần tạo hỏng, hãy cân nhắc tặng một Star. Nó sẽ ở đây khi bạn sẵn sàng làm video tiếp theo.**
 
-我是[烤妹儿](https://x.com/CrazyKaomei)，会继续实测新画风，把好用的提示词、制作方法和踩过的坑免费整理在这里。希望你少花时间折腾工具，多留一点时间给真正想讲的故事。
+Thư viện gốc do [Kaomei](https://x.com/CrazyKaomei) làm. Kaomei vẫn tiếp tục thử phong cách và chia sẻ miễn phí những prompt, quy trình và lỗi đáng tránh. Bớt thời gian vật lộn với công cụ, thêm thời gian cho những câu chuyện bạn thật sự muốn kể.
 
 <div align="center">
 <a href="https://www.star-history.com/?repos=kaomei%2Fstickman-video-director&amp;type=date">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=kaomei/stickman-video-director&amp;type=Date&amp;theme=dark">
     <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=kaomei/stickman-video-director&amp;type=Date">
-    <img src="https://api.star-history.com/svg?repos=kaomei/stickman-video-director&amp;type=Date" alt="kaomei/stickman-video-director 的 GitHub Star 增长曲线" width="800">
+    <img src="https://api.star-history.com/svg?repos=kaomei/stickman-video-director&amp;type=Date" alt="Biểu đồ tăng Star của kaomei/stickman-video-director" width="800">
   </picture>
 </a>
 </div>
 
-## 许可证
+## Giấy phép
 
-本项目采用 [MIT License](LICENSE) 开源，允许免费使用、修改、商用和分发。分发本项目或其重要部分时，请保留原有版权和许可声明。
+Phát hành theo [MIT License](LICENSE). Bạn được dùng, sửa, phân phối lại và dùng cho mục đích thương mại. Giữ thông báo bản quyền và giấy phép khi phân phối dự án hoặc phần đáng kể của nó.
 
-项目按“现状”提供，不作任何担保；完整条款见 [LICENSE](LICENSE)。
+Cung cấp “nguyên trạng”, không kèm bảo đảm. Xem toàn bộ điều khoản trong [LICENSE](LICENSE).

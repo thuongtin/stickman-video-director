@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[简体中文](README.zh-CN.md) · [English](README.en.md) · [日本語](README.ja.md) · [**한국어**](README.ko.md) · [Português do Brasil](README.pt-BR.md)
+[Tiếng Việt](README.vi.md) · [English](README.en.md) · [日本語](README.ja.md) · [**한국어**](README.ko.md) · [Português do Brasil](README.pt-BR.md)
 
 # AI 스틱맨 애니메이션 스타일 모음
 
@@ -53,6 +53,8 @@
 [시작하기](#quick-start) · [최근 업데이트](#recent-updates) · [전체 제작 가이드·중국어](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
+
+이 포크에서 추가한 실험적 스타일 22종, 자세 게이트, Golden Hook 세부 규칙은 [English](README.en.md#fork-additions)와 [Tiếng Việt](README.vi.md#fork-additions) README에 정리되어 있습니다.
 
 <!-- readme:demos -->
 

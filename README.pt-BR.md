@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[简体中文](README.zh-CN.md) · [English](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [**Português do Brasil**](README.pt-BR.md)
+[Tiếng Việt](README.vi.md) · [English](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [**Português do Brasil**](README.pt-BR.md)
 
 # Bonecos de palito com IA: biblioteca de estilos
 
@@ -53,6 +53,8 @@ Estou testando estilos populares de animação com bonecos de palito e compartil
 [Começar](#quick-start) · [Últimas novidades](#recent-updates) · [Tutorial completo em chinês](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
+
+Os 22 estilos experimentais, o portão de postura e o detalhe do Golden Hook que este fork adiciona estão descritos nos READMEs em [English](README.en.md#fork-additions) e [Tiếng Việt](README.vi.md#fork-additions).
 
 <!-- readme:demos -->
 
