@@ -43,6 +43,17 @@ for code, (text, kw) in mutations.items():
     got = codes(text, **kw)
     assert code in got, f"package_lint missed {code}: got {sorted(got)}"
 
+# Per-speaker voice lines: a speaker may be absent from a clip, but their block never changes.
+duo = "\n".join([
+    "```text\nOpening hook: Ana is already running.\n[0–3s] Ana runs.\n[3–7s] Ana stops.\n[7–10s] Ana waves.\n"
+    "Voice — Ana: adult woman, General American accent, warm alto.\nNo swapped left and right hands.\n```",
+    "```text\n[0–3s] Ben runs.\n[3–7s] Ana and Ben stop.\n[7–10s] Ben waves.\n"
+    "Voice — Ana: adult woman, General American accent, warm alto.\n"
+    "Voice — Ben: adult man, Scottish accent, light tenor.\nNo swapped left and right hands.\n```"])
+assert "B5" not in codes(duo), pl.lint(duo)[0]
+assert "B5" in codes(duo.replace("Scottish accent, light tenor.\nNo", "Irish accent, light tenor.\nNo").replace(
+    "Voice — Ana: adult woman, General American accent, warm alto.\nVoice — Ben", "Voice — Ana: adult woman, General American accent, bright alto.\nVoice — Ben")), "speaker drift not caught"
+
 # Yellow checks: camera grammar and weak beats.
 cam = style1.replace("低机位固定镜头", "低机位推近", 1).replace("侧向跟拍、摔倒拆解", "快速推近、摔倒拆解", 1)
 assert any(c == "A3" for _, c, _ in pl.lint(cam)[0]), "three inward rows not flagged"

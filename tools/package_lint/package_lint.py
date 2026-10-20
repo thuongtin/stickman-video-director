@@ -20,7 +20,8 @@ Phase B (prompts)
   B2 `Opening hook:` exactly once, in Clip 1 only                            RED
   B3 tools/posture_gate/hand_ledger.py on the whole package                  RED
   B4 a catalog anchor (style-catalog.md) or --anchor used in Clip 1 is missing from a later clip   RED
-  B5 the narrator paragraph differs between clips                            RED
+  B5 the narrator paragraph differs between clips; with approved dialogue written as one
+     "Voice — Name: ..." line per speaker, each speaker's line must match wherever it appears   RED
   B6 technical color notation (hex, RGB, HSL, Pantone)                       RED
   B7 quoted words outside the spoken dialogue (they tend to render on screen)  RED
   B8 a beat asks for morphing, melting or liquid shapes                      RED
@@ -60,6 +61,7 @@ TECH_COLOR = re.compile(r"#[0-9a-f]{6}\b|#[0-9a-f]{3}\b|\brgba?\s*\(|\bhsla?\s*\
 MORPH = re.compile(r"\b(?:morph\w*|melts? into|melting into|turns? (?:in)?to liquid|liquid (?:shapes?|forms?)|"
                    r"splits? into|separates? into|reshapes?|dissolves? into)\b", re.I)
 BEAT = re.compile(r"^\s*(?:[-*]\s*)?\[(\d+(?:\.\d+)?)\s*[–-]\s*(\d+(?:\.\d+)?)\s*s\]")
+SPEAKER = re.compile(r"^\s*Voice\s*(?:[—–-]\s*|\()([^:()\n]{1,40})\)?:\s*(.+)$", re.M)
 VOICE = re.compile(r"\b(?:accent|timbre|register|resonance|baritone|tenor|alto|soprano|pitch)\b", re.I)
 NUMBER_WORDS = {w: i for i, w in enumerate(
     "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen "
@@ -195,13 +197,24 @@ def lint_phase_b(text, ps, clips, extra_anchors):
             missing = [n for n, p in enumerate(ps, 1) if anchor not in p]
             if missing:
                 out.append((RED, "B4", f"anchor \"{anchor[:60]}…\" is not repeated verbatim in clips {missing}"))
-    voices = []
-    for p in ps:
-        v = [l for l in p.splitlines() if re.search(r"\b(?:narrator|voice)\b", l, re.I) and VOICE.search(l)]
-        voices.append(v[0].strip() if v else None)
-    if any(voices) and len({v for v in voices}) > 1:
-        bad = [n for n, v in enumerate(voices, 1) if v != voices[0]]
-        out.append((RED, "B5", f"the narrator paragraph differs from Clip 1 in clips {bad}; repeat the frozen voice block verbatim"))
+    speakers = {}  # approved dialogue: one "Voice — Name: ..." line per speaker, present only in clips where they speak
+    for n, p in enumerate(ps, 1):
+        for name, block in SPEAKER.findall(p):
+            speakers.setdefault(name.strip(), []).append((n, block.strip()))
+    if speakers:
+        for name, blocks in speakers.items():
+            bad = [n for n, b in blocks if b != blocks[0][1]]
+            if bad:
+                out.append((RED, "B5", f"{name}'s voice block differs from its first appearance in clips {bad}; "
+                                       "repeat each speaker's frozen block verbatim"))
+    else:
+        voices = []
+        for p in ps:
+            v = [l for l in p.splitlines() if re.search(r"\b(?:narrator|voice)\b", l, re.I) and VOICE.search(l)]
+            voices.append(v[0].strip() if v else None)
+        if any(voices) and len({v for v in voices}) > 1:
+            bad = [n for n, v in enumerate(voices, 1) if v != voices[0]]
+            out.append((RED, "B5", f"the narrator paragraph differs from Clip 1 in clips {bad}; repeat the frozen voice block verbatim"))
     accent_clips = []
     for n, p in enumerate(ps, 1):
         body = spoken_free(p)
