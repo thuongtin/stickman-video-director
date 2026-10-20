@@ -61,16 +61,13 @@ assert "Style 4 Cozy Storytelling" in voice_doc
 assert "multi-speaker" in voice_doc and "explicitly silent video" in voice_doc
 assert "Other voice profiles and styles have not had separate provider-backed audio comparisons" in voice_doc
 
-# Ensure this release changes example audio only, not prior visual actions or spoken words.
+# Example visuals may be revised (e.g. hands and hook updates), but the approved spoken words may not.
+SPOKEN = re.compile(r'\(VO: "([^"]*)"\)|dialogue, exactly once: “([^”]*)”')
 old_examples = subprocess.check_output([
     "git", "show", "origin/main:skills/directing-stickman-videos/references/examples.md"
 ], cwd=REPO, text=True)
 for old, new in zip(prompt_blocks(old_examples), example_prompts):
-    for prefix in ("Character:", "Environment:", "First frame:", "[0–3s]", "[3–7s]", "[7–10s]",
-                   "Audio-only dialogue", "Do not generate", "Negative constraints:"):
-        old_lines = [line for line in old.splitlines() if line.startswith(prefix)]
-        new_lines = [line for line in new.splitlines() if line.startswith(prefix)]
-        assert old_lines == new_lines, f"Non-voice example content changed: {prefix}"
+    assert SPOKEN.findall(old) == SPOKEN.findall(new), "Example narration changed"
 
 if len(sys.argv) > 1:
     check_video(prompt_blocks(Path(sys.argv[1]).read_text()))
