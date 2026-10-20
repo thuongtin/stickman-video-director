@@ -37,9 +37,15 @@ for lang in ("vi", "en"):
     assert text.index('<a id="experimental-styles"></a>') < text.index("<!-- readme:advantages -->"), "Styles sit in the style section"
     for slug in slugs:
         assert f"| `{slug}` |" in fork, (lang, slug)
-        assert f'src="docs/style-previews/{slug}.jpg"' in gallery and f"<code>{slug}</code>" in gallery, (lang, slug)
+        assert f'src="docs/style-previews/{slug}.gif"' in gallery and f"<code>{slug}</code>" in gallery, (lang, slug)
+        assert f'href="docs/style-previews/{slug}.jpg"' in gallery, (lang, slug, "link the cast picture")
         preview = root / "docs/style-previews" / f"{slug}.jpg"
         assert preview.exists() and preview.stat().st_size < 60_000, (slug, "keep previews small")
+        # Motion previews follow upstream's GIF demos: 400x225, a few seconds, rendered from the style's own rigs.
+        motion = root / "docs/style-previews" / f"{slug}.gif"
+        data = motion.read_bytes()
+        assert data[:6] in (b"GIF87a", b"GIF89a") and len(data) < 2_500_000, (slug, "motion GIF missing or too large")
+        assert int.from_bytes(data[6:8], "little") == 400 and int.from_bytes(data[8:10], "little") == 225, (slug, "400x225")
     for command in ("tools/posture_gate/hand_ledger.py", "tools/package_lint/package_lint.py",
                     "tools/posture_gate/posture_gate.py check", "tools/risk_sheet/risk_sheet.py", "references/storyboard-template.md"):
         assert command in fork, (lang, command)
