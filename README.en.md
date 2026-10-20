@@ -124,139 +124,161 @@ A mug you've been saving for a special occasion. A message you feel compelled to
 
 ### Experimental styles: 22 new styles
 
-This fork adds 22 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not been checked against generated video. The pictures are each style's code-drawn cast. [How to pick one and the checking tools](#fork-additions).
+This fork adds 22 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not been checked against generated video. Each card is a few seconds of motion rendered from that style's own code-drawn rigs, which passed the posture gate; none of it was made with an AI video model. “See the cast” opens the full cast. [How to pick one and the checking tools](#fork-additions).
 
 <table width="100%">
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/chibi-anime.jpg" alt="Cast of the style Chibi Anime" width="300"><br>
+<img src="docs/style-previews/chibi-anime.gif" alt="Motion clip of the style Chibi Anime" width="360"><br>
 <strong>Chibi Anime</strong> · <code>chibi-anime</code><br>
-Good for: Everyday-life comedy, study tips, relationship sketches, children's content, reaction-heavy shorts
+Good for: Everyday-life comedy, study tips, relationship sketches, children's content, reaction-heavy shorts<br>
+<a href="docs/style-previews/chibi-anime.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/paper-cutout.jpg" alt="Cast of the style Paper Cutout / Collage" width="300"><br>
+<img src="docs/style-previews/paper-cutout.gif" alt="Motion clip of the style Paper Cutout / Collage" width="360"><br>
 <strong>Paper Cutout / Collage</strong> · <code>paper-cutout</code><br>
-Good for: Deadpan comedy; gentle stories and children's English
+Good for: Deadpan comedy; gentle stories and children's English<br>
+<a href="docs/style-previews/paper-cutout.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/whiteboard-doodle.jpg" alt="Cast of the style Whiteboard Doodle" width="300"><br>
+<img src="docs/style-previews/whiteboard-doodle.gif" alt="Motion clip of the style Whiteboard Doodle" width="360"><br>
 <strong>Whiteboard Doodle</strong> · <code>whiteboard-doodle</code><br>
-Good for: Step-by-step explainers, habits and ideas built up piece by piece, light social stories
+Good for: Step-by-step explainers, habits and ideas built up piece by piece, light social stories<br>
+<a href="docs/style-previews/whiteboard-doodle.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/watercolor-storybook.jpg" alt="Cast of the style Watercolor Storybook" width="300"><br>
+<img src="docs/style-previews/watercolor-storybook.gif" alt="Motion clip of the style Watercolor Storybook" width="360"><br>
 <strong>Watercolor Storybook</strong> · <code>watercolor-storybook</code><br>
-Good for: Bedtime stories, children's education, fables, family and nostalgia
+Good for: Bedtime stories, children's education, fables, family and nostalgia<br>
+<a href="docs/style-previews/watercolor-storybook.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/ink-wash.jpg" alt="Cast of the style Ink-Wash / Sumi-e" width="300"><br>
+<img src="docs/style-previews/ink-wash.gif" alt="Motion clip of the style Ink-Wash / Sumi-e" width="360"><br>
 <strong>Ink-Wash / Sumi-e</strong> · <code>ink-wash</code><br>
-Good for: Reflective explainers, habits and patience, craft, folk-tale style stories
+Good for: Reflective explainers, habits and patience, craft, folk-tale style stories<br>
+<a href="docs/style-previews/ink-wash.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/mid-century.jpg" alt="Cast of the style 1950s Mid-Century Limited Animation" width="300"><br>
+<img src="docs/style-previews/mid-century.gif" alt="Motion clip of the style 1950s Mid-Century Limited Animation" width="360"><br>
 <strong>1950s Mid-Century Limited Animation</strong> · <code>mid-century</code><br>
-Good for: Satirical explainers, workplace and money topics, small ensembles of character types
+Good for: Satirical explainers, workplace and money topics, small ensembles of character types<br>
+<a href="docs/style-previews/mid-century.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/dong-ho.jpg" alt="Cast of the style Đông Hồ Folk Print" width="300"><br>
+<img src="docs/style-previews/dong-ho.gif" alt="Motion clip of the style Đông Hồ Folk Print" width="360"><br>
 <strong>Đông Hồ Folk Print</strong> · <code>dong-ho</code><br>
-Good for: Vietnamese culture, Tết and village stories, gentle fables
+Good for: Vietnamese culture, Tết and village stories, gentle fables<br>
+<a href="docs/style-previews/dong-ho.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/science-lab.jpg" alt="Cast of the style Science Lab Explainer" width="300"><br>
+<img src="docs/style-previews/science-lab.gif" alt="Motion clip of the style Science Lab Explainer" width="360"><br>
 <strong>Science Lab Explainer</strong> · <code>science-lab</code><br>
-Good for: Science and how-it-works explainers for kids and families, hands-on demos
+Good for: Science and how-it-works explainers for kids and families, hands-on demos<br>
+<a href="docs/style-previews/science-lab.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/blueprint.jpg" alt="Cast of the style Engineering Blueprint" width="300"><br>
+<img src="docs/style-previews/blueprint.gif" alt="Motion clip of the style Engineering Blueprint" width="360"><br>
 <strong>Engineering Blueprint</strong> · <code>blueprint</code><br>
-Good for: Science, engineering, invention and how-it-works explainers
+Good for: Science, engineering, invention and how-it-works explainers<br>
+<a href="docs/style-previews/blueprint.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/cell-biology.jpg" alt="Cast of the style Cell-Biology Micro-World" width="300"><br>
+<img src="docs/style-previews/cell-biology.gif" alt="Motion clip of the style Cell-Biology Micro-World" width="360"><br>
 <strong>Cell-Biology Micro-World</strong> · <code>cell-biology</code><br>
-Good for: Immunity, blood, wound-healing and infection explainers for kids and families
+Good for: Immunity, blood, wound-healing and infection explainers for kids and families<br>
+<a href="docs/style-previews/cell-biology.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/retro-space.jpg" alt="Cast of the style Retro Space-Age Astronomy" width="300"><br>
+<img src="docs/style-previews/retro-space.gif" alt="Motion clip of the style Retro Space-Age Astronomy" width="360"><br>
 <strong>Retro Space-Age Astronomy</strong> · <code>retro-space</code><br>
-Good for: Space science explainers: orbits, gravity and free fall, the Moon, planets
+Good for: Space science explainers: orbits, gravity and free fall, the Moon, planets<br>
+<a href="docs/style-previews/retro-space.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/youtube-storytime.jpg" alt="Cast of the style Storytime Animation" width="300"><br>
+<img src="docs/style-previews/youtube-storytime.gif" alt="Motion clip of the style Storytime Animation" width="360"><br>
 <strong>Storytime Animation</strong> · <code>youtube-storytime</code><br>
-Good for: Funny true stories told by a narrator about their own life
+Good for: Funny true stories told by a narrator about their own life<br>
+<a href="docs/style-previews/youtube-storytime.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/us-sitcom.jpg" alt="Cast of the style Prime-Time Sitcom" width="300"><br>
+<img src="docs/style-previews/us-sitcom.gif" alt="Motion clip of the style Prime-Time Sitcom" width="360"><br>
 <strong>Prime-Time Sitcom</strong> · <code>us-sitcom</code><br>
-Good for: Dry comedy about everyday life, family and office dynamics
+Good for: Dry comedy about everyday life, family and office dynamics<br>
+<a href="docs/style-previews/us-sitcom.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/modern-tv-cartoon.jpg" alt="Cast of the style Modern TV Cartoon" width="300"><br>
+<img src="docs/style-previews/modern-tv-cartoon.gif" alt="Motion clip of the style Modern TV Cartoon" width="360"><br>
 <strong>Modern TV Cartoon</strong> · <code>modern-tv-cartoon</code><br>
-Good for: Comedy explainers, kids and family stories, small-town adventure told by an ensemble
+Good for: Comedy explainers, kids and family stories, small-town adventure told by an ensemble<br>
+<a href="docs/style-previews/modern-tv-cartoon.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/stylized-3d-family.jpg" alt="Cast of the style Stylized 3D Family Film" width="300"><br>
+<img src="docs/style-previews/stylized-3d-family.gif" alt="Motion clip of the style Stylized 3D Family Film" width="360"><br>
 <strong>Stylized 3D Family Film</strong> · <code>stylized-3d-family</code><br>
-Good for: Warm family stories, kids' explainers, holiday stories
+Good for: Warm family stories, kids' explainers, holiday stories<br>
+<a href="docs/style-previews/stylized-3d-family.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/superhero.jpg" alt="Cast of the style Superhero Action Cartoon" width="300"><br>
+<img src="docs/style-previews/superhero.gif" alt="Motion clip of the style Superhero Action Cartoon" width="360"><br>
 <strong>Superhero Action Cartoon</strong> · <code>superhero</code><br>
-Good for: Short action stories, team-up gags, hero explainers, kids' content (one narrator, no character voices)
+Good for: Short action stories, team-up gags, hero explainers, kids' content (one narrator, no character voices)<br>
+<a href="docs/style-previews/superhero.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/dino-world.jpg" alt="Cast of the style Dino World" width="300"><br>
+<img src="docs/style-previews/dino-world.gif" alt="Motion clip of the style Dino World" width="360"><br>
 <strong>Dino World</strong> · <code>dino-world</code><br>
-Good for: Kids' dinosaur science, fossils, "how do we know?" stories
+Good for: Kids' dinosaur science, fossils, "how do we know?" stories<br>
+<a href="docs/style-previews/dino-world.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/toys.jpg" alt="Cast of the style Toys Come Alive" width="300"><br>
+<img src="docs/style-previews/toys.gif" alt="Motion clip of the style Toys Come Alive" width="360"><br>
 <strong>Toys Come Alive</strong> · <code>toys</code><br>
-Good for: Gentle kids' stories, teamwork and sharing, simple physics (balance, towers)
+Good for: Gentle kids' stories, teamwork and sharing, simple physics (balance, towers)<br>
+<a href="docs/style-previews/toys.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/chu-tieu.jpg" alt="Cast of the style Chú Tiểu Little Monks" width="300"><br>
+<img src="docs/style-previews/chu-tieu.gif" alt="Motion clip of the style Chú Tiểu Little Monks" width="360"><br>
 <strong>Chú Tiểu Little Monks</strong> · <code>chu-tieu</code><br>
-Good for: Mindfulness and kindness lessons, Buddhist-inspired everyday stories, slow-living tips
+Good for: Mindfulness and kindness lessons, Buddhist-inspired everyday stories, slow-living tips<br>
+<a href="docs/style-previews/chu-tieu.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/vn-webcomic.jpg" alt="Cast of the style Vietnamese Web-Comic in Motion" width="300"><br>
+<img src="docs/style-previews/vn-webcomic.gif" alt="Motion clip of the style Vietnamese Web-Comic in Motion" width="360"><br>
 <strong>Vietnamese Web-Comic in Motion</strong> · <code>vn-webcomic</code><br>
-Good for: One-joke relatable gags, literal wordplay, neighbourhood slice-of-life
+Good for: One-joke relatable gags, literal wordplay, neighbourhood slice-of-life<br>
+<a href="docs/style-previews/vn-webcomic.jpg">See the cast</a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/voxel-world.jpg" alt="Cast of the style Voxel Block World" width="300"><br>
+<img src="docs/style-previews/voxel-world.gif" alt="Motion clip of the style Voxel Block World" width="360"><br>
 <strong>Voxel Block World</strong> · <code>voxel-world</code><br>
-Good for: Building and teamwork stories, cause and effect, step-by-step assembly
+Good for: Building and teamwork stories, cause and effect, step-by-step assembly<br>
+<a href="docs/style-previews/voxel-world.jpg">See the cast</a>
 </td>
 <td width="50%" align="center" valign="top">
-<img src="docs/style-previews/brick-build.jpg" alt="Cast of the style Brick-Built Town" width="300"><br>
+<img src="docs/style-previews/brick-build.gif" alt="Motion clip of the style Brick-Built Town" width="360"><br>
 <strong>Brick-Built Town</strong> · <code>brick-build</code><br>
-Good for: How parts fit together, cause and effect, gentle kids' stories, small physics jokes
+Good for: How parts fit together, cause and effect, gentle kids' stories, small physics jokes<br>
+<a href="docs/style-previews/brick-build.jpg">See the cast</a>
 </td>
 </tr>
 </table>
@@ -275,7 +297,7 @@ Besides Styles 1–4, the Skill can use 22 experimental styles. Each one has a f
 - **What `gated` means:** the character rigs passed the posture gate, and the sample package passed the package checks below. These styles have not yet been checked against generated video.
 - **Where they live:** `skills/directing-stickman-videos/references/styles/<key>.md`, with the sample package in `styles/samples/<key>.md`. The full list is in the “Experimental styles” table of `references/style-catalog.md`.
 
-The table below lists all 22 again. Pictures and descriptions are under [Experimental styles](#experimental-styles).
+The table below lists all 22 again. Motion clips and descriptions are under [Experimental styles](#experimental-styles).
 
 | Key | Style | Good for |
 |---|---|---|

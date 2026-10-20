@@ -35,7 +35,7 @@ for locale, (label, title, style_prefix, style_four, tutorial_language) in local
     assert f"[**{label}**]({path.name})" in text
     assert set(re.findall(preview_pattern, text)) == expected_previews
     assert text.count('width="90%"') == 4
-    assert text.count('width="360"') == 8
+    assert len(re.findall(r'src="assets/readme/previews/[^"]+\.gif"[^>]*width="360"', text)) == 8
     assert len(re.findall(rf"^{re.escape(style_prefix)} [1-4]:|^{re.escape(style_prefix)}[1-4]：", text, re.MULTILINE)) == 4
     assert style_four in text
     assert tutorial_language in text
