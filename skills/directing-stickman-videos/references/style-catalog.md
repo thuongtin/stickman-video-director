@@ -129,7 +129,7 @@ To prevent character drift, bug-eye deformations, or clothing loss across clips,
 
 **Character Anchor (every clip, verbatim):**
 ```text
-A minimalist 2D animated stick figure with a big white round head, simple dot eyes, a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing an open red-and-navy plaid flannel shirt with sleeves rolled to the elbows over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
+A minimalist 2D animated stick figure with a big white round head on a very short neck, simple dot eyes, a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing a boxy open red-and-navy flannel shirt with a large simple check, ending just below the hips, sleeves rolled to the elbows, over a plain white t-shirt, with simple black stick limbs and dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.
 ```
 
 **Alternative: Beanie Zeke anchor (every clip, verbatim, only when the user asks for it):**
