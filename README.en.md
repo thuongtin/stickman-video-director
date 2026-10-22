@@ -46,7 +46,7 @@ I'm testing popular stickman animation styles from across the web and sharing th
 
 <div align="center">
 
-**4 styles · 6 visual options · 23 experimental styles · Posture gate · Free and open source**
+**5 styles · 6 visual options · 23 experimental styles · Posture gate · Free and open source**
 
 ⭐ **Star it now. Next time you make an animation, skip the blank page.**
 
@@ -110,6 +110,21 @@ A mug you've been saving for a special occasion. A message you feel compelled to
 - **The look:** White-filled round heads, slender bodies, dark stick limbs, and small, natural expressions in full-color 2D cartoon environments. Wide shots establish the place; close-ups catch hesitation or relief; tracking shots keep the story moving.
 - **Best for:** Relatable everyday stories, personal growth, relationships, warm moments, habit building, and children's English content.
 - **Why choose it?** To help viewers recognize themselves in a small moment. Color and lighting follow the topic: warmth, anxiety, exhaustion, or a fresh start.
+
+
+---
+
+### Style 5: Historical Cartoon
+
+A Roman soldier walks a country road between grass hills and cypress trees. An Edo-period student waves outside a row of wooden houses. One drawing grammar travels through the eras: only costume, setting, props, palette and music change with the period.
+
+- **The look:** White-filled round heads, solid black oval eyes, expressive brows and mouths, no nose, thin black stick limbs, thick clean outlines and soft cel shading on cloth, leather and metal, in painterly landscapes and architecture.
+- **Best for:** History explainers, everyday life in the past, civilization stories and historical comedy, with supported facts kept apart from illustrative or comic scenes.
+- **Why choose it?** Each story gets its own era pack (wardrobe, settings, palette, music), yet it is still one rig, so every era shares the same walk, gestures and posture gate.
+
+The style comes from upstream (visual concept by [@leksautomate](https://github.com/leksautomate)). In this fork it is drawn in code on the Style 2 lead's rig, and every pose passes the posture gate ([cast sheet](docs/style-5/sheet.png), [how it is built](docs/style-5/README.md)):
+
+<p align="center"><img src="docs/style-5/motion.gif" alt="Style 5: a Roman soldier walks a country road and points the way, then an Edo-period student waves" width="480"></p>
 
 
 ---
@@ -294,7 +309,7 @@ This fork of [kaomei/stickman-video-director](https://github.com/kaomei/stickman
 
 ### 23 experimental styles
 
-Besides Styles 1–4, the Skill can use 23 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
+Besides Styles 1–5, the Skill can use 23 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
 
 - **How to pick one:** ask for an experimental style, or name one by its key, for example “make it in the `dong-ho` style”. The Skill offers them only when asked, and tells you each one is `gated`.
 - **What `gated` means:** the character rigs passed the posture gate, and the sample package passed the package checks below. These styles have not yet been built into a full video.
@@ -445,6 +460,7 @@ Use it for faceless explainers, history and business topics, personal growth, ev
 
 ## Latest updates
 
+- **2026-10-22:** Added Style 5, Historical Cartoon, from upstream, built as motion graphics: four roles from three eras (Roman, Edo Japan, ancient Egypt) drawn in code on one rig, every pose through the posture gate.
 - **2026-10-22:** The Skill now builds videos as motion graphics only: Phase B is a segment spec per segment, the posture gate runs on pose tracks exported from the rigs after rendering, and the narration is recorded once for the whole video. The old demo clips were removed from the homepage.
 - **2026-10-22:** New experimental style `tech-illustration` (Soft Tech Illustration): a soft 2.5D tech explainer look with a chibi developer team and a robot sidekick.
 - **2026-10-20:** This fork adds 22 experimental styles, the posture gate with the hand ledger and package lint, and the detailed Golden Hook card. Style 2 now has a buzz-cut, glasses-wearing default lead. See [What this fork adds](#fork-additions).
@@ -453,7 +469,7 @@ Use it for faceless explainers, history and business topics, personal growth, ev
 - **2026-10-13:** Refined Style 1's character descriptions and current-pose constraints.
 - **2026-10-12:** Improved shared voice-consistency rules and added prehistoric and community examples.
 
-Already installed? Homepage changes alone don't require a reinstall. Update the Skill if you want Style 4 or installed before the character and voice-rule changes.
+Already installed? Homepage changes alone don't require a reinstall. Update the Skill if you want Style 4 or 5 or installed before the character and voice-rule changes.
 
 <!-- readme:contribute -->
 

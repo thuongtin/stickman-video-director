@@ -15,17 +15,17 @@ approved_voiceover = (
     "The reward got smaller. The workload got bigger. And somehow… they called that progress.",
 )
 locales = {
-    "vi": ("Tiếng Việt", "# Thư viện phong cách hoạt hình người que bằng motion graphics", "### Phong cách", "Chuyện đời thường ấm áp"),
-    "en": ("English", "# Motion-Graphics Stickman Animation Style Library", "### Style", "Cozy Storytelling"),
-    "ja": ("日本語", "# モーショングラフィックス棒人間アニメのスタイル集", "### スタイル", "ほっとする日常ストーリー"),
-    "ko": ("한국어", "# 모션 그래픽 스틱맨 애니메이션 스타일 모음", "### 스타일", "따뜻한 일상 이야기"),
-    "pt-BR": ("Português do Brasil", "# Bonecos de palito em motion graphics: biblioteca de estilos", "### Estilo", "Histórias acolhedoras"),
+    "vi": ("Tiếng Việt", "# Thư viện phong cách hoạt hình người que bằng motion graphics", "### Phong cách", "Chuyện đời thường ấm áp", "Hoạt hình lịch sử"),
+    "en": ("English", "# Motion-Graphics Stickman Animation Style Library", "### Style", "Cozy Storytelling", "Historical Cartoon"),
+    "ja": ("日本語", "# モーショングラフィックス棒人間アニメのスタイル集", "### スタイル", "ほっとする日常ストーリー", "歴史カートゥーン"),
+    "ko": ("한국어", "# 모션 그래픽 스틱맨 애니메이션 스타일 모음", "### 스타일", "따뜻한 일상 이야기", "역사 카툰"),
+    "pt-BR": ("Português do Brasil", "# Bonecos de palito em motion graphics: biblioteca de estilos", "### Estilo", "Histórias acolhedoras", "Desenho histórico"),
 }
 common_links = (
     "https://github.com/kaomei/stickman-video-director",
     "https://github.com/kaomei/stickman-video-director/issues",
 )
-for locale, (label, title, style_prefix, style_four) in locales.items():
+for locale, (label, title, style_prefix, style_four, style_five) in locales.items():
     path = root / f"README.{locale}.md"
     text = path.read_text()
     assert not re.search(r"monixin888|2109651037850325112", text, re.IGNORECASE), path.name
@@ -36,8 +36,10 @@ for locale, (label, title, style_prefix, style_four) in locales.items():
     # Motion graphics only: no AI video generator, its tutorials or the removed demo clips.
     assert not re.search(r"flow\.google|omni flash|seedance|higgsfield|\bveo\b|x\.com/CrazyKaomei/status|assets/readme/previews",
                          text, re.IGNORECASE), path.name
-    assert len(re.findall(rf"^{re.escape(style_prefix)} [1-4]:|^{re.escape(style_prefix)}[1-4]：", text, re.MULTILINE)) == 4
-    assert style_four in text
+    assert len(re.findall(rf"^{re.escape(style_prefix)} [1-5]:|^{re.escape(style_prefix)}[1-5]：", text, re.MULTILINE)) == 5
+    assert style_four in text and style_five in text
+    # Style 5 is shown with its code-rendered motion clip, not an AI-made film.
+    assert 'src="docs/style-5/motion.gif"' in text and "docs/style-5/sheet.png" in text, path.name
     for link in common_links:
         assert link in text, (path.name, link)
     for voiceover in approved_voiceover:

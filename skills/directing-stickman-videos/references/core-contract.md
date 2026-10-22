@@ -1,6 +1,6 @@
 # Core Contract
 
-These are the rules every style shares, Styles 1–4 and every slug style pack alike. Each rule is stated once here. The detailed wording lives in exactly one other file (the "Owner"), and the "Check" column names what enforces it. When a style reference or pack changes a rule, it does so only where the "Override" column allows, and it states the reason in its own file.
+These are the rules every style shares, Styles 1–5 and every slug style pack alike. Each rule is stated once here. The detailed wording lives in exactly one other file (the "Owner"), and the "Check" column names what enforces it. When a style reference or pack changes a rule, it does so only where the "Override" column allows, and it states the reason in its own file.
 
 Read this file before planning (Phase A), and read it again before assembling segment specs (Phase B).
 
@@ -20,8 +20,8 @@ Read this file before planning (Phase A), and read it again before assembling se
 | C10 | Colours are named in plain words. No hex, RGB, HSL or Pantone. | `segment-spec-contract.md` | lint B6 | never |
 | C11 | Segment specs never name a studio, franchise, brand, signature character or artist, not even as "no X". Describe how it is drawn instead. | this file, `style-pack-template.md` | lint B14 (common names) | never |
 | C12 | Cast: every visible character is planned and has a cast card; no unplanned extras ("no other people or animals" in the negatives when a cast is set). When two or more characters share a frame, each keeps a fixed screen side unless a beat moves them, beats name the character instead of using "he/she" when two of the same gender share a sentence, and cast members differ in silhouette, not only in colour. At most two characters do demanding actions in the same beat; the others hold simple poses. | this file | review | a pack may lower the limit |
-| C13 | Every clip ending connects to the next opening through an action, a prop, screen direction or a named cut or time jump. | `storyboard-template.md` | rubric PACK-6 | Style 4 and packs: scene changes are allowed if named |
-| C14 | Narrative arc: five-stage engine with a closing discussion prompt. | `storyboard-template.md` | rubric PLAN | yes: a pack or style reference may use setup → escalation → payoff (Style 3) or its own arc |
+| C13 | Every clip ending connects to the next opening through an action, a prop, screen direction or a named cut or time jump. | `storyboard-template.md` | rubric PACK-6 | Styles 4 and 5 and packs: scene changes are allowed if named |
+| C14 | Narrative arc: five-stage engine with a closing discussion prompt. | `storyboard-template.md` | rubric PLAN | yes: a pack or style reference may use setup → escalation → payoff (Styles 3 and 5) or its own arc |
 | C15 | Timing and density: three timed beats per clip, about 20–25 VO words, a visual change every two to three seconds, no idle character. | `storyboard-template.md` | lint B9, rubric | yes: holds, word budget, density and motion cadence (`smooth`, `on-twos`, `stepped`) |
 | C16 | Camera grammar: slow or held moves for transitions, fast accents only for reveals, and no three inward pushes in a row. | `storyboard-template.md` | lint A3, B11 | a pack may ban moves (no orbit, no zoom) |
 | C17 | No invented facts, statistics, quotations or product claims. | `SKILL.md` | rubric | never |
@@ -40,6 +40,6 @@ These steps are part of the stitching guide when they are used. A package states
 
 ## How a style changes the core
 
-- Styles 3 and 4 change C14 and C15 and, for Style 4, C13, as their reference files say.
+- Styles 3, 4 and 5 change C14 and C15 and, for Styles 4 and 5, C13, as their reference files say.
 - A slug pack lists its overrides in its "Core rules this style overrides" section (`style-pack-template.md`). Each entry names the rule by ID.
 - An override marked "never" in the table above is not available to any style. A pack that needs one is not ready to ship.

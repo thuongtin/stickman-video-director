@@ -46,7 +46,7 @@ Dự án thử các phong cách hoạt hình người que phổ biến trên m�
 
 <div align="center">
 
-**4 phong cách · 6 lựa chọn hình ảnh · 23 phong cách thử nghiệm · Gate tư thế · Miễn phí, mã nguồn mở**
+**5 phong cách · 6 lựa chọn hình ảnh · 23 phong cách thử nghiệm · Gate tư thế · Miễn phí, mã nguồn mở**
 
 ⭐ **Bấm Star ngay. Lần sau làm hoạt hình, khỏi phải bắt đầu từ trang trắng.**
 
@@ -110,6 +110,21 @@ Chiếc cốc bạn để dành cho một dịp đặc biệt. Tin nhắn bạn 
 - **Trông thế nào:** Đầu tròn tô trắng, thân mảnh, tay chân que màu tối, biểu cảm nhỏ và tự nhiên trong bối cảnh hoạt hình 2D đủ màu. Cảnh rộng giới thiệu nơi chốn; cận cảnh bắt khoảnh khắc ngập ngừng hay nhẹ nhõm; cảnh máy chạy theo giữ cho câu chuyện tiếp diễn.
 - **Hợp với:** Chuyện đời thường dễ đồng cảm, phát triển bản thân, các mối quan hệ, khoảnh khắc ấm áp, xây dựng thói quen và nội dung tiếng Anh cho trẻ em.
 - **Vì sao chọn nó?** Để người xem thấy mình trong một khoảnh khắc nhỏ. Màu sắc và ánh sáng đi theo chủ đề: ấm áp, lo âu, kiệt sức hay một khởi đầu mới.
+
+
+---
+
+### Phong cách 5: Hoạt hình lịch sử
+
+Một người lính La Mã đi trên con đường giữa đồi cỏ và hàng bách. Một cậu học trò thời Edo vẫy tay trước dãy nhà gỗ. Cùng một kiểu vẽ đi qua nhiều thời đại: chỉ trang phục, bối cảnh, đạo cụ, bảng màu và âm nhạc đổi theo thời kỳ.
+
+- **Trông thế nào:** Đầu tròn tô trắng, mắt là hai hình bầu dục đen đặc, lông mày và miệng biểu cảm, không vẽ mũi, tay chân que màu đen, viền đen dày và đổ bóng cel nhẹ trên vải, da và kim loại. Bối cảnh là phong cảnh và kiến trúc vẽ kiểu tranh màu.
+- **Hợp với:** Giải thích lịch sử, đời sống thường ngày thời xưa, chuyện các nền văn minh và hài lịch sử. Phần sự thật lịch sử được tách khỏi các cảnh minh hoạ hay đùa vui.
+- **Vì sao chọn nó?** Mỗi câu chuyện có bộ thời đại riêng (trang phục, bối cảnh, bảng màu, nhạc), nhưng vẫn là một khung xương, nên mọi thời đại dùng chung dáng đi, động tác và gate tư thế.
+
+Phong cách này đến từ upstream (ý tưởng hình ảnh của [@leksautomate](https://github.com/leksautomate)). Ở bản fork, nó được vẽ bằng code từ khung xương của nhân vật chính Phong cách 2, mọi tư thế đã qua gate tư thế ([dàn nhân vật](docs/style-5/sheet.png), [cách dựng](docs/style-5/README.md)):
+
+<p align="center"><img src="docs/style-5/motion.gif" alt="Phong cách 5: lính La Mã đi trên đường quê rồi chỉ đường, sau đó một học trò thời Edo vẫy tay" width="480"></p>
 
 
 ---
@@ -294,7 +309,7 @@ Bản fork này của [kaomei/stickman-video-director](https://github.com/kaomei
 
 ### 23 phong cách thử nghiệm
 
-Ngoài Phong cách 1–4, Skill có thể dùng 23 phong cách thử nghiệm. Mỗi phong cách có một dàn nhân vật gốc cố định, luật riêng và một gói segment spec mẫu ba clip.
+Ngoài Phong cách 1–5, Skill có thể dùng 23 phong cách thử nghiệm. Mỗi phong cách có một dàn nhân vật gốc cố định, luật riêng và một gói segment spec mẫu ba clip.
 
 - **Cách chọn:** hỏi một phong cách thử nghiệm, hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Skill chỉ gợi ý các phong cách này khi bạn hỏi, và sẽ nói rõ mỗi phong cách đang ở mức `gated`.
 - **`gated` nghĩa là gì:** khung xương nhân vật đã qua gate tư thế, và gói segment spec mẫu đã qua các bước kiểm tra gói bên dưới. Các phong cách này chưa được dựng thành một video hoàn chỉnh.
@@ -445,6 +460,7 @@ Dùng cho video giải thích không lộ mặt, chủ đề lịch sử và kin
 
 ## Cập nhật mới
 
+- **2026-10-22:** Thêm Phong cách 5, Hoạt hình lịch sử, từ upstream, chuyển sang dựng bằng motion graphics: bốn nhân vật ở ba thời đại (La Mã, Nhật thời Edo, Ai Cập cổ) vẽ bằng code từ một khung xương, mọi tư thế đã qua gate tư thế.
 - **2026-10-22:** Skill chuyển hẳn sang dựng video bằng motion graphics: Phase B giờ là segment spec cho từng đoạn, gate tư thế chạy trên dữ liệu xuất từ khung xương sau khi render, lời dẫn thu một lần cho cả video. Các clip demo cũ được gỡ khỏi trang chủ.
 - **2026-10-22:** Thêm phong cách thử nghiệm `tech-illustration` (Minh hoạ công nghệ): minh hoạ công nghệ 2.5D với nhóm lập trình chibi và robot trợ lý.
 - **2026-10-20:** Bản fork thêm 22 phong cách thử nghiệm, gate tư thế cùng sổ theo dõi tay và kiểm tra gói, và thẻ Golden Hook chi tiết. Phong cách 2 có nhân vật chính mặc định tóc đinh, đeo kính. Xem [Bản fork này thêm gì](#fork-additions).
@@ -453,7 +469,7 @@ Dùng cho video giải thích không lộ mặt, chủ đề lịch sử và kin
 - **2026-10-13:** Chỉnh mô tả nhân vật và ràng buộc tư thế hiện tại của Phong cách 1.
 - **2026-10-12:** Cải thiện luật giữ giọng đọc nhất quán, thêm ví dụ tiền sử và ví dụ của cộng đồng.
 
-Đã cài rồi? Chỉ đổi trang chủ thì không cần cài lại. Hãy cập nhật Skill nếu bạn muốn dùng Phong cách 4, các phong cách thử nghiệm và gate tư thế, hoặc đã cài trước các thay đổi về nhân vật và giọng đọc.
+Đã cài rồi? Chỉ đổi trang chủ thì không cần cài lại. Hãy cập nhật Skill nếu bạn muốn dùng Phong cách 4 hay 5, các phong cách thử nghiệm và gate tư thế, hoặc đã cài trước các thay đổi về nhân vật và giọng đọc.
 
 <!-- readme:contribute -->
 

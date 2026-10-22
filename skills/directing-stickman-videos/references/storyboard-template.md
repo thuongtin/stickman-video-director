@@ -6,6 +6,8 @@ Style 3 (Prehistoric Hand-Drawn / Dark Comedy) is also supported. Before plannin
 
 Style 4 (Cozy Storytelling / 治愈故事风) uses `cozy-storytelling.md`. In Phase A name a different recognizable main setting for each new ten-second segment by default, plus wide/close/moving shots inside it. Lock character design, important props and narration; scenery changes intentionally. Respect an explicit single-location request or approved callback. Do not call this style hand-drawn or require the same table/room across all segments.
 
+Style 5 (Historical Cartoon / 历史卡通风) uses `historical-cartoon.md`. Include its era pack, complete cast cards, location/prop states, exact VO and shared `voice-continuity.md` profile in Phase A. Keep the drawing grammar while adapting clothing, architecture, palette and music to the era. Its narrative-short ending and physical-action pacing override generic discussion-ending and four-device requirements; reactions may pause deliberately. Separate historical facts from invented comic scenes.
+
 ## Rewrite the source
 
 Create one natural English narration scaled to approximately 20–25 words per 10-second clip based on the target duration (e.g. ~60–75 words for 30s, ~120–150 words for 60s default, ~360–450 words for 3min, ~600–750 words for 5min).
@@ -118,6 +120,7 @@ Style packs may narrow this list in their own reference.
 - Style 2B: cinematic environments allow Partial reveal and Impossible scene with lighting changes as the hit.
 - Style 3: the cold open is the joke's setup. Use Reaction before cause, Sudden entry or a deadpan Visual metaphor; a held deadpan look counts as the hit. Do not force a loud sound cue.
 - Style 4: keep hooks gentle. Prefer Partial reveal, Reaction before cause and Satisfying motion; the sound cue is a soft action sound or single note, not an impact or bass hit. The first segment's setting must already be recognizable in the first frame.
+- Style 5: the first frame already shows the era: costume, architecture or landscape tells the viewer where and when before any word. Prefer Impossible scene (a modern problem inside a historical world), Reaction before cause and Partial reveal; the sound cue comes from the era score or a period sound (a drum hit, a horn, a gong), never a modern bass drop.
 
 #### Hook checks
 

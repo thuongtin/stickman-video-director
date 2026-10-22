@@ -101,7 +101,7 @@ for readme in "${readmes[@]}"; do
     exit 1
   fi
   if [[ "$readme" == README.md || "$readme" == README.vi.md ]]; then
-    for token in 'Phong cách 4: Chuyện đời thường ấm áp' 'docs/lead-character/sheet.png' '“Con người có công việc đầu tiên như thế nào?” | Khổ ngang 16:9'; do
+    for token in 'Phong cách 4: Chuyện đời thường ấm áp' 'Phong cách 5: Hoạt hình lịch sử' 'docs/lead-character/sheet.png' '“Con người có công việc đầu tiên như thế nào?” | Khổ ngang 16:9'; do
       rg -Fq "$token" "$readme_path" || {
         printf '%s missing Vietnamese homepage token: %s\n' "$readme" "$token" >&2
         exit 1

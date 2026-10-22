@@ -23,6 +23,7 @@ Require these before planning:
     - `Style 2B (Cinematic Story)`: full-color narrative environments, cinematic lighting & depth
   - `Style 3 (Prehistoric Hand-Drawn / Dark Comedy)`: expressive white filled heads, black stick limbs, animal-hide costumes and earthy prehistoric settings; story-specific casting
   - `Style 4 (Cozy Storytelling / 治愈故事风)`: expressive minimalist white-filled characters with dark stick limbs in full-color 2D cartoon environments; varied story locations and cinematic shot changes
+  - `Style 5 (Historical Cartoon / 历史卡通风)`: white-filled round heads, simple black oval eyes and thin black stick limbs in era-specific costume, with cel shading and full-color painterly historical settings
   - Experimental styles (`gated`), offered only when the user asks for an experimental style or names one by slug: the 23 slug styles in the "Experimental styles" table of `references/style-catalog.md` (for example `dong-ho`, `chu-tieu`, `watercolor-storybook`). Say the style is `gated` when offering it.
 
 If aspect ratio or visual style is missing, ask for all missing items in one concise message and stop. If duration is omitted, default to 60 seconds (6 clips). If a user provides a duration not divisible by 10, round to the nearest 10-second multiple. If a user specifies only light or dark theme, default to Style 1. Never select an aspect ratio or style silently. Do not re-ask choices already supplied.
@@ -46,6 +47,8 @@ For Style 3, read `references/prehistoric-dark-comedy.md` before planning. Its c
 For an experimental slug style, read `references/styles/<slug>.md` before planning and spec assembly, and use its sample in `references/styles/samples/<slug>.md` as the spec shape. Its frozen anchors, style block, overrides, bans and acceptance list win over the generic rules below, the same way the Style 3 and Style 4 references do; the voice contract, hands ledger and package lint still apply.
 
 For Style 4, read `references/cozy-storytelling.md` before planning and spec assembly. Default each new ten-second segment to a different recognizable story setting, unless the user explicitly requests one location or approves a deliberate return. Preserve characters, drawing grammar, important props, movement direction and narrator—not an identical table or background across the whole video. Name the location cuts and any time jumps in Phase A. This is full-color cartoon storytelling, not a hand-drawn/sketchbook mode and not a claim of photorealistic 3D backgrounds.
+
+For Style 5, read `references/historical-cartoon.md` before planning and spec assembly. Keep its drawing grammar fixed while changing the era pack. Confirm story-specific cast cards, setting, palette, props and exact narration in Phase A; repeat the full approved style and visible cast descriptions in every Phase B spec. Its historical palette, music, physical-action pacing and story ending override generic three-color, mandatory-piano, device-count, no-idle and discussion-ending rules below. Apply the existing shared voice contract; do not apply this style's character rules to Styles 1–4.
 
 - Structure every script using the 5-stage high-completion flow:
   1. **Golden Hook**: Instant curiosity trigger via a counter-intuitive question or visual paradox. Timing is flexible based on duration (e.g. within the first 2–5 seconds in short videos, up to 10–15s in long videos); never open with generic platitudes. For every style, follow "Golden Hook in detail" in `references/storyboard-template.md`: a complete hook card in Phase A, a first frame that already shows the character mid-action with a visible tension, one hook hit by about 2s that reads with the sound off, and a first spoken line of about four to ten words with no greeting. In Phase B the hook lives in Clip 1's first-frame state and first timed beat; it adds no extra spec line.
@@ -79,7 +82,7 @@ For Style 4, read `references/cozy-storytelling.md` before planning and spec ass
   - planned joins between clips;
   - no invented facts.
 
-  Style 3, Style 4 and slug packs override only the rules its table marks as overridable.
+  Styles 3, 4 and 5 and slug packs override only the rules its table marks as overridable.
 - Before delivering Phase B, run `tools/package_lint/package_lint.py` on the package (Phase A storyboard included when available) and fix every RED; it runs `tools/posture_gate/hand_ledger.py` as check B3. After rendering, gate every character's exported pose track with `tools/posture_gate/posture_gate.py` and review each rendered clip with `tools/risk_sheet/risk_sheet.py` (`references/posture-gate.md`); report rendered-clip results as a review, not as certification.
 
 ## Revision rules
