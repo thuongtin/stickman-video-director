@@ -121,13 +121,17 @@ def hand(pen, j, k, s):
     pen.circle(j[f"wrist_{k}"], 5.4 * s, SKIN, INK, 2.0)
 
 
-def meat(pen, wr, el, s, seed):
+def meat_held(wr, el, s):
+    """Where the roast sits when held by its bone: (center, axis from bone to meat)."""
     ux, _ = axis(el, wr)
-    c = add(wr, ux, 17 * s)
+    return add(wr, ux, 17 * s), ux
+
+
+def meat(pen, c, ux, s, seed):
     ang = math.degrees(math.atan2(ux[1], ux[0]))
-    pen.line([add(wr, ux, -9 * s), add(wr, ux, 6 * s)], BONE, 5 * s)
+    pen.line([add(c, ux, -26 * s), add(c, ux, -11 * s)], BONE, 5 * s)
     for o in (-2.6, 2.6):
-        pen.circle(add(add(wr, ux, -10 * s), (-ux[1], ux[0]), o * s), 3.0 * s, BONE, INK, 1.4)
+        pen.circle(add(add(c, ux, -27 * s), (-ux[1], ux[0]), o * s), 3.0 * s, BONE, INK, 1.4)
     pen.poly(wob([add(c, rot((16 * s * math.cos(t), 11.5 * s * math.sin(t)), ang)) for t in
                   [2 * math.pi * q / 18 for q in range(18)]], 0.5, seed, True, 1), MEAT, INK, 2.2)
     pen.ellipse(add(add(c, ux, 3 * s), (-ux[1], ux[0]), -3 * s), 7 * s, 3.4 * s, MEAT_HI, ang=ang)
@@ -248,7 +252,7 @@ def head(pen, j, s, expr, seed, who):
                  SKIN)
 
 
-def figure(pen, j, s, expr, seed, who, holds_meat=False):
+def figure(pen, j, s, expr, seed, who, roast=None):
     sg = 1 if j["toe_r"][0] > j["ankle_r"][0] else -1
     near = "r" if sg == 1 else "l"; far = "l" if near == "r" else "r"
     lw = 3.4 * s
@@ -263,8 +267,8 @@ def figure(pen, j, s, expr, seed, who, holds_meat=False):
         tunic(pen, j, s, 19, 22, seed + 9, SPOTS[::-1])
     head(pen, j, s, expr, seed + 17, who)
     pen.line(wob([j[f"shoulder_{near}"], j[f"elbow_{near}"], j[f"wrist_{near}"]], 0.4, seed + 2, False, 1), INK, lw)
-    if holds_meat:
-        meat(pen, j[f"wrist_{near}"], j[f"elbow_{near}"], s, seed + 4)
+    if roast:
+        meat(pen, roast[0], roast[1], s, seed + 4)
     hand(pen, j, near, s)
 
 
@@ -331,6 +335,28 @@ def build():
     return cave_frames, chief_frames
 
 
+def roast_path(kf, cf):
+    """The roast's place in every frame. The chief holds it by the bone; through the shared hold it stays exactly
+    where it is; then the caveman keeps it where his hand closed on it, turning with his forearm."""
+    out = []
+    local = None
+    for i in range(N):
+        jc, jk = cf[i]["joints"], kf[i]["joints"]
+        if "holds" in cf[i]:
+            out.append(meat_held(jc["wrist_l"], jc["elbow_l"], S))
+            continue
+        ux, px = axis(jk["elbow_r"], jk["wrist_r"])
+        if local is None:
+            c, mx = out[-1]
+            d = (c[0] - jk["wrist_r"][0], c[1] - jk["wrist_r"][1])
+            local = (d[0] * ux[0] + d[1] * ux[1], d[0] * px[0] + d[1] * px[1],
+                     mx[0] * ux[0] + mx[1] * ux[1], mx[0] * px[0] + mx[1] * px[1])
+        a, b, mu, mp = local
+        c = add(add(jk["wrist_r"], ux, a), px, b)
+        out.append((c, (mu * ux[0] + mp * px[0], mu * ux[1] + mp * px[1])))
+    return out
+
+
 def camera(i):
     t2 = ease((i - 48) / 26)
     z = 1.1 + 0.12 * t2
@@ -340,6 +366,7 @@ def camera(i):
 
 def render(out_dir):
     kf, cf = build()
+    roasts = roast_path(kf, cf)
     bd = Backdrop(cave)
     frames = []
     for i in range(N):
@@ -351,8 +378,8 @@ def render(out_dir):
         for f, who in ((cf[i], "chief"), (kf[i], "cave")):
             j = f["joints"]
             pen.ellipse((j["pelvis"][0], GROUND + 2), 34 * S, 5 * S, (60, 36, 20, 60))
-        figure(pen, cf[i]["joints"], S, cf[i]["_expr"], seed + 500, "chief", holds_meat="holds" in cf[i] and i < 38)
-        figure(pen, kf[i]["joints"], S, kf[i]["_expr"], seed, "cave", holds_meat="holds" in kf[i])
+        figure(pen, cf[i]["joints"], S, cf[i]["_expr"], seed + 500, "chief", roast=roasts[i] if i < 38 else None)
+        figure(pen, kf[i]["joints"], S, kf[i]["_expr"], seed, "cave", roast=roasts[i] if i >= 38 else None)
         if 22 <= i < 36:
             sparks(pen, cf[i]["joints"]["wrist_l"], i, S)
         fire(pen, (76, GROUND - 4), i)

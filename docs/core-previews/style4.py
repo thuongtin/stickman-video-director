@@ -205,9 +205,11 @@ def build():
     rest.update(shoulder_l=on_table_l["shoulder_l"], elbow_l=on_table_l["elbow_l"])
     rest_r = ik(pose, dict(rest), "r", (272, TABLE_Y + 1), ("shoulder_r", "elbow_r"), ((-30, 150), (0, 150)))
     grip = ik(pose, dict(rest), "r", HANDLE, ("shoulder_r", "elbow_r"), ((-30, 150), (0, 150)))
-    jr = pose(rest)
-    sip = ik(pose, dict(rest), "r", (jr["head"][0] + HEAD_R * S * 0.86, jr["head"][1] + HEAD_R * S * 0.62),
-             ("shoulder_r", "elbow_r"), ((-30, 150), (0, 150)))
+    # sip: the mug's near rim (left top corner) touches the mouth, with the head tilted as in the hold
+    js = pose(dict(rest, neck=rest["neck"] - 6))
+    mouth = (js["head"][0] + HEAD_R * S * 0.45 + 4 * S, js["head"][1] + HEAD_R * S * 0.42 - 2 * S)
+    base = (mouth[0] + 1 + MW, mouth[1] + MH)
+    sip = ik(pose, dict(rest), "r", (base[0] - MW - 2, base[1] - MH * 0.55), ("shoulder_r", "elbow_r"), ((-30, 150), (0, 150)))
     keys = {"rest": (rest_r["shoulder_r"], rest_r["elbow_r"]), "grip": (grip["shoulder_r"], grip["elbow_r"]),
             "sip": (sip["shoulder_r"], sip["elbow_r"])}
 

@@ -86,8 +86,10 @@ def cage_front(pen, drop, bend, alpha=255):
     for k, x in enumerate(CAGE_X):
         if k in (2, 3) and bend:
             out = -1 if k == 2 else 1
-            mid = (x + out * bend, GRIP_Y + drop)
-            pts = [(x, y0)] + [lerp(lerp((x, y0), mid, t), lerp(mid, (x, y1), t), t) for t in [q / 16 for q in range(1, 16)]] + [(x, y1)]
+            grip = (x + out * bend, GRIP_Y + drop)
+            # quadratic curve through the grip point at its middle: control = 2*grip - (start+end)/2
+            ctl = (2 * grip[0] - x, 2 * grip[1] - (y0 + y1) / 2)
+            pts = [(x, y0)] + [lerp(lerp((x, y0), ctl, t), lerp(ctl, (x, y1), t), t) for t in [q / 16 for q in range(1, 16)]] + [(x, y1)]
             pen.line(pts, ink, 7)
         else:
             pen.line([(x, y0), (x, y1)], ink, 7)
