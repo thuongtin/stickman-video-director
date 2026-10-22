@@ -46,11 +46,11 @@ Dự án thử các phong cách hoạt hình người que phổ biến trên m�
 
 <div align="center">
 
-**4 phong cách · 6 lựa chọn hình ảnh · 22 phong cách thử nghiệm · Gate tư thế · Miễn phí, mã nguồn mở**
+**4 phong cách · 6 lựa chọn hình ảnh · 23 phong cách thử nghiệm · Gate tư thế · Miễn phí, mã nguồn mở**
 
 ⭐ **Bấm Star ngay. Lần sau làm hoạt hình, khỏi phải đi tìm prompt.**
 
-[Bắt đầu](#quick-start) · [22 phong cách mới](#experimental-styles) · [Bản fork này thêm gì](#fork-additions) · [Cập nhật mới](#recent-updates) · [Hướng dẫn đầy đủ (tiếng Trung)](https://x.com/CrazyKaomei/status/2102311241046008268)
+[Bắt đầu](#quick-start) · [23 phong cách mới](#experimental-styles) · [Bản fork này thêm gì](#fork-additions) · [Cập nhật mới](#recent-updates) · [Hướng dẫn đầy đủ (tiếng Trung)](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
 
@@ -132,9 +132,9 @@ Chiếc cốc bạn để dành cho một dịp đặc biệt. Tin nhắn bạn 
 
 <a id="experimental-styles"></a>
 
-### Phong cách thử nghiệm: 22 phong cách mới
+### Phong cách thử nghiệm: 23 phong cách mới
 
-Bản fork này thêm 22 phong cách. Mỗi phong cách có dàn nhân vật gốc riêng, luật riêng và một gói prompt mẫu ba clip đã qua gate tư thế và kiểm tra gói. Muốn dùng, hãy hỏi một phong cách thử nghiệm hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Các phong cách này đang ở mức `gated`: chưa được kiểm tra trên video tạo ra. Mỗi ô là một đoạn chuyển động vài giây, dựng từ khung xương vẽ bằng code của chính phong cách đó và đã qua gate tư thế; không đoạn nào tạo bằng mô hình video AI. Bấm “Xem dàn nhân vật” để xem cả dàn. [Cách chọn và các công cụ kiểm tra](#fork-additions).
+Bản fork này thêm 23 phong cách. Mỗi phong cách có dàn nhân vật gốc riêng, luật riêng và một gói prompt mẫu ba clip đã qua gate tư thế và kiểm tra gói. Muốn dùng, hãy hỏi một phong cách thử nghiệm hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Các phong cách này đang ở mức `gated`: chưa được kiểm tra trên video tạo ra. Mỗi ô là một đoạn chuyển động vài giây, dựng từ khung xương vẽ bằng code của chính phong cách đó và đã qua gate tư thế; không đoạn nào tạo bằng mô hình video AI. Bấm “Xem dàn nhân vật” để xem cả dàn. [Cách chọn và các công cụ kiểm tra](#fork-additions).
 
 <table width="100%">
 <tr>
@@ -291,6 +291,15 @@ Hợp với: Các bộ phận khớp với nhau thế nào, nguyên nhân và k�
 <a href="docs/style-previews/brick-build.jpg">Xem dàn nhân vật</a>
 </td>
 </tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/tech-illustration.gif" alt="Đoạn chuyển động phong cách Minh hoạ công nghệ" width="360"><br>
+<strong>Minh hoạ công nghệ</strong> · <code>tech-illustration</code><br>
+Hợp với: Giải thích phần mềm, AI và mẹo làm việc hiệu quả, câu chuyện về ứng dụng, chuyện có robot trợ lý<br>
+<a href="docs/style-previews/tech-illustration.jpg">Xem dàn nhân vật</a>
+</td>
+<td width="50%"></td>
+</tr>
 </table>
 
 <a id="fork-additions"></a>
@@ -299,15 +308,15 @@ Hợp với: Các bộ phận khớp với nhau thế nào, nguyên nhân và k�
 
 Bản fork này của [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) giữ nguyên mọi thứ ở trên và thêm bốn phần: nhiều phong cách hơn, gate kiểm tra tư thế, Golden Hook chi tiết hơn, và nhân vật chính riêng cho Phong cách 2.
 
-### 22 phong cách thử nghiệm
+### 23 phong cách thử nghiệm
 
-Ngoài Phong cách 1–4, Skill có thể dùng 22 phong cách thử nghiệm. Mỗi phong cách có một dàn nhân vật gốc cố định, luật riêng và một gói prompt mẫu ba clip.
+Ngoài Phong cách 1–4, Skill có thể dùng 23 phong cách thử nghiệm. Mỗi phong cách có một dàn nhân vật gốc cố định, luật riêng và một gói prompt mẫu ba clip.
 
 - **Cách chọn:** hỏi một phong cách thử nghiệm, hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Skill chỉ gợi ý các phong cách này khi bạn hỏi, và sẽ nói rõ mỗi phong cách đang ở mức `gated`.
 - **`gated` nghĩa là gì:** khung xương nhân vật đã qua gate tư thế, và gói prompt mẫu đã qua các bước kiểm tra gói bên dưới. Các phong cách này chưa được kiểm tra trên video tạo ra.
 - **Nằm ở đâu:** `skills/directing-stickman-videos/references/styles/<mã>.md`, gói mẫu ở `styles/samples/<mã>.md`. Danh sách đầy đủ nằm trong bảng “Experimental styles” của `references/style-catalog.md`.
 
-Bảng dưới đây liệt kê lại cả 22 phong cách. Clip chuyển động và mô tả từng phong cách nằm ở [Phong cách thử nghiệm](#experimental-styles).
+Bảng dưới đây liệt kê lại cả 23 phong cách. Clip chuyển động và mô tả từng phong cách nằm ở [Phong cách thử nghiệm](#experimental-styles).
 
 | Mã | Phong cách | Hợp với |
 |---|---|---|
@@ -333,6 +342,7 @@ Bảng dưới đây liệt kê lại cả 22 phong cách. Clip chuyển động
 | `vn-webcomic` | Truyện tranh mạng Việt chuyển động | Gag một câu dễ đồng cảm, chơi chữ theo nghĩa đen, chuyện xóm ngõ |
 | `voxel-world` | Thế giới khối voxel | Chuyện xây dựng và làm việc nhóm, nguyên nhân và kết quả, lắp ráp từng bước |
 | `brick-build` | Thị trấn gạch ráp | Các bộ phận khớp với nhau thế nào, nguyên nhân và kết quả, chuyện nhẹ nhàng cho trẻ em, đùa vật lý nhỏ |
+| `tech-illustration` | Minh hoạ công nghệ | Giải thích phần mềm, AI và mẹo làm việc hiệu quả, câu chuyện về ứng dụng, chuyện có robot trợ lý |
 
 Không prompt nào nêu tên hãng phim, thương hiệu hay nhân vật nổi tiếng. Phong cách nào gợi nhớ một kiểu hình quen thuộc thì chỉ bám theo thể loại và chất liệu.
 
@@ -451,6 +461,7 @@ Dùng cho video giải thích không lộ mặt, chủ đề lịch sử và kin
 
 ## Cập nhật mới
 
+- **2026-10-22:** Thêm phong cách thử nghiệm `tech-illustration` (Minh hoạ công nghệ): minh hoạ công nghệ 2.5D với nhóm lập trình chibi và robot trợ lý.
 - **2026-10-20:** Bản fork thêm 22 phong cách thử nghiệm, gate tư thế cùng sổ theo dõi tay và kiểm tra gói prompt, và thẻ Golden Hook chi tiết. Phong cách 2 có nhân vật chính mặc định tóc đinh, đeo kính. Xem [Bản fork này thêm gì](#fork-additions).
 - **2026-10-15:** Chỉnh lại trang chủ, các bước cài đặt và ví dụ; thêm ảnh xem trước nhẹ hơn và biểu đồ Star History. Luật của Skill không đổi.
 - **2026-10-14:** Thêm Phong cách 4, Chuyện đời thường ấm áp, với ví dụ ở ga tàu và quán cà phê.
