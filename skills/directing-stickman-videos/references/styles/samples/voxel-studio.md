@@ -66,7 +66,7 @@ First frame: Mai and Hà are already stepping onto the platform next to Khôi fr
 Timed beats:
 - [0–3s] (VO: "So he asks two friends for help."): Mai waves her right hand from the elbow, out to the side of her head. Khôi bends at the knees and picks up the fallen cube with his right hand. Camera: hold.
 - [3–7s] (VO: "One cube to Mai."): Khôi holds out the fallen cube in his right hand, and Mai takes the fallen cube from Khôi with her left hand. Hà watches with her hands at her sides. Camera: hold during the pass.
-- [7–10s] (VO: "One cube to Hà, and nobody drops one."): Khôi lifts the top piece off the cube stack with his right hand, and Hà takes the top piece from Khôi with her left hand. Khôi picks up the bottom block with his right hand and raises it out to the side, away from his face. Mai holds the fallen cube in her left hand at her side, and Bit floats still. Camera: hold during the pass and the raise, then a slow pull back once Khôi's arm is still.
+- [7–10s] (VO: "One cube to Hà, and nobody drops one."): Khôi lifts the top piece off the cube stack with his right hand, and Hà takes the top piece from Khôi with her left hand. Khôi picks up the bottom block with his right hand and holds it at his side. Mai holds the fallen cube in her left hand at her side, and Bit floats still. Camera: hold during the pass, then a slow pull back once the hands are still.
 
 Dialogue: audio voiceover only, strictly no speech bubbles, no dialogue boxes. Speak exactly the quoted lines once, in order; do not add, omit, paraphrase, repeat, caption, subtitle or display any words.
 
@@ -74,7 +74,7 @@ Voice: One off-screen adult male narrator throughout. General American accent, w
 
 Audio: the same soft plucked kalimba and light marimba melody over a gentle synth pad at a calm walking tempo continues from clip 1 with identical tempo and instrumentation; a soft click at each pass.
 
-Final frame: the three friends stand on two platforms, each holding one orange cube: Khôi out to the side in his right hand, Mai and Hà at their sides in their left hands; Bit floats behind them.
+Final frame: the three friends stand on two platforms, each holding one orange cube at their side: Khôi in his right hand, Mai and Hà in their left hands; Bit floats behind them.
 Hands at end — Khôi: right hand holds the bottom block; left hand empty. Mai: right hand empty; left hand holds the fallen cube. Hà: right hand empty; left hand holds the top piece.
 
 Negative constraints: no text, no letters or numbers anywhere, no signs with words, no screens with writing, no game interface, no logos, no brand marks, no watermark, no speech bubbles, no dialogue boxes, no existing cartoon or video-game characters, no pixel textures on the cube faces, no shiny plastic, no round studs, no outdoor scenery, no strong colours other than orange, no fingers, no stretched limbs, no limbs passing through bodies, no wristband on the left wrist, no hand or held cube covering a face, no cubes growing or shrinking, no morphing, no duplicate characters, no realistic human bodies, no photoreal people, no 2D cartoon outlines, no knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass.
