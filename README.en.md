@@ -46,11 +46,11 @@ I'm testing popular stickman animation styles from across the web and sharing th
 
 <div align="center">
 
-**4 styles · 6 visual options · 22 experimental styles · Posture gate · Free and open source**
+**4 styles · 6 visual options · 23 experimental styles · Posture gate · Free and open source**
 
 ⭐ **Star it now. Next time you make an animation, skip the hunt for prompts.**
 
-[Get started](#quick-start) · [22 new styles](#experimental-styles) · [What this fork adds](#fork-additions) · [Latest updates](#recent-updates) · [Full walkthrough (Chinese)](https://x.com/CrazyKaomei/status/2102311241046008268)
+[Get started](#quick-start) · [23 new styles](#experimental-styles) · [What this fork adds](#fork-additions) · [Latest updates](#recent-updates) · [Full walkthrough (Chinese)](https://x.com/CrazyKaomei/status/2102311241046008268)
 
 </div>
 
@@ -132,9 +132,9 @@ A mug you've been saving for a special occasion. A message you feel compelled to
 
 <a id="experimental-styles"></a>
 
-### Experimental styles: 22 new styles
+### Experimental styles: 23 new styles
 
-This fork adds 22 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not been checked against generated video. Each card is a few seconds of motion rendered from that style's own code-drawn rigs, which passed the posture gate; none of it was made with an AI video model. “See the cast” opens the full cast. [How to pick one and the checking tools](#fork-additions).
+This fork adds 23 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not been checked against generated video. Each card is a few seconds of motion rendered from that style's own code-drawn rigs, which passed the posture gate; none of it was made with an AI video model. “See the cast” opens the full cast. [How to pick one and the checking tools](#fork-additions).
 
 <table width="100%">
 <tr>
@@ -291,6 +291,15 @@ Good for: How parts fit together, cause and effect, gentle kids' stories, small 
 <a href="docs/style-previews/brick-build.jpg">See the cast</a>
 </td>
 </tr>
+<tr>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/voxel-studio.gif" alt="Motion clip of the style Voxel Studio" width="360"><br>
+<strong>Voxel Studio</strong> · <code>voxel-studio</code><br>
+Good for: Tech and how-to explainers, teamwork and productivity tips, step-by-step guides<br>
+<a href="docs/style-previews/voxel-studio.jpg">See the cast</a>
+</td>
+<td width="50%"></td>
+</tr>
 </table>
 
 <a id="fork-additions"></a>
@@ -299,15 +308,15 @@ Good for: How parts fit together, cause and effect, gentle kids' stories, small 
 
 This fork of [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) keeps everything above and adds four things: more styles, a posture gate, a more detailed Golden Hook, and its own Style 2 lead.
 
-### 22 experimental styles
+### 23 experimental styles
 
-Besides Styles 1–4, the Skill can use 22 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
+Besides Styles 1–4, the Skill can use 23 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
 
 - **How to pick one:** ask for an experimental style, or name one by its key, for example “make it in the `dong-ho` style”. The Skill offers them only when asked, and tells you each one is `gated`.
 - **What `gated` means:** the character rigs passed the posture gate, and the sample package passed the package checks below. These styles have not yet been checked against generated video.
 - **Where they live:** `skills/directing-stickman-videos/references/styles/<key>.md`, with the sample package in `styles/samples/<key>.md`. The full list is in the “Experimental styles” table of `references/style-catalog.md`.
 
-The table below lists all 22 again. Motion clips and descriptions are under [Experimental styles](#experimental-styles).
+The table below lists all 23 again. Motion clips and descriptions are under [Experimental styles](#experimental-styles).
 
 | Key | Style | Good for |
 |---|---|---|
@@ -333,6 +342,7 @@ The table below lists all 22 again. Motion clips and descriptions are under [Exp
 | `vn-webcomic` | Vietnamese Web-Comic in Motion | One-joke relatable gags, literal wordplay, neighbourhood slice-of-life |
 | `voxel-world` | Voxel Block World | Building and teamwork stories, cause and effect, step-by-step assembly |
 | `brick-build` | Brick-Built Town | How parts fit together, cause and effect, gentle kids' stories, small physics jokes |
+| `voxel-studio` | Voxel Studio | Tech and how-to explainers, teamwork and productivity tips, step-by-step guides |
 
 No prompt names a studio, brand or famous character. Where a style resembles a well-known look, it matches the genre and material only.
 
@@ -451,6 +461,7 @@ Use it for faceless explainers, history and business topics, personal growth, ev
 
 ## Latest updates
 
+- **2026-10-22:** Added the experimental style `voxel-studio`: chibi figures of small cubes on orange-topped floating platforms in a white studio.
 - **2026-10-20:** This fork adds 22 experimental styles, the posture gate with the hand ledger and package lint, and the detailed Golden Hook card. Style 2 now has a buzz-cut, glasses-wearing default lead. See [What this fork adds](#fork-additions).
 - **2026-10-15:** Refined the Chinese homepage, installation steps, and examples; added lighter previews and a Star History chart. Skill rules unchanged.
 - **2026-10-14:** Added Style 4, Cozy Storytelling, with train-station and café examples.

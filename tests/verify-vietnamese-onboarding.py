@@ -29,7 +29,7 @@ for row, voiceover in zip(storyboard_rows, approved_voiceover):
 # The fork section lists every experimental style in the catalog and how to run the checks.
 catalog = (root / "skills/directing-stickman-videos/references/style-catalog.md").read_text()
 slugs = re.findall(r"^\| `([a-z0-9-]+)` \|", catalog.split("### Experimental styles", 1)[1], re.MULTILINE)
-assert len(slugs) == 22
+assert len(slugs) == 23
 for lang in ("vi", "en"):
     text = (root / f"README.{lang}.md").read_text()
     fork = text.split('<a id="fork-additions"></a>', 1)[1].split("<!-- readme:advantages -->", 1)[0]
