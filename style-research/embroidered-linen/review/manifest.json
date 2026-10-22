@@ -1,0 +1,30 @@
+{
+  "src/render.py": {
+    "bytes": 10194,
+    "sha256": "db955a0525cf56e099c6ae2257299c1a3e4f10fd5827d5ac8587a5140cea8bf7"
+  },
+  "src/review_sheet.py": {
+    "bytes": 1709,
+    "sha256": "007eb254402d8ea122ca9d3131966276fb4d8879151f1d21e60853d0b57e8cb9"
+  },
+  "motion/demo.mp4": {
+    "bytes": 487196,
+    "sha256": "fcc7fdd30264518d7052c89cf1fcc068097d3b6659e2fe4d065c2dc706d8bd09"
+  },
+  "motion/track.json": {
+    "bytes": 162265,
+    "sha256": "285c295a14889ec924f182808848f5c41780522e7ada95e873afdcb8524987d1"
+  },
+  "concept/options.png": {
+    "bytes": 3967148,
+    "sha256": "42e2499028b7c14341bfbf6e5f3e39247d44e81df7e78bf72250dbe801c6f05f"
+  },
+  "sample.md": {
+    "bytes": 3249,
+    "sha256": "1eece29f667848f50adfdbc242d4014d5e6ce8423160330157adec1390c12045"
+  },
+  "gallery/contact-sheet.jpg": {
+    "bytes": 56172,
+    "sha256": "a9b9e2ac3085a17f87bfdd0fc35a375912abae80f552c0bd7a303eabfc5634bc"
+  }
+}

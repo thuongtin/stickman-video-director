@@ -1,0 +1,7 @@
+motion/frames/
+__pycache__/
+
+action/motion/frames/
+action/motion/draft-frames/
+concept/options.png
+action/concept/storyboard.png

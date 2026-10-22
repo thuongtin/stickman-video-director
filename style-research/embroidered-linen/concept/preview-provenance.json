@@ -1,0 +1,28 @@
+[
+  {
+    "original_local_file": "concept/options.png",
+    "original_sha256": "42e2499028b7c14341bfbf6e5f3e39247d44e81df7e78bf72250dbe801c6f05f",
+    "original_bytes": 3967148,
+    "repository_preview": "concept/options.webp",
+    "preview_sha256": "5726d99fc03cbbb80bbee3114c352bfcc604d8a5fd5727fd3215ec44abfec8a2",
+    "preview_bytes": 685694,
+    "dimensions": [
+      1672,
+      941
+    ],
+    "conversion": "same pixel dimensions, WebP quality 92; a delivery preview, not a new generated concept or semantic edit"
+  },
+  {
+    "original_local_file": "action/concept/storyboard.png",
+    "original_sha256": "5c580bd8a02da3f10498e26965b7988f4b71638eb1cf5c023e13fa4a77fd0b95",
+    "original_bytes": 3965492,
+    "repository_preview": "action/concept/storyboard.webp",
+    "preview_sha256": "d32ca4847e26699ad14f7b32984c5358e38bbdae0442c7f2b094dca1dc961d04",
+    "preview_bytes": 692494,
+    "dimensions": [
+      1536,
+      1024
+    ],
+    "conversion": "same pixel dimensions, WebP quality 92; a delivery preview, not a new generated concept or semantic edit"
+  }
+]
