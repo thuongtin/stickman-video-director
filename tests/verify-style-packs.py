@@ -19,7 +19,7 @@ status = catalog.split("### Status", 1)[1].split("New styles are drafted", 1)[0]
 BRANDS = re.compile(r"\b(lego|minecraft|mario|nintendo|disney|pixar|marvel|youtube|ghibli|simpsons|bluey|pokemon|barbie)\b", re.I)
 
 packs = sorted(STYLES.glob("*.md"))
-assert len(packs) >= 23, f"expected the 23 kept style packs, found {len(packs)}"
+assert len(packs) >= 24, f"expected the 24 kept style packs, found {len(packs)}"
 for pack in packs:
     slug = pack.stem
     text = pack.read_text()
