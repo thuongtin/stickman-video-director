@@ -51,6 +51,11 @@ backdrops.
 graph paper; Voxelgram's seams are a hair darker than the face, so the renderer's seam went from 86% to 90% of the face
 colour and the prompt asks for "softly rounded edges" instead of outlines.
 
+**What the owner's review changed:** the first sheets were flat Pillow polygons and read as rough next to the
+reference picture. The same voxel rigs are now path-traced in 3D (Blender's Cycles engine through the `bpy` module):
+every cube has a small bevel, soft area lights give contact shadows and bounce light, and Khôi's hair became round
+clumps of cube curls instead of a smooth cap. Nothing in the pictures is AI-generated.
+
 ### Five signature traits
 
 1. `must` Everything is built from many small matte cubes of one size, each cube one flat colour, with soft seams
