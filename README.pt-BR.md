@@ -70,6 +70,15 @@ Poucas linhas, uma ideia bem explicada. Em um fundo totalmente branco ou preto, 
 - **Indicado para:** Ciência, psicologia, motivação, organização pessoal, análise de negócios e explicação de conceitos.
 - **Como escolher:** Fundo branco para um resultado limpo e direto; fundo preto para mais contraste, tensão e carga emocional.
 
+<table width="100%">
+<tr>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="Fundo branco: a jaula da preocupação cai, ele entorta as grades e escapa" width="360"><br><sub>Fundo branco: a jaula da preocupação cai, ele entorta as grades e escapa</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="Fundo preto: empurra a barra de progresso até ela encher de azul" width="360"><br><sub>Fundo preto: empurra a barra de progresso até ela encher de azul</sub></td>
+</tr>
+</table>
+
+<p align="center"><sub>Desenhado a partir de rigs em código e aprovado pelo portão de postura.</sub></p>
+
 
 ---
 
@@ -98,6 +107,10 @@ E se os problemas de hoje fossem parar em um mundo sem celular nem escritório? 
 - **Indicado para:** Imaginação pré-histórica, sátira do trabalho, comportamento humano, humor ácido, fábulas e histórias infantis para aprender inglês.
 - **Como escolher:** Quando um pequeno acontecimento precisa levar a um final inesperado. Relações modernas ficam familiares e absurdas ao mesmo tempo em uma tribo pré-histórica.
 
+<p align="center"><img src="docs/core-previews/style-3.gif" alt="Na caverna, o chefe oferece uma coxa assada e o homem das cavernas aceita" width="480"></p>
+
+<p align="center"><sub>Na caverna, o chefe oferece uma coxa assada e o homem das cavernas aceita. Desenhado a partir de rigs em código e aprovado pelo portão de postura.</sub></p>
+
 
 ---
 
@@ -108,6 +121,10 @@ Uma caneca que você guarda para uma ocasião especial. Uma mensagem que parece 
 - **Visual:** Cabeças redondas preenchidas de branco, corpos alongados, membros finos e escuros e expressões discretas em cenários 2D coloridos. Planos abertos apresentam o lugar; closes mostram hesitação ou alívio; a câmera acompanha o personagem para a história seguir em frente.
 - **Indicado para:** Identificação com o cotidiano, crescimento pessoal, relacionamentos, momentos de afeto, novos hábitos e conteúdo infantil em inglês.
 - **Como escolher:** Para quem quer que o público pense “isso também acontece comigo”. A cor e a luz acompanham o tema, seja acolhimento, ansiedade, cansaço ou recomeço.
+
+<p align="center"><img src="docs/core-previews/style-4.gif" alt="Um café tranquilo na mesa de uma cafeteria de calçada" width="480"></p>
+
+<p align="center"><sub>Um café tranquilo na mesa de uma cafeteria de calçada. Desenhado a partir de rigs em código e aprovado pelo portão de postura.</sub></p>
 
 
 ---

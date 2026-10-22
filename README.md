@@ -68,6 +68,15 @@ Vài nét vẽ đủ để giải thích một ý lớn. Trên nền trắng tin
 - **Hợp với:** Khoa học, tâm lý, truyền động lực, tự quản lý bản thân, phân tích kinh doanh, giải thích khái niệm.
 - **Chọn bản nào?** Nền trắng cho cảm giác sạch và thẳng thắn; chọn nền đen khi cần tương phản mạnh, căng thẳng và cảm xúc rõ hơn.
 
+<table width="100%">
+<tr>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="Nền trắng: chiếc lồng lo âu sập xuống, bẻ cong song sắt và thoát ra" width="360"><br><sub>Nền trắng: chiếc lồng lo âu sập xuống, bẻ cong song sắt và thoát ra</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="Nền đen: đẩy thanh tiến độ cho tới khi đầy màu xanh" width="360"><br><sub>Nền đen: đẩy thanh tiến độ cho tới khi đầy màu xanh</sub></td>
+</tr>
+</table>
+
+<p align="center"><sub>Vẽ từ khung xương bằng code và đã qua gate tư thế.</sub></p>
+
 
 ---
 
@@ -100,6 +109,10 @@ Mang những rắc rối hôm nay về một thế giới chưa có điện tho�
 - **Hợp với:** Giả tưởng thời tiền sử, châm biếm công sở, quan sát về bản tính con người, hài đen, ngụ ngôn và truyện tiếng Anh cho trẻ em.
 - **Vì sao chọn nó?** Khi cần một đoạn dẫn ngắn và một cái kết bất ngờ, nhất là khi những mối quan hệ hiện đại hiện ra quen thuộc đến buồn cười trong một bộ lạc tiền sử.
 
+<p align="center"><img src="docs/core-previews/style-3.gif" alt="Trong hang, tù trưởng mời đùi thịt nướng và người tiền sử nhận lấy" width="480"></p>
+
+<p align="center"><sub>Trong hang, tù trưởng mời đùi thịt nướng và người tiền sử nhận lấy. Vẽ từ khung xương bằng code và đã qua gate tư thế.</sub></p>
+
 
 ---
 
@@ -110,6 +123,10 @@ Chiếc cốc bạn để dành cho một dịp đặc biệt. Tin nhắn bạn 
 - **Trông thế nào:** Đầu tròn tô trắng, thân mảnh, tay chân que màu tối, biểu cảm nhỏ và tự nhiên trong bối cảnh hoạt hình 2D đủ màu. Cảnh rộng giới thiệu nơi chốn; cận cảnh bắt khoảnh khắc ngập ngừng hay nhẹ nhõm; cảnh máy chạy theo giữ cho câu chuyện tiếp diễn.
 - **Hợp với:** Chuyện đời thường dễ đồng cảm, phát triển bản thân, các mối quan hệ, khoảnh khắc ấm áp, xây dựng thói quen và nội dung tiếng Anh cho trẻ em.
 - **Vì sao chọn nó?** Để người xem thấy mình trong một khoảnh khắc nhỏ. Màu sắc và ánh sáng đi theo chủ đề: ấm áp, lo âu, kiệt sức hay một khởi đầu mới.
+
+<p align="center"><img src="docs/core-previews/style-4.gif" alt="Ngồi bàn cà phê vỉa hè, nâng cốc nhấp một ngụm" width="480"></p>
+
+<p align="center"><sub>Ngồi bàn cà phê vỉa hè, nâng cốc nhấp một ngụm. Vẽ từ khung xương bằng code và đã qua gate tư thế.</sub></p>
 
 
 ---
