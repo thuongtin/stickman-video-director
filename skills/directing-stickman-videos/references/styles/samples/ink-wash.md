@@ -13,7 +13,7 @@
 ## Clip 1 — The drop
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: traditional East Asian ink-wash painting brought to life as 2D animation, sumi-e style, on warm off-white rice paper with a faint fibre texture. Black ink brush strokes with dry-brush streaks where the brush runs out, soft gray ink washes with darker dried edges, misty layered mountains fading into blank paper, and large calm areas of empty paper. The only color in the whole video is a small vermilion red accent on each character; everything else is black ink, gray wash and paper. A quiet riverbank at dawn: pale misty mountains far behind, a leaning pine on the right, gray wash water at the bottom edge.
 
@@ -47,7 +47,7 @@ Negative constraints: no colors other than black ink, gray washes, warm paper an
 ## Clip 2 — The shuttlecock
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: traditional East Asian ink-wash painting brought to life as 2D animation, sumi-e style, on warm off-white rice paper with a faint fibre texture. Black ink brush strokes with dry-brush streaks where the brush runs out, soft gray ink washes with darker dried edges, misty layered mountains fading into blank paper, and large calm areas of empty paper. The only color in the whole video is a small vermilion red accent on each character; everything else is black ink, gray wash and paper. The same riverbank a moment later: the rice paper with its one painted mountain, the leaning pine on the right.
 
@@ -80,7 +80,7 @@ Negative constraints: no colors other than black ink, gray washes, warm paper an
 ## Clip 3 — The long painting
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: traditional East Asian ink-wash painting brought to life as 2D animation, sumi-e style, on warm off-white rice paper with a faint fibre texture. Black ink brush strokes with dry-brush streaks where the brush runs out, soft gray ink washes with darker dried edges, misty layered mountains fading into blank paper, and large calm areas of empty paper. The only color in the whole video is a small vermilion red accent on each character; everything else is black ink, gray wash and paper. The same riverbank at full morning light, mist lifting off the water.
 
@@ -112,7 +112,7 @@ Negative constraints: no colors other than black ink, gray washes, warm paper an
 
 ## Post-production
 
-- Seal: stamp the plum-blossom seal (`cast/seal-plum.png`) in the lower right corner in the edit. Do not ask the video model for a seal, a signature or calligraphy: they come out as pseudo-characters.
+- Seal: stamp the plum-blossom seal (`cast/seal-plum.png`) in the lower right corner in the edit. Do not draw a seal, a signature or calligraphy into the scene art: they come out as pseudo-characters.
 - No text overlay: the text policy is `post-overlay`, and this sample needs none.
 
 ## Stitching guide
@@ -124,4 +124,4 @@ Negative constraints: no colors other than black ink, gray washes, warm paper an
 ## Voice and music continuity note
 
 - Every clip repeats the same voice block word for word and contains no other voice direction; compare the three clips by listening.
-- Clip 1 sets the score; clips 2 and 3 say it continues with the same tempo and instrumentation. If the voice or music still drifts, regenerate the drifting clip with only the voice block held fixed before considering one external VO and music track at assembly.
+- Clip 1 sets the score; clips 2 and 3 say it continues with the same tempo and instrumentation. Record the narration as one VO track and lay the score as one continuous bed under the assembled cut.

@@ -18,7 +18,7 @@ Evidence: 121 rig tracks pass `posture_gate.py` with the drawn body and head siz
 
 These works are cited from general knowledge of the shows; no frames were re-inspected for this pack.
 
-1. *Isekai Quartet* (TV anime, 2019–): a whole ensemble drawn super-deformed for every shot, not only for gags. Supports the two-heads-tall body, the stubby mitten-hand limbs and telling many characters apart by hair shape and outfit. Runs out on motion: it is limited TV animation, so it says little about how a video model should move these bodies.
+1. *Isekai Quartet* (TV anime, 2019–): a whole ensemble drawn super-deformed for every shot, not only for gags. Supports the two-heads-tall body, the stubby mitten-hand limbs and telling many characters apart by hair shape and outfit. Runs out on motion: it is limited TV animation, so it says little about smooth full motion for these bodies.
 2. *Azumanga Daioh* (TV anime, 2002): normal-proportion characters that switch to chibi for reaction cuts. Supports the anime emotion marks (sweat drop, sparkle eyes, spiral eyes) as short timed graphics and the snappy reaction hold. Runs out on the cast: its chibi form is a gag mode, not a design to freeze.
 3. *Chibi Maruko-chan* (TV anime, 1990–): everyday-life comedy with small, flat-coloured, thickly outlined characters in simple pastel settings. Supports the flat fill, the soft outline and backgrounds simpler than the characters. Runs out on the eyes: its dot eyes are the opposite of this pack's large highlighted eyes.
 
@@ -26,7 +26,7 @@ How-to sources (proportion ratios, reference images) are listed in `README.md`; 
 
 ### Five signature traits
 
-| Tag | Trait (visible in a still frame) | Prompt words, repeated in every clip |
+| Tag | Trait (visible in a still frame) | Spec words, repeated in every clip |
 |---|---|---|
 | `must` | The head is as tall as the whole body below it; short stubby limbs, round mitten hands | "about two heads tall: a large round head as tall as the entire body below it ... short stubby arms ... small round mitten hands, and short legs" (character body) |
 | `must` | Flat cel colour with one shadow tone and a thick, soft, dark-brown outline of constant weight | the frozen style block below |
@@ -51,15 +51,15 @@ Flat 2D cel-shaded anime animation with a hand-drawn look; thick soft dark-brown
 
 Line, fill and shading live here, not in the character anchors.
 
-## Why this style is risky for video models, and the counter-rules
+## Why this style is risky to animate, and the counter-rules
 
-1. **Eye drift.** Style 2 avoids detailed eyes because they trigger bug-eye deformation. Chibi needs big eyes, so describe them as *simple flat shapes* (the character body text). Never request realistic irises, reflections or wet eyes.
-2. **Proportion creep toward normal anime.** Models drift from 2 heads tall toward 4–6 heads tall in action shots. Repeat the ratio in plain words every clip and forbid "long legs, tall teen proportions, realistic anatomy".
+1. **Eye drift.** Style 2 avoids detailed eyes because on a small head they read as bug eyes. Chibi needs big eyes, so describe them as *simple flat shapes* (the character body text). Never request realistic irises, reflections or wet eyes.
+2. **Proportion creep toward normal anime.** Action poses tempt the animator to stretch legs and torsos toward 4–6 heads tall. The rig stays 2 heads tall; repeat the ratio in plain words every clip and forbid "long legs, tall teen proportions, realistic anatomy".
 3. **3D / figurine drift.** "Chibi" also matches vinyl figures and 3D game models. The style block says flat 2D cel-shaded; the negative block says "no 3D render, no CGI, no plastic toy or figurine look, no glossy 3D shading".
-4. **Short-arm poses.** A two-head-tall figure cannot reach above its own head or its own eyes; requests like "raises both hands over its head" or "pushes up its glasses" produce stretched or extra arms. Use outward waves, arms out to the sides, a V of arms beside the head, hugging a prop to the chest, hopping, leaning and whole-body squash-and-stretch.
-5. **Arms on the body.** In front view the rig first drew the arms inside the same-coloured torso, and a video model copies that as arms fused onto the body. Arms hang beside the torso with a visible gap, sleeves end in a light cream cuff, and the negative block says "no arms fused onto the torso".
+4. **Short-arm poses.** A two-head-tall figure cannot reach above its own head or its own eyes; requests like "raises both hands over its head" or "pushes up its glasses" need stretched arms that the posture gate rejects. Use outward waves, arms out to the sides, a V of arms beside the head, hugging a prop to the chest, hopping, leaning and whole-body squash-and-stretch.
+5. **Arms on the body.** In front view the rig first drew the arms inside the same-coloured torso, and in the render that reads as arms fused onto the body. Arms hang beside the torso with a visible gap, sleeves end in a light cream cuff, and the negative block says "no arms fused onto the torso".
 6. **Text in eyes and signs.** Anime backgrounds invite shop signs, posters and manga onomatopoeia. See the text policy.
-7. **Cast clones.** Cute crowds are tempting. As in Style 4, every cast member is planned, described and assigned to clips, and prompts forbid extra background characters.
+7. **Cast clones.** Cute crowds are tempting. As in Style 4, every cast member is planned, described and assigned to clips, and specs forbid extra background characters.
 
 ## Characters and cast cards
 
@@ -81,9 +81,9 @@ The other five replace the text after the last semicolon of the shared body:
 
 Model sheets show the signature prop in the hand the package uses (`gallery/cast/model-<name>.png`, `lineup.png`). In beats, write one character per sentence and keep hands out of the first sentence after the VO quote: `hand_ledger.py` ties a hand to the first character named in a sentence.
 
-### Reference images (strongly recommended)
+### Model sheets (strongly recommended)
 
-Where the generation tool accepts reference images, attach a front-facing full-body model sheet of each recurring character on a plain background, and optionally a location keyframe. Generate the sheet once from the frozen anchor, approve it with the user, and reuse the same file for every clip. The text anchor still repeats in each prompt.
+Build each recurring character once as a rig from the frozen anchor and render a front-facing full-body model sheet on a plain background, plus an optional location keyframe. Approve the sheet with the user and check every clip against the same file. The text anchor still repeats in each spec.
 
 ## Core rules this style overrides
 
@@ -94,11 +94,11 @@ Where the generation tool accepts reference images, attach a front-facing full-b
 
 ## Text policy: `none`
 
-No words, letters, numbers, signs, posters or manga sound-effect lettering in generated frames; message bubbles and screens stay blank or icon-only. Any title or caption is added in the edit (see post-production), never in the prompt.
+No words, letters, numbers, signs, posters or manga sound-effect lettering in the scene art; message bubbles and screens stay blank or icon-only. Any title or caption is added in the edit (see post-production), never in the spec.
 
 ## Motion cadence: `smooth`
 
-Generated motion stays smooth; the anime feel comes from timing, not from dropped frames: quick anticipation, a fast action and a short hold. Squash-and-stretch on hops, landings and surprise takes. Asking a video model for on-twos stepping is untested and risks jitter.
+Motion stays smooth at 24 FPS; the anime feel comes from timing, not from dropped frames: quick anticipation, a fast action and a short hold. Squash-and-stretch on hops, landings and surprise takes. On-twos stepping is not part of this look.
 
 ## Camera grammar
 
@@ -170,10 +170,10 @@ Setup gate (offered only when the user asks for an experimental style):
 
 ## Final check (in addition to the shared Phase B checks)
 
-- Every prompt starts `Style and environment` with the frozen style block and repeats the full anchor of every character on screen and the negative block.
+- Every spec starts `Style and environment` with the frozen style block and repeats the full anchor of every character on screen and the negative block.
 - No anchor names a prop; props are in `Props` and `Hands` lines.
 - No beat asks a character to reach above its own head or to its face.
 - Every beat names its camera move; holds during hand-offs.
 - Every emotion mark is scoped to one timed beat.
-- If reference images are used, the same approved model sheet file is attached to every clip, showing props in the hands the package uses.
-- Generated proportions and arm separation are checked on action frames and at every hand-off.
+- Every clip is checked against the same approved model sheet file, showing props in the hands the package uses.
+- Rendered proportions and arm separation are checked on action frames and at every hand-off.

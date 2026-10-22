@@ -5,17 +5,17 @@ Six recurring cells and one germ: Rubi, Plato, Tia, Neo, Beni, Mac and Bacillo. 
 ## Global continuity block
 
 - Aspect ratio 16:9; target duration 30 seconds (3 clips of about ten seconds).
-- Visual style: cell-biology (Cell-Biology Micro-World, experimental, gated): translucent jelly cells inside one blood vessel, side-on along the pink lining-cell floor. The full style block is repeated verbatim in every prompt.
+- Visual style: cell-biology (Cell-Biology Micro-World, experimental, gated): translucent jelly cells inside one blood vessel, side-on along the pink lining-cell floor. The full style block is repeated verbatim in every spec.
 - Characters: Rubi and Plato (clips 1 and 3), Tia, Neo and Beni (clip 2), Mac (clip 3), Bacillo (all clips). Each full anchor and the shared body rule are repeated verbatim wherever that character appears. Navy wristband on the right wrist of every humanoid cell; Bacillo has no limbs.
 - Palette and environment: histology-stain colours on pale peach plasma; the splinter hole in the vessel wall stays at the same spot, and from clip 1's end the golden net stays stuck over it.
-- Narrator: the shared tested male General American baritone, off-screen, verbatim in every prompt; no character speaks.
+- Narrator: the shared tested male General American baritone, off-screen, verbatim in every spec; no character speaks.
 - Audio arc: clip 1 sets a light plucked-string melody with soft bubbly synth pops; clips 2 and 3 continue it at the same tempo and instrumentation, with only sound effects changing; one warm final plucked chord at the end of clip 3.
 - Continuity strategy: clip 1 to 2 is a planned cut to a new group of cells under the same vessel with Bacillo carried over; clip 2 to 3 is a marked time cut (Bacillo, already tagged, tumbles down to Mac). Props never change hands across a cut.
 
 ## Clip 1 — The wall breaks
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright, friendly 2D animated micro-world inside a human blood vessel, like a cheerful view through a microscope. Characters are soft translucent cells with a jelly-like gradient fill, a thick darker membrane outline with a thin light inner line just inside it, a glossy white highlight near the top, and inner details (nucleus, granules) visible through the membrane. Histology-stain palette on pale peach plasma: crimson, lilac, sky blue, lime green, peach cream and golden yellow. The floor is one row of flat pink lining cells, each with an oval rose nucleus; behind the characters, soft out-of-focus round cells and tiny drifting particles float in the plasma. Gentle depth of field, soft even light, no hard shadows. Clean, rounded educational cartoon; not photorealistic, not a medical textbook illustration.
 
@@ -48,7 +48,7 @@ Negative constraints: no human characters, no human-shaped workers, no uniforms,
 ## Clip 2 — Raise the alarm
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright, friendly 2D animated micro-world inside a human blood vessel, like a cheerful view through a microscope. Characters are soft translucent cells with a jelly-like gradient fill, a thick darker membrane outline with a thin light inner line just inside it, a glossy white highlight near the top, and inner details (nucleus, granules) visible through the membrane. Histology-stain palette on pale peach plasma: crimson, lilac, sky blue, lime green, peach cream and golden yellow. The floor is one row of flat pink lining cells, each with an oval rose nucleus; behind the characters, soft out-of-focus round cells and tiny drifting particles float in the plasma. Gentle depth of field, soft even light, no hard shadows. Clean, rounded educational cartoon; not photorealistic, not a medical textbook illustration.
 
@@ -81,7 +81,7 @@ Negative constraints: no human characters, no human-shaped workers, no uniforms,
 ## Clip 3 — Clean-up crew
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright, friendly 2D animated micro-world inside a human blood vessel, like a cheerful view through a microscope. Characters are soft translucent cells with a jelly-like gradient fill, a thick darker membrane outline with a thin light inner line just inside it, a glossy white highlight near the top, and inner details (nucleus, granules) visible through the membrane. Histology-stain palette on pale peach plasma: crimson, lilac, sky blue, lime green, peach cream and golden yellow. The floor is one row of flat pink lining cells, each with an oval rose nucleus; behind the characters, soft out-of-focus round cells and tiny drifting particles float in the plasma. Gentle depth of field, soft even light, no hard shadows. Clean, rounded educational cartoon; not photorealistic, not a medical textbook illustration.
 
@@ -122,6 +122,6 @@ Negative constraints: no human characters, no human-shaped workers, no uniforms,
 
 ## Voice and music continuity note
 
-1. Every prompt repeats the same frozen voice block and the same dialogue rule; no prompt asks for a different voice. Compare the generated clips by listening, not from screenshots.
+1. Every spec repeats the same frozen voice block and the same dialogue rule; no spec asks for a different voice. Compare the recorded VO by listening, not from screenshots.
 2. Clip 1's Audio line sets the score; clips 2 and 3 open with the same score and the words "continues from clip 1, same tempo and instrumentation", then add only sound effects.
-3. If the voice or score drifts, first retest a voice-only or music-only change with everything else held fixed. A continuous external English VO and music track during assembly remains an optional fallback.
+3. Record the narration as one VO track and lay the score as one continuous bed during assembly.

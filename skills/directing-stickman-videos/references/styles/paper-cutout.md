@@ -20,7 +20,7 @@ Two paper families share this grammar:
 | **5A** | Construction Paper Comedy | Bright flat construction-paper colours, crude round heads, big paper-dot eyes, deadpan timing, visible brass split-pin joints | Satire, workplace comedy, punchy shorts, absurd explainers |
 | **5B** | Collage Storybook | Mixed papers: kraft, newsprint, knitted and polka-dot scrapbook paper, torn edges, warmer light, joints hidden under overlapping pieces | Gentle stories, children's English, history and culture explainers |
 
-One video normally uses one family. A cast may mix them only with the mixed-cast sentence in the style block below, so the model gets one rule for both materials.
+One video normally uses one family. A cast may mix them only with the mixed-cast sentence in the style block below, so the animator gets one rule for both materials.
 
 ## Sources
 
@@ -30,15 +30,15 @@ General knowledge of these works, not a frame-by-frame review done for this rese
 |---|---|---|
 | Lotte Reiniger, *The Adventures of Prince Achmed* (1926) | Jointed cut-paper puppets moved a pose at a time; limbs rotate at visible joints | Silhouettes only: no faces, colour or paper texture |
 | Terry Gilliam's cut-out inserts for *Monty Python's Flying Circus* (1969–74) | Stepped, abrupt motion; pieces dropping in; deadpan absurd timing (5A) | Photo collage of real people, which this style does not use |
-| Yuri Norstein, *Hedgehog in the Fog* (1975) | Depth from paper layers at different distances; soft light through layers | Multiplane glass and very fine detail that a video model will not hold |
+| Yuri Norstein, *Hedgehog in the Fog* (1975) | Depth from paper layers at different distances; soft light through layers | Multiplane glass and very fine detail that a cut-out rig does not need |
 | René Laloux, *Fantastic Planet* (1973) | Cut-out characters with full colour and faces across a long story | Painted detail and a dark science-fiction tone |
 | Eric Carle's picture books | Painted and patterned tissue papers cut into simple shapes, torn edges (5B) | Still images, no motion |
 
-Prompts never name these works, their makers or their characters.
+Specs never name these works, their makers or their characters.
 
 ## Signature traits
 
-| # | Trait (visible in a still frame) | Tag | Prompt words (in the style block, every clip) |
+| # | Trait (visible in a still frame) | Tag | Spec words (in the style block, every clip) |
 |---|---|---|---|
 | 1 | Every shape is a flat piece of matte paper with visible fibre and cut or torn edges; no drawn outlines | `must` | "separate rigid piece of matte paper with visible paper fibre and slightly irregular cut or torn edges ... No drawn outlines." |
 | 2 | Each layer casts a small soft contact shadow on the layer below | `must` | "layered with small soft contact shadows between layers. One warm key light from the upper left." |
@@ -135,7 +135,7 @@ Animated on twos like hand-moved stop motion: about twelve distinct held poses p
 
 ## Text policy
 
-`post-overlay`. Generated clips carry no words, letters or numbers, even on newsprint or book pieces, which show grey bars only. Titles and labels are added in the edit, ideally as cut-paper title cards rendered in code.
+`post-overlay`. Rendered clips carry no words, letters or numbers, even on newsprint or book pieces, which show grey bars only. Titles and labels are added in the edit, ideally as cut-paper title cards rendered in code.
 
 ## Motion cadence
 
@@ -165,7 +165,7 @@ Negative constraints: no smooth vector animation, no 3D rendering, no clay, no f
 
 ## Topic translation
 
-Turn abstract ideas into physical paper props: a growing stack of paper cards for workload, a paper chain for habits, a cut-out bar chart that a character climbs. 5B can use collage metaphors such as old maps, stamps and ticket stubs, as long as no legible text is generated.
+Turn abstract ideas into physical paper props: a growing stack of paper cards for workload, a paper chain for habits, a cut-out bar chart that a character climbs. 5B can use collage metaphors such as old maps, stamps and ticket stubs, as long as no legible text is drawn.
 
 ## Hook override
 
@@ -200,10 +200,10 @@ Phase A for this style includes:
 - the voice block;
 - the chosen score.
 
-## Prompt assembly
+## Spec assembly
 
-Each prompt follows `omni-flash-prompt-contract.md` in this order:
-1. Output spec.
+Each spec follows `segment-spec-contract.md` in this order:
+1. Render spec.
 2. No separate hook line: Clip 1's hook lives in its first frame and first timed beat (Golden Hook section of `storyboard-template.md`).
 3. Style block: material lock, palette lines, the mixed-cast sentence if needed, and the motion lock.
 4. Full cast cards for every visible role.
@@ -221,20 +221,16 @@ Sample package: `samples/paper-cutout.md`.
 
 ## Post-production
 
-1. Add titles, labels and subtitles in the edit, as cut-paper cards or plain text in the safe area; never in generation.
-2. If a clip comes out smooth rather than stepped, conform it to on-twos in the edit, for example `ffmpeg -i in.mp4 -vf "fps=12,fps=24" out.mp4`, and check that the lip and mouth swaps still land.
+1. Add titles, labels and subtitles in the edit, as cut-paper cards or plain text in the safe area; never in the scene art.
+2. Render the rig on twos; if a clip comes out smooth rather than stepped, conform it to on-twos in the edit, for example `ffmpeg -i in.mp4 -vf "fps=12,fps=24" out.mp4`, and check that the lip and mouth swaps still land.
 3. Match the paper colour and light across clips with one grade, warm and slightly lifted blacks, before stitching.
 4. Trim any fade-in at clip starts so each clip opens on its first frame.
-5. Optionally lay one continuous external VO and music track over the stitched clips, keeping the paper SFX from generation.
-6. In the deterministic-rig route (below), render the puppets in code and composite generated or painted backgrounds behind them.
+5. Lay the VO track and one continuous music bed over the stitched clips, then the paper SFX on their beats.
+6. Composite the code-rendered puppets over the painted or rendered paper backgrounds.
 
-## Reference images
+## Rig and model sheets
 
-Paper texture and puppet construction are easier to show than to describe. When the interface accepts reference images, attach the approved sheet for each role (`gallery/cast/sheet-<id>.png`: front, 3/4, walk, signature pose, mouth set, paper swatches) and a background layer card per location to every clip. Treat references as a strong hint, not a guarantee, and check pieces, colours and joints in the footage.
-
-## Alternative: deterministic rig (no video model)
-
-Because the style is rigid pieces plus pivots, it can also be animated exactly in code, using the AI only for the script, VO and optionally the background art. The rig in `gallery/src/` does this:
+Because the style is rigid pieces plus pivots, it is animated exactly in code. The rig in `gallery/src/` does this:
 - SVG paper filters;
 - two-piece limbs with split pins;
 - walks from CMU motion capture;
@@ -244,7 +240,7 @@ Because the style is rigid pieces plus pivots, it can also be animated exactly i
 - replacement mouths;
 - one shared pose library across six characters, gated with `tools/posture_gate`.
 
-Offer it when the user needs zero character drift or a long series with one cast.
+Check every clip against the approved sheet for each role (`gallery/cast/sheet-<id>.png`: front, 3/4, walk, signature pose, mouth set, paper swatches) and the background layer card per location, and check pieces, colours and joints in the rendered footage.
 
 ## Catalog rows
 
@@ -275,5 +271,5 @@ Setup-gate line (offered only when the user asks for an experimental style):
 - Expressions are swaps; faces keep the same pieces and colours across clips.
 - Light direction and shadow side are the same across clips.
 - Prop ownership follows the prop rules; no spawning or duplicated pieces.
-- No generated text, subtitles or speech bubbles; overlays are listed for post.
+- No text, subtitles or speech bubbles in the scene art; overlays are listed for post.
 - The voice block is identical across clips and the score continues from clip 1.

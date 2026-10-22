@@ -13,7 +13,7 @@ Evidence: posture gate on every pose and the motion test (`gallery/gate-v2.txt`,
 the 4-character `--scene` run included), the dinosaur rule check (`src/dino_rules.py`), and the sample package
 `samples/dino-world.md`, which passes `package_lint.py` with the shared hand ledger. Lint facts block:
 [`samples/dino-world.facts.md`](samples/dino-world.facts.md); lint and hook-test output:
-[`prompt-package/lint-output.txt`](prompt-package/lint-output.txt).
+[`spec-package/lint-output.txt`](spec-package/lint-output.txt).
 
 ## When to use
 
@@ -24,7 +24,7 @@ reconstructions.
 ## Sources (look, not characters)
 
 Named from general knowledge of these works; no frames were collected in this thread, so the claims are about the
-overall look only. Nothing below is named in any prompt.
+overall look only. Nothing below is named in any spec.
 
 1. **Dinosaur Train** (PBS Kids TV series, 2009–). Supports: a friendly kids'-science tone, many clades side by side
    with big expressive eyes, a bright but natural palette, simple valley settings. Runs out: it is soft-shaded CG,
@@ -121,7 +121,7 @@ read as an upright teddy bear. The front gate tracks still check the straight fr
 
 1. **Hands lines for animals without hands.** Bo and Tuk have no hands; their front hooves stand in for hands in the
    `Hands at start` / `Hands at end` lines ("Bo: right front hoof empty; left front hoof empty.") so the ledger and
-   the model both track them. Hooves never hold props; the mouth never carries props in this style (the ledger cannot
+   the animator both track them. Hooves never hold props; the mouth never carries props in this style (the ledger cannot
    track a mouth).
 2. **Posture limits.** Dinosaur tracks widen the gate's human hip range (−40…175°) and ankle range (−100…85°): a
    level-backed animal is bent at the hip all the time and its ankle is the high intertarsal joint. Everything else
@@ -149,7 +149,7 @@ beat when the walk matters.
 - Accent moves (a short camera shake on a giant footfall is the only one that fits): at most one per clip and in at
   most one clip in three; never during a handoff, a run, a jump or a dinosaur going down onto its hands.
 - No three inward moves in a row; hold the camera during demanding body actions. Every beat names its move.
-- Side-on, full-body framing for walks: video models confuse the left and right legs of animals seen from the side.
+- Side-on, full-body framing for walks: the left and right legs of an animal seen from the side are easy to swap, and side-on framing keeps the footfall order checkable.
 
 ## Style bans and posture limits
 
@@ -190,14 +190,14 @@ a jump scare or a sting.
 3. Before accepting a clip, check its risky moments frame by frame: clip 1 Bo's footfall order (7–10 s), clip 2 the
    seed-cone handoff (3–7 s), clip 3 Hoot going down onto his hands and back up (0–7 s). Count legs and check the
    yellow band is on the right in each.
-4. Trim a clip's last frames rather than regenerate when only the tail end morphs.
+4. Trim a clip's last frames rather than re-render when only the tail end has a stray key.
 
 ## Sample package
 
 `samples/dino-world.md` ("Whose footprint?", 3 clips): built by `src/make_package.py` from the blocks above.
-`package_lint.py` with the shared hand ledger: see [`prompt-package/lint-output.txt`](prompt-package/lint-output.txt),
+`package_lint.py` with the shared hand ledger: see [`spec-package/lint-output.txt`](spec-package/lint-output.txt),
 facts in [`samples/dino-world.facts.md`](samples/dino-world.facts.md). Ledger mutation tests:
-`prompt-package/ledger-tests.md`.
+`spec-package/ledger-tests.md`.
 
 ## Acceptance checklist
 

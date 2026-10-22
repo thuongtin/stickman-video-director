@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `science-lab.md` sha256 f25325e71b8715d1
-- checked: 2026-10-20
+- package: `science-lab.md` sha256 6439090e669efe27
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=d7639b32154dc7f67086c4bc89b8823e25098e92c50afd6e3c544bbeb685a284 -->
+<!-- package_lint facts end sha256=ea6d247658b33c8843c0d4154d3c7145326eee0c7b2519119e2d32e4b99c57b5 -->

@@ -78,7 +78,7 @@ been upheld twice: Best-Lock v OHIM (T-395/14, T-396/14, 2015) and BB Services (
 | yellow default skin | varied skin tones (tan, light, brown, medium-brown, deep-brown) |
 | printed brand on every stud | plain smooth studs |
 
-- Never write the brand word in a prompt: it pulls the model straight to minifigures, logo studs and licensed sets.
+- Never write the brand word in a spec: it pulls the design straight to minifigures, logo studs and licensed sets.
   Say "plastic toy bricks", "brick-built figure", "studded baseplate".
 - No licensed sets, characters or themes (no city police, space or castle themes copied from catalogues).
 
@@ -99,7 +99,7 @@ Faces are printed decals and can be swapped (10 expressions); the head itself ne
 
 ## Articulation (the core rule)
 
-A brick figure only moves at its plastic joints. This is what makes it read as a toy, and it is where a video model
+A brick figure only moves at its plastic joints. This is what makes it read as a toy, and it is where animation
 drifts most (heads nodding, waists bending, elbows bending like rubber, legs doing splits).
 
 | Joint | Range | Notes |
@@ -155,9 +155,9 @@ Consequences that look odd in words but right on screen (all checked by eye):
 3. Any subtitles or titles are added in post, outside the baseplate area, never as printed bricks.
 4. Check the right-wrist ring, the two-hand clamp and Bà Rêu's skirt on the risky frames before publishing.
 
-## Shared prompt blocks
+## Shared spec blocks
 
-Repeat in every clip (Omni Flash keeps no memory between clips); exact text in `samples/brick-build.md`:
+Repeat in every clip (each segment is built from its own spec); exact text in `samples/brick-build.md`:
 `Style and environment`, `Characters (exactly N, no one else)` = anchors + figure rule + joint rule + ring line,
 `Dialogue` (voiceover only), `Voice` (approved General American male narrator block), `Negative constraints`
 (no humans or human hands, no logos or brand marks, no lettering on studs, no letters or numbers anywhere, no
@@ -218,14 +218,14 @@ Sample: `samples/brick-build.md` ("The top row pops", 3 clips). `hand_ledger.py`
 (`samples/brick-build.facts.md`, `--verify`: intact):
 
 <!-- package_lint facts: generated, do not edit -->
-- package: `package.md` sha256 a6296bfc63d4627e
-- checked: 2026-10-20
+- package: `brick-build.md` sha256 3a129ed2509b5962
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=a1451c107ea28bd0905c3180d345cd39135859f899d8d7a8a7b62fa84df6677a -->
+<!-- package_lint facts end sha256=8cbc8f5ec1d67cdc1bbd0045bf9c878eb3a43ef86c5ec467f52966ec8f379111 -->
 
 ## Catalog entry (draft)
 
@@ -236,12 +236,12 @@ Sample: `samples/brick-build.md` ("The top row pops", 3 clips). `hand_ledger.py`
 Status row: `| brick-build | gated | 60 gated pose tracks, 4-figure scene, linted 3-clip package |`.
 Setup-gate line (offer only when the user asks for an experimental style): `` `brick-build (Brick-Built Town, gated, experimental)`: glossy plastic brick figures and a brick town filmed as tabletop stop-motion ``.
 
-## Generation risks
+## Animation risks
 
 - Drift back to the famous minifigure (yellow cylinder head, C hands) even without the brand word: anchors spell out
   the head, neck peg and knob hands, negatives ban the rest.
 - Logo or letters printed on studs, or random text on bricks and signs.
-- Smooth CGI motion instead of stepped stop-motion; motion blur; rubbery limbs.
+- Smooth tweened motion instead of stepped stop-motion on twos; motion blur; rubbery limbs.
 - Heads nodding and waists bending like people; the skirt figure growing legs.
 - A brick held in one hand, or the ring jumping to the left wrist.
 - Faces: printed faces may animate like cartoon faces; keep expression changes as swaps between poses.

@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `ink-wash.md` sha256 dbfdf0bd87f82f8a
-- checked: 2026-10-20
+- package: `ink-wash.md` sha256 0d34293e56ea6118
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=db93d5d8e4aa4390b5dbec02c8af8e340fe96674c9450fdb63ba99761a7d62fe -->
+<!-- package_lint facts end sha256=1a9067fc9b032d2d75f062930cb5443aed17355a4b942188a939b3c6a46e143f -->

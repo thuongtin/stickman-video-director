@@ -1,6 +1,6 @@
-# The lantern walk — whole-cast prompt package (watercolor-storybook, 16:9, 30 s) — v3
+# The lantern walk — whole-cast spec package (watercolor-storybook, 16:9, 30 s) — v3
 
-Three standalone Phase B prompts. Each prompt carries the output spec, the environment block verbatim with its page setting, the full anchor of every character on screen from `../characters.md`, props, first frame and hands, three timed beats with a camera move each, the dialogue rule, the frozen voice block, music, final frame and hands, and the negatives (style list, the five shared posture negatives, no logos or watermarks). Camera: one inward move in three clips, no accent moves, holds on the two hand-offs and the lantern set-down. Two-character hand-offs are gated with `posture_gate.py check --scene` (`../tracks/scenes/`).
+Three standalone Phase B specs. Each spec carries the output spec, the environment block verbatim with its page setting, the full anchor of every character on screen from `../characters.md`, props, first frame and hands, three timed beats with a camera move each, the dialogue rule, the frozen voice block, music, final frame and hands, and the negatives (style list, the five shared posture negatives, no logos or watermarks). Camera: one inward move in three clips, no accent moves, holds on the two hand-offs and the lantern set-down. Two-character hand-offs are gated with `posture_gate.py check --scene` (`../tracks/scenes/`).
 
 ## Global continuity block
 
@@ -17,7 +17,7 @@ Three standalone Phase B prompts. Each prompt carries the output spec, the envir
 ### Clip 1 — Grandfather's garden at dusk
 
 ```text
-Approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Hand-painted watercolor storybook illustration on warm off-white cold-press paper. Soft transparent washes, gentle granulation, wet-edge blooms and pale unpainted paper highlights. Backgrounds are looser, paler and lower in contrast than the character; foreground is soft and slightly out of focus. Muted natural palette of sky blue, sage green, warm ochre, dusty rose and soft brown, with the character's mustard yellow and red as the strongest colors. The paper grain stays fixed to the frame and does not crawl, shimmer or move with the characters. Setting: a small grandfather's garden at dusk with a winding gravel path, round shrubs, a low wooden gate on the right and the dark edge of a forest beyond it; a deep blue evening sky with the first pale stars.
 
@@ -53,7 +53,7 @@ Negative constraints: no photorealism, no 3D CGI or plastic rendering, no glossy
 ### Clip 2 — Forest path
 
 ```text
-Approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Hand-painted watercolor storybook illustration on warm off-white cold-press paper. Soft transparent washes, gentle granulation, wet-edge blooms and pale unpainted paper highlights. Backgrounds are looser, paler and lower in contrast than the character; foreground is soft and slightly out of focus. Muted natural palette of sky blue, sage green, warm ochre, dusty rose and soft brown, with the character's mustard yellow and red as the strongest colors. The paper grain stays fixed to the frame and does not crawl, shimmer or move with the characters. Setting: a narrow mossy forest path at night between tall soft-edged tree trunks, ferns along both sides, the lantern's warm circle of light on the ground, cool blue shadows beyond it.
 
@@ -89,7 +89,7 @@ Negative constraints: no photorealism, no 3D CGI or plastic rendering, no glossy
 ### Clip 3 — Home porch
 
 ```text
-Approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Hand-painted watercolor storybook illustration on warm off-white cold-press paper. Soft transparent washes, gentle granulation, wet-edge blooms and pale unpainted paper highlights. Backgrounds are looser, paler and lower in contrast than the character; foreground is soft and slightly out of focus. Muted natural palette of sky blue, sage green, warm ochre, dusty rose and soft brown, with the character's mustard yellow and red as the strongest colors. The paper grain stays fixed to the frame and does not crawl, shimmer or move with the characters. Setting: the front porch of a small wooden house at night, three wooden steps, a warm yellow window behind, potted herbs on the steps and soft blue night garden around it.
 
@@ -126,11 +126,11 @@ Negative constraints: no photorealism, no 3D CGI or plastic rendering, no glossy
 
 1. Clip 1 → Clip 2: page-turn cut. Clip 1 ends on Mia at the forest edge on the right with the lantern in her right hand; clip 2 opens on Mia already walking right with the lantern in the same hand. Use a page-turn wipe or a 0.5 s fade through paper white on her step; a short audio crossfade (4–6 frames) on the guitar.
 2. Clip 2 → Clip 3: approved time cut to later that night at the home porch. What continues: Mia, the lantern in her right hand, her direction of travel (she enters from the left). What changes: place, time, Pip and Toby leave, Cô Lan and Tí join. Page-turn wipe; no cross-dissolve of wash into wash.
-3. Inspect each real join: if a generated clip ends with the lantern in the other hand or Mia on the other side of the frame, trim to the last frame that matches the Hands at end line rather than trusting the prompt. Check Ông Bảo's cane hand at the start of clip 1 and both hand-offs frame by frame.
+3. Inspect each real join: if a rendered clip ends with the lantern in the other hand or Mia on the other side of the frame, trim to the last frame that matches the Hands at end line rather than trusting the spec. Check Ông Bảo's cane hand at the start of clip 1 and both hand-offs frame by frame.
 4. Lay one shared static paper-grain plate at low opacity over the whole cut and grade the three clips to the same warm off-white paper tone.
 
 ## Voice and music continuity note
 
 - Every clip repeats the same narrator paragraph word for word; clips 2–3 say the guitar and music box continue from clip 1 with the same tempo and instrumentation. Check by listening to the three clips back to back, not from stills.
-- If the voice drifts, first retest a voice-only change with the visuals, dialogue and music held fixed; one continuous external English VO and guitar/music-box track laid over the assembled picture is the fallback.
-- If the music tempo or instrumentation drifts between clips, mute the generated score and lay one continuous track under the assembled cut; keep the generated SFX (crickets, gravel, ferns).
+- Record the narration as one VO track with this voice block, cut it to the beats, and lay the guitar/music-box as one continuous bed over the assembled picture.
+- Lay the SFX (crickets, gravel, ferns) on their beats after the music bed.

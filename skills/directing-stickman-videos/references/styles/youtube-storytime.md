@@ -7,7 +7,7 @@ Status: gated (2026-10-20). Covers: 3 clips, 4 characters (Mo, Rosa, Dex, Bea), 
 Not covered: Ms. Hargrove and Grandpa Walt in a package, 9:16, crowds, outdoor scenes.
 ```
 
-Evidence for `gated`: 72 pose tracks pass the posture gate with 0 errors and 0 warnings (`gallery/gate-output-v2.txt`), the 4-character motion test passes `posture_gate.py --scene` (`motion-test/gate-v2.txt`), and the sample package passes `hand_ledger.py`, `package_lint.py` (facts block: [`samples/youtube-storytime.facts.md`](samples/youtube-storytime.facts.md)) and `tests/verify-opening-hook.py`. Every claim below about how the model behaves is a prompt design choice, not an observed result. Research notes, sources, gallery and gate results are in `README.md` next to this file. The slug names the genre for the catalog only; no prompt contains the word "YouTube".
+Evidence for `gated`: 72 pose tracks pass the posture gate with 0 errors and 0 warnings (`gallery/gate-output-v2.txt`), the 4-character motion test passes `posture_gate.py --scene` (`motion-test/gate-v2.txt`), and the sample package passes `hand_ledger.py`, `package_lint.py` (facts block: [`samples/youtube-storytime.facts.md`](samples/youtube-storytime.facts.md)) and `tests/verify-opening-hook.py`. Every claim below about how the animation behaves is a spec design choice, not an observed result in a finished video. Research notes, sources, gallery and gate results are in `README.md` next to this file. The slug names the genre for the catalog only; no spec contains the word "YouTube".
 
 Catalog lines (to add when the pack moves into `references/`):
 
@@ -25,7 +25,7 @@ Use it for first-person stories, embarrassing or relatable moments, family and r
 
 ## Signature checklist
 
-Sources: a frame study of five official uploads from four channels (2026-10-20). For each video I looked at the official thumbnail and the three frames YouTube extracts from the video itself (`hq1`, `hq2`, `hq3`, at about a quarter, half and three quarters of the running time). That is four images per work, 20 in all, not a viewing of the videos. Contact sheet: [`sources/frame-study.jpg`](sources/frame-study.jpg); the single images are in `sources/` as `<video id>_<image>.jpg`. Work and channel names stay in this pack and never go into a prompt.
+Sources: a frame study of five official uploads from four channels (2026-10-20). For each video I looked at the official thumbnail and the three frames YouTube extracts from the video itself (`hq1`, `hq2`, `hq3`, at about a quarter, half and three quarters of the running time). That is four images per work, 20 in all, not a viewing of the videos. Contact sheet: [`sources/frame-study.jpg`](sources/frame-study.jpg); the single images are in `sources/` as `<video id>_<image>.jpg`. Work and channel names stay in this pack and never go into a spec.
 
 | Work (official upload) | Images looked at | Confirms | Contradicts |
 |---|---|---|---|
@@ -35,19 +35,19 @@ Sources: a frame study of five official uploads from four channels (2026-10-20).
 | Alex Clark, "My Dad's Proudest Moment" | [thumbnail](https://i.ytimg.com/vi/CvllW-HQ0P8/maxresdefault.jpg), [hq1](https://i.ytimg.com/vi/CvllW-HQ0P8/hq1.jpg), [hq2](https://i.ytimg.com/vi/CvllW-HQ0P8/hq2.jpg), [hq3](https://i.ytimg.com/vi/CvllW-HQ0P8/hq3.jpg) | T1: clean, even dark outline and flat fills; T2: a very big round head on a small body (hq1); simple dot-eye faces | T4: one flat shadow tone on objects and a textured background (hq1, hq2); T5: an "ARTSKOOL" sign (hq3) |
 | Domics, "Ex Best Friend" | [thumbnail](https://i.ytimg.com/vi/2XCQOZc262M/maxresdefault.jpg), [hq1](https://i.ytimg.com/vi/2XCQOZc262M/hq1.jpg), [hq2](https://i.ytimg.com/vi/2XCQOZc262M/hq2.jpg), [hq3](https://i.ytimg.com/vi/2XCQOZc262M/hq3.jpg) | T2: heads about a third of the height (hq1); T3: characters on plain white; white eyes with black pupils | T1 and T4 differ in another direction: black line art with no colour fill at all; noses and fingers are drawn |
 
-What the frames changed: the outline is medium weight, not thick, in every work that has clean lines, so the trait and the style block now say `one clean black outline of even, medium weight` (it said "uniform thick"). Plain white is the most common narrator background (three of five works); radial stripes and vignettes appear for big reactions, so the block now says `a plain white or flat-color background with soft radial stripes for reaction shots`. Mitten hands and no nose hold in the TheOdd1sOut frames but not in all five works; they stay as this pack's design choice. Flat fills with no shadow tone is stricter than the genre (two works add one flat shadow tone) and is kept to keep the model away from rendered shading. On-screen text is a real signature of the genre (four of five works), so it is a `bonus` added in post, not part of generation. Where the sources run out: these are 20 still images; motion, cutting rhythm and timing claims still rest on the genre article and the editing guides in `README.md`, not on watching the videos.
+What the frames changed: the outline is medium weight, not thick, in every work that has clean lines, so the trait and the style block now say `one clean black outline of even, medium weight` (it said "uniform thick"). Plain white is the most common narrator background (three of five works); radial stripes and vignettes appear for big reactions, so the block now says `a plain white or flat-color background with soft radial stripes for reaction shots`. Mitten hands and no nose hold in the TheOdd1sOut frames but not in all five works; they stay as this pack's design choice. Flat fills with no shadow tone is stricter than the genre (two works add one flat shadow tone) and is kept to keep the look away from rendered shading. On-screen text is a real signature of the genre (four of five works), so it is a `bonus` added in post, not part of the scene art. Where the sources run out: these are 20 still images; motion, cutting rhythm and timing claims still rest on the genre article and the editing guides in `README.md`, not on watching the videos.
 
-| Trait | Tag | Prompt words (verbatim in every clip) |
+| Trait | Tag | Spec words (verbatim in every clip) |
 |---|---|---|
 | One clean black outline of even, medium weight and flat fills, no shadow tone (T1) | `must` | `one clean black outline of even, medium weight around every shape. Flat color fills only: no shading, no gradients, no texture, no lighting effects` |
 | Big round head about a third of the height, bean body, noodle limbs, mitten hands (T2) | `must` | `big round heads about a third of their height, small bean-shaped bodies, thin noodle arms and legs of constant width, round mitten hands` |
 | Narrator and reactions on plain white or a flat color, soft radial stripes for big reactions (T3) | `bonus` | `a plain white or flat-color background with soft radial stripes for reaction shots` |
 | Rendered shading, soft gradients, texture or a 3D look (T4) | `forbidden` | negatives: `no 3D render, no CGI, … no shading or gradients, no paper or canvas texture` |
-| Hand-lettered labels and captions (T5) | `bonus`, added in post only | negatives keep generated frames clean: `no visible text, letters, numbers or captions`; every label goes in the edit |
+| Hand-lettered labels and captions (T5) | `bonus`, added in post only | negatives keep the scene art clean: `no visible text, letters, numbers or captions`; every label goes in the edit |
 
 Nearest neighbour: `us-sitcom` (prime-time animated sitcom). Two differences a viewer can see: (1) storytime heads are about a third of the body height with no nose, sitcom characters have near-normal proportions and a nose shape each; (2) storytime rooms are almost empty flat colors with two or three outlined objects, or a radial-stripe card, while sitcom backgrounds are furnished interiors (couch, curtains, pictures).
 
-The cast is original. No character copies a known creator's avatar (no round white "marshmallow" people, no creator's signature hair, outfit or colour combination), and prompts name no channel, creator or character.
+The cast is original. No character copies a known creator's avatar (no round white "marshmallow" people, no creator's signature hair, outfit or colour combination), and specs name no channel, creator or character.
 
 ## Cast cards (verbatim, repeated in every clip the character appears in)
 
@@ -89,9 +89,9 @@ Bea: a small six-year-old girl about half Mo's height with an extra-big round he
 Grandpa Walt: an old man with a big round head, pink skin, a bald top with fluffy white tufts above the ears, a bushy white mustache, a red flannel shirt with brown suspenders, khaki trousers, brown shoes, and a plain white wristband on the right wrist.
 ```
 
-Every clip lists exactly who is in it: `Characters (exactly N, no one else):` followed by the cards and the anatomy line. A character named in the VO but not on screen is called by role ("my roommate"), never by name, so the model does not draw them.
+Every clip lists exactly who is in it: `Characters (exactly N, no one else):` followed by the cards and the anatomy line. A character named in the VO but not on screen is called by role ("my roommate"), never by name, so nobody draws them into the shot.
 
-## Frozen prompt blocks
+## Frozen spec blocks
 
 Style and environment (verbatim every clip, includes the palette):
 
@@ -134,8 +134,8 @@ Negative constraints: no 3D render, no CGI, no anime or manga style, no realisti
 
 | Override | Reason |
 |---|---|
-| The narrator's mouth moves with the VO, but only in narrator cutaways; in story shots no one lip-syncs | The narrator on screen is the genre's signature; limiting lip-sync to one character in one shot type keeps the top generation risk (lip-sync spreading to everyone) contained |
-| Text policy: `post-overlay` | Real storytime videos use labels and captions constantly ("3 hours later"), but generated text is unreliable; every text item goes to post |
+| The narrator's mouth moves with the VO, but only in narrator cutaways; in story shots no one lip-syncs | The narrator on screen is the genre's signature; limiting lip-sync to one character in one shot type keeps the top animation risk (lip-sync spreading to everyone) contained |
+| Text policy: `post-overlay` | Real storytime videos use labels and captions constantly ("3 hours later"), but text kept out of the scene art stays editable and translatable; every text item goes to post |
 | Up to three shots per 10-second clip (story wide, reaction close-up, narrator cutaway) | The genre's comedy lives in the cut to the reaction; one shot per clip would lose it |
 
 ## Motion and camera
@@ -150,7 +150,7 @@ Camera, following the camera grammar in `storyboard-template.md`:
 
 ## Storytime cutting grammar
 
-| Shot | Use | Prompt wording |
+| Shot | Use | Spec wording |
 |---|---|---|
 | Story wide | Show what happened, full bodies, side view for actions | `wide two-shot in the kitchen, side view, Mo at the left facing right` |
 | Reaction close-up | The face that sells the joke, held for at least a second | `Hard cut to a close-up of Mo's face; camera holds: his eyes snap wide, pupils shrink to dots` |
@@ -163,7 +163,7 @@ Camera, following the camera grammar in `storyboard-template.md`:
 
 ## Style bans and posture limits (from the gallery and motion test)
 
-These came from errors the gate or a visual check caught in the code-drawn rig; they apply to prompts because a video model faces the same geometry.
+These came from errors the gate or a visual check caught in the code-drawn rig; they apply to every spec because every segment uses the same rig geometry.
 
 - Arms are shorter than the head is wide. In a hand-over the heads end up close: write `a small gap of less than half a head-width between their heads and both arms held fully straight out` (the motion test measures about 0.3 head-widths). Never write a larger distance than the arms can reach, and never let them lean in.
 - A small child cannot reach past her own face in side view. Turn the child to face the viewer and stretch the arm out to the side for a high five or a grab.
@@ -188,20 +188,20 @@ Hook loudness: the hook hit is one short, light sound (a whoosh on the whip pan,
 1. Trim each clip to its beats; cut on the first frame of each reaction close-up.
 2. Add every text overlay in the edit (time cards such as "3 hours later", labels, captions), in a plain rounded sans font, white with a black outline.
 3. Level the VO above the ukulele loop; check the loop's tempo matches across clips and crossfade it at each clip join.
-4. Add or strengthen the sound cues the prompt asked for (whoosh, slap, record-scratch, slurp) if the model's are weak.
-5. Check every clip for model-drawn text on phones and cups and for lip-sync outside narrator cutaways; regenerate the clip if either appears.
+4. Lay the sound cues the spec asked for (whoosh, slap, record-scratch, slurp) on their beats.
+5. Check every clip for text drawn on phones and cups and for lip-sync outside narrator cutaways; fix the layer or mouth keys and re-render the clip if either appears.
 
 ## Sample package
 
 `samples/youtube-storytime.md` ("The coffee I didn't earn", 3 clips, 16:9): passes `hand_ledger.py` with no warnings, `package_lint.py` with 0 red and 0 yellow (facts: [`samples/youtube-storytime.facts.md`](samples/youtube-storytime.facts.md)) and `verify-opening-hook.py`.
 
-## Generation risks
+## Animation risks
 
-1. Lip-sync spreading to every character in story shots. The voice block restricts it; check the first clip.
+1. Lip-sync spreading to every character in story shots. Only the narrator rig gets mouth keys from the VO; check the first clip.
 2. Smooth motion and face morphing instead of snapped poses.
 3. Three shots inside one 10-second clip may not all land.
-4. The model may still drift toward famous creators' avatars; the negatives ban resemblance, and prompts carry no brand word.
-5. Model-invented text on phones, cups and signs; the negatives ban it.
+4. Character designs may drift toward famous creators' avatars; the negatives ban resemblance, and specs carry no brand word.
+5. Text drawn on phones, cups and signs; the negatives ban it.
 
 ## Acceptance checklist
 

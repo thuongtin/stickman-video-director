@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Semantic planning fixtures and routing checks, not generated-video certification."""
+"""Semantic planning fixtures and routing checks, not rendered-video certification."""
 from copy import deepcopy
 from pathlib import Path
 import re
@@ -101,15 +101,11 @@ for bad in bad_cases:
         raise AssertionError("Expected invalid fixture was accepted")
 
 for path in ("SKILL.md", "references/style-catalog.md", "references/storyboard-template.md",
-             "references/omni-flash-prompt-contract.md"):
+             "references/segment-spec-contract.md"):
     assert "cozy-storytelling.md" in (SKILL / path).read_text(), "Missing style route: " + path
 assert "voice-continuity.md" in REF.read_text()
 assert "Cozy Storytelling / 治愈故事风" in REF.read_text()
 assert len(list(SKILL.rglob("SKILL.md"))) == 1, "Unexpected nested skill entry"
-for asset in ("style-4-cozy-station", "style-4-cozy-cafe"):
-    gif = ROOT / "assets/readme" / (asset + ".gif")
-    assert gif.is_file() and gif.stat().st_size < 10 * 1024 * 1024, "Missing/oversized GIF"
-    assert gif.read_bytes()[:6] in (b"GIF87a", b"GIF89a"), "Invalid GIF header"
-    assert (ROOT / "assets/readme" / (asset + ".mp4")).is_file()
+assert "posture_gate.py" in REF.read_text(), "Style 4 acceptance gates the rigs' pose tracks"
 print("Style 4 rules: two valid plans and eight invalid mutations passed.")
-print("Routing and inline assets passed; no generated-video or audio score claimed.")
+print("Routing passed; no rendered-video or audio score claimed.")

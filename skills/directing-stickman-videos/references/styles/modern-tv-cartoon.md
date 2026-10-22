@@ -16,7 +16,7 @@ Slug: `modern-tv-cartoon`. Evidence: posture gate on 114 pose tracks and a 2-sho
 
 ### Sources
 
-The look of American TV animation from about 2010 to 2022. These works are named here as research only; prompts never name them, and the cast copies none of their characters, costumes or colour combinations.
+The look of American TV animation from about 2010 to 2022. These works are named here as research only; specs never name them, and the cast copies none of their characters, costumes or colour combinations.
 
 Frame study (2026-10-20). Official character art and episode stills from the four shows' Wikipedia articles, downloaded and looked at side by side. They are low resolution (about 230–420 px) and few: one to two images per work, not whole episodes. Only these six images were looked at.
 
@@ -48,7 +48,7 @@ Catalog: **Style 4 Cozy Storytelling** (round head, simple expressive face, full
 
 Research: whiteboard-doodle's "Đậu" also has a bean body and round head, but it is black marker on a white board with no fills and no set.
 
-### Prompt wording for each `must` trait
+### Spec wording for each `must` trait
 
 The frozen style block below says each one in plain words. It is repeated verbatim in every clip.
 
@@ -125,7 +125,7 @@ Anchor rules:
 
 ## 5. Text, motion, camera
 
-- **Text policy: `post-overlay`.** The prompts ask for no words, letters or numbers in the frame, and shelves, boxes and signs carry no labels. Titles or subtitles, if a video needs them, are overlaid in post (see section 8).
+- **Text policy: `post-overlay`.** The specs ask for no words, letters or numbers in the frame, and shelves, boxes and signs carry no labels. Titles or subtitles, if a video needs them, are overlaid in post (see section 8).
 - **Motion cadence: `smooth`.** Clear key poses with smooth in-betweens. Squash and stretch on the body only.
 - **Camera.** Follow the camera grammar in `storyboard-template.md`.
   - Transition moves: hold, slow push-in, pull back, slow lateral pan, hard cut.
@@ -182,10 +182,10 @@ Negative constraints: no 3D render, no CGI, no anime style, no realistic anatomy
 ## 8. Post-production
 
 1. Trim each clip to its 10 s beats and cut hard between clips. Clip 3 is a time cut.
-2. Check the risky frames before stitching: each hand pass, the low five, and each character's first frame for the RIGHT-wrist marker. Re-generate a clip if a marker has moved to the other wrist.
+2. Check the risky frames before stitching: each hand pass, the low five, and each character's first frame for the RIGHT-wrist marker. Fix the rig and re-render a clip if a marker has moved to the other wrist.
 3. Normalise the stitched video to about -14 LUFS integrated, with the hook hit no more than 6 dB above the music bed.
-4. Add any ending variation in post (for example a single music-box phrase under the last line), not in the prompt.
-5. Subtitles, if wanted, are burned in after stitching. Never ask for them in the prompt.
+4. Add any ending variation in post (for example a single music-box phrase under the last line), not in the spec.
+5. Subtitles, if wanted, are burned in after stitching. Never ask for them in the spec.
 
 ## 9. Hook override
 

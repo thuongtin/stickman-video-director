@@ -1,6 +1,6 @@
 # Director's Proposal Contract
 
-Use this contract for Phase A. Present a readable production proposal and stop for confirmation before writing model prompts. Refer to `references/style-catalog.md` for style specifications.
+Use this contract for Phase A. Present a readable production proposal and stop for confirmation before writing segment specs. Refer to `references/style-catalog.md` for style specifications.
 
 Style 3 (Prehistoric Hand-Drawn / Dark Comedy) is also supported. Before planning it, read `prehistoric-dark-comedy.md`; its cast-card, earthy palette, setup/escalation/payoff and reaction-pause rules override the generic five-stage, mandatory discussion-ending and device-count checks here. Include distinguishable cast cards and a location/prop continuity plan in Phase A. Treat the story as fictional analogy, not invented historical fact.
 
@@ -52,7 +52,7 @@ To break through the 60%+ video completion rate threshold, structure every scrip
 
 ### Golden Hook in detail
 
-This extends Stage 1 above; it is not a second hook system. Hook craft (the card, pattern names and the first-two-seconds rules) is learned from the MIT-licensed `rediumvex/ai-video-generator-claude` skills (© 2026 Roman Knox) and rewritten for our characters and no-text rule. Only the hook technique is taken; none of that project's prompt-writing rules.
+This extends Stage 1 above; it is not a second hook system. Hook craft (the card, pattern names and the first-two-seconds rules) is learned from MIT-licensed short-video hook notes by Roman Knox (© 2026) and rewritten for our characters and no-text rule. Only the hook technique is taken.
 
 - `0–2s` is when viewers decide to stay; `2–5s` confirms the promise. The first frame works as the thumbnail: subject and tension are already visible.
 - Many viewers start muted, so the hook reads from the picture alone; voice and sound strengthen it.
@@ -94,11 +94,11 @@ Choose the pattern that fits the source's actual tension, not the loudest one. E
 
 #### Left out on purpose
 
-- Kinetic typography, countdown numbers, bold statistics and "data reveal" counters put words or numbers on screen. Keep them out of the generation prompt. Show the idea with icon-only symbols and, if wanted, list the text as a post-production overlay at the hook timestamp.
-- Subliminal three-frame flashes and strobe lighting are unreliable in generated clips and risky for photosensitive viewers; do not use them.
+- Kinetic typography, countdown numbers, bold statistics and "data reveal" counters put words or numbers on screen. Keep them out of the scene art. Show the idea with icon-only symbols and, if wanted, list the text as a post-production overlay at the hook timestamp.
+- Subliminal three-frame flashes and strobe lighting are hard to read and risky for photosensitive viewers; do not use them.
 - An extreme close-up stare into the camera conflicts with the idle ban and, for Style 1, the no-face rule. Use a quick turn-and-point toward the viewer instead, followed by action.
 - Liquid or shape morphing remains banned in every pattern; express change through concrete action, cuts and wipes.
-- Do not name a hook pattern, a "viral" label or a platform inside the prompt; describe only what is seen and heard.
+- Do not name a hook pattern, a "viral" label or a platform inside the segment spec; describe only what is seen and heard.
 
 #### Ending loop (optional)
 
@@ -204,15 +204,15 @@ Before choosing a move, answer three questions: where should the viewer look now
 - After pushing in, come back out: do not make the main move of three consecutive clips an inward move (push-in, fly-through, zoom into an object). Pull back, track sideways, hold, or cut to a new shot size in between.
 - Do not give every clip the same move. One move repeated clip after clip, whether a steady slow push or a quick push each time, reads as a slideshow.
 
-These rules adapt the camera-language notes of huashu-art-motion (MIT, alchaincyf), where one 102-second film with about 48 inward pushes was judged "too many, too fast, not smooth" and a film with an even slow push on every shot "felt like a slideshow". They are untested on Flow.
+These rules adapt the camera-language notes of huashu-art-motion (MIT, alchaincyf), where one 102-second film with about 48 inward pushes was judged "too many, too fast, not smooth" and a film with an even slow push on every shot "felt like a slideshow". They have not yet been measured on a finished video from this skill.
 
 ## Palette and text
 
 Keep the background and stick figure monochrome according to the selected theme (for Style 1), or use high-key studio grid / cinematic lighting (for Style 2). Use no more than three saturated accent colors across the video. Assign semantic meaning such as anxiety, danger, energy, discovery, or success.
 
-Name colors only with ordinary descriptive language. Do not use hexadecimal, RGB, HSL, Pantone, or other technical color notation anywhere in the proposal or production prompts.
+Name colors only with ordinary descriptive language. Do not use hexadecimal, RGB, HSL, Pantone, or other technical color notation anywhere in the proposal or segment specs.
 
-Default the generated video to no visible words, letters, numbers, captions, subtitles, interface copy, or technical annotations. Make message bubbles, content cards, meters, clocks, and notifications icon-only. After the storyboard, optionally list concise two-to-five-word English overlays for post-production, including their target clips and safe placement; never carry those overlays into the video-generation prompts.
+Default the scene art to no visible words, letters, numbers, captions, subtitles, interface copy, or technical annotations. Make message bubbles, content cards, meters, clocks, and notifications icon-only. After the storyboard, optionally list concise two-to-five-word English overlays for post-production, including their target clips and safe placement; never carry those overlays into the segment specs.
 
 ## Composition by aspect ratio
 
@@ -229,11 +229,11 @@ End each row with a visible interface that the next row inherits: a pose, moving
 
 End Phase A by asking the user to:
 
-- approve the current proposal and generate the N Omni Flash prompts;
+- approve the current proposal and receive the N motion-graphics segment specs;
 - revise a named scene or narration passage; or
 - change a global setting such as aspect ratio, duration, style, theme, palette, voice, or tone.
 
-Do not include final model prompts. A global change invalidates approval and requires a revised Phase A.
+Do not include final segment specs. A global change invalidates approval and requires a revised Phase A.
 
 ## Phase A checks
 
@@ -252,7 +252,7 @@ Do not include final model prompts. A global change invalidates approval and req
 - Every row fills the Hands column from the character's own side, and no beat spends more than one demanding body action per character or pairs one with a camera shake, orbit or tilt.
 - No more than three saturated accent colors are used (for Style 1) or clean palette rules followed (for Style 2).
 - No technical color notation is present.
-- Any proposed text is clearly separated as a post-production overlay and absent from generated scenes.
+- Any proposed text is clearly separated as a post-production overlay and absent from the scene art.
 - Every adjacent pair has a named continuity connection.
 - The ending returns to the central message and CTA.
 - No unsupported factual detail was added.

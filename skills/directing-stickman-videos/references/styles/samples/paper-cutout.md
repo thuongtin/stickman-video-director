@@ -1,6 +1,6 @@
 # Paper cutout cast package: fixed (after hand_ledger and package_lint)
 
-Three standalone prompts, 16:9, three characters from two paper families (Mai 5A; Ông Bảo and Bé Na 5B), joined by the mixed-cast sentence. Cards, locks, score and negatives are copied from ../../paper-cutout-collage.md by make_cast_package.py. Hands are named from each character's own side.
+Three standalone specs, 16:9, three characters from two paper families (Mai 5A; Ông Bảo and Bé Na 5B), joined by the mixed-cast sentence. Cards, locks, score and negatives are copied from ../../paper-cutout-collage.md by make_cast_package.py. Hands are named from each character's own side.
 
 | Hook card | |
 |---|---|
@@ -14,14 +14,14 @@ Three standalone prompts, 16:9, three characters from two paper families (Mai 5A
 
 Post-production overlay: none. Stitch clips in order; the final frame of each clip is the first frame of the next.
 
-Voice and music continuity: the same adult female narrator block is repeated word for word in all three clips (voice-continuity.md). Clip 1 sets the 5B score (music box, fingerpicked guitar, glockenspiel, about 84 BPM); clips 2 and 3 say it continues from clip 1 with identical tempo and instrumentation. Listen across the joins after generation; an external VO and music track is the fallback if the narrator drifts.
+Voice and music continuity: the same adult female narrator block is repeated word for word in all three clips (voice-continuity.md). Clip 1 sets the 5B score (music box, fingerpicked guitar, glockenspiel, about 84 BPM); clips 2 and 3 say it continues from clip 1 with identical tempo and instrumentation. Record the narration as one VO track and lay the score as one bed; listen across the joins after assembly.
 
 Screen direction: Mai and Ông Bảo face right, Bé Na faces left. Facing left, Bé Na's right hand is her far hand, so the balloon is taken and held by the arm behind her body.
 
 ### Clip 1 — The park path
 
 ```text
-Create an approximately 10-second 16:9 horizontal paper cutout stop-motion clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal paper cutout stop-motion segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Flat two-dimensional paper cutout stop-motion animation shot straight down onto a tabletop. Every character, prop and scenery element is a separate rigid piece of matte paper with visible paper fibre and slightly irregular cut or torn edges, layered with small soft contact shadows between layers. One warm key light from the upper left. No drawn outlines.
 
@@ -63,7 +63,7 @@ Negative constraints: no smooth vector animation, no 3D rendering, no clay, no f
 ### Clip 2 — The balloon
 
 ```text
-Create an approximately 10-second 16:9 horizontal paper cutout stop-motion clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal paper cutout stop-motion segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Flat two-dimensional paper cutout stop-motion animation shot straight down onto a tabletop. Every character, prop and scenery element is a separate rigid piece of matte paper with visible paper fibre and slightly irregular cut or torn edges, layered with small soft contact shadows between layers. One warm key light from the upper left. No drawn outlines.
 
@@ -105,7 +105,7 @@ Negative constraints: no smooth vector animation, no 3D rendering, no clay, no f
 ### Clip 3 — The sketch
 
 ```text
-Create an approximately 10-second 16:9 horizontal paper cutout stop-motion clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal paper cutout stop-motion segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Flat two-dimensional paper cutout stop-motion animation shot straight down onto a tabletop. Every character, prop and scenery element is a separate rigid piece of matte paper with visible paper fibre and slightly irregular cut or torn edges, layered with small soft contact shadows between layers. One warm key light from the upper left. No drawn outlines.
 

@@ -1,11 +1,11 @@
 # Dino-world sample package: “Whose footprint?” (3 clips, 16:9, ~30 s)
 
-Six recurring dinosaurs and one kid explorer: Lan, Tok, Mira, Bo, Tuk, Lumo and Hoot (Lumo is not in this story). Hands are named from each character's own side; every character wears a yellow band on the right (wrist for Lan and the two-legged dinosaurs, right front ankle for Bo and Tuk). Bo and Tuk have no hands; their front hooves stand in for hands in the hands lines and are always empty. Not tested on Flow yet.
+Six recurring dinosaurs and one kid explorer: Lan, Tok, Mira, Bo, Tuk, Lumo and Hoot (Lumo is not in this story). Hands are named from each character's own side; every character wears a yellow band on the right (wrist for Lan and the two-legged dinosaurs, right front ankle for Bo and Tuk). Bo and Tuk have no hands; their front hooves stand in for hands in the hands lines and are always empty. Not yet built into a full rendered video.
 
 ## Clip 1 — The giant footprint
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright, friendly 2D cartoon dinosaur world for kids, like a modern picture-book TV cartoon. Flat cel colors with one soft shade tone, thick warm dark-brown outlines of even width, rounded chunky shapes, big glossy eyes with one white highlight. Sunny Cretaceous valley: pale sky, soft green rolling hills, cycad and fern clumps, warm sand-and-moss ground. Gentle depth: background plants slightly paler. Soft even daylight, short soft shadows under the feet. Clean, rounded educational cartoon; not photorealistic, not a museum diorama, not 3D.
 
@@ -38,7 +38,7 @@ Negative constraints: no other dinosaurs or people, no crowds, no famous movie o
 ## Clip 2 — Three toes
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright, friendly 2D cartoon dinosaur world for kids, like a modern picture-book TV cartoon. Flat cel colors with one soft shade tone, thick warm dark-brown outlines of even width, rounded chunky shapes, big glossy eyes with one white highlight. Sunny Cretaceous valley: pale sky, soft green rolling hills, cycad and fern clumps, warm sand-and-moss ground. Gentle depth: background plants slightly paler. Soft even daylight, short soft shadows under the feet. Clean, rounded educational cartoon; not photorealistic, not a museum diorama, not 3D.
 
@@ -71,7 +71,7 @@ Negative constraints: no other dinosaurs or people, no crowds, no famous movie o
 ## Clip 3 — Two legs or four
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright, friendly 2D cartoon dinosaur world for kids, like a modern picture-book TV cartoon. Flat cel colors with one soft shade tone, thick warm dark-brown outlines of even width, rounded chunky shapes, big glossy eyes with one white highlight. Sunny Cretaceous valley: pale sky, soft green rolling hills, cycad and fern clumps, warm sand-and-moss ground. Gentle depth: background plants slightly paler. Soft even daylight, short soft shadows under the feet. Clean, rounded educational cartoon; not photorealistic, not a museum diorama, not 3D.
 

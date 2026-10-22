@@ -56,13 +56,13 @@ cabin or in space; (2) mid-century shades with flat offset blocks and moves in h
 carries halftone dots, and floating bodies drift smoothly under the microgravity rules. Second neighbour:
 `science-lab` (lab interiors, normal gravity, no helmets).
 
-### Prompt wording (verbatim in every clip)
+### Spec wording (verbatim in every clip)
 
 ```text
 1960s space-age poster illustration, retro-futurist. Flat, grainy screen-printed colour shapes with a thin dark-navy outline, soft rounded chunky forms, halftone-dot shading on the shadow side of each shape instead of gradients, a limited palette of midnight navy, burnt orange, mustard yellow, teal, coral pink and warm cream, with tiny cream dot stars. Characters are rounded cartoon astronauts in clear round bubble helmets with their faces visible inside; each helmet has one white highlight crescent. No 3D, no photorealism, no glossy CGI.
 ```
 
-Describe the look; never name a studio, an agency, a show or a real poster series in a prompt.
+Describe the look; never name a studio, an agency, a show or a real poster series in a spec.
 
 ## Cast: one crew, one suit system
 
@@ -98,7 +98,7 @@ Lyra, the slim navigator: a round clear bubble helmet, inside it a face with dot
 Beep, the crew's small helper robot, half Juno's height: a round silver dome head with a dark visor showing two pale-teal dot eyes, a short antenna with a red ball on top and a round grey ear disc on each side, a flat coral collar; a rounded silver body with a round dark dial on its chest and a coral belt, short jointed silver arms and legs, dark-navy mitten hands and boots, and a small red lamp on its right wrist.
 ```
 
-Shared body rule, once per prompt after the anchors:
+Shared body rule, once per spec after the anchors:
 
 ```text
 Every character keeps exactly two arms and two legs of constant length; a moving limb replaces its previous pose. Each astronaut's round mustard-yellow gauge stays on that astronaut's right wrist in every shot. Expressions change only the eyebrows, eyes and mouth inside the helmet, never the helmet, suit colours or proportions.
@@ -114,7 +114,7 @@ the neck ring is a flat collar on the shoulders, never a loop hanging below the 
 |---|---|---|
 | Balance: the body's weight sits over its support | In the cabin there is no "down": floating frames are exempt from balance and instead obey Newton's first law (below) | Microgravity is the subject; a balance check would demand a floor |
 | Faces act freely | Faces live inside the helmet; only eyebrows, eyes and mouth change; the helmet never comes off | The bubble helmet is a signature trait, and a removed helmet in space is wrong science |
-| One left/right marker per character | One marker for the whole crew: the gauge on every right wrist | Six suits in one system; one rule is easier for the model and the reviewer |
+| One left/right marker per character | One marker for the whole crew: the gauge on every right wrist | Six suits in one system; one rule is easier for the animator and the reviewer |
 | Background continuity in one location | Location cuts are planned: cabin -> space -> cabin, each marked `First frame (location cut):` and `Hands at start (time cut)`, with a stitching guide | The science needs both the cabin and an outside view |
 | Music | One space-age library theme set in clip 1 and restated with its full instrumentation in every later clip | Keeps the score frozen across clips |
 | Arm poses | No near arm raised past about 120° in profile and no overhand throw: it sweeps across the bubble helmet | Gate finding `arm_over_face` (see Posture limits) |
@@ -152,7 +152,7 @@ the neck ring is a flat collar on the shoulders, never a loop hanging below the 
 
 ## Props and hands
 
-Follow `posture-gate.md`. Use explicit verbs both the ledger and the model read: "lets go of the red apple", "catches
+Follow `posture-gate.md`. Use explicit verbs both the ledger and the animator read: "lets go of the red apple", "catches
 the red apple with her left hand", "takes the red apple with her right hand; for one held moment both hands are on the
 apple". A rail held through a clip is a held prop in the hands lines; two rails held at once get different names
 ("the handrail", "the low handrail").
@@ -198,7 +198,7 @@ no text, letters, numbers, logos, flags, insignia or mission patches anywhere, n
 1. Conform the clips to 24 fps and trim duplicate holds so each cut lands on a still moment (a stop on a rail, a held
    apple).
 2. Use very short audio crossfades at the cuts; check that the theme keeps one tempo.
-3. Add titles and captions in post over the navy sky or a blank wall area; never ask the model for lettering.
+3. Add titles and captions in post over the navy sky or a blank wall area; never draw lettering into the scene art.
 4. Before publishing, check on the risky frames: the gauge stays on each right wrist, the released apple does not fall,
    helmets do not touch, nobody swims, and no near arm crosses a helmet.
 
@@ -211,14 +211,14 @@ location cuts and a stitching guide). `hand_ledger.py` (shared copy): PASS, and 
 on the gauge line): 0 RED, 0 YELLOW. Facts block (`samples/retro-space.facts.md`, `--verify`: intact):
 
 <!-- package_lint facts: generated, do not edit -->
-- package: `package.md` sha256 5ffa5ee58360bf1e
-- checked: 2026-10-20
+- package: `retro-space.md` sha256 047688c81f949bbe
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=35719c2dc0fb6c818b2d3e279194d99b10ff9c9d106eddcc72bd4bbd62f791fc -->
+<!-- package_lint facts end sha256=f7df5e1ed02b1964bd31f91b7d13db3bc0dde6d25fb0fbab829a9b7f7c640e5c -->
 
 ## Catalog entry (draft)
 
@@ -229,7 +229,7 @@ on the gauge line): 0 RED, 0 YELLOW. Facts block (`samples/retro-space.facts.md`
 Status row: `| retro-space | gated | 53 gated pose tracks, 3-shot microgravity animatic with scene check, linted 3-clip package |`.
 Setup-gate line (offer only when the user asks for an experimental style): `` `retro-space (Retro Space-Age Astronomy, gated, experimental)`: 1960s space-poster astronauts in bubble helmets for space science ``.
 
-## Generation risks
+## Animation risks
 
 - The released apple drops to the floor, or floating characters "swim".
 - The gauge jumps to the left wrist, or faces move outside the helmets.

@@ -15,7 +15,7 @@ import package_lint as pl  # noqa: E402
 catalog = (REFS / "style-catalog.md").read_text()
 experimental = catalog.split("### Experimental styles", 1)[1].split("\n---", 1)[0]
 status = catalog.split("### Status", 1)[1].split("New styles are drafted", 1)[0]
-# Prompts never carry brand or work names; packs may name works only in their Sources sections.
+# Segment specs never carry brand or work names; packs may name works only in their Sources sections.
 BRANDS = re.compile(r"\b(lego|minecraft|mario|nintendo|disney|pixar|marvel|youtube|ghibli|simpsons|bluey|pokemon|barbie)\b", re.I)
 
 packs = sorted(STYLES.glob("*.md"))
@@ -40,5 +40,5 @@ for pack in packs:
     assert f"sha256 {digest}" in facts.read_text(), f"{slug}: facts block is for another version of the sample; re-run package_lint --facts"
     hook = subprocess.run([sys.executable, str(ROOT / "tests/verify-opening-hook.py"), str(sample)], capture_output=True, text=True)
     assert hook.returncode == 0, f"{slug}: opening hook test failed\n{hook.stdout}{hook.stderr}"
-    assert not BRANDS.search(body), f"{slug}: brand name in sample prompts: {BRANDS.search(body).group(0)}"
+    assert not BRANDS.search(body), f"{slug}: brand name in sample specs: {BRANDS.search(body).group(0)}"
 print(f"style packs: PASS ({len(packs)} gated packs, samples lint clean, hooks placed, catalog rows present)")

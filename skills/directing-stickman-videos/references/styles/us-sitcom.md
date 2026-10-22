@@ -14,7 +14,7 @@ Slug: `us-sitcom`. Evidence: posture gate on 54 pose tracks and a 5-character mo
 
 ### Sources
 
-The look of the American prime-time animated family sitcom, from about 1990 to today. These works are named here as research only, never in prompts. Prompts never name them, and the cast copies none of their characters, skin colours, eye shapes, costumes or colour combinations.
+The look of the American prime-time animated family sitcom, from about 1990 to today. These works are named here as research only, never in specs. Specs never name them, and the cast copies none of their characters, skin colours, eye shapes, costumes or colour combinations.
 
 Frame study (2026-10-20). I downloaded and looked at the seven stills below. The copies were kept out of the project folder. Each row says which of the five traits (section "Five signature traits", T1–T5) the frame confirms or contradicts. Four are from episodes: two Simpsons couch-gag frames, the Simpsons opening-sequence collage (one image stitched from many opening frames) and a first-season Bob's Burgers frame. The King of the Hill and Family Guy images are promotional group art, not frames.
 
@@ -49,7 +49,7 @@ Changes made from the study:
 - Bodies: our adults are about 4.5 heads with natural proportions (pear-shaped dad, tall slim mom); modern-tv-cartoon uses big round heads on bean bodies with noodle limbs.
 - Staging: our frame is a locked-off front-facing couch set held like a stage; modern-tv-cartoon moves through attics and yards with pans and push-ins, and plays big-eyed double-takes instead of deadpan holds.
 
-### Prompt wording for each `must` trait
+### Spec wording for each `must` trait
 
 - Trait 1: "Every shape has one clean, uniform black outline of the same weight everywhere, on characters, props and backgrounds alike. Flat cel colors only: no shading, no gradients, no rim light, no texture."
 - Trait 2: "a suburban living room with a blue three-seat couch facing the viewer … The camera is the TV: the couch faces straight at the viewer, a locked-off wide shot like a stage."
@@ -93,7 +93,7 @@ Props are not part of anyone's anchor. They are named in the clip's `Props:` lin
 
 ## 5. Text, motion, camera
 
-- **Text policy: `post-overlay`.** The generated video has no words, letters, numbers or logos on the TV, remote, cereal box, mug or signs. Titles or subtitles, if a video needs them, are added in post (section 8).
+- **Text policy: `post-overlay`.** The scene art has no words, letters, numbers or logos on the TV, remote, cereal box, mug or signs. Titles or subtitles, if a video needs them, are added in post (section 8).
 - **Motion cadence: `stepped`.** Limited animation: characters hold a pose, move to the next key pose, and hold again. The comedy lands on the holds.
 - **Camera.** Follow the camera grammar in `storyboard-template.md`.
   - Default: hold, locked-off wide shot of the couch. Every beat names its camera move.
@@ -138,10 +138,10 @@ Posture limits from the gate and from eye checks:
 ## 8. Post-production
 
 1. Trim each clip to its 10 s beats and cut hard between clips.
-2. Check the risky frames before stitching: the TV-remote pass in clip 2 and clip 3, and each character's first frame for the RIGHT-wrist marker. Re-generate a clip if a marker moves to the other wrist or the remote changes hands without a visible pass.
-3. Check that the TV, remote and cereal box carry no lettering; re-generate if they do (do not blur in post).
+2. Check the risky frames before stitching: the TV-remote pass in clip 2 and clip 3, and each character's first frame for the RIGHT-wrist marker. Fix the keys and re-render a clip if a marker moves to the other wrist or the remote changes hands without a visible pass.
+3. Check that the TV, remote and cereal box carry no lettering; fix the layer and re-render if they do (do not blur in post).
 4. Normalise the stitched video to about -14 LUFS integrated, with the hook hit (a plastic click and a carpet swish) no more than 6 dB above the music bed.
-5. Add any title card or subtitles after stitching. Never ask for them in the prompt.
+5. Add any title card or subtitles after stitching. Never ask for them in the spec.
 
 ## 9. Hook override
 
@@ -151,7 +151,7 @@ Sudden entry, Reaction before cause and Before → after cut suit this style. Th
 
 - [samples/us-sitcom.md](samples/us-sitcom.md): 3 clips, "The remote", with 3, 5 and 4 characters on screen.
 - `tools/package_lint/package_lint.py package.md --facts samples/us-sitcom.facts.md`: PASS, 0 red, 0 yellow. [Facts block](samples/us-sitcom.facts.md).
-- `hand_ledger.py`: PASS. Nine mutation tests catch 8; the 9th is a WARN by design ([ledger-tests.md](prompt-package/ledger-tests.md)).
+- `hand_ledger.py`: PASS. Nine mutation tests catch 8; the 9th is a WARN by design ([ledger-tests.md](spec-package/ledger-tests.md)).
 - Posture gate: 54/54 pose tracks PASS with 0 warnings. 5/5 motion tracks and the 5-track `--scene` run PASS ([README.md](README.md)).
 
 ## 11. Catalog entry (ready to merge)

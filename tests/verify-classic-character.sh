@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 root = Path('skills/directing-stickman-videos')
 catalog = (root / 'references/style-catalog.md').read_text()
-contract = (root / 'references/omni-flash-prompt-contract.md').read_text()
+contract = (root / 'references/segment-spec-contract.md').read_text()
 skill = (root / 'SKILL.md').read_text()
 classic = catalog.split('## 2. Style 1: Classic Minimalist', 1)[1].split('## 3. Style 2:', 1)[0]
 anchors = re.findall(r'```text\n(.*?)\n```', classic, re.S)
@@ -22,8 +22,8 @@ for anchor in anchors:
     assert not re.search(r'\d|one sixth|skeleton|rig definition|pen path', anchor), 'Do not reintroduce unvalidated geometric recipes'
 assert 'Occasional simple line expressions are allowed by default.' in catalog
 assert 'replace only "no face, no eyes, no mouth,"' in catalog, 'Expression choice must not change anatomy'
-assert 'expression-enabled and left-handed variants were not separately tested' in catalog
-assert 'not frame-by-frame certification' in catalog
+assert 'Build the figure once as a rig' in catalog, 'Style 1 is built as one reusable rig'
+assert 'Gate the rig\'s pose tracks' in catalog
 assert 'repeat the concise frozen character anchor' in contract
 assert 'A raised arm replaces its old lowered line.' in contract
 assert 'no facial features, no hair, no clothing, no filled body, stable proportions, uniform medium line weight' not in contract

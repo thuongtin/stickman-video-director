@@ -1,13 +1,13 @@
 ---
 name: directing-stickman-videos
-description: "Use when turning copy, notes, articles, or topics into customizable-length English stick-figure or illustrated-character videos (classic stickman plus experimental styles such as paper cutout, chibi, watercolor or Vietnamese folk prints) (in 10-second multiples: 30s, 60s, 3min, 5min, default 60s), kinetic line-animation explainers, motivational shorts, or Gemini Omni Flash prompt packages."
+description: "Use when turning copy, notes, articles, or topics into customizable-length English stick-figure or illustrated-character videos (classic stickman plus experimental styles such as paper cutout, chibi, watercolor or Vietnamese folk prints) (in 10-second multiples: 30s, 60s, 3min, 5min, default 60s), kinetic line-animation explainers, motivational shorts, or motion-graphics segment spec packages."
 ---
 
 # Directing Stickman Videos
 
 ## Core contract
 
-Turn one source into a confirmed director's proposal and then N standalone prompts for approximately ten-second Gemini Omni Flash clips (where N = target duration in seconds / 10; default 6 clips for 60 seconds). Preserve the source's meaning while structuring it through a high-completion 5-stage emotional narrative arc.
+Turn one source into a confirmed director's proposal and then N standalone segment specs for approximately ten-second motion-graphics segments (where N = target duration in seconds / 10; default 6 clips for 60 seconds). The video is built as motion graphics: rigged characters drawn in the style's look, layered backgrounds, props and effects, camera moves over those layers, one recorded or synthesised VO track, and music and SFX in the edit. Preserve the source's meaning while structuring it through a high-completion 5-stage emotional narrative arc.
 
 ## Setup gate
 
@@ -27,14 +27,14 @@ Require these before planning:
 
 If aspect ratio or visual style is missing, ask for all missing items in one concise message and stop. If duration is omitted, default to 60 seconds (6 clips). If a user provides a duration not divisible by 10, round to the nearest 10-second multiple. If a user specifies only light or dark theme, default to Style 1. Never select an aspect ratio or style silently. Do not re-ask choices already supplied.
 
-Urgency, generation cost, client pressure, and requests to "pick normal settings" do not waive this gate.
+Urgency, production cost, client pressure, and requests to "pick normal settings" do not waive this gate.
 
 ## Workflow
 
 1. Read `references/core-contract.md`, `references/storyboard-template.md`, `references/style-catalog.md` and `references/voice-continuity.md`. Structure the narrative using the **5-Stage High-Completion Heartbeat Engine** (Golden Hook → Disrupting Assumptions → Unveiling Insider Secrets → Ultimate Truth Revelation → Elevation & Interactive Discussion), with timing dynamically scaled to the target duration. Produce Phase A in the user's language, with English VO and a reference translation.
 2. Stop after the director's proposal and request explicit approval.
 3. If the user changes ratio, duration, style, theme, narration, scene structure, or global direction, recompose Phase A and request approval again.
-4. Only after approval of the current Phase A, read `references/omni-flash-prompt-contract.md` and `references/posture-gate.md` and produce Phase B.
+4. Only after approval of the current Phase A, read `references/segment-spec-contract.md` and `references/posture-gate.md` and produce Phase B.
 5. Use `references/examples.md` only when a concrete end-to-end example would resolve ambiguity.
 
 Topic approval, schedule pressure, or approval of an older draft is not approval of the current Phase A.
@@ -43,12 +43,12 @@ Topic approval, schedule pressure, or approval of an older draft is not approval
 
 For Style 3, read `references/prehistoric-dark-comedy.md` before planning. Its casting, story rhythm, palette and continuity rules override the generic no-idle, device-count and five-stage discussion-ending rules below. Use setup → escalation → ironic payoff for narrative shorts; do not force a discussion question into a visual punchline. This is a visual storytelling style, not a claim about actual prehistory.
 
-For an experimental slug style, read `references/styles/<slug>.md` before planning and prompt assembly, and use its sample in `references/styles/samples/<slug>.md` as the prompt shape. Its frozen anchors, style block, overrides, bans and acceptance list win over the generic rules below, the same way the Style 3 and Style 4 references do; the voice contract, hands ledger and package lint still apply.
+For an experimental slug style, read `references/styles/<slug>.md` before planning and spec assembly, and use its sample in `references/styles/samples/<slug>.md` as the spec shape. Its frozen anchors, style block, overrides, bans and acceptance list win over the generic rules below, the same way the Style 3 and Style 4 references do; the voice contract, hands ledger and package lint still apply.
 
-For Style 4, read `references/cozy-storytelling.md` before planning and prompt assembly. Default each new ten-second segment to a different recognizable story setting, unless the user explicitly requests one location or approves a deliberate return. Preserve characters, drawing grammar, important props, movement direction and narrator—not an identical table or background across the whole video. Name the location cuts and any time jumps in Phase A. This is full-color cartoon storytelling, not a hand-drawn/sketchbook mode and not a claim of photorealistic 3D backgrounds.
+For Style 4, read `references/cozy-storytelling.md` before planning and spec assembly. Default each new ten-second segment to a different recognizable story setting, unless the user explicitly requests one location or approves a deliberate return. Preserve characters, drawing grammar, important props, movement direction and narrator—not an identical table or background across the whole video. Name the location cuts and any time jumps in Phase A. This is full-color cartoon storytelling, not a hand-drawn/sketchbook mode and not a claim of photorealistic 3D backgrounds.
 
 - Structure every script using the 5-stage high-completion flow:
-  1. **Golden Hook**: Instant curiosity trigger via a counter-intuitive question or visual paradox. Timing is flexible based on duration (e.g. within the first 2–5 seconds in short videos, up to 10–15s in long videos); never open with generic platitudes. For every style, follow "Golden Hook in detail" in `references/storyboard-template.md`: a complete hook card in Phase A, a first frame that already shows the character mid-action with a visible tension, one hook hit by about 2s that reads with the sound off, and a first spoken line of about four to ten words with no greeting. In Phase B the hook lives in Clip 1's first-frame state and first timed beat; it adds no extra prompt line.
+  1. **Golden Hook**: Instant curiosity trigger via a counter-intuitive question or visual paradox. Timing is flexible based on duration (e.g. within the first 2–5 seconds in short videos, up to 10–15s in long videos); never open with generic platitudes. For every style, follow "Golden Hook in detail" in `references/storyboard-template.md`: a complete hook card in Phase A, a first frame that already shows the character mid-action with a visible tension, one hook hit by about 2s that reads with the sound off, and a first spoken line of about four to ten words with no greeting. In Phase B the hook lives in Clip 1's first-frame state and first timed beat; it adds no extra spec line.
   2. **Disrupting Assumptions**: State what everyone thinks is true, then shatter it in one sentence to build cognitive conflict.
   3. **Unveiling Insider Secrets**: Pull back the curtain on hidden mechanics, counter-intuitive details, or the real obstacle.
   4. **Ultimate Truth Revelation**: Deliver the underlying business logic or human psychology truth with maximum cognitive payoff.
@@ -56,7 +56,7 @@ For Style 4, read `references/cozy-storytelling.md` before planning and prompt a
 - Scale English VO word count to approximately 20–25 words per 10-second clip across N clips (e.g. ~60–75 words for 30s / 3 clips, ~120–150 words for 60s / 6 clips, ~360–450 words for 3min / 18 clips, ~600–750 words for 5min / 30 clips).
 - Give each clip three timed beats, at least four relevant visual devices, and a visual change every two to three seconds. Choose camera moves with the camera grammar in `references/storyboard-template.md`: hold or move slowly for transitions, keep fast accents for reveals, and do not push inward in three clips in a row.
 - Keep character proportions, line weight, style, and narrator consistent across all clips.
-- For Style 1, freeze the concise character anchor from `references/style-catalog.md` and repeat it verbatim in every clip. Keep two arms and two legs, one current pose per limb, stable proportions and uniform medium line weight; a moving arm replaces its previous pose rather than adding another arm. Keep the figure monochrome and saturated accents on props/graphics. Do not replace the anchor with "same character", ellipses, numeric anatomy recipes, skeleton/path instructions or clip-specific appearance descriptions. Occasional simple line expressions are allowed; the head remains hollow. Keep rich actions and effects separate from character design. Treat generated consistency as a visual acceptance check, not a guarantee from repeated text.
+- For Style 1, freeze the concise character anchor from `references/style-catalog.md` and repeat it verbatim in every clip. Keep two arms and two legs, one current pose per limb, stable proportions and uniform medium line weight; a moving arm replaces its previous pose rather than adding another arm. Keep the figure monochrome and saturated accents on props/graphics. Do not replace the anchor with "same character", ellipses, numeric anatomy recipes, pen paths or clip-specific appearance descriptions; the rig owns its measurements. Occasional simple line expressions are allowed; the head remains hollow. Keep rich actions and effects separate from character design. Check the rendered look against the anchor; repeated text does not prove it.
 - For Style 1, limit the video to three saturated accent colors named with ordinary descriptive words (e.g. vivid red, electric blue, warm gold). For light theme, enforce a flat, digitally pure-white canvas with no textures, gradients, or 3D depth.
 - For Style 2 (Modern Pop), enforce character consistency:
   - Every clip, 1 through N, repeats this default anchor verbatim: `A minimalist 2D animated stick figure with a big white round head on a very short neck, simple dot eyes, a very short dark buzz cut (close-cropped spiky black hair) and thick dark rectangular glasses, wearing a loose plain white short-sleeved button-up shirt with a small pointed collar, buttoned all the way down, cut like a t-shirt that flares slightly to just below the hips, with short wide sleeves rolled up above the elbows, with simple black stick arms and slim legs in dark blue jeans. Simple black lines, vibrant colors, smooth 2D animation style.`
@@ -72,7 +72,7 @@ For Style 4, read `references/cozy-storytelling.md` before planning and prompt a
   - hands named from the character's own side with `Hands at start` / `Hands at end` lines and the posture negatives (`references/posture-gate.md`), plus the posture budget;
   - anchors verbatim in every clip;
   - no morphing;
-  - no generated text: overlays go to post-production;
+  - no text in the scene art: overlays go to post-production;
   - plain colour words;
   - no studio, franchise, brand or artist names;
   - planned cast only;
@@ -80,7 +80,7 @@ For Style 4, read `references/cozy-storytelling.md` before planning and prompt a
   - no invented facts.
 
   Style 3, Style 4 and slug packs override only the rules its table marks as overridable.
-- Before delivering Phase B, run `tools/package_lint/package_lint.py` on the package (Phase A storyboard included when available) and fix every RED; it runs `tools/posture_gate/hand_ledger.py` as check B3. After generation, review each clip with `tools/risk_sheet/risk_sheet.py` (`references/posture-gate.md`); report generated-clip results as a review, not as certification.
+- Before delivering Phase B, run `tools/package_lint/package_lint.py` on the package (Phase A storyboard included when available) and fix every RED; it runs `tools/posture_gate/hand_ledger.py` as check B3. After rendering, gate every character's exported pose track with `tools/posture_gate/posture_gate.py` and review each rendered clip with `tools/risk_sheet/risk_sheet.py` (`references/posture-gate.md`); report rendered-clip results as a review, not as certification.
 
 ## Revision rules
 

@@ -11,7 +11,7 @@ A style's status is the lowest level whose evidence exists. A level covers only 
 | `research` | References studied, signature checklist written, cast sheets or poses drawn | Sources, checklist, gallery |
 | `gated` | Rigs or poses pass `tools/posture_gate/posture_gate.py`; the sample package passes `tools/package_lint/package_lint.py` | Gate report, the lint facts block (`--facts`) |
 | `approved` | The owner accepted named samples | The owner's words, the date and what the acceptance covers |
-| `core` | Styles 1–4, shipped with the skill (catalog only; a new pack never uses this level) | The upstream demo or report |
+| `core` | Styles 1–4, shipped with the skill (catalog only; a new pack never uses this level) | The catalog entry |
 
 - The setup gate offers the core styles (Styles 1–4, marked `core` in the catalog) and `approved` styles. Offer `research` or `gated` styles only when the user asks for an experimental style, and say which level it is.
 - Write the status block at the top of the pack:
@@ -31,8 +31,8 @@ Not covered: 9:16, crowds, night scenes.
    - `bonus`: strengthens it;
    - `forbidden`: breaks it (for a minimal style: busy backgrounds).
 3. **Nearest neighbour.** Name the closest style already in the catalog or in research and two differences that a viewer can see. Styles that only differ in palette are one style.
-4. **How it is drawn, not what is in the pictures.** Keep line, fill, material, light, colour relationships and how the frame is organized. Do not carry over the references' characters, props or layouts. Prompts name no studio, artist, brand or signature character, and the cast borrows no named character's costume colour combination.
-5. **Prompt wording.** For each `must` trait, the plain words the prompt uses to ask for it, repeated verbatim in every clip.
+4. **How it is drawn, not what is in the pictures.** Keep line, fill, material, light, colour relationships and how the frame is organized. Do not carry over the references' characters, props or layouts. Segment specs name no studio, artist, brand or signature character, and the cast borrows no named character's costume colour combination.
+5. **Spec wording.** For each `must` trait, the plain words the segment spec uses to ask for it, repeated verbatim in every clip.
 
 ## 3. Review
 
@@ -49,7 +49,7 @@ Not covered: 9:16, crowds, night scenes.
 - Camera moves allowed, following the camera grammar in `storyboard-template.md`
 - Style bans and posture limits (moves the rig cannot do)
 - Post-production steps
-- One sample clip prompt that passes `package_lint.py`, with its facts block
+- One sample clip spec that passes `package_lint.py`, with its facts block
 - The status block from section 1
 
 The status levels, signature checklist and review rules adapt the style-research protocol of huashu-art-motion (MIT, alchaincyf), where self-scores ran about ten points above independent review.

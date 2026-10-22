@@ -1,4 +1,4 @@
-# Who's in the attic? — modern TV cartoon prompt package (v2)
+# Who's in the attic? — modern TV cartoon spec package (v2)
 
 Modern American TV cartoon, multi-character, 16:9, 3 clips, about 30 seconds. Original cast ("The Gullport Fix-It Club"), no likeness to existing shows. Every clip repeats the full anchor of each character on screen, including the RIGHT-wrist marker. One character per hand sentence; the holder is named in the same sentence as the prop and the hand.
 
@@ -7,7 +7,7 @@ Hook card: pattern Reaction before cause / Sudden entry. First frame: a dark att
 ## Clip 1 — Lights out
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style: modern American TV cartoon. Flat bright colour fills with no shading, no gradients and no texture; one thin, even, dark-plum outline on every shape. Characters have rounded bean-shaped bodies, big round heads, simple black dot eyes with one white highlight, small simple mouths, and bendy noodle arms and legs that curve smoothly instead of showing sharp elbows or knees. Noodle limbs always keep the same length: they bend by curving, never by stretching or shrinking. Hands are small rounded cartoon hands with four fingers. Snappy, clear key poses with smooth in-betweens; squash and stretch only on the body, never on the arms or legs. Seen from the front, the arms grow from the outer edge of the shoulders and hang with a visible gap from the waist; they never lie on the chest or belly. Palette: warm tan wood, navy, mustard yellow, teal and coral, with the light source as the brightest shape.
 
@@ -44,7 +44,7 @@ Negative constraints: no 3D render, no CGI, no anime style, no realistic anatomy
 ## Clip 2 — The culprit
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style: modern American TV cartoon. Flat bright colour fills with no shading, no gradients and no texture; one thin, even, dark-plum outline on every shape. Characters have rounded bean-shaped bodies, big round heads, simple black dot eyes with one white highlight, small simple mouths, and bendy noodle arms and legs that curve smoothly instead of showing sharp elbows or knees. Noodle limbs always keep the same length: they bend by curving, never by stretching or shrinking. Hands are small rounded cartoon hands with four fingers. Snappy, clear key poses with smooth in-betweens; squash and stretch only on the body, never on the arms or legs. Seen from the front, the arms grow from the outer edge of the shoulders and hang with a visible gap from the waist; they never lie on the chest or belly. Palette: warm tan wood, navy, mustard yellow, teal and coral, with the light source as the brightest shape.
 
@@ -81,7 +81,7 @@ Negative constraints: no 3D render, no CGI, no anime style, no realistic anatomy
 ## Clip 3 — A closer look
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style: modern American TV cartoon. Flat bright colour fills with no shading, no gradients and no texture; one thin, even, dark-plum outline on every shape. Characters have rounded bean-shaped bodies, big round heads, simple black dot eyes with one white highlight, small simple mouths, and bendy noodle arms and legs that curve smoothly instead of showing sharp elbows or knees. Noodle limbs always keep the same length: they bend by curving, never by stretching or shrinking. Hands are small rounded cartoon hands with four fingers. Snappy, clear key poses with smooth in-betweens; squash and stretch only on the body, never on the arms or legs. Seen from the front, the arms grow from the outer edge of the shoulders and hang with a visible gap from the waist; they never lie on the chest or belly. Palette: warm tan wood, navy, mustard yellow, teal and coral, with the light source as the brightest shape.
 

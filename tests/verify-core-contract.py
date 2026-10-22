@@ -26,10 +26,10 @@ never = {r[0] for r in rows if r[4].strip() == "never"}
 assert {"C2", "C7", "C8", "C10", "C11"} <= never, never
 assert "never remove" in dict((r[0], r[4]) for r in rows)["C5"]
 
-# Routing: the skill, the prompt contract and the pack template point at the core contract.
+# Routing: the skill, the segment spec contract and the pack template point at the core contract.
 skill = (SKILL / "SKILL.md").read_text()
 assert "references/core-contract.md" in skill
-assert "core-contract.md" in (REFS / "omni-flash-prompt-contract.md").read_text()
+assert "core-contract.md" in (REFS / "segment-spec-contract.md").read_text()
 assert "core-contract.md" in (REFS / "style-pack-template.md").read_text()
 assert "tools/risk_sheet/risk_sheet.py" in skill and "risk_sheet.py" in (REFS / "posture-gate.md").read_text()
 # SKILL.md no longer carries its own copies of rules the core owns elsewhere.
@@ -37,10 +37,10 @@ for copy in ("Never place technical color notation", "Default generated clips to
              "avoid abstract liquid/shape morphing", "Treat narration as audio-only"):
     assert copy not in skill, f"SKILL.md still repeats: {copy}"
 
-# C11: no bundled prompt names a studio, franchise, brand or artist.
+# C11: no bundled spec names a studio, franchise, brand or artist.
 packages = [REFS / "examples.md", *sorted((REFS / "styles/samples").glob("*.md"))]
 for path in packages:
     for block in re.findall(r"```text\n(.*?)\n```", path.read_text(), re.S):
         m = pl.NAMED_SOURCE.search(block)
-        assert not m, f"{path.name} prompt names {m.group(0)}"
+        assert not m, f"{path.name} spec names {m.group(0)}"
 print(f"core contract: 18 rules, owners and checks exist, skill routes through it, {len(packages)} packages name no sources")

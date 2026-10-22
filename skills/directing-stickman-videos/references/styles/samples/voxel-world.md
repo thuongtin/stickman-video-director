@@ -1,6 +1,6 @@
 # Voxel world sample package: “The last stone” (3 clips, 16:9, ~30 s)
 
-Six original blocky characters of one village, Xóm Khối; this story uses Gạch, Bấc, Than, Bà Lúa, Tí Mầm and Trâu Đá. Anchors are the `look` fields of src/cast.py, pasted in full. Hands are named from each character's own side; every character wears the lemon-yellow band on the right wrist (Bấc on its right leg, Trâu Đá on its right foreleg). Bấc and Trâu Đá have no hands and stay out of the hands lines. The score is set once in clip 1 and continues unchanged; each beat names its camera move. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Physics break). The prompts never name any existing game. Not yet tested on Flow.
+Six original blocky characters of one village, Xóm Khối; this story uses Gạch, Bấc, Than, Bà Lúa, Tí Mầm and Trâu Đá. Anchors are the `look` fields of src/cast.py, pasted in full. Hands are named from each character's own side; every character wears the lemon-yellow band on the right wrist (Bấc on its right leg, Trâu Đá on its right foreleg). Bấc and Trâu Đá have no hands and stay out of the hands lines. The score is set once in clip 1 and continues unchanged; each beat names its camera move. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Physics break). The specs never name any existing game. Not yet built into a full rendered video.
 
 ## Global continuity block
 
@@ -17,7 +17,7 @@ Six original blocky characters of one village, Xóm Khối; this story uses Gạ
 ## Clip 1 — One stone short
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a cozy blocky voxel world where everything is built from cubes: a small riverside village of mossy green ground blocks on a grey stone embankment, stone-block walls, bamboo, rice paddies, thatch and clay-tile roofs, in warm late-afternoon light. Every block face carries a low-resolution pixel texture of 16 by 16 square texels, rendered crisp with hard nearest-neighbour edges, never smoothed, blurred or painterly; the texel grid is the same size on every block and stays locked to the faces while the camera moves. Simple sunlit block lighting: top faces brightest, side faces a step darker, soft dark shading in the inside corners where blocks meet, soft short shadows under characters and blocks, no glossy highlights, a light distance haze. Clear blue sky with a few flat square clouds. A clean real-time 3D game-render look with a steady camera; not photoreal, not claymation, not smooth CGI.
 
@@ -50,7 +50,7 @@ Negative constraints: no text, no letters or numbers anywhere, no signs with wor
 ## Clip 2 — The last stone
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a cozy blocky voxel world where everything is built from cubes: a small riverside village of mossy green ground blocks on a grey stone embankment, stone-block walls, bamboo, rice paddies, thatch and clay-tile roofs, in warm late-afternoon light. Every block face carries a low-resolution pixel texture of 16 by 16 square texels, rendered crisp with hard nearest-neighbour edges, never smoothed, blurred or painterly; the texel grid is the same size on every block and stays locked to the faces while the camera moves. Simple sunlit block lighting: top faces brightest, side faces a step darker, soft dark shading in the inside corners where blocks meet, soft short shadows under characters and blocks, no glossy highlights, a light distance haze. Clear blue sky with a few flat square clouds. A clean real-time 3D game-render look with a steady camera; not photoreal, not claymation, not smooth CGI.
 
@@ -83,7 +83,7 @@ Negative constraints: no text, no letters or numbers anywhere, no signs with wor
 ## Clip 3 — The wall holds
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a cozy blocky voxel world where everything is built from cubes: a small riverside village of mossy green ground blocks on a grey stone embankment, stone-block walls, bamboo, rice paddies, thatch and clay-tile roofs, in warm late-afternoon light. Every block face carries a low-resolution pixel texture of 16 by 16 square texels, rendered crisp with hard nearest-neighbour edges, never smoothed, blurred or painterly; the texel grid is the same size on every block and stays locked to the faces while the camera moves. Simple sunlit block lighting: top faces brightest, side faces a step darker, soft dark shading in the inside corners where blocks meet, soft short shadows under characters and blocks, no glossy highlights, a light distance haze. Clear blue sky with a few flat square clouds. A clean real-time 3D game-render look with a steady camera; not photoreal, not claymation, not smooth CGI.
 
@@ -117,11 +117,11 @@ Negative constraints: no text, no letters or numbers anywhere, no signs with wor
 
 1. Clip 1 → Clip 2: clip 1 ends with Gạch beside the gap, mallet in her right hand, looking left; clip 2 opens with Gạch at the same spot facing left as Than walks in from the left edge. Hard cut on Than's first step; 4–6 frame audio crossfade on the marimba.
 2. Clip 2 → Clip 3: approved time cut to golden hour at the same wall. What continues: Gạch, her mallet in the right hand, the finished wall. What changes: light, Than and Bấc leave, Bà Lúa, Tí Mầm and Trâu Đá join. Hard cut; no dissolve (a dissolve between block worlds smears the texel grid).
-3. If the model blurs the small stone growing into the full block, trim clip 2 to cut on the click.
-4. Inspect each real join: if a clip ends on a different hand or side of the frame, trim to the last frame that matches the Hands at end line rather than trusting the prompt. Check every frame for game UI, text, a familiar green mob or a green-lip-over-dirt block before publishing.
+3. If the small stone's growth into the full block reads as a blur, trim clip 2 to cut on the click.
+4. Inspect each real join: if a clip ends on a different hand or side of the frame, trim to the last frame that matches the Hands at end line rather than trusting the spec. Check every frame for game UI, text, a familiar green mob or a green-lip-over-dirt block before publishing.
 
 ## Voice and music continuity note
 
 - Every clip repeats the same narrator paragraph word for word, and clips 2–3 say the marimba and woodblock continue from clip 1 with identical tempo and instrumentation. Check by listening to the three clips back to back.
-- If the voice or score drifts, first retest a voice-only change with the visuals, dialogue and music held fixed; the fallback is one continuous external English VO and marimba track laid over the assembled picture.
-- Post-production: no colour grade that softens edges; an optional 2× nearest-neighbour down-and-up pass can re-harden soft texels (untested; check faces after it).
+- Record the narration as one VO track with this voice block, cut it to the beats, and lay the marimba as one continuous bed over the assembled picture.
+- Post-production: no colour grade that softens edges; render textures with nearest-neighbour sampling so texels stay hard.

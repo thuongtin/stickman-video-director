@@ -3,7 +3,7 @@
 
 Works on a pose track (JSON of 2D joint positions per frame) from either
   * a code-rendered rig (exact joints, strict "rig" profile), or
-  * a pose estimator run on generated frames (estimate_pose.py, "video" profile).
+  * a pose estimator run on rendered frames (estimate_pose.py, "video" profile).
 
 Usage:
   posture_gate.py check track.json [more clips in order...] [--profile rig|pixel|video] [--report DIR]
@@ -691,7 +691,7 @@ def raw_points(frame, min_conf):
 
 
 def check_hands(track, P, usable=None):
-    """Left/right mistakes generated video makes: arms trading places, the upper body
+    """Left/right mistakes animation makes: arms trading places, the upper body
     flipped against the legs, a prop jumping to the other hand, a prop drawn in the
     wrong hand, a left hand drawn on the right arm (mirrored hand), a hand missing what
     it should touch, and a forearm sweeping across the face."""

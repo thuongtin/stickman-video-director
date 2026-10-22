@@ -5,7 +5,7 @@ Recurring cast: Gary, Denise, Benji, Kayla, Ray, Grandpa Walt (five on screen at
 ## Clip 1 — Click
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a flat 2D prime-time American animated sitcom look. Every shape has one clean, uniform black outline of the same weight everywhere, on characters, props and backgrounds alike. Flat cel colors only: no shading, no gradients, no rim light, no texture. Characters have natural human skin tones, simple oval eyes that sit apart with small black dot pupils, thick single-stroke eyebrows, and a nose shape of their own. Backgrounds are simple, slightly muted flat interiors with straight lines: a suburban living room with a blue three-seat couch facing the viewer, beige walls, a window with red curtains, a framed landscape picture, a yellow floor lamp and an open doorway on the right. The camera is the TV: the couch faces straight at the viewer, a locked-off wide shot like a stage. Animation is limited and deliberate: characters hold still between actions, and comedy lands on held deadpan looks.
 
@@ -38,7 +38,7 @@ Negative constraints: no 3D render, no CGI, no gradients or soft shading, no ani
 ## Clip 2 — The grab
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a flat 2D prime-time American animated sitcom look. Every shape has one clean, uniform black outline of the same weight everywhere, on characters, props and backgrounds alike. Flat cel colors only: no shading, no gradients, no rim light, no texture. Characters have natural human skin tones, simple oval eyes that sit apart with small black dot pupils, thick single-stroke eyebrows, and a nose shape of their own. Backgrounds are simple, slightly muted flat interiors with straight lines: a suburban living room with a blue three-seat couch facing the viewer, beige walls, a window with red curtains, a framed landscape picture, a yellow floor lamp and an open doorway on the right. The camera is the TV: the couch faces straight at the viewer, a locked-off wide shot like a stage. Animation is limited and deliberate: characters hold still between actions, and comedy lands on held deadpan looks.
 
@@ -71,7 +71,7 @@ Negative constraints: no 3D render, no CGI, no gradients or soft shading, no ani
 ## Clip 3 — The real boss
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a flat 2D prime-time American animated sitcom look. Every shape has one clean, uniform black outline of the same weight everywhere, on characters, props and backgrounds alike. Flat cel colors only: no shading, no gradients, no rim light, no texture. Characters have natural human skin tones, simple oval eyes that sit apart with small black dot pupils, thick single-stroke eyebrows, and a nose shape of their own. Backgrounds are simple, slightly muted flat interiors with straight lines: a suburban living room with a blue three-seat couch facing the viewer, beige walls, a window with red curtains, a framed landscape picture, a yellow floor lamp and an open doorway on the right. The camera is the TV: the couch faces straight at the viewer, a locked-off wide shot like a stage. Animation is limited and deliberate: characters hold still between actions, and comedy lands on held deadpan looks.
 

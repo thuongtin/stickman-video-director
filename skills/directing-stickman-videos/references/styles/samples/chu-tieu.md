@@ -16,7 +16,7 @@ Hook card (Phase A): Pattern: Sudden entry. First frame: little An sweeps the la
 ## Clip 1 — The last leaf
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a calm, minimal 2D chibi illustration in a soft picture-book style. Flat pastel colors with no gradients and no texture: warm rice-paper cream background, soft grey, monastic brown, light tan, blue-grey and one gentle sage green, with a single soft pink accent. Every shape has one thin, even, warm brown-grey outline. Lots of empty space: a quiet temple yard with one pale ground line, the plain curved corner of a tiled roof at the upper left, one bare branch with a few leaves at the upper right and a pale morning sun. Few elements, no clutter, no crowds, no statues, no altar, no signs.
 
@@ -49,7 +49,7 @@ Negative constraints: no 3D render, no CGI, no gradients, no shading or soft air
 ## Clip 2 — One stroke for each breath
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a calm, minimal 2D chibi illustration in a soft picture-book style. Flat pastel colors with no gradients and no texture: warm rice-paper cream background, soft grey, monastic brown, light tan, blue-grey and one gentle sage green, with a single soft pink accent. Every shape has one thin, even, warm brown-grey outline. Lots of empty space: a quiet temple yard with one pale ground line, the plain curved corner of a tiled roof at the upper left, one bare branch with a few leaves at the upper right and a pale morning sun. Few elements, no clutter, no crowds, no statues, no altar, no signs.
 
@@ -82,7 +82,7 @@ Negative constraints: no 3D render, no CGI, no gradients, no shading or soft air
 ## Clip 3 — Leaves will fall again
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a calm, minimal 2D chibi illustration in a soft picture-book style. Flat pastel colors with no gradients and no texture: warm rice-paper cream background, soft grey, monastic brown, light tan, blue-grey and one gentle sage green, with a single soft pink accent. Every shape has one thin, even, warm brown-grey outline. Lots of empty space: a quiet temple yard with one pale ground line, the plain curved corner of a tiled roof at the upper left, one bare branch with a few leaves at the upper right and a pale morning sun. Few elements, no clutter, no crowds, no statues, no altar, no signs.
 
@@ -114,17 +114,17 @@ Negative constraints: no 3D render, no CGI, no gradients, no shading or soft air
 
 ## Stitching guide
 
-1. Generate clip 1 and check the hook frame (the leaf on An's head at about 1.5 s) and the bracelet side before going on.
-2. Generate clip 2 from clip 1's last frame if the generation tool offers frame-to-video; otherwise use the prompt alone. Cut clip 1 to clip 2 on the broom stroke: trim to the first frame where An's broom is in both hands.
+1. Render clip 1 and check the hook frame (the leaf on An's head at about 1.5 s) and the bracelet side before going on.
+2. Start clip 2 from clip 1's last pose (same rig state, same set). Cut clip 1 to clip 2 on the broom stroke: trim to the first frame where An's broom is in both hands.
 3. Clip 3 begins after a time cut: join it to clip 2 with a short (about 12-frame) cross-dissolve, the only dissolve in the video.
 4. Hold the last frame of clip 3 for about one second of silence while the bell fades, then end.
-5. Reject and regenerate any clip where the bracelet changes wrist, the broom or cup changes hands without a visible pass, a statue, altar or writing appears, or the cat grows a fifth leg.
+5. Fix and re-render any clip where the bracelet changes wrist, the broom or cup changes hands without a visible pass, a statue, altar or writing appears, or the cat grows a fifth leg.
 
 ## Voice and music continuity
 
 - The narrator for this video is one off-screen adult male voice with a gentle Vietnamese accent speaking English; the same Voice paragraph is pasted verbatim in all three clips. The narrator belongs to this video, not to the style: another video may cast another voice or Vietnamese narration, and then that new paragraph is frozen across its clips.
 - Music: clip 1 sets the slow, sparse bamboo flute melody over a soft low drone; clips 2 and 3 continue the identical score with the same tempo and instrumentation. At most one bell tone per clip.
-- If the clips are stitched with a separate music bed in post, mute the generated music and keep the VO and sound effects.
+- Lay the VO, the music bed and the sound effects as separate tracks in the edit.
 
 ## Bản dịch tham khảo lời đọc (tiếng Việt)
 

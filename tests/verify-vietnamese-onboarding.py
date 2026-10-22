@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Check the Vietnamese default homepage, its fork section, section layout, and preview budgets."""
+"""Check the Vietnamese default homepage, its fork section, section layout, and motion previews."""
 from pathlib import Path
 import re
-import struct
 
 root = Path(__file__).resolve().parents[1]
 vi = (root / "README.md").read_text()
 assert vi == (root / "README.vi.md").read_text()
 assert not (root / "README.zh-CN.md").exists(), "The Chinese README was replaced by the Vietnamese one"
-assert "# Thư viện phong cách hoạt hình người que bằng AI" in vi
+assert "# Thư viện phong cách hoạt hình người que bằng motion graphics" in vi
 for heading in ("## Chọn phong cách", "## Bản fork này thêm gì", "## Skill làm được gì", "## Bắt đầu",
                 "## Vài mẹo thực tế", "## Cập nhật mới", "## Nên thêm gì tiếp theo?", "## Star History"):
     assert heading in vi, heading
@@ -49,7 +48,7 @@ for lang in ("vi", "en"):
     for command in ("tools/posture_gate/hand_ledger.py", "tools/package_lint/package_lint.py",
                     "tools/posture_gate/posture_gate.py check", "tools/risk_sheet/risk_sheet.py", "references/storyboard-template.md"):
         assert command in fork, (lang, command)
-    for stale in ("Opening hook:", "opening-hook.md", "flow-tested"):
+    for stale in ("Opening hook:", "opening-hook.md", "flow-tested", "Omni", "Google Flow", "Seedance", "assets/readme/previews"):
         assert stale not in text, (lang, stale)
 assert vi.count('<div align="center">') == vi.count("</div>")
 
@@ -57,23 +56,7 @@ for link in re.findall(r"\]\(([^)]+)\)", vi):
     if "://" not in link and not link.startswith("#"):
         assert (root / link.split("#")[0]).exists(), link
 
-previews = sorted(set(re.findall(r'src="(assets/readme/previews/[^" ]+\.gif)"', vi)))
-assert len(previews) == 8
-old_bytes = new_bytes = 0
-for preview in previews:
-    optimized = root / preview
-    original = root / "assets/readme" / optimized.name
-    assert optimized.exists()
-    header = optimized.read_bytes()[:10]
-    assert header[:6] in (b"GIF87a", b"GIF89a")
-    assert struct.unpack("<HH", header[6:10]) == (400, 225)
-    assert optimized.stat().st_size < original.stat().st_size
-    old_bytes += original.stat().st_size
-    new_bytes += optimized.stat().st_size
-assert new_bytes < old_bytes * 0.6, "Preview total should shrink by at least 40%"
+assert not (root / "CHANGELOG.zh-CN.md").exists() and "CHANGELOG" not in vi
+assert not (root / "assets/readme/previews").exists(), "The AI-made demo clips were removed"
 
-for lang in ("en", "ja", "ko", "pt-BR"):
-    text = (root / f"README.{lang}.md").read_text()
-    assert "assets/readme/previews/" in text, "Localized pages use the same lightweight previews"
-
-print(f"Vietnamese onboarding passed; previews {old_bytes:,} -> {new_bytes:,} bytes ({1-new_bytes/old_bytes:.1%} smaller).")
+print("Vietnamese onboarding passed; homepage is motion graphics only.")

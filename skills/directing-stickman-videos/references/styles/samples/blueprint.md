@@ -18,7 +18,7 @@ Post-production text (optional): none is needed; any title goes in the blank tit
 ## Clip 1 — One empty shaft
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: an animated engineering blueprint in flat 2D. The whole frame is cyanotype paper: deep Prussian-blue ground with slightly uneven exposure, faint fold creases, and a fine pale-blue drafting grid with a heavier line every fifth square, a thin double white border and an empty ruled title block in the lower right corner. Everything is drawn in crisp pale white lines of one or two weights over flat, slightly lighter blue fills; there is no other color. Draftsman's marks stay on every drawing: small pin-joint circles with cross-hairs at shoulders, elbows and knees, faint dash-dot centre lines through limbs and machines, dashed hidden lines for parts behind a wall, 45-degree section hatching on cut surfaces and work clothes, dimension lines with arrowheads whose labels are blank rounded capsules, and faint head guides (a centre line and an eye line) running just past each head. Machines are shown in cutaway: housings in hatched section with gear trains inside. New machine parts appear by being plotted on line by line, left to right, never by fading or morphing. Characters stand in flat side or front view on two white ground lines; the back row stands higher, not smaller.
 
@@ -51,7 +51,7 @@ Negative constraints: no letters, words, numbers, measurements, formulas, labels
 ## Clip 2 — Special delivery
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: an animated engineering blueprint in flat 2D. The whole frame is cyanotype paper: deep Prussian-blue ground with slightly uneven exposure, faint fold creases, and a fine pale-blue drafting grid with a heavier line every fifth square, a thin double white border and an empty ruled title block in the lower right corner. Everything is drawn in crisp pale white lines of one or two weights over flat, slightly lighter blue fills; there is no other color. Draftsman's marks stay on every drawing: small pin-joint circles with cross-hairs at shoulders, elbows and knees, faint dash-dot centre lines through limbs and machines, dashed hidden lines for parts behind a wall, 45-degree section hatching on cut surfaces and work clothes, dimension lines with arrowheads whose labels are blank rounded capsules, and faint head guides (a centre line and an eye line) running just past each head. Machines are shown in cutaway: housings in hatched section with gear trains inside. New machine parts appear by being plotted on line by line, left to right, never by fading or morphing. Characters stand in flat side or front view on two white ground lines; the back row stands higher, not smaller.
 
@@ -84,7 +84,7 @@ Negative constraints: no letters, words, numbers, measurements, formulas, labels
 ## Clip 3 — It turns
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: an animated engineering blueprint in flat 2D. The whole frame is cyanotype paper: deep Prussian-blue ground with slightly uneven exposure, faint fold creases, and a fine pale-blue drafting grid with a heavier line every fifth square, a thin double white border and an empty ruled title block in the lower right corner. Everything is drawn in crisp pale white lines of one or two weights over flat, slightly lighter blue fills; there is no other color. Draftsman's marks stay on every drawing: small pin-joint circles with cross-hairs at shoulders, elbows and knees, faint dash-dot centre lines through limbs and machines, dashed hidden lines for parts behind a wall, 45-degree section hatching on cut surfaces and work clothes, dimension lines with arrowheads whose labels are blank rounded capsules, and faint head guides (a centre line and an eye line) running just past each head. Machines are shown in cutaway: housings in hatched section with gear trains inside. New machine parts appear by being plotted on line by line, left to right, never by fading or morphing. Characters stand in flat side or front view on two white ground lines; the back row stands higher, not smaller.
 
@@ -118,10 +118,10 @@ Negative constraints: no letters, words, numbers, measurements, formulas, labels
 
 1. Clip 1 → Clip 2: Nova's grip at the end of clip 1 is the same as at the start of clip 2 (compare the Hands lines); clip 2 opens with Nova at the right while Hank walks in from the left. Hard cut on Hank's first step; a 4–6 frame audio crossfade on the clockwork rhythm.
 2. Clip 2 → Clip 3: Nova's two-hand grip at the end of clip 2 carries into clip 3, which opens with her below the empty shaft, Mira and Hank on the front line and Cog on the back row. Hard cut; no crossfade on the picture.
-3. Inspect each real join: if a generated clip ends on a different grip, a cuff on the wrong wrist or a prop in a different place, trim to the last frame where the hands match the Hands at end line rather than trusting the prompt. Check that the grid and title block do not jump at the cut.
+3. Inspect each real join: if a rendered clip ends on a different grip, a cuff on the wrong wrist or a prop in a different place, trim to the last frame where the hands match the Hands at end line rather than trusting the spec. Check that the grid and title block do not jump at the cut.
 
 ## Voice and music continuity note
 
 - Every clip repeats the same narrator paragraph word for word, and clips 2–3 say the clockwork rhythm and pizzicato strings continue from clip 1 with the same tempo and instrumentation. Check by listening to the three clips back to back, not from stills.
-- If the voice drifts, first retest a voice-only change with the visuals, dialogue and music held fixed; one continuous external English VO and clockwork track laid over the assembled picture is the fallback.
+- Record the narration as one VO track with this voice block, cut it to the beats, and lay the clockwork as one continuous bed over the assembled picture.
 - Post-production: fill the blank dimension capsules and the title block as the style pack says, add subtitles below the lower ground line, keep the double border visible, and do not colour-grade (any tint breaks the one-pigment look).

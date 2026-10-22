@@ -9,13 +9,13 @@ Not covered: Minh and Bảo in a package, 9:16, crowds (4+ in one clip), night s
 
 Slug: `stylized-3d-family`. Evidence: posture gate on 186 pose tracks and two multi-character motion tests ([README.md](README.md), `gallery/gate-output-v2.txt`, `motion/gate-motion.txt`); the sample package [samples/stylized-3d-family.md](samples/stylized-3d-family.md) passes `package_lint.py` and `hand_ledger.py` ([facts block](samples/stylized-3d-family.facts.md)); `tests/verify-opening-hook.py` passes on it.
 
-The mainstream US animated-feature look: stylized 3D characters with appealing exaggerated proportions, big expressive eyes, soft rounded forms, satin skin with a warm glow at the shadow edge, sculpted hair and matte cloth, under soft cinematic light. All characters are original. Prompts describe the look in plain words and never name a studio, film or character.
+The mainstream US animated-feature look: stylized 3D characters with appealing exaggerated proportions, big expressive eyes, soft rounded forms, satin skin with a warm glow at the shadow edge, sculpted hair and matte cloth, under soft cinematic light. All characters are original. Specs describe the look in plain words and never name a studio, film or character.
 
 ## 1. Signature checklist
 
 ### Sources
 
-These works are named here as research only. Prompts never name them, and the cast copies none of their characters, costumes or colour combinations. Frames studied on 2026-10-20; local copies for review are in `research/frames/` (the CC-BY Blender stills may be kept; the two posters are copyrighted and are kept only as a research record, never published).
+These works are named here as research only. Specs never name them, and the cast copies none of their characters, costumes or colour combinations. Frames studied on 2026-10-20; local copies for review are in `research/frames/` (the CC-BY Blender stills may be kept; the two posters are copyrighted and are kept only as a research record, never published).
 
 | Work | Image looked at | Confirms | Contradicts, and what changed |
 |---|---|---|---|
@@ -50,7 +50,7 @@ Catalog: **Style 2B** is the closest catalog entry (full-colour cinematic sets, 
 
 ### Why this style is allowed when Style 2B bans 3D CGI
 
-Style 2B bans "3D humanoid CGI" because a prompt that only says "3D" lets the model drift toward semi-realistic humans: small eyes, real skin texture, adult proportions on a doll body. That middle zone is the uncanny valley. This style avoids it by pushing far to the stylized side on every axis at once, and by naming those axes in every clip:
+Style 2B bans "3D humanoid CGI" because a spec that only says "3D" invites semi-realistic humans: small eyes, real skin texture, adult proportions on a doll body. That middle zone is the uncanny valley. This style avoids it by pushing far to the stylized side on every axis at once, and by naming those axes in every clip:
 
 | Axis | Stylized side (ask for) | Uncanny middle (ban) |
 |---|---|---|
@@ -58,13 +58,13 @@ Style 2B bans "3D humanoid CGI" because a prompt that only says "3D" lets the mo
 | Eyes | each eye about a quarter of the head width (kids), one flat iris colour, black pupil, one catchlight | small realistic eyes, wet red rims, veins, detailed eyelashes |
 | Skin | smooth satin, one tone, warm glow at the shadow edge | pores, wrinkles, stubble, glossy plastic or doll sheen |
 | Face detail | button nose, no nostril holes, simple mouth shapes, soft sculpted brows | realistic teeth and lips, nostrils, eye bags |
-| Hair | a few large sculpted clumps of one colour (strands are allowed in the genre, banned in this cast to keep hair stable in video) | flyaways, wet or greasy realistic hair |
+| Hair | a few large sculpted clumps of one colour (strands are allowed in the genre, banned in this cast to keep hair stable in motion) | flyaways, wet or greasy realistic hair |
 | Hands | simplified cartoon hands (this cast: three fingers and a thumb) | realistic knuckles, nails and veins |
 | Motion | clear key poses, slight squash and stretch, weighty | motion-capture jitter, realistic micro-movement |
 
-Will Omni Flash hold it? Likely for faces and materials, less certain for hands and proportions. Video models have seen far more stylized family-film 3D than any other 3D look, so these words are a strong attractor. The risks are (1) adults drifting to realistic heights and small eyes in wide shots, (2) five-fingered hands coming back in close-ups, (3) a likeness of a famous character if a studio or film is named, which is why prompts never name one. Test order on Flow: one character close-up, one adult in a wide shot, then the package.
+Will the build hold it? The characters are built once as simple 3D rigs, so faces, materials, proportions and the three-fingered hands are fixed in the model sheet, not re-described per shot. The risks are (1) adults posed or scaled to realistic heights in wide shots, (2) a five-fingered hand swapped in from a stock asset, (3) a likeness of a famous character if a studio or film is named, which is why specs never name one. Build order: one character close-up, one adult in a wide shot, then the package.
 
-### Prompt wording for each `must` trait
+### Spec wording for each `must` trait
 
 The frozen style block below says each one in plain words. It is repeated verbatim in every clip.
 
@@ -97,7 +97,7 @@ Every character has exactly two arms and two legs and cartoon hands with three f
 
 Anchor rules:
 
-- Use ASCII names in prompts ("Su", "Linh", "Bao"), one spelling per character; Vietnamese family titles (Bé, Mẹ, Bố, Ông) stay out of prompts.
+- Use ASCII names in specs ("Su", "Linh", "Bao"), one spelling per character; Vietnamese family titles (Bé, Mẹ, Bố, Ông) stay out of specs.
 - Write each relation so it reads correctly without the other character in the clip ("a mother", not "Lulu's mother").
 - Keep props out of the anchors; a ball goes in `Props:` and in the `Hands` lines.
 - Lulu's hair is two low pigtails with coral ties. The first design (two round buns on top of a round head) read in silhouette as a famous mouse mascot's ears and was dropped.
@@ -114,7 +114,7 @@ Anchor rules:
 
 ## 5. Text, motion, camera
 
-- **Text policy: `post-overlay`.** No words, letters or numbers in the frame; shelves, boxes and toys carry no labels. Titles, captions or subtitles are added in post (section 8), never in the prompt.
+- **Text policy: `post-overlay`.** No words, letters or numbers in the frame; shelves, boxes and toys carry no labels. Titles, captions or subtitles are added in post (section 8), never in the spec.
 - **Motion cadence: `smooth`.** Clear key poses held for a beat, then smooth eased moves; anticipation before big actions; slight squash and stretch on the body, never on limbs.
 - **Camera.** Follow the camera grammar in `storyboard-template.md`; name the move at the start of every beat.
   - Transition moves: hold, slow push-in, slow pull back, slow lateral track or pan, hard cut.
@@ -164,13 +164,13 @@ Gating 186 pose tracks (6 characters × 31 actions; walk from CMU motion capture
 Negatives, verbatim in every clip. They include the five shared posture negatives from `posture-gate.md`:
 
 ```text
-Do not generate photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ## 8. Post-production
 
 1. Trim each clip to its 10 s beats and cut hard between clips; clip 3 is a time and place cut.
-2. Check the risky frames before stitching: each ball pass, the low five, and each character's first frame for the yellow band on the RIGHT wrist and three fingers plus a thumb. Re-generate a clip if the band moves wrists or a fifth finger appears.
+2. Check the risky frames before stitching: each ball pass, the low five, and each character's first frame for the yellow band on the RIGHT wrist and three fingers plus a thumb. Fix the rig and re-render a clip if the band moves wrists or a fifth finger appears.
 3. Check adults in wide shots for height and eye-size drift against `sheets/cast-lineup.png`.
 4. Normalise the stitched video to about -14 LUFS integrated, with the hook boing no more than 6 dB above the music bed.
 5. Titles and subtitles, if wanted, are burned in after stitching (text policy `post-overlay`).
@@ -181,8 +181,8 @@ Sudden entry, Reaction before cause and Visual metaphor suit this style: a prop 
 
 ## 10. Sample package and gates
 
-- [samples/stylized-3d-family.md](samples/stylized-3d-family.md): 3 clips, "The red ball", with 3, 2 and 2 characters on screen. Earlier versions: `prompts/package-v1.md`, `prompts/package-v2.md`.
-- `tools/package_lint/package_lint.py package.md --clips 3 --anchor "<style block>" --anchor "<shared rules>" --anchor "<negatives>" --anchor "<voice>"`, from branch `claude/posture-gate-drmgl9` at f99e90a and at 99de4b9 (its hand ledger matches the shared copy): PASS, 0 red, 0 yellow (none storyboard rows, 3 prompts). [Facts block](samples/stylized-3d-family.facts.md).
+- [samples/stylized-3d-family.md](samples/stylized-3d-family.md): 3 clips, "The red ball", with 3, 2 and 2 characters on screen. Earlier versions: `specs/package-v1.md`, `specs/package-v2.md`.
+- `tools/package_lint/package_lint.py package.md --clips 3 --anchor "<style block>" --anchor "<shared rules>" --anchor "<negatives>" --anchor "<voice>"`, from branch `claude/posture-gate-drmgl9` at f99e90a and at 99de4b9 (its hand ledger matches the shared copy): PASS, 0 red, 0 yellow (none storyboard rows, 3 specs). [Facts block](samples/stylized-3d-family.facts.md).
 - `tests/verify-opening-hook.py`: passed. `hand_ledger.py` (shared copy): PASS.
 - Posture gate: 186/186 pose tracks PASS with 0 errors in v2; front-view tracks export `body_width`, `body_profile` (the pear bodies are wider at the belly) and `limb_width`. With the gate's arm-thickness check (PR #4 @f99e90a), 178/186 have no warnings. Su's hanging arms first grazed his belly by about a pixel (10 tracks warned), so his arms now hang a little further out. The 8 that still warn were checked by eye and kept: self-hug and crossed-arm poses whose upper arms pass in front of the chest by design (cold for Ray, Linh, Minh and Bao, Su's belly laugh), one in-between frame of Su's cross and cold, and Minh's facepalm, whose bare upper arm stays readable against the blue shirt (v1 drafts, re-gated with the current gate: 166/186 clean, 4 failing, plus 4 faults found only by eye: Su's hand on chin read as hand on chest, the kids' raised ball covering the eyes, and the kids' one-hand face cover). 6/6 motion tracks and both `--scene` shots PASS; the high five and the handoff were re-staged after the audit found a hand passing Su's face and the ball crossing his face, both of which the gate passed ([README.md](README.md), `motion/v2/` keeps the earlier staging).
 
