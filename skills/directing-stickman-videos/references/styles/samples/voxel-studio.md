@@ -65,16 +65,16 @@ First frame: Mai and Hà are already stepping onto the platform next to Khôi fr
 
 Timed beats:
 - [0–3s] (VO: "So he asks two friends for help."): Mai waves her right hand from the elbow, out to the side of her head. Khôi bends at the knees and picks up the fallen cube with his right hand. Camera: hold.
-- [3–7s] (VO: "One cube to Mai, one cube to Hà."): Khôi holds out the fallen cube in his right hand, and Mai takes the fallen cube from Khôi with her left hand. Khôi lifts the top piece off the cube stack with his right hand, and Hà takes the top piece from Khôi with her left hand. Camera: hold during both passes.
-- [7–10s] (VO: "Three friends, three tasks, and nobody drops one."): Khôi picks up the bottom block with his right hand. Khôi raises the bottom block in his right hand, Mai raises the fallen cube in her left hand and Hà raises the top piece in her left hand, all three arms out to the side, away from their faces. Bit hops once. Camera: hold while the three cubes are raised, then a slow pull back once the arms are still.
+- [3–7s] (VO: "One cube to Mai."): Khôi holds out the fallen cube in his right hand, and Mai takes the fallen cube from Khôi with her left hand. Hà watches with her hands at her sides. Camera: hold during the pass.
+- [7–10s] (VO: "One cube to Hà, and nobody drops one."): Khôi lifts the top piece off the cube stack with his right hand, and Hà takes the top piece from Khôi with her left hand. Khôi picks up the bottom block with his right hand and raises it out to the side, away from his face. Mai holds the fallen cube in her left hand at her side, and Bit floats still. Camera: hold during the pass and the raise, then a slow pull back once Khôi's arm is still.
 
 Dialogue: audio voiceover only, strictly no speech bubbles, no dialogue boxes. Speak exactly the quoted lines once, in order; do not add, omit, paraphrase, repeat, caption, subtitle or display any words.
 
 Voice: One off-screen adult male narrator throughout. General American accent, warm clean baritone, medium-low pitch, gentle chest resonance, no raspiness or breathiness. Calm conversational delivery, restrained pitch variation, steady speaking pace, and close, dry studio sound. Keep the same vocal timbre, register, accent, pace, and recording quality throughout. Emotional progression belongs to the visuals and music; do not change the narrator's voice or switch to character dialogue.
 
-Audio: the same soft plucked kalimba and light marimba melody over a gentle synth pad at a calm walking tempo continues from clip 1 with identical tempo and instrumentation; a soft click at each pass; one light hop sound.
+Audio: the same soft plucked kalimba and light marimba melody over a gentle synth pad at a calm walking tempo continues from clip 1 with identical tempo and instrumentation; a soft click at each pass.
 
-Final frame: the three friends stand on two platforms, each holding one orange cube out to the side: Khôi in his right hand, Mai and Hà in their left hands; Bit floats behind them.
+Final frame: the three friends stand on two platforms, each holding one orange cube: Khôi out to the side in his right hand, Mai and Hà at their sides in their left hands; Bit floats behind them.
 Hands at end — Khôi: right hand holds the bottom block; left hand empty. Mai: right hand empty; left hand holds the fallen cube. Hà: right hand empty; left hand holds the top piece.
 
 Negative constraints: no text, no letters or numbers anywhere, no signs with words, no screens with writing, no game interface, no logos, no brand marks, no watermark, no speech bubbles, no dialogue boxes, no existing cartoon or video-game characters, no pixel textures on the cube faces, no shiny plastic, no round studs, no outdoor scenery, no strong colours other than orange, no fingers, no stretched limbs, no limbs passing through bodies, no wristband on the left wrist, no hand or held cube covering a face, no cubes growing or shrinking, no morphing, no duplicate characters, no realistic human bodies, no photoreal people, no 2D cartoon outlines, no knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass.
@@ -99,7 +99,7 @@ First frame: Khôi already crouches at the edge of the gap, reaching down with t
 Timed beats:
 - [0–3s] (VO: "A small gap needs only a small bridge."): Khôi places the bottom block in the gap with his right hand and lets go; it clicks into place level with the platform tops. Khôi stands up. Camera: hold.
 - [3–7s] (VO: "Mai and Hà set their cubes beside his."): Mai places the fallen cube in the gap next to it with her left hand and lets go. Hà places the top piece in the last space with her left hand and lets go. The three orange cubes now make a thin bridge across the gap. Camera: hold during both placements, then a slow lateral track along the bridge.
-- [7–10s] (VO: "What would you hand to a friend today?"): Bit hops across the orange cube bridge to Bác Tùng, who waves his right hand out beside his head. Khôi, Mai and Hà cheer with both arms raised out to the sides, away from their faces. Camera: hold while the cast waves and cheers, then a slow pull back to the wide shot once the arms come down.
+- [7–10s] (VO: "What would you hand to a friend today?"): Bit hops across the orange cube bridge to Bác Tùng, who waves his right hand out beside his head. Khôi, Mai and Hà watch and smile with their hands at their sides. Camera: hold while Bác Tùng waves, then a slow pull back to the wide shot once his arm comes down.
 
 Dialogue: audio voiceover only, strictly no speech bubbles, no dialogue boxes. Speak exactly the quoted lines once, in order; do not add, omit, paraphrase, repeat, caption, subtitle or display any words.
 
@@ -107,7 +107,7 @@ Voice: One off-screen adult male narrator throughout. General American accent, w
 
 Audio: the same soft plucked kalimba and light marimba melody over a gentle synth pad at a calm walking tempo continues from clip 1 with identical tempo and instrumentation; three soft clicks as the cubes settle; light hop sounds; a warm chime at the end.
 
-Final frame: the orange cube bridge spans the gap; Bit floats beside Bác Tùng on the far platform; Khôi, Mai and Hà stand on the near platform with their arms raised and empty hands.
+Final frame: the orange cube bridge spans the gap; Bit floats beside Bác Tùng on the far platform; Khôi, Mai and Hà stand on the near platform smiling, their empty hands at their sides.
 Hands at end — Khôi: right hand empty; left hand empty. Mai: right hand empty; left hand empty. Hà: right hand empty; left hand empty. Bác Tùng: right hand empty; left hand empty.
 
 Negative constraints: no text, no letters or numbers anywhere, no signs with words, no screens with writing, no game interface, no logos, no brand marks, no watermark, no speech bubbles, no dialogue boxes, no existing cartoon or video-game characters, no pixel textures on the cube faces, no shiny plastic, no round studs, no outdoor scenery, no strong colours other than orange, no fingers, no stretched limbs, no limbs passing through bodies, no wristband on the left wrist, no hand or held cube covering a face, no cubes growing or shrinking, no morphing, no duplicate characters, no realistic human bodies, no photoreal people, no 2D cartoon outlines, no knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass.

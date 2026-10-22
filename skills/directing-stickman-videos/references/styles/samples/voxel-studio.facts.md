@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `voxel-studio.md` sha256 70ad260e713c678b
+- package: `voxel-studio.md` sha256 018c12813a115cc8
 - checked: 2026-10-22
 - storyboard rows: none
 - prompts: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=06a39bea86fbf53c190cbd83e6b921c69fef6be3e2c5d5a727b3d54a25130e1f -->
+<!-- package_lint facts end sha256=15dee1e7a13c42da9b389b4c8c61d21e37fb713aa6b39f396c996a0babed0f38 -->
