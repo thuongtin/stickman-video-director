@@ -1,0 +1,10 @@
+{
+  "segment_video_sha256": "5f4785840ae46b72937b5bd8ab5633b890ef9a655562379bee96f2dff8c282d0",
+  "source_video_sha256": "bd9cd22120aac0b0c736ef28fb64781f62db572415580f0683404c03d1d5e9fa",
+  "source_world_offset_seconds": 10,
+  "last_frame_timestamp": 9.958333,
+  "seek_ceiling": 9.957333,
+  "method": "repository risk_sheet, plus explicitly selected transition moments; final seeks clamped to actual last presentation timestamp",
+  "gate_logic_changed": false,
+  "manual_review": "See signed checklist and final-review.md. Whole-sequence independent review was sequential decoded frames, not real-time playback."
+}

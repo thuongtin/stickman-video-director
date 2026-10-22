@@ -1,0 +1,32 @@
+{
+  "frames_checked": 480,
+  "fps": 24,
+  "duration_seconds": 20.0,
+  "stance_world_drift_max_px": 0.0,
+  "stance_ground_gap_max_px": 0.0,
+  "held_grip_constraint_error_max_px": 0.0,
+  "bone_length_change_max_px": 1.5631940186722204e-13,
+  "held_frames": 281,
+  "camera_cuts": [
+    {
+      "time": 4.416666666666667,
+      "from": 1,
+      "to": 2,
+      "world_pelvis_delta": 0.049770325927170234,
+      "facing_before": "right",
+      "facing_after": "right"
+    },
+    {
+      "time": 6.833333333333333,
+      "from": 2,
+      "to": 3,
+      "world_pelvis_delta": 1.5196759259259238,
+      "facing_before": "right",
+      "facing_after": "right"
+    }
+  ],
+  "camera_tracking_world_translation": true,
+  "full_decode": "passed",
+  "visual_acceptance": "pending",
+  "video_sha256": "bd9cd22120aac0b0c736ef28fb64781f62db572415580f0683404c03d1d5e9fa"
+}

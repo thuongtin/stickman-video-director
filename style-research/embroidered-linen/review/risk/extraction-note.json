@@ -1,0 +1,11 @@
+{
+  "last_frame_timestamp": 9.916667,
+  "seek_ceiling": 9.915667000000001,
+  "method": "repository risk_sheet with presentation-timestamp clamp",
+  "gate_logic_changed": false,
+  "supplemental_risk_times": [
+    1.25,
+    5.5,
+    7.5
+  ]
+}

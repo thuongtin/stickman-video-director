@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "clips": [
+    {
+      "profile": "rig",
+      "frames": 216,
+      "frames_checked": 216,
+      "errors": 0,
+      "warnings": 0,
+      "passed": true,
+      "status": "PASS",
+      "issues": []
+    }
+  ],
+  "sequence": []
+}
