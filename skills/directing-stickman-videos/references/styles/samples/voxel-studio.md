@@ -33,7 +33,7 @@ First frame: Khôi is already mid-stride on the platform path, carrying the wobb
 Timed beats:
 - [0–3s] (VO: "One person, too many tasks, and one falls."): Khôi walks right with the cube stack in his right hand and his left hand. At about 1.5s the top orange cube tips off the cube stack, falls to the platform with a soft pop and rolls to a stop. Khôi stops mid-step, eyes wide behind his glasses. Camera: slow lateral track with Khôi, then hold.
 - [3–7s] (VO: "Bit hops over to see what went wrong."): Bit hops in from the right in two small hops and lands beside the fallen cube, its white eyes wide. Khôi turns his head toward Bit. Camera: hold.
-- [7–10s] (VO: "Maybe the problem is doing it all alone."): Khôi sets the cube stack down on the platform and lets go with both hands, then shrugs: his forearms lift out to the sides with the elbows bent, palms up. Bit tilts its round body. Camera: slow push-in on Khôi and Bit.
+- [7–10s] (VO: "Maybe the problem is doing it all alone."): Khôi sets the cube stack down on the platform and lets go with both hands, then shrugs: his forearms lift out to the sides with the elbows bent, palms up. Bit tilts its round body. Camera: hold through the put-down and the shrug, then a slow push-in on Khôi and Bit.
 
 Dialogue: audio voiceover only, strictly no speech bubbles, no dialogue boxes. Speak exactly the quoted lines once, in order; do not add, omit, paraphrase, repeat, caption, subtitle or display any words.
 
@@ -66,7 +66,7 @@ First frame: Mai and Hà are already stepping onto the platform next to Khôi fr
 Timed beats:
 - [0–3s] (VO: "So he asks two friends for help."): Mai waves her right hand from the elbow, out to the side of her head. Khôi bends at the knees and picks up the fallen cube with his right hand. Camera: hold.
 - [3–7s] (VO: "One cube to Mai, one cube to Hà."): Khôi holds out the fallen cube in his right hand, and Mai takes the fallen cube from Khôi with her left hand. Khôi lifts the top piece off the cube stack with his right hand, and Hà takes the top piece from Khôi with her left hand. Camera: hold during both passes.
-- [7–10s] (VO: "Three friends, three tasks, and nobody drops one."): Khôi picks up the bottom block with his right hand. Khôi raises the bottom block in his right hand, Mai raises the fallen cube in her left hand and Hà raises the top piece in her left hand, all three arms out to the side, away from their faces. Bit hops once. Camera: slow pull back.
+- [7–10s] (VO: "Three friends, three tasks, and nobody drops one."): Khôi picks up the bottom block with his right hand. Khôi raises the bottom block in his right hand, Mai raises the fallen cube in her left hand and Hà raises the top piece in her left hand, all three arms out to the side, away from their faces. Bit hops once. Camera: hold while the three cubes are raised, then a slow pull back once the arms are still.
 
 Dialogue: audio voiceover only, strictly no speech bubbles, no dialogue boxes. Speak exactly the quoted lines once, in order; do not add, omit, paraphrase, repeat, caption, subtitle or display any words.
 
@@ -98,8 +98,8 @@ First frame: Khôi already crouches at the edge of the gap, reaching down with t
 
 Timed beats:
 - [0–3s] (VO: "A small gap needs only a small bridge."): Khôi places the bottom block in the gap with his right hand and lets go; it clicks into place level with the platform tops. Khôi stands up. Camera: hold.
-- [3–7s] (VO: "Mai and Hà set their cubes beside his."): Mai places the fallen cube in the gap next to it with her left hand and lets go. Hà places the top piece in the last space with her left hand and lets go. The three orange cubes now make a thin bridge across the gap. Camera: slow lateral track along the bridge.
-- [7–10s] (VO: "What would you hand to a friend today?"): Bit hops across the orange cube bridge to Bác Tùng, who waves his right hand out beside his head. Khôi, Mai and Hà cheer with both arms raised out to the sides, away from their faces. Camera: slow pull back to the wide shot.
+- [3–7s] (VO: "Mai and Hà set their cubes beside his."): Mai places the fallen cube in the gap next to it with her left hand and lets go. Hà places the top piece in the last space with her left hand and lets go. The three orange cubes now make a thin bridge across the gap. Camera: hold during both placements, then a slow lateral track along the bridge.
+- [7–10s] (VO: "What would you hand to a friend today?"): Bit hops across the orange cube bridge to Bác Tùng, who waves his right hand out beside his head. Khôi, Mai and Hà cheer with both arms raised out to the sides, away from their faces. Camera: hold while the cast waves and cheers, then a slow pull back to the wide shot once the arms come down.
 
 Dialogue: audio voiceover only, strictly no speech bubbles, no dialogue boxes. Speak exactly the quoted lines once, in order; do not add, omit, paraphrase, repeat, caption, subtitle or display any words.
 
