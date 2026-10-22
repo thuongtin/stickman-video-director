@@ -66,7 +66,7 @@ Six original characters, a small software team and its robot. They differ first 
 | Character | Role | Anchor |
 |---|---|---|
 | Khoa | lead developer | Khoa: a young man, chibi, about two and a half heads tall. Big round head, light peach skin, messy short black hair with a soft fringe, thick black rectangular glasses, dark eyes. A light-gray zip hoodie worn open over a plain white t-shirt, with gray drawstrings and a hood behind his neck, navy jeans, plain white sneakers. |
-| Bit | robot sidekick | Bit: a small white robot, about two heads tall, a round glossy white head with a dark navy face screen and two glowing cyan oval eyes, round blue ear pods, a short antenna with a blue bead, an egg-shaped white body with a small cyan chest light, short white arms with round white hands, short legs and dark gray feet. |
+| Bit | robot sidekick | Bit: a small white robot, about two heads tall, a round glossy white head with a dark navy face screen and two glowing cyan oval eyes, round blue ear pods, a short antenna with a blue bead, an egg-shaped white body with a small cyan chest light, short white arms with round dark-gray mitten hands, short legs and dark gray feet. |
 | Lan | UI designer | Lan: a young woman, chibi, about two and a half heads tall. Big round head, light peach skin, a dark-brown chin-length bob with a straight fringe, dark eyes. A sky-blue sweater, white trousers, pale-blue sneakers. |
 | Mai | product lead | Mai: a young woman, chibi, about two and a half heads tall. Big round head, warm light-tan skin, a black high ponytail tied with a mint band, dark eyes. A mint-green jacket worn open over a white t-shirt, gray trousers, white sneakers. |
 | Tung | senior engineer | Tung: an older man, chibi, the tallest of the team, about two and three-quarter heads tall. Big round head, warm tan skin, short silver-gray hair, a short neat silver beard, dark eyes. A navy cardigan over a pale-blue shirt, gray trousers, brown shoes. |
@@ -87,12 +87,17 @@ Anchor rules:
 
 ## 4. Core rules this style overrides
 
+Each entry names the rule by its ID in `core-contract.md`. The first two rows change the Style 1/2 catalog look, which is not a core rule.
+
 | Core rule | Override | Reason |
 |---|---|---|
-| Stick figures with plain or line faces | Chibi characters with outlined, softly shaded rounded bodies and simple dot-eye faces | The tech-explainer genre is built from these characters |
-| Piano and ambient score | The frozen soft synth-pluck and marimba score below | Bright product-explainer tone |
-| One hero figure | A team of six named characters, at most two in a clip in the sample | Team and helper stories |
-| Body bans | Raised hands go out beside the head, never in front of the face; a hand never reaches the forehead (section 7) | Big heads and short arms hide hands and faces |
+| Catalog look (Styles 1–2): stick figures with plain or line faces | Chibi characters with outlined, softly shaded rounded bodies and simple dot-eye faces | The tech-explainer genre is built from these characters |
+| Catalog look (Styles 1–2): one hero figure | A team of six named characters, each with a cast card; at most two in a clip in the sample (C12 still applies) | Team and helper stories |
+| C3 (instruments only) | The frozen soft synth-pluck and marimba score in section 6 instead of piano and synth; the continuity sentence is kept | Bright product-explainer tone |
+| C5 (adds limits) | Raised hands go out beside the head, never in front of the face; a hand never reaches the forehead; Bit holds and passes with its right hand only (section 7) | Big heads and short arms hide hands and faces |
+| C9 (`none` → `post-overlay`) | Cards carry shapes and icons only; any titles or labels are added in post (sections 5 and 8) | Explainers need labels, and the model cannot draw readable text |
+| C15 (motion cadence) | `smooth`, with clear holds | Small eased moves suit the clean product look |
+| C16 (bans a move) | No orbit | An orbit turns the big heads past the shoulders and breaks the isometric angle |
 
 ## 5. Text, motion, camera
 

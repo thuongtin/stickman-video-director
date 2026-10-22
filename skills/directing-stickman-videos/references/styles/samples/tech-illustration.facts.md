@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `tech-illustration.md` sha256 35471bf71e012de2
+- package: `tech-illustration.md` sha256 94c03d224584ff4e
 - checked: 2026-10-22
 - storyboard rows: none
 - prompts: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=c70448715060719c846170d38be17927efdf0377799b01aa666223cb71381a69 -->
+<!-- package_lint facts end sha256=e6a632aaf19422a20f1864fd3f45519e496fe474f3b3329f1e86e4e5ede9d4d8 -->
