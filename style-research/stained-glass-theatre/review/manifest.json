@@ -1,0 +1,30 @@
+{
+  "src/render.py": {
+    "bytes": 7406,
+    "sha256": "b99a9a06f168faf702d4eddb2b3e32022264f1698675af97f181528eea0b86a4"
+  },
+  "src/review_sheet.py": {
+    "bytes": 1643,
+    "sha256": "feb6f76bc425a8f6f196ba18585a5a8e62143e9f6a4879fc3a894b1b602405f1"
+  },
+  "motion/demo.mp4": {
+    "bytes": 144606,
+    "sha256": "2c4e77326e624e702f7643c28b1466c8e96284d39ff3276a7ac30e9856726902"
+  },
+  "motion/track.json": {
+    "bytes": 142723,
+    "sha256": "093539a04aef7ade86a6b6e3b56c4c83e5f257f49cccd06f6608988f22c70ffa"
+  },
+  "concept/options.png": {
+    "bytes": 2055580,
+    "sha256": "72ff8758387b3b5ef23e56f6ea73b69a02facc9041213d5f111544d5ad766db5"
+  },
+  "sample.md": {
+    "bytes": 3214,
+    "sha256": "a1be9a22315b84c5493a3a4e1e85731b02d04fd18c47b259106cfc7417ac6211"
+  },
+  "gallery/contact-sheet.jpg": {
+    "bytes": 69166,
+    "sha256": "4981646fed18f9fe2b3fa35f737ee28737c63c69a79b80de07eb1988c63ca31f"
+  }
+}
