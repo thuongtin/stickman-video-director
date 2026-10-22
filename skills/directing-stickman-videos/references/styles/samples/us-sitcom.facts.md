@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `us-sitcom.md` sha256 a826b3b6a3e64970
-- checked: 2026-10-20
+- package: `us-sitcom.md` sha256 42030a8e3f5ca4da
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=afdae919e1492cf7b465642a4cc4c73ed86227c9af8e67d3c1a42faae24202a8 -->
+<!-- package_lint facts end sha256=a323560f8625958e9328cad320f258609117601e832214ab190ba1b509d9cc0a -->

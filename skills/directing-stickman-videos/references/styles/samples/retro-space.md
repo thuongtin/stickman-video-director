@@ -1,4 +1,4 @@
-# Why astronauts float — retro space-age prompt package
+# Why astronauts float — retro space-age spec package
 
 Retro space-age poster style, multi-character. 16:9, 3 clips, about 30 seconds. Voice: the accepted male narrator block. Every astronaut wears the crew's left/right marker, a round mustard gauge on the RIGHT wrist, repeated in every anchor. Science check: astronauts float because they are in free fall around the Earth, not because there is no gravity up there (gravity at station height is still about 90% of the ground value).
 
@@ -7,7 +7,7 @@ Hook card: pattern Physics break. First frame: Juno floats in a station cabin ho
 ## Clip 1 — The apple that does not fall
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: 1960s space-age poster illustration, retro-futurist. Flat, grainy screen-printed colour shapes with a thin dark-navy outline, soft rounded chunky forms, halftone-dot shading on the shadow side of each shape instead of gradients, a limited palette of midnight navy, burnt orange, mustard yellow, teal, coral pink and warm cream, with tiny cream dot stars. Characters are rounded cartoon astronauts in clear round bubble helmets with their faces visible inside; each helmet has one white highlight crescent. No 3D, no photorealism, no glossy CGI. The inside of a small round space station module: cream padded walls with thin vertical seams, rounded corners, a teal frame, a big round porthole in the middle showing the curved blue-green Earth with mustard continents against black space, two navy panels with only round coloured lamps, and short mustard handrails on the walls. Zero gravity.
 
@@ -42,7 +42,7 @@ Negative constraints: no text, letters, numbers, logos, flags, insignia or missi
 ## Clip 2 — Throw it faster
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: 1960s space-age poster illustration, retro-futurist. Flat, grainy screen-printed colour shapes with a thin dark-navy outline, soft rounded chunky forms, halftone-dot shading on the shadow side of each shape instead of gradients, a limited palette of midnight navy, burnt orange, mustard yellow, teal, coral pink and warm cream, with tiny cream dot stars. Characters are rounded cartoon astronauts in clear round bubble helmets with their faces visible inside; each helmet has one white highlight crescent. No 3D, no photorealism, no glossy CGI. Open space: a midnight-navy sky full of tiny cream dot stars, a small orange ringed planet in the top right, and in the foreground the curved top of a tiny moon-grey planet with a few flat craters, so small that its horizon visibly curves down at both edges.
 
@@ -75,7 +75,7 @@ Negative constraints: no text, letters, numbers, logos, flags, insignia or missi
 ## Clip 3 — Falling together
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: 1960s space-age poster illustration, retro-futurist. Flat, grainy screen-printed colour shapes with a thin dark-navy outline, soft rounded chunky forms, halftone-dot shading on the shadow side of each shape instead of gradients, a limited palette of midnight navy, burnt orange, mustard yellow, teal, coral pink and warm cream, with tiny cream dot stars. Characters are rounded cartoon astronauts in clear round bubble helmets with their faces visible inside; each helmet has one white highlight crescent. No 3D, no photorealism, no glossy CGI. The inside of a small round space station module: cream padded walls with thin vertical seams, rounded corners, a teal frame, a big round porthole in the middle showing the curved blue-green Earth with mustard continents against black space, two navy panels with only round coloured lamps, and short mustard handrails on the walls. Zero gravity.
 

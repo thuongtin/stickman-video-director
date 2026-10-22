@@ -5,7 +5,7 @@ Six recurring original characters; each clip uses at most four. Hands are named 
 ## Clip 1 — Cold open: the catch
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bold 2D cel-shaded superhero cartoon in the look of a modern Saturday-morning action show, original characters only. Characters are lightly stylized heroic proportions: heads about one sixth of their height, broad chests, tapered waists, strong hands in solid-color gloves, every shape outlined with one even thick dark navy line. Flat color fills with exactly one hard-edged darker shadow tone on the side away from the light, no gradients, no airbrush, no texture on skin or suits. Faces: large expressive eyes with a white highlight, thick angular eyebrows, simple line noses, clear readable mouths. Backgrounds are flat-color city skylines with simple outlined buildings and rows of square windows, a faint pale halftone dot pattern on the sky, and a plain grey street. Action is shown with shapes only: white speed lines behind fast movers, a jagged white-and-yellow impact star with no letters, small dust puffs and ground cracks on landings. Animation is snappy: strong anticipation before every big move, a fast action, then a held pose for a beat. The kid sidekick has a bigger head, about one fifth of her height.
 
@@ -38,7 +38,7 @@ Negative constraints: no resemblance to any existing comic-book or film superher
 ## Clip 2 — Sao Mai lands
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bold 2D cel-shaded superhero cartoon in the look of a modern Saturday-morning action show, original characters only. Characters are lightly stylized heroic proportions: heads about one sixth of their height, broad chests, tapered waists, strong hands in solid-color gloves, every shape outlined with one even thick dark navy line. Flat color fills with exactly one hard-edged darker shadow tone on the side away from the light, no gradients, no airbrush, no texture on skin or suits. Faces: large expressive eyes with a white highlight, thick angular eyebrows, simple line noses, clear readable mouths. Backgrounds are flat-color city skylines with simple outlined buildings and rows of square windows, a faint pale halftone dot pattern on the sky, and a plain grey street. Action is shown with shapes only: white speed lines behind fast movers, a jagged white-and-yellow impact star with no letters, small dust puffs and ground cracks on landings. Animation is snappy: strong anticipation before every big move, a fast action, then a held pose for a beat. The kid sidekick has a bigger head, about one fifth of her height.
 
@@ -71,7 +71,7 @@ Negative constraints: no resemblance to any existing comic-book or film superher
 ## Clip 3 — The real boss
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bold 2D cel-shaded superhero cartoon in the look of a modern Saturday-morning action show, original characters only. Characters are lightly stylized heroic proportions: heads about one sixth of their height, broad chests, tapered waists, strong hands in solid-color gloves, every shape outlined with one even thick dark navy line. Flat color fills with exactly one hard-edged darker shadow tone on the side away from the light, no gradients, no airbrush, no texture on skin or suits. Faces: large expressive eyes with a white highlight, thick angular eyebrows, simple line noses, clear readable mouths. Backgrounds are flat-color city skylines with simple outlined buildings and rows of square windows, a faint pale halftone dot pattern on the sky, and a plain grey street. Action is shown with shapes only: white speed lines behind fast movers, a jagged white-and-yellow impact star with no letters, small dust puffs and ground cracks on landings. Animation is snappy: strong anticipation before every big move, a fast action, then a held pose for a beat. The kid sidekick has a bigger head, about one fifth of her height.
 

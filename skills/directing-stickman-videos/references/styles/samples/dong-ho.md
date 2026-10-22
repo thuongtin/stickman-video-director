@@ -16,7 +16,7 @@ Four recurring characters: Mận, Tí, Ông Đồ, Cô Thắm. Hands are named f
 ## Clip 1 — Too big to carry
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: an animated Vietnamese Đông Hồ folk woodblock print in flat 2D. Warm off-white điệp paper with a faint pearly shell shimmer and fine diagonal brush grain shows through everywhere. Only flat areas of natural pigment colors: cinnabar red, pagoda-flower yellow, leaf green, indigo blue, soft brick pink and charcoal black, each color printed slightly off register from the outlines. Every shape has a bold, slightly uneven black woodblock outline printed over the colors. No shading, no gradients, no lighting effects, no perspective depth: figures stand in flat side or front view on simple ground bands, farther things sit higher on the page instead of smaller. Sparse folk motifs only: swirling cloud scrolls, a peach-blossom branch, bamboo, grass tufts. A thin double black border frames the picture.
 
@@ -49,7 +49,7 @@ Negative constraints: no 3D render, no CGI, no gradients or soft shading, no glo
 ## Clip 2 — The scholar's porch
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: an animated Vietnamese Đông Hồ folk woodblock print in flat 2D. Warm off-white điệp paper with a faint pearly shell shimmer and fine diagonal brush grain shows through everywhere. Only flat areas of natural pigment colors: cinnabar red, pagoda-flower yellow, leaf green, indigo blue, soft brick pink and charcoal black, each color printed slightly off register from the outlines. Every shape has a bold, slightly uneven black woodblock outline printed over the colors. No shading, no gradients, no lighting effects, no perspective depth: figures stand in flat side or front view on simple ground bands, farther things sit higher on the page instead of smaller. Sparse folk motifs only: swirling cloud scrolls, a peach-blossom branch, bamboo, grass tufts. A thin double black border frames the picture.
 
@@ -82,7 +82,7 @@ Negative constraints: no 3D render, no CGI, no gradients or soft shading, no glo
 ## Clip 3 — What came back
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: an animated Vietnamese Đông Hồ folk woodblock print in flat 2D. Warm off-white điệp paper with a faint pearly shell shimmer and fine diagonal brush grain shows through everywhere. Only flat areas of natural pigment colors: cinnabar red, pagoda-flower yellow, leaf green, indigo blue, soft brick pink and charcoal black, each color printed slightly off register from the outlines. Every shape has a bold, slightly uneven black woodblock outline printed over the colors. No shading, no gradients, no lighting effects, no perspective depth: figures stand in flat side or front view on simple ground bands, farther things sit higher on the page instead of smaller. Sparse folk motifs only: swirling cloud scrolls, a peach-blossom branch, bamboo, grass tufts. A thin double black border frames the picture.
 
@@ -116,10 +116,10 @@ Negative constraints: no 3D render, no CGI, no gradients or soft shading, no glo
 
 1. Clip 1 → Clip 2: clip 1 ends with Mận at the centre facing right holding the rice cake in both hands; clip 2 opens with Mận walking in from the left holding it the same way (same direction of travel, same grip). Use a hard cut on her step; a 4–6 frame audio crossfade on the flute.
 2. Clip 2 → Clip 3: approved time cut to the afternoon at the same porch. What continues: Ông Đồ, Mận, the low red table and the rice cake (now resting on the table). What changes: time of day, the brush in Ông Đồ's right hand, Cô Thắm and Tí join. Hard cut; no crossfade on the picture.
-3. Inspect each real join: if a generated clip ends on a different grip or a different side of the frame, trim to the last frame where the hands match the Hands at end line rather than trusting the prompt.
+3. Inspect each real join: if a rendered clip ends on a different grip or a different side of the frame, trim to the last frame where the hands match the Hands at end line rather than trusting the spec.
 
 ## Voice and music continuity note
 
 - Every clip repeats the same narrator paragraph word for word, and clips 2–3 say the flute and clapper continue from clip 1 with the same tempo and instrumentation. Check by listening to the three clips back to back, not from stills.
-- If the voice drifts, first retest a voice-only change with the visuals, dialogue and music held fixed; one continuous external English VO and flute/clapper track laid over the assembled picture is the fallback.
-- Post-production: add any caption, title or calligraphy as an overlay on the paper areas (top band or side margins), never in the prompts; keep the double border visible; do not colour-grade (it breaks the flat pigments).
+- Record the narration as one VO track with this voice block, cut it to the beats, and lay the flute/clapper as one continuous bed over the assembled picture.
+- Post-production: add any caption, title or calligraphy as an overlay on the paper areas (top band or side margins), never in the specs; keep the double border visible; do not colour-grade (it breaks the flat pigments).

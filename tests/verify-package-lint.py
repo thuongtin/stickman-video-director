@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""package_lint passes the bundled examples and catches each broken package it claims to catch (prompt text only)."""
+"""package_lint passes the bundled examples and catches each broken package it claims to catch (spec text only)."""
 from pathlib import Path
 import re
 import sys
@@ -87,5 +87,5 @@ with tempfile.TemporaryDirectory() as d:
     facts.write_text(facts.read_text().replace("red: 0", "red: 0 (all good)"))
     assert not pl.verify(facts), "edited facts block not detected"
 
-assert "package_lint.py" in (ROOT / "skills/directing-stickman-videos/references/omni-flash-prompt-contract.md").read_text()
+assert "package_lint.py" in (ROOT / "skills/directing-stickman-videos/references/segment-spec-contract.md").read_text()
 print(f"package lint: PASS ({len(mutations)} broken packages caught; examples clean)")

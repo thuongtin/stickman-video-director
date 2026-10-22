@@ -121,7 +121,7 @@ def front_frames(bug=None, n=12):
         side = f["holds"]["cup"]
         f.setdefault("props", {})["cup"] = f.get("_cup_at") or j[f"wrist_{side}"]
         f.pop("_cup_at", None)
-        if "_swap" in f:  # generated video drew each hand where the other should be
+        if "_swap" in f:  # the render drew each hand where the other should be
             j["elbow_l"], j["elbow_r"], j["wrist_l"], j["wrist_r"] = j["elbow_r"], j["elbow_l"], j["wrist_r"], j["wrist_l"]
             del f["_swap"]
         if "_flip" in f:  # upper body turned around against the legs

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Hook instruction regression and package lint; this does not score generated video retention."""
+"""Hook instruction regression and package lint; this does not score rendered video retention."""
 from pathlib import Path
 import re
 import sys
@@ -45,20 +45,20 @@ def check_card(card, clip_count):
     assert not any(re.search(rf"\b{w}", hook_text) for w in ON_SCREEN_TEXT), "On-screen text in hook"
 
 
-def first_beat(prompt):
-    start = re.search(r"\[0\s*[–-]", prompt)
+def first_beat(spec):
+    start = re.search(r"\[0\s*[–-]", spec)
     assert start, "Clip 1 has no first timed beat"
-    rest = prompt[start.start():]
+    rest = spec[start.start():]
     end = re.search(r"\[3\s*[–-]", rest)
     return rest[:end.start()] if end else rest
 
 
-def check_package(prompts):
-    """The hook lives in Clip 1's first frame and first beat; no prompt carries a separate hook line."""
-    assert prompts, "No prompts"
-    for prompt in prompts:
-        assert not re.search(r"^\s*Opening hook:", prompt, re.M), "No separate Opening hook line in any prompt"
-    beat = first_beat(prompts[0])
+def check_package(specs):
+    """The hook lives in Clip 1's first frame and first beat; no spec carries a separate hook line."""
+    assert specs, "No segment specs"
+    for spec in specs:
+        assert not re.search(r"^\s*Opening hook:", spec, re.M), "No separate Opening hook line in any spec"
+    beat = first_beat(specs[0])
     hits = [float(n) for n in re.findall(r"at about (\d+(?:\.\d+)?)\s*(?:s\b|sec)", beat, re.I)]
     assert hits and min(hits) <= 2.5, "Clip 1's first beat must time the hook hit at about 2s or earlier"
     low = beat.lower()
@@ -96,7 +96,7 @@ for field, bad in (
     else:
         raise AssertionError(f"Bad hook card was not rejected: {field}={bad!r}")
 
-spec = "Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip."
+spec = "Build an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics segment."
 hooked = ("First frame: Stick Figure A is already buckling under a house-sized violet thought tangle.\n"
           "[0–3s] A strains upward; at about 1.5s the tangle drops lower and the floor cracks.\n[3–7s] ...\n[7–10s] ...")
 plain = "First frame: A walks right.\n[0–3s] A walks.\n[3–7s] ...\n[7–10s] ..."
@@ -118,21 +118,21 @@ for bad in (
 # Routing: one hook system, Stage 1 of the storyboard template; no separate hook reference.
 assert not (SKILL / "references/opening-hook.md").exists(), "Hook detail belongs in the Golden Hook stage"
 skill = (SKILL / "SKILL.md").read_text()
-assert '"Golden Hook in detail"' in skill and "adds no extra prompt line" in skill
+assert '"Golden Hook in detail"' in skill and "adds no extra spec line" in skill
 storyboard = STORYBOARD.read_text()
 assert "complete Golden Hook card" in storyboard and "`0–2s` hook" in storyboard
 assert "passes the hook checks in \"Golden Hook in detail\"" in storyboard
 assert storyboard.count("Golden Hook in detail") >= 3 and "Stage 1: Golden Hook" in storyboard
-contract = (SKILL / "references/omni-flash-prompt-contract.md").read_text()
+contract = (SKILL / "references/segment-spec-contract.md").read_text()
 assert 'Clip 1 only: follow "Golden Hook in detail"' in contract
-assert "The hook adds no separate line to the prompt." in contract
+assert "The hook adds no separate line to the spec." in contract
 
 ref = golden_hook()
 for style in ("Style 1:", "Style 2A:", "Style 2B:", "Style 3:", "Style 4:"):
     assert style in ref, f"Missing style override: {style}"
 assert "MIT-licensed" in ref, "Source attribution missing"
 assert "not a second hook system" in ref and "Only the hook technique is taken" in ref, "Source scope must stay explicit"
-assert "Opening hook:" not in ref and "weight the start of a prompt" not in ref, "Borrowed prompt-order claim is back"
+assert "Opening hook:" not in ref and "weight the start of a prompt" not in ref, "Borrowed spec-order claim is back"
 assert len(patterns()) >= 10
 
 if len(sys.argv) > 1:

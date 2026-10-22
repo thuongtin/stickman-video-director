@@ -9,7 +9,7 @@ walking meditation and the full prostration (lạy), 44 human poses and 4 cat po
 Not covered: 9:16, indoor shrine scenes, night, crowds, dialogue between characters, Vietnamese narration.
 ```
 
-Draft for the skill's `references/` folder, named by slug. Every claim below about how Omni Flash behaves is a prompt design choice, not an observed result.
+Draft for the skill's `references/` folder, named by slug. Every claim below about how the animation behaves is a spec design choice, not an observed result in a finished video.
 
 Use it for short, gentle life lessons on mindfulness, kindness and simple living (a page like "Thân Tâm Tuệ"): one small everyday moment in a temple yard, a quiet turn, one question for the viewer.
 
@@ -37,7 +37,7 @@ What the sources do not cover: I found no published survey of Vietnamese chú ti
 - **Rendering:** chibi-anime uses cel shading with a shadow tone and a thick dark outline. Chú tiểu uses flat fills with no shadow and a thin warm-grey line.
 - **Emotion and scene:** chibi-anime shows emotion with anime marks (sparkle eyes, sweat drops, storm clouds) in busy, furnished rooms. Chú tiểu moves only the eyes, brows, mouth and cheeks, in a near-empty yard.
 
-### Prompt wording for the `must` traits
+### Spec wording for the `must` traits
 
 The style block, body rule and negative below are frozen. Paste them verbatim in every clip.
 
@@ -59,9 +59,9 @@ The subject is monastic life, so the gentleness is part of the style, not decora
   - the prostration (lạy), see Posture limits;
   - walking meditation with the hands folded at the belly.
   - Do not invent mudras or chants.
-- **Original characters only.** Do not copy a known artist's chú tiểu designs, the Longquan Monastery's Xian'er, or Ikkyū-san. These names stay in this pack and never go into a prompt.
+- **Original characters only.** Do not copy a known artist's chú tiểu designs, the Longquan Monastery's Xian'er, or Ikkyū-san. These names stay in this pack and never go into a spec.
 
-## Shared prompt blocks (frozen)
+## Shared spec blocks (frozen)
 
 Style and environment (verbatim in every clip):
 
@@ -131,11 +131,11 @@ These came out of gating 44 human poses, 4 cat poses and a 4-character motion te
   - Stage it in side view only.
   - Two drafts read as crawling on hands and knees with the head up, and both passed the gate. Check this pose by eye, every time.
   - A chibi head is bigger than the upper arm, so the elbows rest just above the floor rather than flat.
-  - Prompt wording: "kneels, bows forward from the hips until the forehead rests on the floor, face down, forearms and palms flat on the floor beside the head".
+  - Spec wording: "kneels, bows forward from the hips until the forehead rests on the floor, face down, forearms and palms flat on the floor beside the head".
 - **Lotus / cross-legged sitting:**
   - In front view, mark the track `"cross_legged": true`. Cross-legged looks the same as a bad knee there, so the gate skips the hip abduction and knee lateral checks; still check the pose by eye.
   - Robes cover the legs, which hides most crossing errors.
-  - Prompt wording: "seated cross-legged on a round cushion, robe covering the legs".
+  - Spec wording: "seated cross-legged on a round cushion, robe covering the legs".
 - **Meditation hands:** "hands resting in the lap, right hand on the left palm, thumbs touching". The wrists stay on their own sides; only the hands overlap.
 - **Two-handed offering:**
   - Offer and receive with both hands, but chibi arms are short: the cup stays at chest height, within about 85% of the arm's reach.
@@ -143,7 +143,7 @@ These came out of gating 44 human poses, 4 cat poses and a 4-character motion te
   - Name one holding hand per character ("his left hand under it and his right hand steadying its side").
 - **Front-view sleeves:** the sleeves are one tone darker than the robe body, with an outline (the novices' grey sleeve takes a bigger step, since grey has no hue to help). In every front-view pose the elbows open far enough that the outer edge of the sleeve sits outside the body outline, with a sliver of background between elbow and waist.
   - Gassho: the wrists stay a palm-width apart so the short chibi arms can open the elbows; the lotus bud widens to join both palms. Meditation: the wrists also sit apart and the drawn mudra (right hand on the left palm, thumbs touching) bridges them at the centre of the lap. These tracks carry `contact_tolerance: 0.55` because the wrists, not the palms, are what the gate measures.
-  - Prompt wording: "sleeves a shade darker than the robe, elbows held slightly away from the body, a little space between the arms and the waist".
+  - Spec wording: "sleeves a shade darker than the robe, elbows held slightly away from the body, a little space between the arms and the waist".
 - **Front view:** shoulders at the edge of the torso, with a small gap between the hanging arms and the waist. In the rig the rest angle is 22° for novices and 13–14° for adults.
 - **Big heads:** the forehead-to-floor, hand-to-face and cup-to-mouth moments are where chibi proportions fail; stage them in side view.
 - **The cat:**
@@ -168,7 +168,7 @@ These came out of gating 44 human poses, 4 cat poses and a 4-character motion te
 1. Trim each clip to its first clean frame and cut on motion (a broom stroke, a step).
 2. Join a time cut with one short cross-dissolve (about half a second). Use hard cuts everywhere else.
 3. Add captions, subtitles or the page name as overlays in a calm sans-serif in the empty sky area, never over a face or hands.
-4. If music is laid in post, mute the generated score and keep the VO and sound effects.
+4. Lay the music bed in one pass under the VO and sound effects.
 5. Before publishing, review each clip at its risky moments:
    - the bracelet is on the right wrist;
    - hand passes are visible;

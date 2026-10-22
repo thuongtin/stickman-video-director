@@ -13,7 +13,7 @@
 - PLAN-2: Produces N approximately ten-second rows (N = duration / 10; default: 6 rows).
 - PLAN-3: Gives every row three timed beats and at least four relevant visual devices.
 - PLAN-4: Includes title, message, format, theme, palette, voice, BGM, tone, VO, translation, SFX, and transitions.
-- PLAN-5: Ends by requesting approval instead of producing final model prompts.
+- PLAN-5: Ends by requesting approval instead of producing final segment specs.
 - PLAN-6: Gives a complete hook card (pattern, first frame mid-action, hit by about 2s, sound cue, first spoken line of about four to ten words with no greeting, payoff clip, sound-off check) per "Golden Hook in detail" in `storyboard-template.md`.
 
 ## Revision gate
@@ -23,11 +23,11 @@
 
 ## Phase B
 
-- PACK-1: Produces exactly N prompts after explicit approval (matching approved Phase A duration).
-- PACK-2: Every prompt is independently usable.
-- PACK-3: Every prompt contains three timed visual beats.
-- PACK-4: Every prompt contains exact dialogue, voice, BGM/SFX, transition, and negative constraints.
-- PACK-5: Every prompt repeats the selected aspect ratio and theme.
+- PACK-1: Produces exactly N specs after explicit approval (matching approved Phase A duration).
+- PACK-2: Every spec is independently usable.
+- PACK-3: Every spec contains three timed visual beats.
+- PACK-4: Every spec contains exact dialogue, voice, BGM/SFX, transition, and negative constraints.
+- PACK-5: Every spec repeats the selected aspect ratio and theme.
 - PACK-6: The stitching guide matches adjacent endings and openings.
 - PACK-7: Clip 1's first-frame state and first beat carry the approved hook (hit timed at about 2s or earlier), with no separate `Opening hook:` line and no on-screen words or numbers.
 

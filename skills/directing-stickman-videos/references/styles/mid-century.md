@@ -27,7 +27,7 @@ Frozen style paragraph, verbatim in every clip:
 
 ### Sources
 
-Frame study, 2026-10-20: four public-domain-marked prints downloaded from the Internet Archive, 24 evenly spaced frames per film pulled with ffmpeg into contact sheets, plus full-size frames at the timecodes below and a duplicate-frame count for the drawing rate. Contact sheets and study frames: `research/` next to this file (study copies only, never shown to a model or used in prompts).
+Frame study, 2026-10-20: four public-domain-marked prints downloaded from the Internet Archive, 24 evenly spaced frames per film pulled with ffmpeg into contact sheets, plus full-size frames at the timecodes below and a duplicate-frame count for the drawing rate. Contact sheets and study frames: `research/` next to this file (study copies only, never traced or used in specs).
 
 - *Gerald McBoing-Boing* (1950), https://archive.org/details/gerald-mc-boing-boing-1950 (`research/contact-gerald.png`; frames 00:00:52, 00:01:26, 00:02:54 in `research/study-1950-1951.png`). Confirms trait 1: the pink armchair, the rug and the mother's dress are colour patches that sit off their black line or stop short of it. Confirms trait 2: tall angular parents with thin tapering limbs, a block-shaped butler. Confirms trait 3: furniture and lamps are drawn as line only, with hairpin and scroll legs, on one flat colour field with no floor line. **Contradicts trait 4**: no character has a shadow tone; every shape is one flat colour. Confirms trait 5: no gradients. The line is near-black, not brown, and character fills are smooth, not grainy.
 - *Rooty Toot Toot* (1951), https://archive.org/details/rooty-toot-toot-1951 (`research/contact-rooty.png`; frames 00:02:32 and 00:03:29). Confirms trait 1: the red hat fill spills past its line. Confirms trait 2: elongated angular figures on thin legs. Confirms trait 3, with a correction: the walls are sponge-textured colour fields, with furniture in line on top. **Contradicts trait 4**: the white-suited figure and the woman in red are unshaded; contrast comes from colour blocking (a white figure on a dark field). Confirms trait 5.
@@ -37,11 +37,11 @@ Frame study, 2026-10-20: four public-domain-marked prints downloaded from the In
 
 What changed from the study: trait 4 is now "unshaded, one colour per shape" (none of the four films shades a character with a darker slab), the frozen style paragraph says "near-black" ink, "flat unshaded colour" and "a little sponge texture on the walls", and the rig no longer draws the torso shadow slab. Trait 1 stays a must because it is what marks the early films, but the study shows it fading by 1956. The 1950 and 1951 drawing rate could not be measured cleanly: the prints are telecined and pans read as change.
 
-The sources run out on two points: how a 2026 video model renders "off-register" fills, and whether it holds poses instead of tweening smoothly. Neither has been tested. Nothing here copies a character, prop or layout from these works, and prompts name no studio, film or artist.
+The sources run out on two points: how far the "off-register" fill offset can go before it reads as a mistake, and how long a held pose can last before it reads as frozen. Both are set in the rig and checked on the rendered clip. Nothing here copies a character, prop or layout from these works, and specs name no studio, film or artist.
 
 ### Five signature traits
 
-| # | Trait (visible in a still frame) | Tag | Prompt wording (in the frozen style paragraph) |
+| # | Trait (visible in a still frame) | Tag | Spec wording (in the frozen style paragraph) |
 |---|---|---|---|
 | 1 | Flat colour fills shifted a few pixels off their thin wobbly near-black ink outline | must | "Flat colour shapes, lightly grainy, printed a little off-register from a thin, slightly wobbly near-black ink line" |
 | 2 | Angular geometric bodies (trapezoid, A-line, block, triangle, diamond) on stick-thin limbs | must | "Angular geometric character designs" plus each anchor's named torso shape and "stick-thin legs" |
@@ -55,7 +55,7 @@ The sources run out on two points: how a 2026 video model renders "off-register"
 
 ## Cast cards
 
-The style is an ensemble style. Plan the cast as types from one world and give each a different geometric silhouette; two characters with the same body shape merge in generated clips. Each anchor names role and build, head shape and face marks, hat or hair, torso shape and outfit colour, legs and shoes, mitten hands, and **one fixed left/right marker**. The marker shows which hand is the character's own right. Repeat every visible character's full card verbatim in every clip it appears in. Names in Hands lines have no periods ("Boxley", not "Mr. Boxley").
+The style is an ensemble style. Plan the cast as types from one world and give each a different geometric silhouette; two characters with the same body shape merge in wide shots. Each anchor names role and build, head shape and face marks, hat or hair, torso shape and outfit colour, legs and shoes, mitten hands, and **one fixed left/right marker**. The marker shows which hand is the character's own right. Repeat every visible character's full card verbatim in every clip it appears in. Names in Hands lines have no periods ("Boxley", not "Mr. Boxley").
 
 **Wendell**
 
@@ -87,7 +87,7 @@ Tilly, an eight-year-old girl: a big rounded head with freckles, dot eyes and tw
 Hank, a tall mail-room runner: a square-jawed head with a navy cap and black brim, an olive uniform jacket with a barrel chest shaped like a diamond, a brown satchel strap running from his right shoulder to his left hip, navy trousers, brown shoes, round mitten hands with a small thumb.
 ```
 
-Shared body rule, once per prompt after the cards:
+Shared body rule, once per spec after the cards:
 
 ```text
 Every character keeps exactly two arms and two legs drawn as thin stick limbs of constant length; a moving limb replaces its previous pose. Resting arms hang slightly away from the body, drawn outside the outline of a wide skirt, dress or jacket, never painted over it. Expressions change only the eyebrows, eyes and mouth, never the head shape, hat, hair, outfit or proportions.
@@ -95,20 +95,20 @@ Every character keeps exactly two arms and two legs drawn as thin stick limbs of
 
 ## Core rules this style overrides
 
-- **Idle ban (prompt contract: never leave a character idle).** Held poses are the style; a hold counts as action when the face or one arm moves, and no hold runs longer than about one second without a change. Reason: limited animation reads through holds, and the gate showed held poses must be balanced, not that they must move.
+- **Idle ban (spec contract: never leave a character idle).** Held poses are the style; a hold counts as action when the face or one arm moves, and no hold runs longer than about one second without a change. Reason: limited animation reads through holds, and the gate showed held poses must be balanced, not that they must move.
 - **Opening hook.** Prefer Sudden entry, Reaction before cause and Visual metaphor; the hook hit is a held surprise pose landing on one hard sound, no beat drops. Reason: the take is the style's native hook.
 - **Location per segment (Style 4 habit).** New clips move to another room of the same world (office, typing pool, mail room) connected by a travelling prop. Reason: the ensemble needs one world; different rooms keep sets readable.
 - **Faces.** Expressions use floating eyebrows, dot or wide eyes and simple mouths only; never realistic faces. Reason: the geometry of the head is the identity.
 
 ## Text policy: `post-overlay`
 
-No signs, labels, numerals, lettering or clock numerals in any generated frame (the starburst clock has a blank face). Titles and captions are added in post-production.
+No signs, labels, numerals, lettering or clock numerals in any frame (the starburst clock has a blank face). Titles and captions are added in post-production.
 
 ## Motion cadence: `on-twos`
 
 Each character holds a clear, balanced key pose, then moves through one in-between drawing into the next key pose. Rules from gating 35 rig poses and the three-shot animatic (draft keys: 9 of 35 tracks failed, every failure from a limited-animation habit):
 
-- Every pose change passes through one in-between. A snap into a take is a pop the gate blocks and the motion a video model renders as a teleporting limb. Write "moves through one in-between into", never "snaps".
+- Every pose change passes through one in-between. A snap into a take is a pop the gate blocks and reads as a teleporting limb. Write "moves through one in-between into", never "snaps".
 - A held pose must be balanced: feet under the body, or a named support ("both hands land on the desk"). Bows stay within about 45 degrees with the hips bent.
 - Front-view squats open the knees outward over the toes (a diamond shape), never bow-legged.
 - Exaggerate with arms, head and timing, not stride: scaled leg angles push the standing foot behind the body, and a scaled arm swing drawn on twos makes the wrists land on each other's spots.
@@ -146,14 +146,14 @@ One frozen score per video: a brisk muted-trumpet, walking upright-bass and brus
 [`samples/mid-century.md`](samples/mid-century.md): 3 clips, 5 characters, two hand-to-hand passes, opening hook, Hands lines for every character, global continuity block, stitching guide and voice/music note. Facts block from `package_lint.py package.md --clips 3 --facts`:
 
 <!-- package_lint facts: generated, do not edit -->
-- package: `package.md` sha256 bb3fc4e697ea78eb
-- checked: 2026-10-20
+- package: `mid-century.md` sha256 7e93688c1e6ca13a
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=43a1054d5daa3df1cff3012758d03b5ef85aa1346bdd3927975a448e62ada2d1 -->
+<!-- package_lint facts end sha256=a77d628f4d226b1ab5292739c2dbcbed992b9140aa89fcd2a9af33876c942b87 -->
 
 ## Catalog entry (ready to paste)
 

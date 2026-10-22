@@ -1,12 +1,12 @@
 # Posture gate
 
-Catches the body and left/right-hand errors video models make, at three points in the pipeline:
+Catches the body and left/right-hand errors animated characters make, at three points in the pipeline:
 
 | When | Tool | Blocks? |
 |---|---|---|
-| Phase B prompts, before generating | `hand_ledger.py package.md` | yes |
-| Code-rendered characters (SVG/JS/3D rigs) | `posture_gate.py check track.json` | yes |
-| Generated clips | `estimate_pose.py` then `posture_gate.py check` | review only |
+| Phase B segment specs, before rendering | `hand_ledger.py package.md` | yes |
+| Rigged characters (SVG/JS/3D rigs), from their exported tracks | `posture_gate.py check track.json` | yes |
+| Rendered clips whose rig cannot export joints | `estimate_pose.py` then `posture_gate.py check` | review only |
 
 `hand_ledger.py` rules are listed in the skill's `references/posture-gate.md`. On a pass between characters: "B takes the X from A" (or "A gives/passes/hands the X to B") is itself A's release, and no separate "A lets go" beat is needed; A's end line must then be empty of X. A release beat is needed when nobody takes the prop (a drop, a put-down) and when a character goes from holding a prop in both hands to one hand ("lets go with his right hand").
 
@@ -68,9 +68,9 @@ Profiles: `rig` (strict, default for rig tracks), `pixel` (rigs snapped to a pix
 
 [`examples/make_examples.py`](examples/make_examples.py) builds a walk cycle, a front-facing wave with a cup, and one track per bug; [`examples/make_figures.py`](examples/make_figures.py) redraws the figures above.
 
-## Generated clips: what to expect
+## Rendered clips: what to expect
 
-`estimate_pose.py` uses MediaPipe Pose Landmarker (Apache-2.0). It is trained on real people. On this repository's own Flow demo clips (sampled at 4 fps) it found a usable pose in 3 to 16 of 40 frames per clip, and 5 of 113 for the Style 3 demo. The poses it found were often drawn on scenery, a giant gavel or a beanie rather than the character: in the Style 1 Light, Style 2B and Style 4 café clips we inspected, every flag was an estimator mistake, not a character mistake. That is why the `video` profile reports `REVIEW` and exits 0: open `report.svg`, keep the flags that are real. Use `--strict` to fail instead.
+Export joints from the rig whenever you can: the `rig` profile is exact and blocks. `estimate_pose.py` is the fallback for a clip whose rig cannot export joints. It uses MediaPipe Pose Landmarker (Apache-2.0), which is trained on real people. On cartoon stick-figure clips sampled at 4 fps it found a usable pose in only about 3 to 16 of 40 frames per clip, and the poses it found were often drawn on scenery, a giant gavel or a beanie rather than the character; in the clips we inspected, every flag was an estimator mistake, not a character mistake. That is why the `video` profile reports `REVIEW` and exits 0: open `report.svg`, keep the flags that are real. Use `--strict` to fail instead.
 
 The checks themselves were run on eight CMU Motion Capture clips projected to side view (walking, running, jumping and dance). The six everyday clips pass with no errors; two dance/gymnastics clips trip the hip and ankle limits on high kicks and pivots, which `limits_override` covers.
 

@@ -7,7 +7,7 @@ Hook card: Pattern: Reaction before cause. First frame: Kip holds a glass beaker
 ## Clip 1 — The foam fountain
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D cartoon clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D cartoon segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright flat 2D Saturday-morning science cartoon. Clean uniform dark navy outlines of one steady weight around every shape, flat solid colors with no gradients, no textures and no soft shading; the arm and leg on the side turned away from the viewer are one shade darker than the pair facing the viewer. A cheerful mint-green school lab with tall pale tiles, simple shelves of round flasks and straight beakers holding pink, green and blue liquids, a white wall chart showing only a picture of an atom with three orbits, and a long grey-blue lab bench. Even, bright, shadowless lighting. Every glass container is plain, with no labels, scale marks or writing.
 
@@ -33,13 +33,13 @@ Music/SFX: at about 1.5s a bright fizzing whoosh synced to the foam burst, then 
 
 Final frame: Kip holds the overflowing glass beaker in both hands at the center; Dr. Nova stands at the left pointing at the foam with her left index finger, the round flask still in her right hand.
 
-Do not generate photorealism, 3D rendering, CGI, gradients, airbrushing, glossy highlights, anime or manga eyes, realistic anatomy, extra arms or legs, duplicate characters, extra scientists, students or crowds, knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, the yellow wristband on the left wrist, a prop switching hands without a visible pass, flames, explosions, smoke clouds, chemical formulas, equations, labels on bottles, scale marks with numbers, visible text, letters or numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. Do not alter, omit, repeat, reorder or add dialogue.
+Do not draw photorealism, 3D rendering, CGI, gradients, airbrushing, glossy highlights, anime or manga eyes, realistic anatomy, extra arms or legs, duplicate characters, extra scientists, students or crowds, knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, the yellow wristband on the left wrist, a prop switching hands without a visible pass, flames, explosions, smoke clouds, chemical formulas, equations, labels on bottles, scale marks with numbers, visible text, letters or numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. Do not alter, omit, repeat, reorder or add dialogue.
 ```
 
 ## Clip 2 — The recipe
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D cartoon clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D cartoon segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright flat 2D Saturday-morning science cartoon. Clean uniform dark navy outlines of one steady weight around every shape, flat solid colors with no gradients, no textures and no soft shading; the arm and leg on the side turned away from the viewer are one shade darker than the pair facing the viewer. A cheerful mint-green school lab with tall pale tiles, simple shelves of round flasks and straight beakers holding pink, green and blue liquids, a white wall chart showing only a picture of an atom with three orbits, and a long grey-blue lab bench. Even, bright, shadowless lighting. Every glass container is plain, with no labels, scale marks or writing.
 
@@ -65,13 +65,13 @@ Music/SFX: continue the identical light bubbly pizzicato strings from clip 1, sa
 
 Final frame: Kip holds the glass beaker as the first bubbles rise; Dr. Nova stands at the left with the round flask lowered in her right hand; Bolt stands at the right holding the metal tray.
 
-Do not generate photorealism, 3D rendering, CGI, gradients, airbrushing, glossy highlights, anime or manga eyes, realistic anatomy, extra arms or legs, duplicate characters, extra scientists, students or crowds, knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, the yellow wristband on the left wrist, a prop switching hands without a visible pass, flames, explosions, smoke clouds, chemical formulas, equations, labels on bottles, scale marks with numbers, visible text, letters or numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. Do not alter, omit, repeat, reorder or add dialogue.
+Do not draw photorealism, 3D rendering, CGI, gradients, airbrushing, glossy highlights, anime or manga eyes, realistic anatomy, extra arms or legs, duplicate characters, extra scientists, students or crowds, knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, the yellow wristband on the left wrist, a prop switching hands without a visible pass, flames, explosions, smoke clouds, chemical formulas, equations, labels on bottles, scale marks with numbers, visible text, letters or numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. Do not alter, omit, repeat, reorder or add dialogue.
 ```
 
 ## Clip 3 — Why it grows
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D cartoon clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D cartoon segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a bright flat 2D Saturday-morning science cartoon. Clean uniform dark navy outlines of one steady weight around every shape, flat solid colors with no gradients, no textures and no soft shading; the arm and leg on the side turned away from the viewer are one shade darker than the pair facing the viewer. A cheerful mint-green school lab with tall pale tiles, simple shelves of round flasks and straight beakers holding pink, green and blue liquids, a white wall chart showing only a picture of an atom with three orbits, and a long grey-blue lab bench. Even, bright, shadowless lighting. Every glass container is plain, with no labels, scale marks or writing.
 
@@ -97,7 +97,7 @@ Music/SFX: continue the identical light bubbly pizzicato strings from clip 1, sa
 
 Final frame: Dr. Nova holds the foaming glass beaker in her left hand at the left; Kip lands with both hands empty; Prof. Otto points his right index finger up; Bolt holds the metal tray.
 
-Do not generate photorealism, 3D rendering, CGI, gradients, airbrushing, glossy highlights, anime or manga eyes, realistic anatomy, extra arms or legs, duplicate characters, extra scientists, students or crowds, knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, the yellow wristband on the left wrist, a prop switching hands without a visible pass, flames, explosions, smoke clouds, chemical formulas, equations, labels on bottles, scale marks with numbers, visible text, letters or numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. Do not alter, omit, repeat, reorder or add dialogue.
+Do not draw photorealism, 3D rendering, CGI, gradients, airbrushing, glossy highlights, anime or manga eyes, realistic anatomy, extra arms or legs, duplicate characters, extra scientists, students or crowds, knees or elbows bending backward, limbs changing length, a head turned past the shoulders, swapped left and right hands, the yellow wristband on the left wrist, a prop switching hands without a visible pass, flames, explosions, smoke clouds, chemical formulas, equations, labels on bottles, scale marks with numbers, visible text, letters or numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. Do not alter, omit, repeat, reorder or add dialogue.
 ```
 
 ## Stitching guide

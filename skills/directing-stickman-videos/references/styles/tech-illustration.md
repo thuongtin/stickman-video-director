@@ -9,13 +9,13 @@ Not covered: Lan, Mai, Tung and Hai in a package, 9:16, crowds (3+ in one clip),
 
 Slug: `tech-illustration`. Evidence: posture gate on 133 pose track pairs (true 3D plus the drawing camera's projection) and a two-character motion test with `--scene`, all 0 errors and 0 warnings (`gallery/gate-v1.json`, `motion/gate-motion.txt`); the sample package [samples/tech-illustration.md](samples/tech-illustration.md) passes `package_lint.py` and `hand_ledger.py` ([facts block](samples/tech-illustration.facts.md)); `tests/verify-opening-hook.py` passes on it.
 
-The soft 2.5D tech-explainer look used by app landing pages and SaaS explainers: chibi people with big round heads, clean dark-navy outlines and soft gradient shading, sitting on white isometric blocks with a laptop, a friendly white robot sidekick, and floating rounded UI cards (a code window, a flow diagram, a green check) on a white to pale-blue background with bright blue accents. All characters are original. Prompts describe the look in plain words and never name a product, brand, icon set or app.
+The soft 2.5D tech-explainer look used by app landing pages and SaaS explainers: chibi people with big round heads, clean dark-navy outlines and soft gradient shading, sitting on white isometric blocks with a laptop, a friendly white robot sidekick, and floating rounded UI cards (a code window, a flow diagram, a green check) on a white to pale-blue background with bright blue accents. All characters are original. Specs describe the look in plain words and never name a product, brand, icon set or app.
 
 ## 1. Signature checklist
 
 ### Sources
 
-These works are named here as research only. Prompts never name them, and the cast copies none of their characters, colours or layouts. Frames studied on 2026-10-22; local copies are in `research/` (the Fluent Emoji images are MIT-licensed; the icons8 previews are watermarked and kept only as a research record, never published).
+These works are named here as research only. Specs never name them, and the cast copies none of their characters, colours or layouts. Frames studied on 2026-10-22; local copies are in `research/` (the Fluent Emoji images are MIT-licensed; the icons8 previews are watermarked and kept only as a research record, never published).
 
 | Work | Image looked at | Confirms | Contradicts, and what changed |
 |---|---|---|---|
@@ -47,7 +47,7 @@ Catalog: **science-lab** (a clean explainer set with a cast of scientists). Two 
 
 Second neighbour: **blueprint** (technical line drawing on a blue ground). This style keeps a white ground and only uses blue as the accent.
 
-### Prompt wording for each `must` trait
+### Spec wording for each `must` trait
 
 The frozen style block below says each one in plain words. It is repeated verbatim in every clip.
 
@@ -80,7 +80,7 @@ Every character has exactly two arms and two legs and small rounded hands with f
 
 Anchor rules:
 
-- Use ASCII names in prompts ("Khoa", "Tung", "Hai"), one spelling per character.
+- Use ASCII names in specs ("Khoa", "Tung", "Hai"), one spelling per character.
 - Write each role so it reads correctly without the others ("a small white robot", not "Khoa's robot").
 - Keep props out of the anchors; the laptop, the chip and the tablet go in `Props:` and in the `Hands` lines.
 - The laptop is "a plain silver laptop with a blank lid": never a fruit, a letter or any mark on it.
@@ -95,13 +95,13 @@ Each entry names the rule by its ID in `core-contract.md`. The first two rows ch
 | Catalog look (Styles 1–2): one hero figure | A team of six named characters, each with a cast card; at most two in a clip in the sample (C12 still applies) | Team and helper stories |
 | C3 (instruments only) | The frozen soft synth-pluck and marimba score in section 6 instead of piano and synth; the continuity sentence is kept | Bright product-explainer tone |
 | C5 (adds limits) | Raised hands go out beside the head, never in front of the face; a hand never reaches the forehead; Bit holds and passes with its right hand only (section 7) | Big heads and short arms hide hands and faces |
-| C9 (`none` → `post-overlay`) | Cards carry shapes and icons only; any titles or labels are added in post (sections 5 and 8) | Explainers need labels, and the model cannot draw readable text |
+| C9 (`none` → `post-overlay`) | Cards carry shapes and icons only; any titles or labels are added in post (sections 5 and 8) | Explainers need labels, and labels kept out of the art stay editable and translatable |
 | C15 (motion cadence) | `smooth`, with clear holds | Small eased moves suit the clean product look |
 | C16 (bans a move) | No orbit | An orbit turns the big heads past the shoulders and breaks the isometric angle |
 
 ## 5. Text, motion, camera
 
-- **Text policy: `post-overlay`.** No words, letters, numbers or readable code anywhere: the code window is coloured bars, the flow card is nodes and arrows, the check is an icon. Titles, labels or captions are added in post (section 8), never in the prompt.
+- **Text policy: `post-overlay`.** No words, letters, numbers or readable code anywhere: the code window is coloured bars, the flow card is nodes and arrows, the check is an icon. Titles, labels or captions are added in post (section 8), never in the spec.
 - **Motion cadence: `smooth`.** Small eased moves with clear holds; UI cards pop in with a slight overshoot and settle; typing is a gentle alternate tap of both hands on the keys, never fast finger blur.
 - **Camera.** Follow the camera grammar in `storyboard-template.md`; name the move at the start of every beat.
   - Transition moves: hold, slow push-in, slow pull back, slow lateral track, hard cut.
@@ -154,8 +154,8 @@ Negative constraints: no logos, no brand marks, no fruit or letter on the laptop
 ## 8. Post-production
 
 1. Trim each clip to its 10 s beats and cut hard between clips; clip 3 continues the same moment.
-2. Check the risky frames before stitching: the chip pass, the thumbs-up, and each character's first frame for the cyan band on the RIGHT wrist and a blank laptop lid. Re-generate a clip if the band moves wrists or any mark appears on the lid or cards.
-3. Check every UI card for letters or numbers the model added. Blur or patch them, or re-generate; the cards must stay shapes only.
+2. Check the risky frames before stitching: the chip pass, the thumbs-up, and each character's first frame for the cyan band on the RIGHT wrist and a blank laptop lid. Fix the rig or layer and re-render a clip if the band moves wrists or any mark appears on the lid or cards.
+3. Check every UI card for letters or numbers. Fix the card layer and re-render; the cards must stay shapes only.
 4. Normalise the stitched video to about -14 LUFS integrated, with the warning blip no more than 6 dB above the music bed.
 5. Titles, card labels and subtitles, if wanted, are added after stitching (text policy `post-overlay`), on the white background beside the cards.
 

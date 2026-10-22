@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `retro-space.md` sha256 93ae435930810d37
-- checked: 2026-10-20
+- package: `retro-space.md` sha256 047688c81f949bbe
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=629011bd62be0ef6db97c0241c887a5e12b7e42076d70cd7ceab239155743591 -->
+<!-- package_lint facts end sha256=f7df5e1ed02b1964bd31f91b7d13db3bc0dde6d25fb0fbab829a9b7f7c640e5c -->

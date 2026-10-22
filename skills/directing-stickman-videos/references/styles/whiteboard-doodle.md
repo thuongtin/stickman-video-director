@@ -18,7 +18,7 @@ Styles 1–4 show finished drawings that move. This style shows **the act of dra
 
 Studied from memory of the works and their public descriptions; no frame-by-frame review was done in this thread.
 
-1. **RSA Animate, "Changing Education Paradigms"** (Cognitive Media for the RSA, 2010, over a Ken Robinson talk). Supports: a real hand drawing on a white surface in sync with speech, stroke-order reveals, the camera sliding to clean board, a final pull-back over the whole board. Runs out: it leans on handwritten keywords (our no-text rule drops them), its people are one-off caricatures rather than a recurring cast, and its drawing speed is far beyond what a video model holds.
+1. **RSA Animate, "Changing Education Paradigms"** (Cognitive Media for the RSA, 2010, over a Ken Robinson talk). Supports: a real hand drawing on a white surface in sync with speech, stroke-order reveals, the camera sliding to clean board, a final pull-back over the whole board. Runs out: it leans on handwritten keywords (our no-text rule drops them), its people are one-off caricatures rather than a recurring cast, and its drawing speed is far beyond a ten-second segment.
 2. **MinutePhysics** (Henry Reich, YouTube, from 2011). Supports: black marker on white with one or two accent colors, sped-up drawing synced to narration, simple recurring stick characters, limited animation by redrawing. Runs out: it is paper, not a board, usually without a visible hand, and much of it is labeled diagrams.
 3. **Mike Rohde, *The Sketchnote Handbook*** (2012). Supports: a marker grammar for drawing people and objects fast (simple bodies, a few colors, consistent line weight) and telling characters apart by shape. Runs out: static pages, nothing on motion or timing.
 
@@ -28,7 +28,7 @@ Studied from memory of the works and their public descriptions; no frame-by-fram
 2. `must` — Lines draw on exactly under a marker tip in stroke order (outline first, details after); nothing fades in or pops in.
 3. `must` — Characters and props are outlines left white inside; color comes only from three accent markers (red, blue, green) on small areas.
 4. `bonus` — A realistic drawing hand at the frame edge that interacts with the doodles: draws a ladder the character climbs, wipes a rain cloud away with the side of its fist.
-5. `forbidden` — Painted, textured or full-color backgrounds, shading, gradients, 3D, paper or chalkboard texture, and letters or pseudo-text generated on the board.
+5. `forbidden` — Painted, textured or full-color backgrounds, shading, gradients, 3D, paper or chalkboard texture, and letters or pseudo-text drawn on the board.
 
 ## Nearest neighbour
 
@@ -112,7 +112,7 @@ When the drawing hand draws a character on screen, describe the stroke order onc
 
 ## Text policy
 
-`blank-zone`. Generate no letters or numbers. Keep one named part of the board blank in every clip (default: the upper-right third) and list 2–4 word overlay phrases in the post-production note.
+`blank-zone`. Draw no letters or numbers. Keep one named part of the board blank in every clip (default: the upper-right third) and list 2–4 word overlay phrases in the post-production note.
 
 ## Motion cadence
 
@@ -132,7 +132,7 @@ Following the camera grammar in `storyboard-template.md`; every beat names its m
 - Big-head characters (Bean, Candy; head about a third of the body mass): no straight overhead reach in side view, because the arm crosses the face. Raised arms open into a V; jumps swing the arms forward and back below the face; bows stay at about 30° with the hips pushed back; cheering hands stay off the cheeks.
 - Kicks, stomps and cross-legged sits are drawn side-on; a front view cannot bend a knee sideways.
 - Sitting, leaning, pushing and pulling name what holds the body up: a stool, a wall, a rope, Granny Round's cane.
-- Robo Stroke keeps human joint limits so the video model sees normal arms.
+- Robo Stroke keeps human joint limits so its arms read as normal arms and pass the posture gate.
 - Side views: facing screen right shows the character's right side to the camera; facing screen left shows the left side. A pass between two characters uses each character's camera-side hand where possible.
 - Shared posture negatives (in the negative block below): no knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass.
 
@@ -158,16 +158,16 @@ Clip 1 sets it; clips 2–N say the identical score continues from clip 1 with i
 
 ## Post-production steps
 
-1. Review every clip at the risky moments before editing: lines popping in ahead of the tip, the drawing hand's fingers and marker count, hand passes between characters, a character changing design after the reveal. Regenerate failing clips.
+1. Review every clip at the risky moments before editing: lines popping in ahead of the tip, the drawing hand's fingers and marker count, hand passes between characters, a character changing design after the reveal. Fix the rig or keys and re-render failing clips.
 2. Trim and stitch on the planned joins (board slides or matching final/first frames).
 3. Add the overlay phrases in the blank zone, timed to the VO, with a handwriting font or scanned real marker strokes.
-4. Optional finale: build the whole-board pull-back from real frames of the clips, not from a generated wide shot.
+4. Optional finale: build the whole-board pull-back from real frames of the clips, not from a separately drawn wide shot.
 5. Mix: VO on top, score under it, marker squeaks kept; normalize loudness.
 6. Subtitles, if wanted, as a separate track or burned in at this step only.
 
 ## Sample package
 
-[`samples/whiteboard-doodle.md`](samples/whiteboard-doodle.md): three clips, Bean, Candy and Mr. Square, two visible balloon passes, Mr. Square's briefcase fixed in his left hand. Lint facts: [`samples/whiteboard-doodle.facts.md`](samples/whiteboard-doodle.facts.md). The older Bean-only `sample-prompts-30s.md` is superseded.
+[`samples/whiteboard-doodle.md`](samples/whiteboard-doodle.md): three clips, Bean, Candy and Mr. Square, two visible balloon passes, Mr. Square's briefcase fixed in his left hand. Lint facts: [`samples/whiteboard-doodle.facts.md`](samples/whiteboard-doodle.facts.md). The older Bean-only `sample-specs-30s.md` is superseded.
 
 ## Catalog rows (ready, not merged)
 

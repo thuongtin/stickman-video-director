@@ -19,7 +19,7 @@ Feel: quiet, warm, unhurried. Best for bedtime-style stories, children's educati
 
 ## Signature traits
 
-| # | Trait (visible in a still) | Tag | Prompt wording (verbatim in every clip) |
+| # | Trait (visible in a still) | Tag | Spec wording (verbatim in every clip) |
 |---|---|---|---|
 | 1 | Transparent washes on visible warm off-white paper, with unpainted paper as the highlights | `must` | "Soft transparent washes, gentle granulation, wet-edge blooms and pale unpainted paper highlights" on "warm off-white cold-press paper" (environment block) |
 | 2 | A thin, slightly irregular dark sepia ink contour around every character | `must` | "drawn in soft watercolor with a thin, slightly irregular dark sepia ink outline" (every anchor) |
@@ -35,14 +35,14 @@ Style 4 (Cozy Storytelling). Visible differences:
 
 ## Sources and where they stop
 
-Prompts name no artist, studio, book or character. The cast borrows no named character's look or costume colour combination: a brown bear cub in red with a honey jar and a cream rabbit in a blue jacket were redesigned in the audit round (see `gallery/cast/characters.md`).
+Specs name no artist, studio, book or character. The cast borrows no named character's look or costume colour combination: a brown bear cub in red with a honey jar and a cream rabbit in a blue jacket were redesigned in the audit round (see `gallery/cast/characters.md`).
 
 | Source | What it supports | Where it stops |
 |---|---|---|
 | Beatrix Potter's tales | Transparent wash over light ink, unpainted paper, small animals in clothes | Her characters and their costumes are not carried over; studied from reproductions only |
 | E. H. Shepard's drawings for A. A. Milne | Light, broken pen line with a little wash; lots of empty paper | Line quality only; no bear-in-red, no honey pot |
 | Anita Jeram, Guess How Much I Love You | Soft wash animals, a large pale ground, two-character warmth | Stills only; no motion evidence |
-| Quentin Blake | Loose, quick ink with splashed wash | His line is far looser than ours; we keep a steady contour for model stability |
+| Quentin Blake | Loose, quick ink with splashed wash | His line is far looser than ours; we keep a steady contour so the rig keeps one silhouette |
 | Ernest & Celestine (2012 film) | The closest moving reference: watercolor backgrounds, ink outlines that hold in motion, slow camera | Only trailers and stills were looked at; frame-by-frame texture behaviour not studied |
 | The Tale of the Princess Kaguya (2013) | Unfinished paper, line that breaks around fast action | Its fast sketchy passages are out of scope; we avoid fast action |
 | Song of the Sea (2014) | Multiplane depth and paper texture layers | Its flat graphic shapes are closer to Style 4 than to wash |
@@ -59,7 +59,7 @@ Mia, a small storybook girl drawn in soft watercolor with a thin, slightly irreg
 
 Rules carried over from Style 4: one anchor per recurring role, repeated verbatim; action, camera and props stay outside the anchor; no spawned background extras. Props (Ông Bảo's cane, the lantern, the teddy bear, the carrot, the kite, the basket) are listed per clip under `Props:` with their hand rule, never inside an anchor. Write one character per sentence in beats; the hand ledger ties a hand to the first character a sentence names.
 
-Why an outline instead of a pure wash figure: pure wet-on-wet figures drift and melt between frames; the ink contour gives the model a stable silhouette to hold, while the wash supplies the style.
+Why an outline instead of a pure wash figure: pure wet-on-wet figures lose their shape when a limb moves; the ink contour gives the rig a stable silhouette, while the wash supplies the style.
 
 ## Environment specification
 
@@ -126,14 +126,14 @@ Clips 2–N: "Music: seamlessly continues the identical soft fingerpicked acoust
 ## Post-production steps
 
 1. Join clips with a page-turn wipe or a 0.5 s fade through paper white; do not cross-dissolve wash into wash.
-2. Overlay one shared static paper-grain plate at low opacity over the whole video, so grain that crawls between generations is masked by a fixed texture.
+2. Overlay one shared static paper-grain plate at low opacity over the whole video, so the grain stays fixed while the layers move.
 3. Grade all clips to the same warm off-white paper tone; do not raise contrast (it kills the wash).
 4. Add any title or text as a post overlay on the paper margin (text policy `post-overlay`).
 5. Check the risky moments frame by frame: the two hand-offs, Ông Bảo's cane hand, Pip's ears and Toby's vest colour.
 
 ## Sample package
 
-`samples/watercolor-storybook.md`: three standalone prompts (garden at dusk, forest path, home porch), every section the prompt contract asks for. Results on 2026-10-20: `package_lint.py --clips 3 --anchor <environment block>` PASS 0 red 0 yellow (facts `samples/watercolor-storybook.facts.md`), `hand_ledger.py` PASS (main and the shared gate copy), `tests/verify-opening-hook.py <package>` PASS.
+`samples/watercolor-storybook.md`: three standalone specs (garden at dusk, forest path, home porch), every section the spec contract asks for. Results on 2026-10-20: `package_lint.py --clips 3 --anchor <environment block>` PASS 0 red 0 yellow (facts `samples/watercolor-storybook.facts.md`), `hand_ledger.py` PASS (main and the shared gate copy), `tests/verify-opening-hook.py <package>` PASS.
 
 ## Catalog rows (draft, for when the style is merged)
 

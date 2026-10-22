@@ -5,10 +5,10 @@
 ```text
 Status: gated (2026-10-20). Covers: 3 clips, 16:9, two characters per clip, one stool held with both hands,
 a glass set down on a table, a seated character, a reaction cut; poses for six characters; one 4-character
-motion test (table pass). Not covered: 9:16, crowds, night scenes, more than two characters in one prompt.
+motion test (table pass). Not covered: 9:16, crowds, night scenes, more than two characters in one spec.
 ```
 
-Evidence: gate report `gallery/gate-v2.txt` (73 poses, including Mèo Mướp pointing with his far right hand while facing left, as in clip 2) and `motion-test/gate-v2.txt` (`--scene`, 4 characters); lint facts block `samples/vn-webcomic.facts.md`; hand ledger `prompt-package/ledger-output.txt`. Research notes, sources and gallery: `README.md` next to this file (in Vietnamese).
+Evidence: gate report `gallery/gate-v2.txt` (73 poses, including Mèo Mướp pointing with his far right hand while facing left, as in clip 2) and `motion-test/gate-v2.txt` (`--scene`, 4 characters); lint facts block `samples/vn-webcomic.facts.md`; hand ledger `spec-package/ledger-output.txt`. Research notes, sources and gallery: `README.md` next to this file (in Vietnamese).
 
 ## What the format is
 
@@ -20,7 +20,7 @@ Use it for short relatable gags, wordplay that can be shown literally, slice-of-
 
 ## Originality
 
-This style takes the spirit of Vietnamese webcomics (round animals, dot eyes, deadpan absurd humor, everyday Vietnamese life), not any comic's designs. Never name an existing comic, creator or character in a prompt. The sample cast avoids the best-known species and signatures of that scene on purpose: no swallows or small blue birds, no rabbits, no hats, no bowler hats or canes as a gag prop on a bird. (Cô Vịt is a white duck: a different silhouette, colour and role.) The negative list carries `no resemblance to any existing comic or webcomic character` and `no hats`.
+This style takes the spirit of Vietnamese webcomics (round animals, dot eyes, deadpan absurd humor, everyday Vietnamese life), not any comic's designs. Never name an existing comic, creator or character in a spec. The sample cast avoids the best-known species and signatures of that scene on purpose: no swallows or small blue birds, no rabbits, no hats, no bowler hats or canes as a gag prop on a bird. (Cô Vịt is a white duck: a different silhouette, colour and role.) The negative list carries `no resemblance to any existing comic or webcomic character` and `no hats`.
 
 ## Sources
 
@@ -28,7 +28,7 @@ This style takes the spirit of Vietnamese webcomics (round animals, dot eyes, de
 |---|---|---|
 | Én (Trần Tuấn Dũng, 2018–): [Znews](https://znews.vn/en-khung-vao-vung-sang-tao-moi-post1690153.html), [Thanh Niên](https://thanhnien.vn/ba-tac-gia-truyen-tranh-viet-chia-se-chuyen-nghe-sau-nhung-net-ve-185260618084727133.htm) | Humour from absurd, non-logical reactions, idioms read literally, wordplay, reversed endings; a hero described in 2–3 keywords; the "forgot his brain" blank reaction | Press covers the humour and the business, not the drawing; line and panel notes are my reading of the strips |
 | Thỏ Bảy Màu (Huỳnh Thái Ngọc): [Vietcetera](https://vietcetera.com/en/father-of-the-seven-colored-rabbit-first-dont-compromise), [Vietcetera list](https://vietcetera.com/amp/vn/cuoi-la-ca-nguoi-voi-9-fanpage-giai-tri-hai-huoc-bac-nhat-tai-viet-nam) | A tiny expressionless lead whose deadpan line in an awkward situation is the joke; a face of "little black eyes and rosy cheeks"; consistent design as the reason readers follow | No source on panel timing |
-| Vàng Xám Comic: [Vietcetera list](https://vietcetera.com/amp/vn/cuoi-la-ca-nguoi-voi-9-fanpage-giai-tri-hai-huoc-bac-nhat-tai-viet-nam) | An animal duo split by temperament (a loud one and a serious one) with short, witty exchanges in family and neighbourhood life: the model for a cast that differs by personality and silhouette, not only colour | One article paragraph; no drawing analysis |
+| Vàng Xám Comic: [Vietcetera list](https://vietcetera.com/amp/vn/cuoi-la-ca-nguoi-voi-9-fanpage-giai-tri-hai-huoc-bac-nhat-tai-viet-nam) | An animal duo split by temperament (a loud one and a serious one) with short, witty exchanges in family and neighbourhood life: the pattern for a cast that differs by personality and silhouette, not only colour | One article paragraph; no drawing analysis |
 | Quỳnh Aka: same list | A big-headed lead built on one exaggerated feature and illogical-but-forceful arguments: one strong silhouette feature per character | Same |
 
 ## Signature traits
@@ -41,7 +41,7 @@ This style takes the spirit of Vietnamese webcomics (round animals, dot eyes, de
 | 4 | Reaction shots on a plain flat colour with thin speed lines from the edges | bonus |
 | 5 | Shading, gradients, texture, or any text, speech bubble or floating symbol in the frame | forbidden |
 
-Prompt wording for the `must` traits is in the frozen style block below (`small round animals about two heads tall … one thick uniform black outline … flat pastel color fills only`, `two small black dot eyes … snap into two large empty white circles`, `red plastic stools`, `small low green tea table`).
+Spec wording for the `must` traits is in the frozen style block below (`small round animals about two heads tall … one thick uniform black outline … flat pastel color fills only`, `two small black dot eyes … snap into two large empty white circles`, `red plastic stools`, `small low green tea table`).
 
 ## Nearest neighbour
 
@@ -57,7 +57,7 @@ Prompt wording for the `must` traits is in the frozen style block below (`small 
 
 ## Expression vocabulary
 
-13 faces drawn in `gallery/expressions.png`: neutral, happy, laugh, deadpan, blank (empty white eyes), shocked, angry, sad, crying, cringe, smug, confused, panic. Prompts name only the ones the joke needs and describe them physically (`his dot eyes snap into two big empty white circles`), never by mood word alone.
+13 faces drawn in `gallery/expressions.png`: neutral, happy, laugh, deadpan, blank (empty white eyes), shocked, angry, sad, crying, cringe, smug, confused, panic. Specs name only the ones the joke needs and describe them physically (`his dot eyes snap into two big empty white circles`), never by mood word alone.
 
 ## Cast grammar
 
@@ -72,7 +72,7 @@ Sample cast "Xóm Ao" (anchors in `src/rig.py`, `CAST[..]["anchor"]`):
 - **Bác Trâu**: an old grey-blue water buffalo: a broad head with two cream crescent horns curving up, a pale grey muzzle with two nostrils, sleepy tiny black dot eyes, a brown long-sleeved áo bà ba with a black-and-white checked scarf around the neck, black trousers, dark hooves, and a red rubber band on the right wrist.
 - **Bé Chuột**: a tiny grey-brown mouse schoolkid about half Cóc's height: two big round ears with pink insides, tiny black dot eyes, a pink nose, a white short-sleeved school shirt with a red triangle scarf tied at the neck, navy shorts, a long thin tail, and a red rubber band on the right wrist.
 
-## Shared prompt blocks
+## Shared spec blocks
 
 Style and environment (verbatim every clip):
 
@@ -124,7 +124,7 @@ Transition moves: hold (the default, and always during a demanding body action s
 
 1. Trim each clip to its last held frame; do not cut into the one-second silent hold or the punchline hold.
 2. Join on hard cuts; no transitions or zooms added in the edit.
-3. Captions or a title only as overlays after generation, outside the faces and hands.
+3. Captions or a title only as overlays after rendering, outside the faces and hands.
 4. Conform audio: one music level across clips, the silent beats left silent.
 
 ## Music (frozen)
@@ -148,7 +148,7 @@ One 10-second clip carries one strip (see `gallery/strip-to-motion.png`):
 | 6–7.2 s | The gutter before the last panel | About one second of silence: VO stops, music drops, face frozen. Write it in the beat and the Audio line |
 | 7.2–10 s | Last panel: punchline | Snap into the punchline pose and hold it for at least one second; one small sound cue (boing, clink) |
 
-- Speech-bubble text cannot be generated. Turn it into VO, or make the gag readable with sound off; list any caption as a post-production overlay.
+- Speech-bubble text stays out of the scene art. Turn it into VO, or make the gag readable with sound off; list any caption as a post-production overlay.
 - The narrator never explains the joke. The last spoken line ends before the punchline pose, or states the absurd logic as if it were normal (`"Exactly as he asked."`).
 - A 3-clip story can open with the punchline image as the hook and then cut back (`ten minutes earlier`), with `(time cut)` on the Hands lines.
 
@@ -157,7 +157,7 @@ One 10-second clip carries one strip (see `gallery/strip-to-motion.png`):
 These came from errors the gate or a visual check caught in the code-drawn rig.
 
 - Hands cannot reach above a two-head-tall character's own head. "Holding something overhead" reads as a broken pose; hold it out in front of the chest with straight arms instead.
-- Bills and snouts stick out up to about 1.5 head-radii. Face-to-face characters stand at least an arm's length apart (the prompt's spacing rule) and do not lean in; a pass goes via a table (one sets it down, the other picks it up) or at arm's length.
+- Bills and snouts stick out up to about 1.5 head-radii. Face-to-face characters stand at least an arm's length apart (the spec's spacing rule) and do not lean in; a pass goes via a table (one sets it down, the other picks it up) or at arm's length.
 - A small child next to an adult looks up (head tilt) instead of leaning in.
 - A hand at the head (scratching, saluting) sits just outside the head outline at the temple, with the elbow out; a wide low head (toad) also needs a smaller forward arm swing when walking, or the hand crosses the face.
 - Sitting on a low plastic stool: thighs level, hands on the knees (clear of the face), feet just off the ground so the stool's legs show below the seat. A deep hip bend hides the stool and drops the big head onto the knees.
@@ -173,9 +173,9 @@ Follow `posture-gate.md`. Name every held prop with the character's own hand, on
 
 Reaction before cause (the absurd result first: Cóc guarding a stool, a passer-by's eyes go blank), Before → after cut, and Visual metaphor when the joke is a phrase taken literally (the literal image is the first frame). First spoken line under ten words, the premise only.
 
-## Generation risks
+## Animation risks
 
-1. The model morphs faces smoothly instead of snapping dot eyes to empty white circles.
+1. Faces tween smoothly instead of snapping dot eyes to empty white circles; the eyes are swapped, never interpolated.
 2. The one-second silent hold may be filled with motion or music; it is written in both the beat and the Audio line.
 3. "Vietnamese comic" may pull toward a famous existing character (a blue bird with a hat, a rabbit). If so, remove the phrase and keep only the physical description.
 4. Text on stools, glasses, shop signs; the negatives ban it.

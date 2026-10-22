@@ -53,7 +53,7 @@ which keeps the Style 2 stick-figure lead and has no material rule.
 
 No Toy Story, LEGO, Barbie, Funko, Playmobil, Transformers, Sylvanian or other recognisable designs or trade dress:
 no cowboy/space-ranger pair, no stud-topped bricks or C-hand minifigures, no oversized square-headed vinyl, no
-fashion doll. Chest plates carry no emblem. Prompts name no brand, film or studio, not even in the negatives
+fashion doll. Chest plates carry no emblem. Specs name no brand, film or studio, not even in the negatives
 ("no logos, no brand marks" is enough). The cast is one generic toy box with our own colours, faces and details.
 
 ## Frozen style block
@@ -103,7 +103,7 @@ Chốt, a slim painted wooden toy soldier with a natural wood ball head, rosy pa
 ## Articulation and posture limits
 
 A toy only bends where it was built to bend. This is what makes it read as a toy and not a cartoon person, and it is
-also where a video model is most likely to drift (a plush bear growing elbows, a tin robot waving like a person).
+also where an animator is most likely to drift (a plush bear growing elbows, a tin robot waving like a person).
 The table is enforced on every rig track by `src/toy_limits.py`, on top of the shared posture gate. Side-view
 angles; "none" means the joint does not exist (held at 0 ± 4°).
 
@@ -163,7 +163,7 @@ Follow the camera grammar in `storyboard-template.md`:
 - The camera stays at toy height; no human eye-level shots looking down at the floor (that reads as a person in the
   room).
 
-## Prompt blocks per clip
+## Spec blocks per clip
 
 1. Output line. (Clip 1's hook lives in its first frame and first timed beat, not in a separate line.)
 2. Frozen style block.
@@ -210,9 +210,9 @@ a block, pull back). Keep the hit sound woody or soft (clack, thump, boff, tin c
 ## Post-production
 
 - Trim each clip at its last usable frame where the next clip's first frame matches (same toys, same hands); do not
-  assume the generated last frame is usable.
+  assume the rendered last frame is usable.
 - Add titles and subtitles in post (text policy `none`).
-- Check the right-wrist band and the jointless limbs at every pass and catch; regenerate a clip rather than paint
+- Check the right-wrist band and the jointless limbs at every pass and catch; fix the keys and re-render a clip rather than paint
   over a bent plush arm.
 - Level the music across clips (the music box should not restart audibly at a cut); keep the narrator dry.
 
@@ -231,12 +231,12 @@ a block, pull back). Keep the hit sound woody or soft (clack, thump, boff, tin c
   sentence; one name per prop.
 - Visual review by eye: no bend on a jointless limb, Thiếc's arms never out to the side, the band on the right wrist
   in every view, a gap between hanging arms and the waist in front view, a prop held where the hands actually are.
-- In a generated clip, also check: material consistency (plush stays plush, tin stays tin), whether the model keeps jointless
-  limbs straight, Mây's unchanging button eyes, the wristband, and no letters on blocks.
+- In a rendered clip, also check: material consistency (plush stays plush, tin stays tin), whether jointless
+  limbs stay straight, Mây's unchanging button eyes, the wristband, and no letters on blocks.
 
-## Generation risks
+## Animation risks
 
-- The model's prior for "animated toys" is one famous film franchise; expect drift toward its look and toward a
+- The best-known "animated toys" look is one famous film franchise; designs and props drift toward it and toward a
   cowboy or space ranger. The negatives and plain designs push against it but this is the first thing to check.
 - Human-like bending: plush arms gaining elbows, the tin robot waving like a person, the roly-poly growing legs.
 - Letters appearing on blocks (alphabet blocks are the default), and packaging or brand marks.

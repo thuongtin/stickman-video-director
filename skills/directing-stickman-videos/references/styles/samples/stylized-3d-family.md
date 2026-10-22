@@ -1,12 +1,12 @@
-# The red ball — stylized 3D family prompt package
+# The red ball — stylized 3D family spec package
 
-Stylized 3D family-film look, 3 clips, 16:9, about 30 seconds. Cast: Lulu, Ray, Su, Linh (at most three characters per clip; the Vietnamese names Bé Su and Mẹ Linh stay out of the prompts so each character has one spelling).
+Stylized 3D family-film look, 3 clips, 16:9, about 30 seconds. Cast: Lulu, Ray, Su, Linh (at most three characters per clip; the Vietnamese names Bé Su and Mẹ Linh stay out of the specs so each character has one spelling).
 Hands are named from each character's own side. Every character wears one yellow band on the right wrist only.
 
 ### Clip 1 — The ball comes back
 
 ```text
-Create an approximately 10-second 16:9 horizontal stylized 3D animated family-film clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal stylized 3D animated family-film segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Style: a stylized 3D animated feature-film look for families. Appealing exaggerated, shape-based proportions: oversized heads on kids, one boldly pushed shape on adults (a round belly, a long neck, a tall thin frame), soft rounded simplified forms, no realistic anatomy. Skin is smooth and satin with a soft warm glow where light meets shadow, no pores, wrinkles, veins or visible nostrils. Big eyes with one solid iris color, a black pupil and one bright catchlight; soft sculpted eyebrows; simple mouths. Hair is a few large sculpted clumps of one color, never individual strands. Clothes are plain matte cotton with no prints, text or logos. Warm soft key light from the upper left, a cool soft fill, a gentle warm rim light, soft contact shadows. Smooth, weighty, readable acting with clear poses and slight squash and stretch. Palette: warm cream walls and honey-wood floors, soft sunlit gold, clear but gentle costume colors (coral, teal, purple, rust orange, sky blue, moss green), deep warm browns for hair, no neon colors and no grey, desaturated grading.
 
@@ -32,13 +32,13 @@ One off-screen adult female narrator throughout. General American accent, warm c
 
 Music/SFX: light ukulele and soft glockenspiel around 100 BPM; a loud rubbery boing on the first bounce, sneaker squeaks on the floor; keep the voice dominant.
 
-Do not generate photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Clip 2 — High five
 
 ```text
-Create an approximately 10-second 16:9 horizontal stylized 3D animated family-film clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal stylized 3D animated family-film segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Style: a stylized 3D animated feature-film look for families. Appealing exaggerated, shape-based proportions: oversized heads on kids, one boldly pushed shape on adults (a round belly, a long neck, a tall thin frame), soft rounded simplified forms, no realistic anatomy. Skin is smooth and satin with a soft warm glow where light meets shadow, no pores, wrinkles, veins or visible nostrils. Big eyes with one solid iris color, a black pupil and one bright catchlight; soft sculpted eyebrows; simple mouths. Hair is a few large sculpted clumps of one color, never individual strands. Clothes are plain matte cotton with no prints, text or logos. Warm soft key light from the upper left, a cool soft fill, a gentle warm rim light, soft contact shadows. Smooth, weighty, readable acting with clear poses and slight squash and stretch. Palette: warm cream walls and honey-wood floors, soft sunlit gold, clear but gentle costume colors (coral, teal, purple, rust orange, sky blue, moss green), deep warm browns for hair, no neon colors and no grey, desaturated grading.
 
@@ -64,13 +64,13 @@ One off-screen adult female narrator throughout. General American accent, warm c
 
 Music/SFX: the same light ukulele and soft glockenspiel theme continues from clip 1, same tempo (about 100 BPM) and instrumentation; a crisp clap on the high five, a giggle swell after it; keep the voice dominant.
 
-Do not generate photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Clip 3 — Mom's turn
 
 ```text
-Create an approximately 10-second 16:9 horizontal stylized 3D animated family-film clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal stylized 3D animated family-film segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Style: a stylized 3D animated feature-film look for families. Appealing exaggerated, shape-based proportions: oversized heads on kids, one boldly pushed shape on adults (a round belly, a long neck, a tall thin frame), soft rounded simplified forms, no realistic anatomy. Skin is smooth and satin with a soft warm glow where light meets shadow, no pores, wrinkles, veins or visible nostrils. Big eyes with one solid iris color, a black pupil and one bright catchlight; soft sculpted eyebrows; simple mouths. Hair is a few large sculpted clumps of one color, never individual strands. Clothes are plain matte cotton with no prints, text or logos. Warm soft key light from the upper left, a cool soft fill, a gentle warm rim light, soft contact shadows. Smooth, weighty, readable acting with clear poses and slight squash and stretch. Palette: warm cream walls and honey-wood floors, soft sunlit gold, clear but gentle costume colors (coral, teal, purple, rust orange, sky blue, moss green), deep warm browns for hair, no neon colors and no grey, desaturated grading.
 
@@ -96,5 +96,5 @@ One off-screen adult female narrator throughout. General American accent, warm c
 
 Music/SFX: the same light ukulele and soft glockenspiel theme continues from clip 1, same tempo (about 100 BPM) and instrumentation; quiet evening crickets underneath; a soft rubber thump on the catch; keep the voice dominant.
 
-Do not generate photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealistic people, realistic skin pores, wrinkles or stubble, glossy plastic or doll-like skin, small realistic eyes, individual hair strands, uncanny-valley faces, likenesses of existing animated characters, extra fingers, extra arms or legs, duplicate characters, unintended characters, a raised hand, arm or ball covering anyone's face, changed proportions or colors between shots, the yellow wrist band on the left wrist, visible writing, letters, numbers, captions, subtitles, speech bubbles, dialogue boxes, logos or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```

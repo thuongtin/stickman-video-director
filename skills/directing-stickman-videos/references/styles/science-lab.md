@@ -13,12 +13,12 @@ Evidence for `gated`:
 - Pose gate: `gallery/gate-v2.txt` and `gallery/gate-output-v2.txt`, 43 tracks.
 - Motion test, with `--scene`: `motion-test/gate-v2.txt` and `motion-test/gate-v2-cli-scene.txt`.
 - Package lint facts: [`samples/science-lab.facts.md`](samples/science-lab.facts.md), from `tools/package_lint/package_lint.py samples/science-lab.md --clips 3 --anchor <style block> --facts samples/science-lab.facts.md`.
-- Lint and hook output: `prompt-package/lint-output.txt`.
-- Hand ledger: `prompt-package/ledger-output.txt`.
+- Lint and hook output: `spec-package/lint-output.txt`.
+- Hand ledger: `spec-package/ledger-output.txt`.
 
 A bright flat 2D Saturday-morning science cartoon. A recurring team of original scientists explains one concept per video through a hands-on demo in a school lab. Use it for science and how-it-works explainers aimed at curious kids and families. It fits poorly with satire, workplace stories or cinematic mood pieces; use Style 4 or mid-century there.
 
-## Sources (never paste into prompts)
+## Sources (never paste into specs)
 
 Studied from general knowledge of the genre, not frame by frame. Treat every claim as a recollection, not a measurement.
 
@@ -97,7 +97,7 @@ Originality: the cast is our own. Do not add a bow tie and blue coat to a host, 
 
 ## Text policy
 
-`post-overlay`. Generated frames carry no words, letters or numbers. Terms ("catalase", "oxygen") and numbers ("3%") are added in post from the approved VO script, never in the prompt.
+`post-overlay`. Rendered frames carry no words, letters or numbers. Terms ("catalase", "oxygen") and numbers ("3%") are added in post from the approved VO script, never in the spec.
 
 ## Motion cadence
 
@@ -133,7 +133,7 @@ no knees or elbows bending backward, no limbs changing length, no head turned pa
 
 Lab work and the hands:
 - Lab work means two props in two hands: flask and beaker, pipette and dish, or cup and bench edge. Name both hands in the beat, one character per sentence. Every such gallery pose failed its first draft because the hands stopped short of the props.
-- Every prop picked up inside a clip needs its own set-down sentence, for example "sets the small yellow cup back on the metal tray with her left hand". The shared `hand_ledger.py` now flags a missing set-down, but write it anyway: the model needs the beat.
+- Every prop picked up inside a clip needs its own set-down sentence, for example "sets the small yellow cup back on the metal tray with her left hand". The shared `hand_ledger.py` now flags a missing set-down, but write it anyway: the animator needs the beat.
 - Point with the free hand. A character holding a flask in the right hand points with the left index finger. The shared ledger now flags pointing with a busy hand.
 - A hand-off is its own beat: who holds out, which hand receives, and that the giver's hands are now empty. A receiver bending toward a short character says so in the beat.
 

@@ -5,7 +5,7 @@ Four recurring characters: Mo (narrator), Rosa, Dex, Bea. Hands are named from e
 ## Clip 1 — Cold open: the high five
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a flat 2D American first-person storytime cartoon, original characters only. Characters have big round heads about a third of their height, small bean-shaped bodies, thin noodle arms and legs of constant width, round mitten hands, and one clean black outline of even, medium weight around every shape. Flat color fills only: no shading, no gradients, no texture, no lighting effects. Faces are simple: large white oval eyes with small black pupils, thick floating eyebrows, a mouth that opens wide in a D shape for big reactions; no nose. Backgrounds are simple flat-color rooms with a few outlined objects (a window, a blank picture frame, a counter), or a plain white or flat-color background with soft radial stripes for reaction shots. Palette: pale peach and butter-yellow walls, sky-blue and soft-yellow reaction backgrounds, clothing in teal, mustard yellow, tomato red and grass green, white eyes, black outlines; backgrounds are a step paler than the characters. Limited, snappy animation: a character holds a pose, then snaps quickly into the next one; faces change in one quick snap, not a slow morph.
 
@@ -38,7 +38,7 @@ Negative constraints: no 3D render, no CGI, no anime or manga style, no realisti
 ## Clip 2 — Flashback: the coffee
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a flat 2D American first-person storytime cartoon, original characters only. Characters have big round heads about a third of their height, small bean-shaped bodies, thin noodle arms and legs of constant width, round mitten hands, and one clean black outline of even, medium weight around every shape. Flat color fills only: no shading, no gradients, no texture, no lighting effects. Faces are simple: large white oval eyes with small black pupils, thick floating eyebrows, a mouth that opens wide in a D shape for big reactions; no nose. Backgrounds are simple flat-color rooms with a few outlined objects (a window, a blank picture frame, a counter), or a plain white or flat-color background with soft radial stripes for reaction shots. Palette: pale peach and butter-yellow walls, sky-blue and soft-yellow reaction backgrounds, clothing in teal, mustard yellow, tomato red and grass green, white eyes, black outlines; backgrounds are a step paler than the characters. Limited, snappy animation: a character holds a pose, then snaps quickly into the next one; faces change in one quick snap, not a slow morph.
 
@@ -71,7 +71,7 @@ Negative constraints: no 3D render, no CGI, no anime or manga style, no realisti
 ## Clip 3 — Payoff: officially Bea's
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a flat 2D American first-person storytime cartoon, original characters only. Characters have big round heads about a third of their height, small bean-shaped bodies, thin noodle arms and legs of constant width, round mitten hands, and one clean black outline of even, medium weight around every shape. Flat color fills only: no shading, no gradients, no texture, no lighting effects. Faces are simple: large white oval eyes with small black pupils, thick floating eyebrows, a mouth that opens wide in a D shape for big reactions; no nose. Backgrounds are simple flat-color rooms with a few outlined objects (a window, a blank picture frame, a counter), or a plain white or flat-color background with soft radial stripes for reaction shots. Palette: pale peach and butter-yellow walls, sky-blue and soft-yellow reaction backgrounds, clothing in teal, mustard yellow, tomato red and grass green, white eyes, black outlines; backgrounds are a step paler than the characters. Limited, snappy animation: a character holds a pose, then snaps quickly into the next one; faces change in one quick snap, not a slow morph.
 

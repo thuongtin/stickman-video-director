@@ -1,11 +1,11 @@
 # Toys sample package: “Tower before morning” (3 clips, 16:9, ~30 s)
 
-Six original toys from one toy box; this story uses Kit, Bông, Đật, Thiếc, Chốt and Mây. Hands are named from each toy's own side; every toy wears its lime-green band on the right wrist (Đật on its right stub arm). Plush paws and the tin robot's knob hands cannot grip, so they only hold with both hands. The first spoken line, the hook and the joint rules follow the Golden Hook section of references/storyboard-template.md and the toys style reference. Not yet tested on Flow.
+Six original toys from one toy box; this story uses Kit, Bông, Đật, Thiếc, Chốt and Mây. Hands are named from each toy's own side; every toy wears its lime-green band on the right wrist (Đật on its right stub arm). Plush paws and the tin robot's knob hands cannot grip, so they only hold with both hands. The first spoken line, the hook and the joint rules follow the Golden Hook section of references/storyboard-template.md and the toys style reference. Not yet built into a full rendered video.
 
 ## Clip 1 — The tower wobbles
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a warm, cozy toy-photography look: real toys come alive on the wooden floor of a child's bedroom at dusk, filmed like a macro lens close to the floor, shallow depth of field, soft warm lamp light from the right and a gentle blue window glow from the left. Every material reads true and stays the same: glossy molded plastic, cream muslin with visible stitches, soft fuzzy plush, painted tin with rivets, painted wood with fine grain, a glossy painted shell. Honey-colored floorboards, a plain cream wall with a skirting board, a few plain colored wooden blocks blurred in the background. Smooth, charming character animation with a handmade feel; toys keep their toy proportions and materials; not a cartoon drawing, no people anywhere.
 
@@ -39,7 +39,7 @@ Negative constraints: no knees or elbows bending backward, no limbs changing len
 ## Clip 2 — Hand me the block
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a warm, cozy toy-photography look: real toys come alive on the wooden floor of a child's bedroom at dusk, filmed like a macro lens close to the floor, shallow depth of field, soft warm lamp light from the right and a gentle blue window glow from the left. Every material reads true and stays the same: glossy molded plastic, cream muslin with visible stitches, soft fuzzy plush, painted tin with rivets, painted wood with fine grain, a glossy painted shell. Honey-colored floorboards, a plain cream wall with a skirting board, a few plain colored wooden blocks blurred in the background. Smooth, charming character animation with a handmade feel; toys keep their toy proportions and materials; not a cartoon drawing, no people anywhere.
 
@@ -73,7 +73,7 @@ Negative constraints: no knees or elbows bending backward, no limbs changing len
 ## Clip 3 — Before morning
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: a warm, cozy toy-photography look: real toys come alive on the wooden floor of a child's bedroom at dusk, filmed like a macro lens close to the floor, shallow depth of field, soft warm lamp light from the right and a gentle blue window glow from the left. Every material reads true and stays the same: glossy molded plastic, cream muslin with visible stitches, soft fuzzy plush, painted tin with rivets, painted wood with fine grain, a glossy painted shell. Honey-colored floorboards, a plain cream wall with a skirting board, a few plain colored wooden blocks blurred in the background. Smooth, charming character animation with a handmade feel; toys keep their toy proportions and materials; not a cartoon drawing, no people anywhere.
 

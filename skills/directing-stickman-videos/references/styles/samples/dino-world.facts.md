@@ -1,9 +1,9 @@
 <!-- package_lint facts: generated, do not edit -->
-- package: `dino-world.md` sha256 c198f1f617f28027
-- checked: 2026-10-20
+- package: `dino-world.md` sha256 37133b99764e7923
+- checked: 2026-10-22
 - storyboard rows: none
-- prompts: 3
+- segment specs: 3
 - hand_ledger: PASS
 - red: 0
 - yellow: 0
-<!-- package_lint facts end sha256=70c140e76320d9d5e8ec2e39ae9b334ec8dfc12047e57d8479572cbbd450f057 -->
+<!-- package_lint facts end sha256=59dc35f574c71645539c2ad15ae12a3e3510f21bfcfe0037da73a76bbea48f3a -->

@@ -4,7 +4,7 @@
 
 - Ratio and length: 16:9, three clips of about ten seconds (about 30 s).
 - Style: `chibi-anime` (draft pack `chibi-anime.md`, status gated). The frozen style block opens Style and environment in every clip, word for word; the location sentence follows it.
-- Cast and locks: Bo and Kai (clips 1–3), Mimi (clips 1–3), Nori (clip 3 only). Each anchor is the frozen text from `prototype/cast.py`, repeated verbatim in every clip the character is in; every clip says exactly how many characters appear and forbids anyone else and any outfit swap. Anchors hold design only; props live in the Props and Hands lines. Model sheets: `gallery/cast/model-<name>.png`, with each signature prop in the hand the prompts use (Kai's basketball in his right hand).
+- Cast and locks: Bo and Kai (clips 1–3), Mimi (clips 1–3), Nori (clip 3 only). Each anchor is the frozen text from `prototype/cast.py`, repeated verbatim in every clip the character is in; every clip says exactly how many characters appear and forbids anyone else and any outfit swap. Anchors hold design only; props live in the Props and Hands lines. Model sheets: `gallery/cast/model-<name>.png`, with each signature prop in the hand the specs use (Kai's basketball in his right hand).
 - Props and hands: the teddy bear travels Bo → Kai (clip 1) → Mimi (clip 2) → Bo (clip 3); Kai's basketball stays in his right hand, Mimi's bubble tea in her right hand, Nori's phone in her right hand. Each clip's Hands at start line repeats the previous clip's Hands at end line.
 - Palette: soft pastel park colours (sand, hedge green, sky blue, warm golden-hour light in clip 3); the outfit colours stay the most saturated things on screen (Bo's yellow, Kai's green, Mimi's lavender, Nori's orange).
 - Narrator: one off-screen adult male narrator, General American accent, warm clean baritone (full block in every clip, identical). Characters do not speak.
@@ -15,7 +15,7 @@
 ## Clip 1 — The bump
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 Style and environment: Flat 2D cel-shaded anime animation with a hand-drawn look; thick soft dark-brown outline of constant weight on characters and props; flat colors with one soft shadow tone and no gradients; soft pastel backgrounds built from simple shapes, with fewer details than the characters; the characters' outfit colors stay the most saturated things on screen. A sunny neighborhood park: a sandy path, a low green hedge, a wooden bench on the right and a small basketball hoop on a post at the far left.
 
 Characters (exactly 3, each keeps its own design; no one else appears):
@@ -50,7 +50,7 @@ Negative constraints: no 3D render, no CGI, no plastic toy or figurine look, no 
 ## Clip 2 — The relay
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: Flat 2D cel-shaded anime animation with a hand-drawn look; thick soft dark-brown outline of constant weight on characters and props; flat colors with one soft shadow tone and no gradients; soft pastel backgrounds built from simple shapes, with fewer details than the characters; the characters' outfit colors stay the most saturated things on screen. The same park bench area, closer: the wooden bench, a flower bed behind it and dappled shade from a tree.
 
@@ -86,7 +86,7 @@ Negative constraints: no 3D render, no CGI, no plastic toy or figurine look, no 
 ## Clip 3 — Home again
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: Flat 2D cel-shaded anime animation with a hand-drawn look; thick soft dark-brown outline of constant weight on characters and props; flat colors with one soft shadow tone and no gradients; soft pastel backgrounds built from simple shapes, with fewer details than the characters; the characters' outfit colors stay the most saturated things on screen. The park path at golden hour, long soft shadows, the hedge glowing warm.
 
@@ -124,10 +124,10 @@ Negative constraints: no 3D render, no CGI, no plastic toy or figurine look, no 
 
 1. Clip 1 → Clip 2: clip 1 ends with Kai crouching beside Bo at center, holding the teddy bear out in his left hand; clip 2 opens with Kai at center holding it out toward Bo in the same hand. Hard cut on Kai's movement; a 4–6 frame audio crossfade on the ukulele. If Kai is still crouched at the start of clip 2, trim to the frame where he is upright, or cut on his rise.
 2. Clip 2 → Clip 3: approved time cut to golden hour on the same path. What continues: Bo, Kai, Mimi, the teddy bear in Mimi's left hand, the basketball and the bubble tea in the same hands. What changes: the light, the place along the path, and Nori walks in. Hard cut; no crossfade on the picture.
-3. Inspect each real join: if a generated clip ends with a prop in a different hand or a character on the other side of the frame, trim to the last frame that matches the Hands at end line rather than trusting the prompt. Check arm separation (arms beside the body, not fused to it) on the first and last second of every clip.
+3. Inspect each real join: if a rendered clip ends with a prop in a different hand or a character on the other side of the frame, trim to the last frame that matches the Hands at end line rather than trusting the spec. Check arm separation (arms beside the body, not fused to it) on the first and last second of every clip.
 
 ## Voice and music continuity note
 
 - Every clip repeats the same narrator paragraph word for word, and clips 2–3 say the ukulele and glockenspiel continue from clip 1 with the same tempo and instrumentation. Check by listening to the three clips back to back, not from stills.
-- If the voice drifts, first retest a voice-only change with the visuals, dialogue and music held fixed; one continuous external VO and ukulele/glockenspiel track laid over the assembled picture is the fallback.
-- Post-production: stitch at 24 FPS; add any caption or title in the edit, outside the character area, never in the prompts; do not colour-grade toward glossy or high-contrast looks (it breaks the flat cel colour).
+- Record the narration as one VO track with this voice block, cut it to the beats, and lay the ukulele/glockenspiel as one continuous bed over the assembled picture.
+- Post-production: stitch at 24 FPS; add any caption or title in the edit, outside the character area, never in the specs; do not colour-grade toward glossy or high-contrast looks (it breaks the flat cel colour).

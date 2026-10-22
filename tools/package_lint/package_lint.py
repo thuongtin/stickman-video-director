@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Lint a director's proposal (Phase A) and/or an Omni Flash prompt package (Phase B) before anything is generated.
+"""Lint a director's proposal (Phase A) and/or a motion-graphics segment spec package (Phase B) before anything is rendered.
 
     package_lint.py package.md [--clips N] [--anchor "verbatim text" ...] [--facts out.md]
     package_lint.py --verify out.md
 
 Reads Markdown: the Phase A storyboard is the first table with a Hands or camera column;
-Phase B prompts are the ```text blocks. Each check prints RED (must fix) or YELLOW (look at it, or say why it stays).
+Phase B segment specs are the ```text blocks. Each check prints RED (must fix) or YELLOW (look at it, or say why it stays).
 
 Phase A (storyboard table)
   A1 row count = N (with --clips)                       RED
@@ -15,16 +15,16 @@ Phase A (storyboard table)
   A4 last row is a title, text or quote card                                 RED
   A5 a scene beat only "appears / shows / fades in"                          YELLOW
   A6 a number in the post-production overlay note that the English VO never says   RED
-Phase B (prompts)
-  B1 prompt count = N (with --clips), and Phase A rows = prompts when both exist   RED
-  B2 a prompt carries a separate `Opening hook:` line (the hook lives in Clip 1's first frame and first beat)   RED;
+Phase B (segment specs)
+  B1 spec count = N (with --clips), and Phase A rows = specs when both exist   RED
+  B2 a spec carries a separate `Opening hook:` line (the hook lives in Clip 1's first frame and first beat)   RED;
      Clip 1's first beat does not time a hit at about 2 s or earlier (storyboard-template.md, Golden Hook)   YELLOW
   B3 tools/posture_gate/hand_ledger.py on the whole package                  RED
   B4 a catalog anchor (style-catalog.md) or --anchor used in Clip 1 is missing from a later clip   RED
   B5 the narrator paragraph differs between clips; with approved dialogue written as one
      "Voice — Name: ..." line per speaker, each speaker's line must match wherever it appears   RED
   B6 technical color notation (hex, RGB, HSL, Pantone)                       RED
-  B7 quoted words outside the spoken dialogue (they tend to render on screen)  RED
+  B7 quoted words outside the spoken dialogue (they end up drawn on screen)  RED
   B8 a beat asks for morphing, melting or liquid shapes                      RED
   B9 a clip has fewer than three timed beats covering 0 to about 10 s            RED
   B10 a clip missing any of the five posture negatives (knees or elbows bending backward, limbs
@@ -33,11 +33,11 @@ Phase B (prompts)
   B11 more than one accent camera move in a clip; weak "appears/fades in" beats   YELLOW
   B12 clips 2–N whose Audio/Music line does not say the score continues from clip 1   YELLOW
   B13 a clip whose negatives never forbid logos                                YELLOW
-  B14 a prompt names a studio, franchise, brand or artist (core-contract.md C11), even in a negative   RED
+  B14 a spec names a studio, franchise, brand or artist (core-contract.md C11), even in a negative   RED
 
 --facts writes the measured facts (counts, results, sha256 of the package) with a fingerprint, so a
 delivery note can quote them instead of claiming a pass; --verify reports whether the block was edited.
-The checks read prompt text only. They do not score generated video.
+The checks read spec text only. They do not score the rendered video.
 
 Ideas adapted from storyboard_lint.py and deliver.py of huashu-art-motion (MIT, alchaincyf); no code copied.
 Exit: 0 = no RED, 1 = RED found, 2 = bad input or edited facts.
@@ -56,7 +56,7 @@ sys.path.insert(0, str(REPO / "tools/posture_gate"))
 import hand_ledger  # noqa: E402
 
 RED, YELLOW = "RED", "YELLOW"
-# Names a prompt must not carry, even as "no X": naming a studio, franchise or artist pulls the model toward it.
+# Names a spec must not carry, even as "no X": naming a studio, franchise or artist pulls the design toward it.
 # Not exhaustive; the rule in core-contract.md C11 covers every such name.
 NAMED_SOURCE = re.compile(r"\b(Pixar|Disney|Ghibli|Miyazaki|DreamWorks|Aardman|Laika|Cartoon Network|Nickelodeon|"
                           r"LEGO|Lego|Minecraft|Roblox|Mario|Nintendo|Pok[eé]mon|Marvel|DC Comics|Simpsons|Family Guy|"
@@ -123,7 +123,7 @@ def column(head, *keys):
     return None
 
 
-def prompts(text):
+def specs(text):
     """```text blocks; failing that, the bodies under "Clip N" headings that carry timed beats."""
     found = re.findall(r"```text\n(.*?)\n```", text, re.S)
     if found:
@@ -199,7 +199,7 @@ def lint_phase_a(text, head, rows, clips):
 
 
 def spoken_free(p):
-    """The prompt without spoken lines: '(VO: "...")', curly-quoted dialogue and the dialogue sentence itself."""
+    """The spec without spoken lines: '(VO: "...")', curly-quoted dialogue and the dialogue sentence itself."""
     p = re.sub(r'\([^()"\n]{1,40}:\s*"[^"\n]*"\)', "", p)  # (VO: "...") and (Name: "...")
     p = re.sub(r"“[^”]*”", "", p)
     return "\n".join(l for l in p.splitlines()
@@ -220,7 +220,7 @@ def hook_hit(p):
 def lint_phase_b(text, ps, clips, extra_anchors):
     out = []
     if clips and len(ps) != clips:
-        out.append((RED, "B1", f"package has {len(ps)} prompts, expected {clips}"))
+        out.append((RED, "B1", f"package has {len(ps)} segment specs, expected {clips}"))
     stray = [n for n, p in enumerate(ps, 1) if re.search(r"^\s*Opening hook:", p, re.M)]
     if stray:
         out.append((RED, "B2", f"clips {stray} carry an `Opening hook:` line; put the hook in Clip 1's first frame and first beat"))
@@ -295,19 +295,19 @@ def lint_phase_b(text, ps, clips, extra_anchors):
 def lint(text, clips=None, anchors=()):
     """Return (findings, facts). findings: [(level, code, message)]."""
     head, rows = storyboard(text)
-    ps = prompts(text)
+    ps = specs(text)
     if head is None and not ps:
-        raise ValueError("no storyboard table (with a Hands or camera column) and no ```text prompts found")
+        raise ValueError("no storyboard table (with a Hands or camera column) and no ```text segment specs found")
     out = []
     if head is not None:
         out += lint_phase_a(text, head, rows, clips)
     if ps:
         out += lint_phase_b(text, ps, clips, anchors)
         if head is not None and len(rows) != len(ps):
-            out.append((RED, "B1", f"Phase A has {len(rows)} rows but Phase B has {len(ps)} prompts"))
+            out.append((RED, "B1", f"Phase A has {len(rows)} rows but Phase B has {len(ps)} segment specs"))
     facts = {
         "storyboard rows": len(rows) if head is not None else "none",
-        "prompts": len(ps),
+        "segment specs": len(ps),
         "hand_ledger": "PASS" if not any(c == "B3" for _, c, _ in out) else "FAIL",
         "red": sum(l == RED for l, _, _ in out),
         "yellow": sum(l == YELLOW for l, _, _ in out),
@@ -360,7 +360,7 @@ def main():
     for level, code, msg in findings:
         print(f"{level:6} {code:4} {msg}")
     print(f"{'FAIL' if facts['red'] else 'PASS'}: {facts['red']} red, {facts['yellow']} yellow "
-          f"({facts['storyboard rows']} storyboard rows, {facts['prompts']} prompts)")
+          f"({facts['storyboard rows']} storyboard rows, {facts['segment specs']} segment specs)")
     if a.facts:
         Path(a.facts).write_text(facts_block(path, facts))
     return 1 if facts["red"] else 0

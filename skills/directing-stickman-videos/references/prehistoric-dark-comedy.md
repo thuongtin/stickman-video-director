@@ -6,7 +6,7 @@ Preserve the drawing grammar, not a single default face. Use crude hand-drawn 2D
 
 Cast to fit the topic. Adults, children, elders and different genders can share this visual grammar without sharing a face. In Phase A provide a compact cast card for each named role: role and age range, head/body proportions, hair, eyebrows/eyes, optional facial marks, costume silhouette and one recognizable accessory. Give recurring characters at least two visible non-color differences. Do not identify gender through eyelashes alone or make every elder or child a stereotype. Keep the cast as small as the story needs; explicitly state which characters appear in each clip and forbid unintended duplicates.
 
-New stories may use entirely new casts. Within one story, freeze each character's card and repeat its FULL description in every standalone prompt where it appears. Never use only “the same caveman” or an ellipsis as an identity lock. Lock white head fill, head/body proportions, hair, facial marks, costume and accessory. Expressions and poses may change; identity must not.
+New stories may use entirely new casts. Within one story, freeze each character's card and repeat its FULL description in every standalone segment spec where it appears. Never use only “the same caveman” or an ellipsis as an identity lock. Lock white head fill, head/body proportions, hair, facial marks, costume and accessory. Expressions and poses may change; identity must not.
 
 ## Translate topics into concrete prehistoric situations
 
@@ -18,17 +18,17 @@ Satire is fictional analogy. Do not present invented scenes as the historical or
 
 For a 30-second story use three ten-second clips: premise/conflict → tempting solution/escalation → reversal/callback. Scale to other approved durations. Keep approximately 18–25 spoken words per clip as a guide, not a quota; shorten VO to leave room for reaction beats. A deadpan glance or held expression of roughly half a second to two seconds can be the payoff. Do not insert effects every moment or force four devices into a quiet joke. Prefer clear action, expressive reactions, a motivated camera cut and synchronized SFX over irrelevant spectacle.
 
-Use explicit timed physical beats and track prop ownership. State where an object starts, who hands it over and where it ends. Avoid spawning objects, teleporting stones, duplicated tools or characters changing costumes between shots. Draw a simple verbal layout, keep screen direction stable and reserve subtitle-safe space without requesting generated subtitles. In 16:9 use lateral staging; in 9:16 re-block for depth and vertical readability.
+Use explicit timed physical beats and track prop ownership. State where an object starts, who hands it over and where it ends. Avoid spawning objects, teleporting stones, duplicated tools or characters changing costumes between shots. Draw a simple verbal layout, keep screen direction stable and reserve subtitle-safe space; subtitles are added in post-production. In 16:9 use lateral staging; in 9:16 re-block for depth and vertical readability.
 
-## Continuity and generation
+## Continuity and rendering
 
-Phase A includes cast cards, location layout, exact English VO with translation, music/SFX and named ending/opening states. Phase B repeats these anchors in each prompt. An intentional time jump may replace a literal match cut only if named in the approved proposal and stitching guide. Choose understated primitive percussion, dry pauses or another story-appropriate score; do not inherit mandatory optimistic piano from other modes. Repeat the selected music specification verbatim. Apply the shared `voice-continuity.md` contract: repeat the complete approved voice block verbatim in every clip, independently of music or cast age/gender. Deadpan character reactions and cave acoustics must not recast the narrator or add voice reverb. Narration is audio-only; no lip-sync unless approved.
+Phase A includes cast cards, location layout, exact English VO with translation, music/SFX and named ending/opening states. Phase B repeats these anchors in each segment spec. An intentional time jump may replace a literal match cut only if named in the approved proposal and stitching guide. Choose understated primitive percussion, dry pauses or another story-appropriate score; do not inherit mandatory optimistic piano from other modes. Repeat the selected music specification verbatim. Apply the shared `voice-continuity.md` contract: repeat the complete approved voice block verbatim in every clip, independently of music or cast age/gender. Deadpan character reactions and cave acoustics must not recast the narrator or add voice reverb. Narration is audio-only; no lip-sync unless approved.
 
-When the interface supports it, reuse approved character images and prior ending frames as references. Check full voice-profile repetition and contradictory audio directions first when the narrator drifts; follow the authorized voice-only retest in `voice-continuity.md`. Prompt repetition is not a guarantee of matching faces, voice or music, and Style 3 audio has not been separately provider-tested with the new voice block. One external VO/BGM track is an optional polish control; preserve usable SFX and inspect the joins. Do not promise automatic Flow operation: this skill outputs a production package; generation, paid retries and publication require separate user authorization. If authorized, begin with a small test and stop to report material identity/action failures instead of spending indefinitely.
+Build each cast member once as a rig from the approved cast card and reuse it in every segment; a later segment never redraws a character from the text alone. Check the rendered faces, costumes and props against the cast cards and the previous segment's ending frame. Record the narration as one VO track with the frozen voice block (`voice-continuity.md`) and lay the score as one bed across the joins; preserve usable SFX and inspect the joins. This skill outputs a production package; rendering and publication require separate user authorization. Start with one segment, check it, and report identity or action problems before building the rest.
 
-## Prompt assembly
+## Segment spec assembly
 
-Each prompt includes: duration/ratio → full drawing-style anchor → full cast cards for visible roles → location/layout and opening state → timed actions and prop transfers → exact quoted English VO → verbatim voice/music lock and timed SFX → ending state → negatives. Name colors naturally; never use technical color notation. Forbid visible text, subtitles, logos, speech bubbles, color swatches, extra humans, duplicate props, extra limbs and unintended identity changes. Do not forbid the cartoon faces, hair or texture that define this mode.
+Each segment spec includes: duration/ratio → full drawing-style anchor → full cast cards for visible roles → location/layout and opening state → timed actions and prop transfers → exact quoted English VO → verbatim voice/music lock and timed SFX → ending state → negatives. Name colors naturally; never use technical color notation. Forbid visible text, subtitles, logos, speech bubbles, color swatches, extra humans, duplicate props, extra limbs and unintended identity changes. Do not forbid the cartoon faces, hair or texture that define this mode.
 
 ## Review checklist
 
@@ -39,6 +39,6 @@ Each prompt includes: duration/ratio → full drawing-style anchor → full cast
 - Actions readable; prop ownership and scene layout remain coherent.
 - Payoff has breathing room; no forced comment question.
 - Adjacent shots match or have an explicitly planned time jump.
-- Generated footage contains no writing; subtitles are a post-production step.
+- Rendered footage contains no writing; subtitles are a post-production step.
 - Voice/reference limitations are disclosed, not advertised as guarantees.
 - The full voice profile is identical across clips, separate from the prehistoric score and cast design; alternative voices may be chosen for other stories.

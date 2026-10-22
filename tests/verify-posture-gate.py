@@ -267,7 +267,7 @@ finally:
     big.unlink()
 assert run("check", GATE / "examples/clip1_cup_left.json", GATE / "examples/clip2_cup_right.json") == 1
 
-# prompt-level hand ledger
+# spec-level hand ledger
 assert hand_ledger.lint((GATE / "examples/ledger_ok.md").read_text()) == []
 problems = hand_ledger.lint((GATE / "examples/ledger_bad.md").read_text())
 assert any("beat puts the red paper card" in p for p in problems), problems
@@ -276,7 +276,7 @@ assert any("ended clip 1 with" in p for p in problems), problems
 assert hand_ledger.lint("### Clip 1\nNo props here. She holds her breath.\n") == []
 # no ledger at all while a beat holds something
 assert hand_ledger.lint("### Clip 1\n[0-3s] Mia grabs the phone from the table.\n")
-assert hand_ledger.lint("[0-3s] Mia grabs the phone from the table.\n")  # one prompt, no heading
+assert hand_ledger.lint("[0-3s] Mia grabs the phone from the table.\n")  # one spec, no heading
 assert hand_ledger.lint("[0-3s] Mia waves.\n") == []
 # spoken narration is not a beat: neither a VO "carrying" nor a VO "it" counts as a hand action
 assert hand_ledger.lint('Audio-only dialogue: “Your mind is already carrying a hundred disasters.”\n[0-3s] Mia waves.\n') == []
@@ -968,7 +968,7 @@ assert not any(i["kind"] == "handoff_gap" for i in pg.check_scene([a, b]))
 
 # the skill points at the gate
 skill = (ROOT / "skills/directing-stickman-videos/SKILL.md").read_text()
-contract = (ROOT / "skills/directing-stickman-videos/references/omni-flash-prompt-contract.md").read_text()
+contract = (ROOT / "skills/directing-stickman-videos/references/segment-spec-contract.md").read_text()
 assert "references/posture-gate.md" in skill
 assert "Hands at start" in contract and "Hands at end" in contract
 

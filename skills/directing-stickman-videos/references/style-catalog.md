@@ -1,4 +1,4 @@
-# Style Catalog: Visual Styles & Prompt Formulas
+# Style Catalog: Visual Styles & Segment Spec Formulas
 
 This catalog defines the supported visual styles for `directing-stickman-videos`, including character DNA locks, environment specifications, motion pacing, and negative constraints.
 
@@ -16,17 +16,17 @@ This catalog defines the supported visual styles for `directing-stickman-videos`
 
 ### Status
 
-Levels follow `style-pack-template.md`: a level covers only the samples behind it. `core` marks the styles that ship with the skill; their evidence is the upstream demos and reports.
+Levels follow `style-pack-template.md`: a level covers only the samples behind it. `core` marks the styles that ship with the skill from upstream; their looks were accepted upstream, and this repository has no rig or rendered sample for them yet except the Style 2 default lead.
 
 | Style | Status | Evidence |
 |---|---|---|
-| Style 1 Dark | approved | Owner accepted the Dark samples, 2026-10-12/13 (`tests/reports/classic-character.md`) |
-| Style 1 Light | core | Same story with the polarity swapped (`tests/reports/classic-character.md`); no separate acceptance |
-| Style 2A | core | Three-clip Flow run for the voice block (`tests/reports/shared-voice.md`); README demo |
-| Style 2B | core | README demo only; no written report |
-| Style 2 default lead (buzz cut, glasses) | gated | Code-rendered sheet and motion clip in `docs/lead-character/`, all poses through `posture_gate.py` (`tests/verify-lead-character.py`); not yet checked against generated video. The Style 2A/2B evidence above was made with the beanie alternative |
-| Style 3 | approved | Owner approved three clips of one story (`tests/reports/style-3.md`) |
-| Style 4 | approved | Owner selected two samples (`tests/reports/style-4.md`) |
+| Style 1 Dark | core | Upstream owner accepted the Dark character look, 2026-10-12/13 |
+| Style 1 Light | core | Same look with the polarity swapped; no separate acceptance |
+| Style 2A | core | Upstream style; the male voice block was accepted by listening, 2026-10-12 |
+| Style 2B | core | Upstream style; no written acceptance |
+| Style 2 default lead (buzz cut, glasses) | gated | Code-rendered sheet and motion clip in `docs/lead-character/`, all poses through `posture_gate.py` (`tests/verify-lead-character.py`); not yet used in a full rendered video. The Style 2A/2B evidence above was made with the beanie alternative |
+| Style 3 | core | Upstream owner approved the look in three clips of one story, 2026-10-12 |
+| Style 4 | core | Upstream owner selected two samples of the look, 2026-10-14 |
 | chibi-anime | gated | `styles/chibi-anime.md`, sample `styles/samples/chibi-anime.md` with lint facts |
 | paper-cutout | gated | `styles/paper-cutout.md`, sample `styles/samples/paper-cutout.md` with lint facts |
 | whiteboard-doodle | gated | `styles/whiteboard-doodle.md`, sample `styles/samples/whiteboard-doodle.md` with lint facts |
@@ -97,21 +97,21 @@ For Style 4 read `cozy-storytelling.md`. Treat locations as story beats, not one
 
 ### Character DNA
 
-**Classic Dark — tested faceless base:**
+**Classic Dark — accepted faceless base:**
 ```text
 Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects.
 ```
 
-**Classic Light — tested faceless base:**
+**Classic Light — accepted faceless base:**
 ```text
 Use minimalist two-dimensional black line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays black; accent colors affect only props and graphic effects.
 ```
 
-Choose the theme, then freeze its full anchor and repeat it verbatim in every clip. Do not expand it into numeric ratios, skeleton/rig definitions, pen paths, separate hand/foot shapes or body-volume descriptions. Keep pose, movement, props and camera in the timed sequence, not in competing character definitions. The current-pose rule applies to every limb; if the approved story uses a left-arm lead action, adjust the handedness once before freezing, never clip by clip. "Right" means the character's own right side, as in `posture-gate.md`; this wording was clarified after the 2026-10-13 Flow retest below. Preserve energetic actions and rich effects; draw motion trails on props or detached graphics, not as additional limb poses.
+Choose the theme, then freeze its full anchor and repeat it verbatim in every clip. Do not expand it into numeric ratios, pen paths, separate hand/foot shapes or body-volume descriptions; the rig holds the measurements, the spec holds the look. Keep pose, movement, props and camera in the timed sequence, not in competing character definitions. The current-pose rule applies to every limb; if the approved story uses a left-arm lead action, adjust the handedness once before freezing, never clip by clip. "Right" means the character's own right side, as in `posture-gate.md`. Preserve energetic actions and rich effects; draw motion trails on props or detached graphics, not as additional limb poses.
 
-Occasional simple line expressions are allowed by default. Before freezing either base anchor, replace only "no face, no eyes, no mouth," with "occasional simple line expressions, no detailed facial features," and keep the prompt's negative constraints compatible with that choice. If the user explicitly requests a faceless character, keep the base unchanged. Expressions never change head fill, head outline, body structure or proportions; no detailed eyes, pupils or realistic facial rendering.
+Occasional simple line expressions are allowed by default. Before freezing either base anchor, replace only "no face, no eyes, no mouth," with "occasional simple line expressions, no detailed facial features," and keep the spec's negative constraints compatible with that choice. If the user explicitly requests a faceless character, keep the base unchanged. Expressions never change head fill, head outline, body structure or proportions; no detailed eyes, pupils or realistic facial rendering.
 
-2026-10-13 Flow retest: Omni 1.1 Flash, 16:9, 720p, independent 10s clips for a paper-airplane/perfectionism story. The final Dark base was used in three clips plus two repeated high-risk clips; the Light base was used in two clips. Browser-sampled action frames did not show extra limbs or sudden head enlargement in these final samples. Hand/foot endpoints and cross-clip line weight can still vary; this is not frame-by-frame certification or a guarantee for future generations. The expression-enabled and left-handed variants were not separately tested. Detailed scope and asset IDs are in `tests/reports/classic-character.md` at repository level. Prop continuity and audio were not accepted by this character-only check.
+Build the figure once as a rig (hollow circle head, one line per limb segment, round line caps) and reuse it in every segment; line weight is a rig setting, not a per-segment choice. Gate the rig's pose tracks with `posture-gate.md` before rendering.
 
 ### Palette Contract
 - Maximum of three saturated accent colors named with ordinary words (e.g., vivid red, electric blue, warm gold).
@@ -123,11 +123,11 @@ Occasional simple line expressions are allowed by default. Before freezing eithe
 
 Style 2 has one recurring lead per video. The default is Nam (buzz cut, glasses, white short-sleeved button-up shirt, jeans). Nam keeps the beanie lead's body: the same big round white head on a very short neck, loose tee-cut shirt flaring slightly to just below the hips, short wide sleeves, thin black stick limbs and simple face; only the hair, glasses and clothes change. Upstream's red-beanie Zeke is kept as an alternative: use it only when the user asks for the beanie character or for Zeke by name. Never mix the two anchors in one video.
 
-Character sheet, expressions, poses and a motion clip of the default lead: `docs/lead-character/` at repository level (code-rendered from a posture-gated rig; no generated video).
+Character sheet, expressions, poses and a motion clip of the default lead: `docs/lead-character/` at repository level (code-rendered from a posture-gated rig).
 
 ### Character DNA Anchors (Anti-Deformation Lock)
 
-To prevent character drift, bug-eye deformations, or clothing loss across clips, use one of these exact character anchors:
+To prevent character drift, bug-eye faces, or clothing loss across clips, use one of these exact character anchors:
 
 **Character Anchor (every clip, verbatim):**
 ```text
@@ -142,12 +142,12 @@ A minimalist 2D animated stick figure wearing a bright red beanie (smooth rounde
 Repeat the chosen full anchor in clips 2–N as well. The earlier short form for later clips ("The same minimalist 2D animated stick figure in a bright red beanie and yellow shirt" followed by an ellipsis) dropped the no-pom-pom, limbs and shorts locks and is retired; no shortened form of either anchor is allowed. The full-anchor-every-clip form follows the Style 1, Style 4 and voice rules.
 
 **Deformation Prevention Rules:**
-- **No Realistic Facial Features**: Round white head with minimal dot eyes only. Never request detailed pupils, irises, or photorealistic facial contours (which trigger alien bug-eyes).
+- **No Realistic Facial Features**: Round white head with minimal dot eyes only. Never request detailed pupils, irises, or photorealistic facial contours; on a stick-figure head they read as bug eyes.
 - **Glasses stay on** (default lead): in every shot, including jumps, bumps and close-ups, with clear lenses and the dot eyes behind them. No lens glare, no sunglasses, no glasses floating off the face. If a beat needs the glasses adjusted, the hand pushes them up and lets go; they never come off.
 - **Buzz cut stays close-cropped** (default lead): no long, swept or spiked-up hair, no hat, no beanie.
 - **Outfit locks** (default lead): the shirt is plain white with a thin black outline, buttoned, with a small pointed collar and a thin button line down the front; short wide sleeves rolled up above the elbows (drawn like the beanie lead's tee sleeves, flaring open) so the stick arms show below them. No pattern, logo, text or tie, no jacket, no long sleeves; jeans stay dark blue, never shorts. Light stubble is not in the anchor: at stick-figure scale it reads as dirt or a beard. Add "faint light stubble dots along the jaw" to the anchor only when the user asks, and then in every clip.
-- **No Pom-Poms** (beanie alternative): Specify smooth rounded beanie top to prevent erratic pom-poms or winter tassels.
-- **Always include every clothing lock**: Omitting the shirt results in naked stick bodies; omitting the glasses and hair (or the beanie) results in standard Style 1 characters.
+- **No Pom-Poms** (beanie alternative): Specify smooth rounded beanie top, with no pom-pom or winter tassels.
+- **Always include every clothing lock**: a spec without the shirt describes a bare stick body; without the glasses and hair (or the beanie) it describes a standard Style 1 character.
 
 ---
 
@@ -161,13 +161,13 @@ in a modern bright white studio space with subtle light-gray perspective grid li
 ```
 
 #### Mandatory Negative Constraints (Anti-Clutter)
-Without explicit negative constraints, diffusion models tend to generate motherboard circuitry, spaceship corridors, and cracked concrete. **Always append this negative clause in 2A prompts:**
+Studio-tech sets drift toward motherboard circuitry, spaceship corridors and cracked concrete when they are dressed up for "tech". **Always append this negative clause in 2A segment specs:**
 ```text
 Negative constraints: strictly minimalist studio aesthetic, no circuit board textures, no sci-fi wall panels, no spaceship corridors, no cracked concrete, no grunge textures, no photorealistic human skin, no speech bubbles, no dialogue text boxes.
 ```
 
-#### Motion Dynamics (Anti-Stutter & Anti-Lag)
-- **Do not use abstract liquid/morphing transformations** (e.g., stairs melting into a clock), which trigger latent flicker and stuttering.
+#### Motion Dynamics (Readable Motion)
+- **Do not use abstract liquid/morphing transformations** (e.g., stairs melting into a clock); they break the clean layered shapes and read as a change of style.
 - **Use physical, character-driven interactions**:
   - Leaping and bumping an invisible glass ceiling with a comedic bounce.
   - Tapping a sneaker onto the floor grid to emit an expanding cyan ripple wave.
@@ -216,7 +216,7 @@ Voice continuity is a shared foundation for **all styles**, including Styles 3 a
 ```text
 One off-screen adult male narrator throughout. General American accent, warm clean baritone, medium-low pitch, gentle chest resonance, no raspiness or breathiness. Calm conversational delivery, restrained pitch variation, steady speaking pace, and close, dry studio sound. Keep the same vocal timbre, register, accent, pace, and recording quality throughout. Emotional progression belongs to the visuals and music; do not change the narrator's voice or switch to character dialogue.
 ```
-This is the user-accepted male example, not a compulsory voice for every project. For female, older, youthful or other approved voices, resolve a complete coherent profile using `voice-continuity.md`, then repeat it verbatim across every clip. Do not use only "same narrator" or inherit a prior clip by name. Keep narration audio-only, voice-first, with no speech bubbles or dialogue boxes. Actual listening acceptance exists for the Style 2A Hope sample; other profiles/styles remain untested for audio matching.
+This is the user-accepted male example, not a compulsory voice for every project. For female, older, youthful or other approved voices, resolve a complete coherent profile using `voice-continuity.md`, then repeat it verbatim across every clip. Do not use only "same narrator" or inherit a prior clip by name. Keep narration audio-only, voice-first, with no speech bubbles or dialogue boxes. Listening acceptance exists for this male block only; other profiles are accepted when the user hears the recorded VO.
 
 ### BGM Continuity Lock
 
@@ -235,7 +235,7 @@ This piano-and-synth wording is the Style 1/2 default. Other styles choose their
 
 ## 6. Visual Beat Pacing Template (10-Second Clip)
 
-Every prompt must divide its 10 seconds into three active narrative beats:
+Every segment spec must divide its 10 seconds into three active narrative beats:
 
 ```text
 Timed Synchronized Visual Beats:

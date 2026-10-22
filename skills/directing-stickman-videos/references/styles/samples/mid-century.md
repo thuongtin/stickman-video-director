@@ -1,4 +1,4 @@
-# The folder nobody owns — mid-century prompt package
+# The folder nobody owns — mid-century spec package
 
 Mid-century limited animation, multi-character. 16:9, 3 clips, about 30 seconds.
 
@@ -12,13 +12,13 @@ Mid-century limited animation, multi-character. 16:9, 3 clips, about 30 seconds.
 - The red folder: Boxley right hand, then the desk, then Wendell left hand (end of clip 1), passed to Marge right hand (clip 2), passed to Tilly left hand (clip 3).
 - Narrator: the accepted adult male General American baritone block from `voice-continuity.md`, verbatim in every clip.
 - Score: one brisk muted-trumpet, walking upright-bass and brushed-snare jazz theme, established in clip 1 and continued identically.
-- Text policy: post-overlay. No words, numerals or signage in any generated frame; titles are added in post.
+- Text policy: post-overlay. No words, numerals or signage in any frame; titles are added in post.
 - Motion cadence: on-twos, held key poses with one in-between per change.
 
 ## Clip 1 — The folder lands
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: 1950s mid-century modern limited animation. Flat colour shapes, lightly grainy, printed a little off-register from a thin, slightly wobbly near-black ink line, so each fill sits a few pixels up and to the right of its outline. Angular geometric character designs in flat unshaded colour, one colour per shape with no shadow tones, on sparse sets of flat colour fields with a little sponge texture on the walls; no gradients, no soft shading, no 3D. Limited animation on twos: each character holds a clear, balanced key pose, then moves through one in-between drawing into the next key pose; while a pose is held, only the face or one arm moves. Palette: warm cream paper, mustard, teal, coral, olive, charcoal, with brick red as the accent. A sparse mid-century office: a cream wall block on the left and a dusty pink wall block on the right, a mustard floor band, a square window with flat teal and navy skyline blocks, a starburst wall clock with a blank face and no numerals, a teal boomerang-shaped desk on thin hairpin legs in the middle, a mustard filing cabinet and a potted snake plant on the right.
 
@@ -51,7 +51,7 @@ Negative constraints: no 3D render, no CGI, no gradients or soft airbrushed shad
 ## Clip 2 — Pass it along
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: 1950s mid-century modern limited animation. Flat colour shapes, lightly grainy, printed a little off-register from a thin, slightly wobbly near-black ink line, so each fill sits a few pixels up and to the right of its outline. Angular geometric character designs in flat unshaded colour, one colour per shape with no shadow tones, on sparse sets of flat colour fields with a little sponge texture on the walls; no gradients, no soft shading, no 3D. Limited animation on twos: each character holds a clear, balanced key pose, then moves through one in-between drawing into the next key pose; while a pose is held, only the face or one arm moves. Palette: warm cream paper, mustard, teal, coral, olive, charcoal, with brick red as the accent. The typing pool of the same office: a dusty pink wall block, a mustard floor band, a teal desk on hairpin legs with a charcoal typewriter holding one blank sheet, a coral shell chair, two floating boomerang shapes on the wall.
 
@@ -84,7 +84,7 @@ Negative constraints: no 3D render, no CGI, no gradients or soft airbrushed shad
 ## Clip 3 — One owner
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style and environment: 1950s mid-century modern limited animation. Flat colour shapes, lightly grainy, printed a little off-register from a thin, slightly wobbly near-black ink line, so each fill sits a few pixels up and to the right of its outline. Angular geometric character designs in flat unshaded colour, one colour per shape with no shadow tones, on sparse sets of flat colour fields with a little sponge texture on the walls; no gradients, no soft shading, no 3D. Limited animation on twos: each character holds a clear, balanced key pose, then moves through one in-between drawing into the next key pose; while a pose is held, only the face or one arm moves. Palette: warm cream paper, mustard, teal, coral, olive, charcoal, with brick red as the accent. The mail room of the same office: a cream wall block with a large flat teal rectangle of empty pigeonhole shelves, a mustard floor band, a low mustard table on hairpin legs, brown paper parcels with string stacked in a corner.
 
@@ -118,10 +118,10 @@ Negative constraints: no 3D render, no CGI, no gradients or soft airbrushed shad
 
 1. Clip 1 → clip 2: clip 1 ends on Wendell at the desk holding the folder out; clip 2 opens on Wendell walking in from the left with the same folder (the Hands lines name the hand). Location change (office → typing pool) carried by the folder and the left-to-right travel direction. Cut on Wendell's step.
 2. Clip 2 → clip 3: clip 2 ends on Marge facing right toward the doorway with the folder; clip 3 opens on Marge walking into the mail room from the left with it (the Hands lines name the hand). Cut on her first step.
-3. Trim each clip at its last clean held pose rather than the last generated frame; check the hand-pass frames (clip 2 [3–7s], clip 3 [0–3s]) for a doubled or vanishing folder before joining.
+3. Trim each clip at its last clean held pose rather than the last rendered frame; check the hand-pass frames (clip 2 [3–7s], clip 3 [0–3s]) for a doubled or vanishing folder before joining.
 4. Short audio crossfade (about 4 frames) at each cut so the jazz theme runs on; do not crossfade the voice.
 5. Optional post-production overlays (titles), added after assembly: none required by the narration.
 
 ## Voice and music continuity note
 
-The voice block is the accepted male narrator block and is identical in all three clips. Compare the actual audio of the three clips by listening before calling them consistent. If the jazz theme drifts in tempo or instrumentation between clips, prefer one external score track under the assembled video over regenerating the clips; keep the narrator's track from each clip.
+The voice block is the accepted male narrator block and is identical in all three clips. Record the narration as one VO track and lay the jazz theme as one continuous score under the assembled video, then listen to the whole cut before calling it consistent.

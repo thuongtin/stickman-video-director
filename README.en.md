@@ -4,7 +4,7 @@
 
 [Tiếng Việt](README.vi.md) · [**English**](README.en.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Português do Brasil](README.pt-BR.md)
 
-# AI Stickman Animation Style Library
+# Motion-Graphics Stickman Animation Style Library
 
 **Turn an idea into a polished stickman video with a consistent visual style.**
 
@@ -15,7 +15,7 @@
 
 <div align="center">
 
-I'm testing popular stickman animation styles from across the web and sharing the workflows here, free and open source. Install the Skill, give your AI a topic, and get a script, animated storyboards, and prompts for narration and sound effects.
+I'm testing popular stickman animation styles from across the web and sharing the workflows here, free and open source. Install the Skill, give your assistant a topic, and get a script, a storyboard, and a segment spec for each part of the video to build as motion graphics, with narration and sound effects.
 
 <strong>Next time you want to make a stickman animation, start here.</strong> For **YouTube explainers, TikTok videos, workplace and motivational stories, educational content, and punchy shorts about everyday life.**
 
@@ -24,22 +24,22 @@ I'm testing popular stickman animation styles from across the web and sharing th
 <table width="100%">
 <tr>
 <td width="50%" align="center">
-<strong>Minimalist Monochrome</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/dark-theme-demo.gif" alt="Minimalist stickman animation with white lines on black" width="90%"></a>
+<strong>Style 2 default lead</strong><br>
+<a href="#lead-character-preview"><img src="docs/lead-character/motion.gif" alt="Nam, the buzz-cut stick figure with glasses, walks in and waves" width="90%"></a>
 </td>
 <td width="50%" align="center">
-<strong>Modern Tech</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/style-2a-demo.gif" alt="Red-beanie stickman with clean tech visuals" width="90%"></a>
+<strong>Đông Hồ Folk Print</strong><br>
+<a href="#experimental-styles"><img src="docs/style-previews/dong-ho.gif" alt="Motion clip of the Đông Hồ Folk Print style" width="90%"></a>
 </td>
 </tr>
 <tr>
 <td width="50%" align="center">
-<strong>Prehistoric Dark Comedy</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/style-3-demo.gif" alt="Prehistoric stickman story with a comic twist" width="90%"></a>
+<strong>Chú Tiểu Little Monks</strong><br>
+<a href="#experimental-styles"><img src="docs/style-previews/chu-tieu.gif" alt="Motion clip of the Chú Tiểu Little Monks style" width="90%"></a>
 </td>
 <td width="50%" align="center">
-<strong>Cozy Storytelling</strong><br>
-<a href="#style-gallery"><img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="Expressive stick characters in a colorful everyday setting" width="90%"></a>
+<strong>Soft Tech Illustration</strong><br>
+<a href="#experimental-styles"><img src="docs/style-previews/tech-illustration.gif" alt="Motion clip of the Soft Tech Illustration style" width="90%"></a>
 </td>
 </tr>
 </table>
@@ -48,9 +48,9 @@ I'm testing popular stickman animation styles from across the web and sharing th
 
 **4 styles · 6 visual options · 23 experimental styles · Posture gate · Free and open source**
 
-⭐ **Star it now. Next time you make an animation, skip the hunt for prompts.**
+⭐ **Star it now. Next time you make an animation, skip the blank page.**
 
-[Get started](#quick-start) · [23 new styles](#experimental-styles) · [What this fork adds](#fork-additions) · [Latest updates](#recent-updates) · [Full walkthrough (Chinese)](https://x.com/CrazyKaomei/status/2102311241046008268)
+[Get started](#quick-start) · [23 new styles](#experimental-styles) · [What this fork adds](#fork-additions) · [Latest updates](#recent-updates)
 
 </div>
 
@@ -68,10 +68,6 @@ A few lines can explain a big idea. On a pure-white or pure-black canvas, charac
 - **Best for:** Science, psychology, motivation, self-management, business breakdowns, and explaining concepts.
 - **Which version?** White backgrounds feel clean and direct; choose black backgrounds for stronger contrast, tension, and emotional impact.
 
-| Style 1A: Black on White | Style 1B: White on Black |
-|:---:|:---:|
-| <!-- demo:light:start --><img src="assets/readme/previews/light-theme-demo.gif" alt="Black stick figure on a pure-white background" width="360"><!-- demo:light:end --> | <!-- demo:dark:start --><img src="assets/readme/previews/dark-theme-demo.gif" alt="White stick figure on a pure-black background" width="360"><!-- demo:dark:end --> |
-| White canvas · Black figure | Black canvas · White figure |
 
 ---
 
@@ -83,12 +79,8 @@ In this fork the lead has a short dark buzz cut, dark rectangular glasses, a whi
 - **Best for:** 2A suits AI tools, tech products, tutorials, and feature demos. 2B suits personal growth, everyday situations, adventures, and motivational stories.
 - **Which version?** Choose 2A to explain a tool or method; choose 2B to follow a character through an experience.
 
-| Style 2A: Minimal Tech | Style 2B: Cinematic Story |
-|:---:|:---:|
-| <img src="assets/readme/previews/style-2a-demo.gif" alt="Minimal tech animation with a red-beanie character" width="360"> | <img src="assets/readme/previews/style-2b-demo.gif" alt="Red-beanie character in a colorful cinematic setting" width="360"> |
-| White space · Faint grid · Cyan glow | Colorful settings · Cinematic light · Story atmosphere |
 
-The two clips above were made upstream with the red-beanie lead. Here is this fork's default lead, drawn from a code rig that passed the posture gate ([character sheet](docs/lead-character/sheet.png)):
+Here is this fork's default lead, drawn from a code rig that passed the posture gate ([character sheet](docs/lead-character/sheet.png)):
 
 <a id="lead-character-preview"></a>
 
@@ -108,10 +100,6 @@ Take today's problems back to a world without phones or offices. Caves, animal h
 - **Best for:** Prehistoric what-ifs, workplace satire, observations about human nature, dark comedy, fables, and children's English stories.
 - **Why choose it?** For a short setup and an unexpected payoff—especially when modern relationships become absurdly familiar in a prehistoric tribe.
 
-| Example 1: “How Did Humans Get Their First Job?” | Example 2: “Humans Discover Fire” |
-|:---:|:---:|
-| <img src="assets/readme/previews/style-3-demo.gif" alt="How Did Humans Get Their First Job? animated preview" width="360"> | <img src="assets/readme/previews/style-3-community-fire.gif" alt="Humans Discover Fire, a community-made animation" width="360"> |
-| Prehistoric workplace comedy | Fire discovery · Community creation |
 
 ---
 
@@ -123,10 +111,6 @@ A mug you've been saving for a special occasion. A message you feel compelled to
 - **Best for:** Relatable everyday stories, personal growth, relationships, warm moments, habit building, and children's English content.
 - **Why choose it?** To help viewers recognize themselves in a small moment. Color and lighting follow the topic: warmth, anxiety, exhaustion, or a fresh start.
 
-| Example 1: Message Anxiety on the Commute | Example 2: Making Time for Yourself |
-|:---:|:---:|
-| <img src="assets/readme/previews/style-4-cozy-station.gif" alt="A character dealing with message anxiety at a train station" width="360"> | <img src="assets/readme/previews/style-4-cozy-cafe.gif" alt="Taking a break at a sunlit outdoor café" width="360"> |
-| Train station · Tracking shots · Emotional close-ups | Outdoor café · Warm light · Everyday gestures |
 
 ---
 
@@ -134,7 +118,7 @@ A mug you've been saving for a special occasion. A message you feel compelled to
 
 ### Experimental styles: 23 new styles
 
-This fork adds 23 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not been checked against generated video. Each card is a few seconds of motion rendered from that style's own code-drawn rigs, which passed the posture gate; none of it was made with an AI video model. “See the cast” opens the full cast. [How to pick one and the checking tools](#fork-additions).
+This fork adds 23 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not yet been built into a full video. Each card is a few seconds of motion rendered from that style's own code-drawn rigs, which passed the posture gate. “See the cast” opens the full cast. [How to pick one and the checking tools](#fork-additions).
 
 <table width="100%">
 <tr>
@@ -313,7 +297,7 @@ This fork of [kaomei/stickman-video-director](https://github.com/kaomei/stickman
 Besides Styles 1–4, the Skill can use 23 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
 
 - **How to pick one:** ask for an experimental style, or name one by its key, for example “make it in the `dong-ho` style”. The Skill offers them only when asked, and tells you each one is `gated`.
-- **What `gated` means:** the character rigs passed the posture gate, and the sample package passed the package checks below. These styles have not yet been checked against generated video.
+- **What `gated` means:** the character rigs passed the posture gate, and the sample package passed the package checks below. These styles have not yet been built into a full video.
 - **Where they live:** `skills/directing-stickman-videos/references/styles/<key>.md`, with the sample package in `styles/samples/<key>.md`. The full list is in the “Experimental styles” table of `references/style-catalog.md`.
 
 The table below lists all 23 again. Motion clips and descriptions are under [Experimental styles](#experimental-styles).
@@ -344,28 +328,28 @@ The table below lists all 23 again. Motion clips and descriptions are under [Exp
 | `brick-build` | Brick-Built Town | How parts fit together, cause and effect, gentle kids' stories, small physics jokes |
 | `tech-illustration` | Soft Tech Illustration | Software, AI and productivity explainers, app and onboarding stories, helper-robot stories |
 
-No prompt names a studio, brand or famous character. Where a style resembles a well-known look, it matches the genre and material only.
+No segment spec names a studio, brand or famous character. Where a style resembles a well-known look, it matches the genre and material only.
 
 ### Posture gate and package checks
 
-Video models often bend a knee the wrong way, stretch a limb, or move a held prop to the wrong hand. These tools catch that before and after generation. They need only Python 3; reading poses from a video also needs `pip install mediapipe opencv-python-headless`.
+Animated rigs easily bend a knee the wrong way, stretch a limb, or attach a held prop to the wrong hand. These tools catch that before the build and after rendering. They need only Python 3; reading poses from a rendered clip also needs `pip install mediapipe opencv-python-headless`.
 
 | Tool | What it checks | Run |
 |---|---|---|
 | Hand ledger | Every held prop stays in one named hand (the character's own left or right) unless a beat passes it; `Hands at start` / `Hands at end` lines chain from clip to clip. | `python3 tools/posture_gate/hand_ledger.py package.md` |
-| Package lint | The whole prompt package: hook placement, the same anchors and voice block in every clip, the five posture negatives, music continuity, no logos or written text, plus the hand ledger. | `python3 tools/package_lint/package_lint.py package.md` |
-| Posture gate | Pose tracks from code-drawn rigs or from a video: joint limits, limb length, one-frame pops, balance, arms over the torso or face, left and right hands swapping. `--scene` checks several characters in one shot, such as a hand-off. | `python3 tools/posture_gate/posture_gate.py check track.json` |
-| Risk sheet | One image per generated clip with frames around the moments its prompt marks as risky (passes, turns, falls), for a person to review. | `python3 tools/risk_sheet/risk_sheet.py package.md --clip 2 --video clip2.mp4 -o out/` |
+| Package lint | The whole segment spec package: hook placement, the same anchors and voice block in every clip, the five posture negatives, music continuity, no logos or written text, plus the hand ledger. | `python3 tools/package_lint/package_lint.py package.md` |
+| Posture gate | Pose tracks exported from each character's rig (or read from a rendered clip): joint limits, limb length, one-frame pops, balance, arms over the torso or face, left and right hands swapping. `--scene` checks several characters in one shot, such as a hand-off. | `python3 tools/posture_gate/posture_gate.py check track.json` |
+| Risk sheet | One image per rendered clip with frames around the moments its segment spec marks as risky (passes, turns, falls), for a person to review. | `python3 tools/risk_sheet/risk_sheet.py package.md --clip 2 --video clip2.mp4 -o out/` |
 
-The Skill runs the hand ledger and package lint before it hands over the prompts. Details: `tools/posture_gate/README.md` and `references/posture-gate.md`.
+The Skill runs the hand ledger and package lint before it hands over the segment specs. Details: `tools/posture_gate/README.md` and `references/posture-gate.md`.
 
 ### Golden Hook in detail
 
-The first stage of the script, the Golden Hook, now has its own card in the director's proposal: a hook pattern, a first frame that already shows the character mid-action with a visible tension, one hook moment by about two seconds that reads with the sound off, and a first spoken line of four to ten words with no greeting. The hook lives in Clip 1's first frame and first beat; it adds no extra line to the prompt. See “Golden Hook in detail” in `references/storyboard-template.md`.
+The first stage of the script, the Golden Hook, now has its own card in the director's proposal: a hook pattern, a first frame that already shows the character mid-action with a visible tension, one hook moment by about two seconds that reads with the sound off, and a first spoken line of four to ten words with no greeting. The hook lives in Clip 1's first frame and first beat; it adds no extra line to the spec. See “Golden Hook in detail” in `references/storyboard-template.md`.
 
 ### Style 2 lead
 
-Style 2 now defaults to a lead with a short dark buzz cut, thick dark rectangular glasses, a plain white short-sleeved button-up shirt with rolled sleeves, and dark blue jeans. The body and face follow upstream's red-beanie lead. The glasses stay on in every shot. Upstream's red-beanie Zeke stays as the alternative: ask for the beanie character and the Skill uses its anchor instead. The character sheet, poses and motion clip are in `docs/lead-character/` (shown under [Style 2](#lead-character-preview)); every pose passed the posture gate, and none of it was made with an AI model.
+Style 2 now defaults to a lead with a short dark buzz cut, thick dark rectangular glasses, a plain white short-sleeved button-up shirt with rolled sleeves, and dark blue jeans. The body and face follow upstream's red-beanie lead. The glasses stay on in every shot. Upstream's red-beanie Zeke stays as the alternative: ask for the beanie character and the Skill uses its anchor instead. The character sheet, poses and motion clip are in `docs/lead-character/` (shown under [Style 2](#lead-character-preview)); every pose passed the posture gate.
 
 <!-- readme:advantages -->
 
@@ -379,13 +363,13 @@ It plans the writing and the visuals together—not just a stick figure's appear
 | **Visuals** | Character actions, props, camera moves, transitions, and sound cues. |
 | **Continuity** | Character, prop, and narrator profiles, plus transitions between clips. |
 | **Framing** | Composition and shot choices adapted to landscape or portrait. |
-| **Revisions** | A proposal to approve before the final prompts. |
+| **Revisions** | A proposal to approve before the final segment specs. |
 
 <!-- readme:output -->
 
-First, review the **director's proposal**: narration, scenes, camera work, and sound design. Once you approve it, get standalone **Gemini Omni Flash video prompts** for each segment, plus stitching, transition, and subtitle notes.
+First, review the **director's proposal**: narration, scenes, camera work, and sound design. Once you approve it, get a standalone **segment spec** for each roughly ten-second segment to build as motion graphics, plus stitching, transition, and subtitle notes.
 
-The Skill plans the video and writes the prompts. Flow or another video tool generates the clips; a video editor handles the final assembly and subtitles. No API or MCP setup is required for the Skill.
+The Skill plans the video and writes the segment specs. The video is built as motion graphics: characters are rigs drawn in the chosen style, backgrounds, props and effects are layers, and the narration is recorded or synthesised as its own track; a video editor handles the final assembly, music and subtitles. No API or MCP setup is required for the Skill.
 
 <!-- readme:install -->
 
@@ -412,17 +396,17 @@ Send a topic, draft, or article. For example:
 Make a stickman video called “How Did Humans Get Their First Job?”
 ```
 
-### 3. Follow the prompts and approve the plan
+### 3. Follow the guide and approve the plan
 
-**Choose settings → Review the proposal → Request changes → Approve and get your prompts.**
+**Choose settings → Review the proposal → Request changes → Approve and get your segment specs.**
 
 If you haven't chosen an aspect ratio or style, the Skill asks. Pick landscape `16:9` or portrait `9:16`, then a style from the gallery. It won't ask again for settings you've already given. Videos default to 60 seconds; say “let's try 30 seconds first” for a shorter test.
 
-Next comes the director's proposal: story structure, narration for each segment, character actions, camera work, and sound design. Review the whole plan and request changes before approving the final video prompts.
+Next comes the director's proposal: story structure, narration for each segment, character actions, camera work, and sound design. Review the whole plan and request changes before approving the final segment specs.
 
 **“How Did Humans Get Their First Job?” | Landscape 16:9 · Style 3: Prehistoric Dark Comedy · 30 seconds**
 
-This is the storyboard approved before making the example above. The sample's original narration is preserved:
+Here is an approved sample storyboard. The sample's original narration is preserved:
 
 | Time | Scene and action | Voiceover |
 |---|---|---|
@@ -430,13 +414,13 @@ This is the storyboard approved before making the example above. The sample's or
 | **10–20s: The boss finds you** | Just as he closes his eyes, three knocks come from the entrance. The boulder shifts open a crack. The chief leans in, smiling, and offers a spear. The caveman waves it away. Then the chief produces a roasted leg of meat. The caveman sniffs, eyes suddenly wide. Cut outside: spear in hand, he's being nudged toward giant animal tracks. | **“Then someone offered him food… in exchange for a small favor. Congratulations. Employment was invented.”** |
 | **20–30s: The price of progress** | He returns to the same cave covered in dust, drops the spear, and holds out his hand for the meat. The chief offers a tiny piece with a professional smile, then presses a whole bundle of spears into his arms, pats his shoulder, and leaves. The caveman looks from the meat to the spears, then slowly at the camera. He lies back down, but the spears jab him upright. | **“The reward got smaller. The workload got bigger. And somehow… they called that progress.”** |
 
-Don't like a line or a scene? Say what to change. Final prompts come only after your approval. This 30-second example produces three roughly ten-second prompts covering characters, action, camera work, narration, and audio.
+Don't like a line or a scene? Say what to change. Final segment specs come only after your approval. This 30-second example produces three roughly ten-second specs covering characters, action, camera work, narration, and audio.
 
-### 4. Generate the clips and edit your video
+### 4. Build the segments and edit your video
 
-Submit the prompts to [Google Flow](https://flow.google.com/) in order. Assemble the clips in CapCut or another editor, adjust the joins, and add subtitles. A 30-second video usually uses three roughly ten-second prompts; a 60-second video uses six.
+Build each segment from its spec: rig each character once from its description, key the three beats, and render. Export each character's pose track and run the posture gate before the final render. Record the narration once for the whole video, then assemble the clips in CapCut or another editor and add music, sound effects and subtitles. A 30-second video usually has three roughly ten-second segments; a 60-second video has six.
 
-For a first run, follow the [complete production walkthrough](https://x.com/CrazyKaomei/status/2102311241046008268). There's also a [Flow tutorial](https://x.com/CrazyKaomei/status/2093893997223923822?s=20). Both are in Chinese. The Skill is free; video generation costs and model availability depend on the platform.
+Style 2's lead comes with a sample rig in `docs/lead-character/` (`render.py`); the experimental styles have character sheets and sample motion clips in `docs/style-previews/`. The Skill is free.
 
 <!-- readme:reliability -->
 
@@ -454,13 +438,14 @@ For a first run, follow the [complete production walkthrough](https://x.com/Craz
 Use it for faceless explainers, history and business topics, personal growth, everyday stories, and product demos. English narration with bilingual subtitles added later also works for English-learning content, short dramas, and close-reading videos. Durations can be any multiple of ten seconds: 30 seconds, 60 seconds, 90 seconds, three minutes, and beyond.
 
 - Keep character, prop, and narrator profiles consistent across the whole video. Choose any voice changes in the proposal first.
-- If one clip's character, props, or voice drift, adjust and retest that clip rather than remaking everything.
+- If one clip's character or props drift, fix the rig or the keys and re-render that clip rather than remaking everything.
 - Improve the writing without inventing facts, statistics, or product claims.
 
 <a id="recent-updates"></a>
 
 ## Latest updates
 
+- **2026-10-22:** The Skill now builds videos as motion graphics only: Phase B is a segment spec per segment, the posture gate runs on pose tracks exported from the rigs after rendering, and the narration is recorded once for the whole video. The old demo clips were removed from the homepage.
 - **2026-10-22:** New experimental style `tech-illustration` (Soft Tech Illustration): a soft 2.5D tech explainer look with a chibi developer team and a robot sidekick.
 - **2026-10-20:** This fork adds 22 experimental styles, the posture gate with the hand ledger and package lint, and the detailed Golden Hook card. Style 2 now has a buzz-cut, glasses-wearing default lead. See [What this fork adds](#fork-additions).
 - **2026-10-15:** Refined the Chinese homepage, installation steps, and examples; added lighter previews and a Star History chart. Skill rules unchanged.
@@ -468,7 +453,7 @@ Use it for faceless explainers, history and business topics, personal growth, ev
 - **2026-10-13:** Refined Style 1's character descriptions and current-pose constraints.
 - **2026-10-12:** Improved shared voice-consistency rules and added prehistoric and community examples.
 
-Already installed? Homepage changes alone don't require a reinstall. Update the Skill if you want Style 4 or installed before the character and voice-rule changes. [Detailed changelog (Chinese)](CHANGELOG.zh-CN.md).
+Already installed? Homepage changes alone don't require a reinstall. Update the Skill if you want Style 4 or installed before the character and voice-rule changes.
 
 <!-- readme:contribute -->
 
@@ -487,9 +472,9 @@ Suggest a style, share your work, or report a problem in [Issues](https://github
 
 ## Star History
 
-⭐ **If this library saved you time hunting for prompts or fixing failed generations, consider giving it a Star. It'll be here when you're ready to make your next video.**
+⭐ **If this library saved you time planning scripts or fixing broken characters, consider giving it a Star. It'll be here when you're ready to make your next video.**
 
-I'm [Kaomei](https://x.com/CrazyKaomei). I'll keep testing styles and sharing useful prompts, workflows, and the mistakes worth avoiding—all for free. Less time wrestling with tools, more time for the stories you actually want to tell.
+I'm [Kaomei](https://x.com/CrazyKaomei). I'll keep testing styles and sharing useful styles, workflows, and the mistakes worth avoiding—all for free. Less time wrestling with tools, more time for the stories you actually want to tell.
 
 <div align="center">
 <a href="https://www.star-history.com/?repos=kaomei%2Fstickman-video-director&amp;type=date">

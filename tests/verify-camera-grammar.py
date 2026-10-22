@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Camera grammar regression: the template states the rules and the example storyboard follows them.
 
-This reads the `Motion, camera, and transition` column only; it does not judge generated footage.
+This reads the `Motion, camera, and transition` column only; it does not judge rendered footage.
 """
 from pathlib import Path
 import re

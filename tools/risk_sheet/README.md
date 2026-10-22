@@ -1,6 +1,6 @@
 # Risk sheet
 
-One PNG per generated clip with frame bursts around the moments its own prompt says are risky. Use it instead of scrubbing the whole clip.
+One PNG per rendered clip with frame bursts around the moments its own segment spec says are risky. Use it instead of scrubbing the whole clip.
 
 The tool reads the clip's beats and `Hands at start` / `Hands at end` lines. It picks the moments where a named character does one of these:
 

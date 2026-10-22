@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Check left/right-hand continuity in a Phase B prompt package before anything is generated.
+"""Check left/right-hand continuity in a Phase B segment spec package before anything is rendered.
 
-Video models often put a prop in the wrong hand or let it jump hands between clips.
-The prompt contract asks every clip to state, from each character's own side:
+Animation often puts a prop in the wrong hand or lets it jump hands between clips.
+The segment spec contract asks every clip to state, from each character's own side:
 
   Hands at start — Pip: right hand holds the red paper card; left hand empty.
   Hands at end — Pip: right hand empty; left hand holds the red paper card.
@@ -294,7 +294,7 @@ def split_clips(text):
 def lint(text, warnings=None):
     problems = []
     text = SPOKEN.sub('""', text)
-    clips = split_clips(text) or [(1, text)]  # a single prompt without a heading is clip 1
+    clips = split_clips(text) or [(1, text)]  # a single spec without a heading is clip 1
     ledgers = []
     for n, body in clips:
         lines = {k.lower(): (q + " " + v, parse_ledger(EXCUSE.sub("", v))) for k, q, v in LINE.findall(body)}
@@ -400,7 +400,7 @@ def lint(text, warnings=None):
                                     if (TRANSFER.search(x) or re.search(r"\b(?:grip|grab|catch|clutch)\w*", x, re.I))
                                     and any(mentions(x, end[1][name][sd]) for sd in ("r", "l") if end[1][name][sd] in moved)
                                     for _, hs in hand_owners(x, set(start[1]) | set(end[1])) for _, o in hs):
-                    # "Bao hands Mira the loaf": the model picks the receiving hand itself
+                    # "Bao hands Mira the loaf": the animator picks the receiving hand itself
                     warnings.append(f"Clip {n}: the beat that gives {name} the "
                                     f"{next(end[1][name][sd] for sd in ('r', 'l') if end[1][name][sd] in moved)} "
                                     f"names no hand; say which hand takes it: \"{excerpt(next((x for x in passes if any(mentions(x, end[1][name][sd]) for sd in ('r', 'l') if end[1][name][sd] in moved)), passes[0]))}\"")

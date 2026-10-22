@@ -2,7 +2,7 @@
 
 Load this reference only when a concrete end-to-end example resolves ambiguity. Reuse its workflow and level of detail, not its topic, wording, metaphors, or palette.
 
-All examples follow the shared `voice-continuity.md` contract. Freeze one complete profile per video; different examples may choose different voices. The male block has user listening acceptance for the separate Style 2A Hope test; the female profile below is an illustrative adaptation, not a provider-tested voice. Both examples follow the current character anchors, the Golden Hook section of `storyboard-template.md` (Clip 1) and `posture-gate.md` (hands named from each character's own side, `Hands at start` / `Hands at end` lines in every clip). `tests/verify-examples.py` runs `tools/posture_gate/hand_ledger.py` on each example.
+All examples follow the shared `voice-continuity.md` contract. Freeze one complete profile per video; different examples may choose different voices. The male block was accepted by the user after a listening comparison; the female profile below is an illustrative adaptation, not a separately accepted voice. Both examples follow the current character anchors, the Golden Hook section of `storyboard-template.md` (Clip 1) and `posture-gate.md` (hands named from each character's own side, `Hands at start` / `Hands at end` lines in every clip). `tests/verify-examples.py` runs `tools/posture_gate/hand_ledger.py` on each example.
 
 ## User source
 
@@ -56,9 +56,9 @@ User: “16:9，60秒，黑底白火柴人。”
 | 40–50s | 行动爆发 | **0–3s：** 碎片移开，A 双手抓住藤蔓，金色能量沿双臂流动。**3–7s：** A 扯断藤蔓并扔下，碎片向右爆开。**7–10s：** A 用右手按下发送图标，匹配剪辑到右手打开空白文档，再到金色行动路径；A 抬起右脚。 | 快速推近、镜头震动、能量传播、藤蔓爆裂、三次匹配剪辑和悬停脚步。下一段由同一只脚落地。 | 开始：双手空。0–3s 双手抓住红藤，3–7s 扔下。结束：双手空，右脚悬空。 | So interrupt the loop. Choose one tiny move and do it now. Send the message, open the document, take the first imperfect step. | 打断这个循环。现在就选择一个微小动作：发出消息、打开文档，迈出并不完美的第一步。 | BGM 切到 108 BPM；能量声、断裂声、发送提示、键盘声和蓄力脚步。 |
 | 50–60s | 释放、成长与 CTA | **0–3s：** 右脚在同一位置落地，产生金色冲击波，紫色线团炸成金星。**3–7s：** 随冲击波切到由左下通往右上的金色山路，A 开始攀登，紫色影子消散。**7–10s：** 镜头拉远，A 走向金色地平线，中心右侧保留干净留白。 | 落脚冲击、满屏波纹、星点粒子、纸张折山、对角跟拍和远景拉出。最后保持金色道路与后期 CTA 安全区。 | A 双手空。 | The moment you move, fear loses power. Stop waiting to feel ready. Try, make mistakes, grow—and prove your thoughts do not control your life. | 当你开始行动，恐惧就会失去力量。别再等待准备好的感觉。去尝试、去犯错、去成长，证明思想无法控制你的人生。 | 强鼓点、冲击波、星光、折纸、攀爬脚步和坚定收束音。 |
 
-**可选后期文字叠加：** Clip 2 在安全区加入 “WHAT IF?”；Clip 6 在中心右侧加入 “STOP OVERTHINKING. START MOVING.”。两处文字均在剪辑阶段添加，不进入 Omni Flash 视频生成提示词。
+**可选后期文字叠加：** Clip 2 在安全区加入 “WHAT IF?”；Clip 6 在中心右侧加入 “STOP OVERTHINKING. START MOVING.”。两处文字均在剪辑阶段添加，不进入动态图形分段说明（segment spec）。
 
-Assistant: “请确认当前导演预案，或指定要修改的场景、旁白、尺寸、主题、配色、声音或语气。确认后我再生成六条 Omni Flash 提示词。”
+Assistant: “请确认当前导演预案，或指定要修改的场景、旁白、尺寸、主题、配色、声音或语气。确认后我再写六段动态图形分段说明（segment spec）。”
 
 User: “确认。”
 
@@ -76,11 +76,11 @@ So interrupt the loop. Choose one tiny move and do it now. Send the message, ope
 
 The moment you move, fear loses power. Stop waiting to feel ready. Try, make mistakes, grow—and prove your thoughts do not control your life.
 
-## Phase B — Omni Flash Production Package
+## Phase B — Motion-Graphics Production Package
 
 ### Global continuity block
 
-- Six approximately ten-second clips; 16:9 horizontal; 720p target; 24 FPS; synchronized audio.
+- Six approximately ten-second clips; 16:9 horizontal; 1080p; 24 FPS; VO, music and SFX on separate tracks.
 - Pure black background with white stick figures and white line art.
 - Character: the Classic Dark faceless anchor from `style-catalog.md`, repeated verbatim in every clip (hollow circular head, no face, exactly two arms and two legs, current pose only).
 - Hands are named from each figure's own side. Every clip carries `Hands at start` / `Hands at end` lines; the only held prop is the violet cord in Clip 1 and the red vines in Clip 5.
@@ -88,14 +88,14 @@ The moment you move, fear loses power. Stop waiting to feel ready. Try, make mis
 - Adult female, General American, clear warm mid-high voice, gentle forward resonance, no rasp/breathiness, lively conversational delivery with controlled pitch variation, steady pace, close dry studio sound. Repeat the full profile below verbatim in all six clips.
 - Stage action across left, center, and right; use lateral tracking, horizontal match cuts, and deliberate negative space.
 - Use rapid scene changes, kinetic motion-graphic transformations, and frequent visual events, while preserving an identical stick-figure design, constant line weight, and strict temporal consistency.
-- Generate no visible writing. Keep every card, bubble, clock, meter, notification, and interface element icon-only; add optional phrases in post-production.
+- Draw no visible writing. Keep every card, bubble, clock, meter, notification, and interface element icon-only; add optional phrases in post-production.
 
 ### Clip 1 — Thought storm
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
-Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use only saturated anxiety violet, vivid danger red, and warm action gold as accents; this clip primarily uses violet. Treat these ordinary color names as visual art direction only. Compose across left, center, and right with deliberate negative space on the right. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
+Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use only saturated anxiety violet, vivid danger red, and warm action gold as accents; this clip primarily uses violet. Treat these ordinary color names as visual art direction only. Compose across left, center, and right with deliberate negative space on the right. Draw no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
 
 First frame: A is mid-step in the left third, leaning forward and walking right, dragging a huge violet line tangle behind on a violet cord.
 Hands at start — A: right hand holds the violet cord; left hand empty.
@@ -111,15 +111,15 @@ One off-screen adult female narrator throughout. General American accent, clear 
 
 Music/SFX: Open on a soft clock tick under the voice; at about 1.5s land a single low thud synced to the falling tangle. Then restrained minor-key piano around 72 BPM, an electrical pulse, battery-drain sound, and rising low rumble; keep the voice dominant.
 
-Do not generate photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, unrelated spectacle, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, unrelated spectacle, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Clip 2 — Imagined failures
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
-Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use saturated anxiety violet for imagined thoughts, vivid danger red for rejection and confinement, and warm action gold only when approved. Treat these ordinary color names as visual art direction only. Compose fear scenes sequentially across the widescreen canvas. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every bubble, envelope, panel, and symbol icon-only.
+Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use saturated anxiety violet for imagined thoughts, vivid danger red for rejection and confinement, and warm action gold only when approved. Treat these ordinary color names as visual art direction only. Compose fear scenes sequentially across the widescreen canvas. Draw no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every bubble, envelope, panel, and symbol icon-only.
 
 First frame: begin inside the same full-frame rotating violet line tangle that ended Clip 1.
 Hands at start — A: right hand empty; left hand empty.
@@ -135,15 +135,15 @@ One off-screen adult female narrator throughout. General American accent, clear 
 
 Music/SFX: Continue restrained piano; add rushing wind, a fall impact, nonverbal crowd whispers, two stamp hits, and a metal prison slam. Keep narration dominant.
 
-Do not generate photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, unrelated spectacle, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, unrelated spectacle, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Clip 3 — Fear becomes restraint
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
-Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use vivid danger red for restraint, saturated anxiety violet for intrusive thought spirals, and a small amount of warm action gold at the end. Treat these ordinary color names as visual art direction only. Keep A in the left third and use left-to-right motion as progress. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
+Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use vivid danger red for restraint, saturated anxiety violet for intrusive thought spirals, and a small amount of warm action gold at the end. Treat these ordinary color names as visual art direction only. Keep A in the left third and use left-to-right motion as progress. Draw no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
 
 First frame: inherit the same red prison bars twisting downward from Clip 2.
 Hands at start — A: right hand empty; left hand empty.
@@ -159,15 +159,15 @@ One off-screen adult female narrator throughout. General American accent, clear 
 
 Music/SFX: Add accelerating heartbeat, vine creaks, treadmill friction, nonverbal whispers, rotating wind, and a clean gold cutting sound; keep voice dominant.
 
-Do not generate photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, irrelevant effects, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, irrelevant effects, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Clip 4 — Reality and recovery
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
-Use a pure black background. Stick Figures A and B: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Stick Figure B uses the identical design and moves with open, confident posture; Stick Figure A stays hunched on the left. Use warm action gold for the path and saturated anxiety violet for imaginary futures. Treat these ordinary color names as visual art direction only. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
+Use a pure black background. Stick Figures A and B: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Stick Figure B uses the identical design and moves with open, confident posture; Stick Figure A stays hunched on the left. Use warm action gold for the path and saturated anxiety violet for imaginary futures. Treat these ordinary color names as visual art direction only. Draw no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
 
 First frame: inherit the same gold beam crossing the full frame from Clip 3.
 Hands at start — A: right hand empty; left hand empty. B: right hand empty; left hand empty.
@@ -183,15 +183,15 @@ One off-screen adult female narrator throughout. General American accent, clear 
 
 Music/SFX: Warm the piano harmony; add running footsteps, a restrained trip impact, a soft roll and bounce, glass breaks, and a rising pulse. Keep narration dominant.
 
-Do not generate injury, photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. Keep B's design identical throughout. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw injury, photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. Keep B's design identical throughout. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Clip 5 — Interrupt the loop
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
-Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use vivid danger red for vines and warm action gold for energy and deliberate movement. Treat these ordinary color names as visual art direction only. Drive all action from left to right. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every document, message control, and symbol icon-only.
+Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use vivid danger red for vines and warm action gold for energy and deliberate movement. Treat these ordinary color names as visual art direction only. Drive all action from left to right. Draw no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every document, message control, and symbol icon-only.
 
 First frame: inherit the same full-frame glass-fragment wipe from Clip 4. As it exits right, reveal A in the left third, still bound at the ankles by the red vines.
 Hands at start — A: right hand empty; left hand empty.
@@ -207,22 +207,22 @@ One off-screen adult female narrator throughout. General American accent, clear 
 
 Music/SFX: Switch to an uplifting 108 BPM beat with driving percussion and warm synth. Add energy charge, vine snap, whoosh, send sound, keyboard taps, and a rising step sound that pauses before impact. Keep narration dominant.
 
-Do not generate photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, irrelevant effects, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, irrelevant effects, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Clip 6 — Movement releases fear
 
 ```text
-Create an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal 2D kinetic motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
-Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use warm action gold for movement, stars, and growth; use small saturated anxiety-violet remnants only before they dissolve. Treat these ordinary color names as visual art direction only. Compose progress from lower-left to upper-right and reserve clean center-right negative space for a post-production overlay. Generate no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
+Use a pure black background. Stick Figure A: Use minimalist two-dimensional white line animation. Show the same consistent stick figure with a hollow circular head, no face, no eyes, no mouth, no hair, no clothing, no filled body, stable proportions, connected line limbs, and uniform medium line weight. Exactly two arms and two legs are visible per figure. Each limb appears only in its current pose: raising or lowering the character's own right arm replaces that arm's previous line, never leaving a resting arm beneath an active arm. The figure stays white; accent colors affect only props and graphic effects. Use warm action gold for movement, stars, and growth; use small saturated anxiety-violet remnants only before they dissolve. Treat these ordinary color names as visual art direction only. Compose progress from lower-left to upper-right and reserve clean center-right negative space for a post-production overlay. Draw no visible words, letters, numbers, technical annotations, captions, subtitles, or interface text; keep every graphic icon-only.
 
 First frame: inherit A’s raised right foot in the same lower-right foreground position from Clip 5.
 Hands at start — A: right hand empty; left hand empty.
 
 [0–3s] Land the right foot in the same lower-right foreground position. Expand a gold shockwave across the full width. Burst the remaining violet tangle into hundreds of gold stars moving right.
 [3–7s] Cut on the shockwave to a gold mountain path rising from lower-left to upper-right. A climbs immediately while large violet shadow versions hesitate behind and dissolve.
-[7–10s] Pull outward to reveal the mountain, gold steps, and A approaching the upper-right horizon. Keep the center-right negative space clean and visually stable for an optional post-production overlay. Do not generate the overlay inside the clip.
+[7–10s] Pull outward to reveal the mountain, gold steps, and A approaching the upper-right horizon. Keep the center-right negative space clean and visually stable for an optional post-production overlay. Do not draw the overlay inside the clip.
 Hands at end — A: right hand empty; left hand empty.
 
 Audio-only dialogue, exactly once: “The moment you move, fear loses power. Stop waiting to feel ready. Try, make mistakes, grow—and prove your thoughts do not control your life.” Do not display or transcribe the dialogue visually.
@@ -231,7 +231,7 @@ One off-screen adult female narrator throughout. General American accent, clear 
 
 Music/SFX: Continue the 108 BPM music with stronger drums, uplifting strings, and bright synth. Add foot impact, energy wave, star sounds, a cut whoosh, climbing steps, and a resolved final hit. Keep narration dominant.
 
-Do not generate photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, unrelated objects, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
+Do not draw photorealism, unwanted 3D rendering, faces, hair, clothing, filled bodies, extra limbs, malformed anatomy, disconnected lines, changed proportions, broken or changing line weight, inverted theme colors, unexplained colors, unintended characters, unrelated objects, visible writing, technical color notation, palette labels, interface copy, captions, subtitles, logos, or watermarks. No knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass. Do not alter, omit, repeat, reorder, or add dialogue.
 ```
 
 ### Stitching guide
@@ -247,18 +247,18 @@ Trim duplicate transition holds and use very short audio crossfades at each cut.
 
 ### Voice and music continuity
 
-First verify that all six full voice blocks are identical and no scene-specific voice direction contradicts them. Follow `voice-continuity.md` for listening checks and authorized voice-only retesting. Voice/audio references or one external VO/BGM track are optional further controls, not prerequisites. Do not infer an audio pass from a complete prompt package.
+First verify that all six full voice blocks are identical and no scene-specific voice direction contradicts them. Record the narration in one session with one voice and lay the music as one bed across the joins; follow `voice-continuity.md` for the listening check. Do not infer an audio pass from a complete spec package.
 
 ---
 
 # Example 2: Style 2A (Modern Pop, default lead Nam — Modern Studio Tech)
 
-Concrete end-to-end production prompt package demonstrating Style 2A (high-key white studio, subtle perspective floor grid, cyan glowing glass elements, and the default lead's full character anchor repeated in every clip; for the beanie alternative, swap in its anchor from `style-catalog.md`).
+Concrete end-to-end production spec package demonstrating Style 2A (high-key white studio, subtle perspective floor grid, cyan glowing glass elements, and the default lead's full character anchor repeated in every clip; for the beanie alternative, swap in its anchor from `style-catalog.md`).
 
 ## Clip 1 — The Glass Ceiling
 
 ```text
-Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchronized audio.
+Build an approximately 10-second 16:9 motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Environment: A modern bright white studio space with subtle light-gray perspective grid lines on the floor plane. High-key studio lighting, clean white negative space, sleek glowing cyan and electric blue glass holographic UI elements.
 
@@ -283,7 +283,7 @@ Negative constraints: strictly minimalist studio aesthetic, no circuit board tex
 ## Clip 2 — Drawing the Bridge
 
 ```text
-Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchronized audio.
+Build an approximately 10-second 16:9 motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Environment: The identical modern bright white studio space with subtle light-gray perspective grid lines.
 
@@ -307,7 +307,7 @@ Negative constraints: strictly minimalist studio aesthetic, no circuit board tex
 ## Clip 3 — Unlocking the Vault
 
 ```text
-Create an approximately 10-second 16:9 video, 24 FPS, targeting 720p with synchronized audio.
+Build an approximately 10-second 16:9 motion-graphics segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Environment: The identical modern bright white studio space with subtle light-gray perspective grid lines.
 

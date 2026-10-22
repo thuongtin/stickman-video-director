@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Contact sheet of the risky moments in a generated clip, read from its own prompt.
+"""Contact sheet of the risky moments in a rendered clip, read from its own segment spec.
 
-Video models get hands and bodies wrong at predictable moments: a prop passing between hands,
-a turn, a reach overhead, crossed arms, a fall. The prompt already says when those happen.
+Animation gets hands and bodies wrong at predictable moments: a prop passing between hands,
+a turn, a reach overhead, crossed arms, a fall. The segment spec already says when those happen.
 This script reads one clip of a Phase B package, lists those moments with the hands the
-ledger expects, and (given the generated video) cuts a short burst of frames around each one
+ledger expects, and (given the rendered video) cuts a short burst of frames around each one
 into a single PNG, so a person checks one sheet instead of scrubbing the whole clip.
 
     risk_sheet.py package.md --clip 2                       # print the plan (no video needed)

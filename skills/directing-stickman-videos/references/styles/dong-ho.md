@@ -33,7 +33,7 @@ Museum and archive records and articles were read as text; the prints themselves
 | 4 | Figures in flat profile or front view on ground bands; far things sit higher on the page, not smaller; a thin double border | `bonus` |
 | 5 | Shading, gradients, lighting, perspective depth or any writing (Hán Nôm, seals, banners) | `forbidden` |
 
-Prompt wording for each `must` trait is the style block below, repeated verbatim in every clip.
+Spec wording for each `must` trait is the style block below, repeated verbatim in every clip.
 
 **Nearest neighbour:** `paper-cutout` (Paper Cutout / Collage, research thread). Both are flat 2D with visible paper. A viewer sees two differences: Đông Hồ shapes are bounded by a printed black key line with colour slipping off register, while cut paper has no outline and casts a soft shadow onto the layer beneath; and the Đông Hồ ground is one shimmering điệp sheet with no layering or stop-motion jitter.
 
@@ -71,7 +71,7 @@ Style and environment: an animated Vietnamese Đông Hồ folk woodblock print i
 
 ## Text policy: `post-overlay`
 
-Real prints carry Hán or Nôm captions, but video models invent fake characters. Prompts ban all writing; captions, a title or calligraphy are added in post-production on the paper margins. A scholar "writing" paints a picture (a plum-blossom branch) instead.
+Real prints carry Hán or Nôm captions, but drawn into the scene art they come out as fake characters. Specs ban all writing; captions, a title or calligraphy are added in post-production on the paper margins. A scholar "writing" paints a picture (a plum-blossom branch) instead.
 
 ## Motion cadence: `on-twos`
 
@@ -111,7 +111,7 @@ Prefer Reaction before cause, Partial reveal and Satisfying motion. The hit is o
 1. Trim each clip to the last frame whose hands match its `Hands at end` line; hard cuts at the joins, 4 to 6 frame audio crossfades.
 2. Add any caption, title or calligraphy as an overlay on the paper margins.
 3. Do not colour-grade or add vignettes: they break the flat pigments and the paper white.
-4. If the voice drifts between clips, lay one continuous external VO and flute/clapper track over the assembled picture.
+4. Record the narration as one VO track and lay the flute/clapper score as one continuous bed over the assembled picture.
 
 ## Sample package
 

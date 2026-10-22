@@ -1,10 +1,10 @@
 # Tech-illustration sample package: "The missing chip" (3 clips, 16:9, ~30 s)
 
-Six original characters of a small software team; this story uses Khoa (the lead developer) and Bit (the robot sidekick). Hands are named from each character's own side; every character wears one cyan band on the right wrist. Bit holds and passes with its right hand only. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Accent ignition; payoff in Clip 3). No brand, product or app is named, and the laptop lid stays blank. Not yet tested on a video model.
+Six original characters of a small software team; this story uses Khoa (the lead developer) and Bit (the robot sidekick). Hands are named from each character's own side; every character wears one cyan band on the right wrist. Bit holds and passes with its right hand only. The hook follows the Golden Hook section of references/storyboard-template.md (pattern: Accent ignition; payoff in Clip 3). No brand, product or app is named, and the laptop lid stays blank. Not yet built into a full rendered video.
 
 ## Global continuity block
 
-- Ratio and length: 16:9, three clips of about ten seconds (about 30 s), 24 FPS, 720p target.
+- Ratio and length: 16:9, three clips of about ten seconds (about 30 s), 24 FPS, 1080p.
 - Style: `tech-illustration` (soft 2.5D tech explainer, pack `tech-illustration.md`, status gated). The style paragraph, the first part of the setting paragraph, the body rule, the voice block and the negatives are repeated verbatim in every clip; each clip adds only where the laptop and cards are at that moment.
 - Cast: Khoa (clips 1–3), Bit (clips 2–3). Each anchor is the frozen text from the pack's cast cards, repeated verbatim in every clip the character appears in; a clip lists exactly who is in it.
 - Locks: one cyan band on the right wrist of every character; the laptop lid is blank silver; the cards carry shapes only; Khoa sits on the center block the whole video; Bit gives and holds with its right hand.
@@ -17,7 +17,7 @@ Six original characters of a small software team; this story uses Khoa (the lead
 ## Clip 1 — The orange dot
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style: a soft 2.5D tech illustration brought to life, like a clean explainer animation for a software product. Chibi characters about two and a half heads tall with big round heads, small bodies and short rounded limbs, simple dark dot eyes with one white catchlight, small simple mouths and rosy cheeks. Every shape has a clean, even dark-navy outline and soft gradient shading inside, no texture, no hard shadow bands. The scene is seen from slightly above at a three-quarter isometric angle. White isometric blocks with softly rounded edges and a faint blue glow along their bottom edges serve as seats and tables. Floating rounded white UI cards hover around the characters with soft drop shadows, drawn as simple shapes: a code window is short coloured bars, a flow diagram is round nodes joined by arrows, a status badge is one round icon. Each clip names which cards are on screen. Cards carry shapes and icons only, never letters or numbers. Palette: white and very pale blue background with a soft radial glow, bright blue and cyan accents, gray and navy clothing, a touch of mint and orange for status icons; no neon, no dark scenes. Smooth, gentle motion: small eased moves, cards pop in with a slight overshoot, characters hold clear poses.
 
@@ -54,7 +54,7 @@ Negative constraints: no logos, no brand marks, no fruit or letter on the laptop
 ## Clip 2 — Bit brings the chip
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style: a soft 2.5D tech illustration brought to life, like a clean explainer animation for a software product. Chibi characters about two and a half heads tall with big round heads, small bodies and short rounded limbs, simple dark dot eyes with one white catchlight, small simple mouths and rosy cheeks. Every shape has a clean, even dark-navy outline and soft gradient shading inside, no texture, no hard shadow bands. The scene is seen from slightly above at a three-quarter isometric angle. White isometric blocks with softly rounded edges and a faint blue glow along their bottom edges serve as seats and tables. Floating rounded white UI cards hover around the characters with soft drop shadows, drawn as simple shapes: a code window is short coloured bars, a flow diagram is round nodes joined by arrows, a status badge is one round icon. Each clip names which cards are on screen. Cards carry shapes and icons only, never letters or numbers. Palette: white and very pale blue background with a soft radial glow, bright blue and cyan accents, gray and navy clothing, a touch of mint and orange for status icons; no neon, no dark scenes. Smooth, gentle motion: small eased moves, cards pop in with a slight overshoot, characters hold clear poses.
 
@@ -91,7 +91,7 @@ Negative constraints: no logos, no brand marks, no fruit or letter on the laptop
 ## Clip 3 — Green check
 
 ```text
-Output: approximately ten seconds, 16:9, 720p target, 24 FPS, synchronized audio.
+Render: approximately ten seconds, 16:9, 1080p, 24 FPS; VO, music and SFX on separate tracks timed to the beats.
 
 Style: a soft 2.5D tech illustration brought to life, like a clean explainer animation for a software product. Chibi characters about two and a half heads tall with big round heads, small bodies and short rounded limbs, simple dark dot eyes with one white catchlight, small simple mouths and rosy cheeks. Every shape has a clean, even dark-navy outline and soft gradient shading inside, no texture, no hard shadow bands. The scene is seen from slightly above at a three-quarter isometric angle. White isometric blocks with softly rounded edges and a faint blue glow along their bottom edges serve as seats and tables. Floating rounded white UI cards hover around the characters with soft drop shadows, drawn as simple shapes: a code window is short coloured bars, a flow diagram is round nodes joined by arrows, a status badge is one round icon. Each clip names which cards are on screen. Cards carry shapes and icons only, never letters or numbers. Palette: white and very pale blue background with a soft radial glow, bright blue and cyan accents, gray and navy clothing, a touch of mint and orange for status icons; no neon, no dark scenes. Smooth, gentle motion: small eased moves, cards pop in with a slight overshoot, characters hold clear poses.
 
@@ -130,10 +130,10 @@ Negative constraints: no logos, no brand marks, no fruit or letter on the laptop
 1. Clip 1 → Clip 2: continuous. What continues: Khoa on the block with the laptop, his right hand on his cheek, the orange dot, the score. What changes: Bit walks in from the right with the chip. Hard cut on Khoa's held frown; a 4–6 frame audio crossfade on the marimba.
 2. Clip 2 → Clip 3: continuous. What continues: Khoa holding the blue chip in his left hand, Bit on his left with empty hands, the orange dot. What changes: the camera tracks left for the chip glow. Hard cut; no crossfade on the picture.
 3. Trim each clip at a held pose, never mid-pass. Conform all clips to 24 FPS before joining.
-4. Inspect each real join: if a generated clip ends with the chip in the other hand, the band on the wrong wrist or a mark on the laptop lid, trim to the last frame where the hands match the "Hands at end" line rather than trusting the prompt.
+4. Inspect each real join: if a rendered clip ends with the chip in the other hand, the band on the wrong wrist or a mark on the laptop lid, trim to the last frame where the hands match the "Hands at end" line rather than trusting the spec.
 
 ## Voice and music continuity note
 
 - Every clip repeats the same narrator paragraph word for word, and clips 2–3 say the synth-pluck and marimba theme continues from clip 1 with the same tempo and instrumentation. Check by listening to the three clips back to back, not from stills.
-- If the voice drifts, first retest a voice-only change with the visuals, dialogue and music held fixed; one continuous external English VO and score track laid over the assembled picture is the fallback.
-- Post-production: keep the key taps, blips and chimes from the generated audio; add any caption or card label as an overlay on the white background, never in the prompts; check every card for letters or numbers the model added and patch or re-generate.
+- Record the narration as one VO track with this voice block, cut it to the beats, and lay the score as one continuous bed over the assembled picture.
+- Post-production: lay the key taps, blips and chimes on their beats; add any caption or card label as an overlay on the white background, never in the specs; check every card for letters or numbers and fix the card layer if any appear.

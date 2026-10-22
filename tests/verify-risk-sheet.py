@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""risk_sheet.py finds the risky moments a prompt names and cuts a contact sheet around them (no error detection claimed)."""
+"""risk_sheet.py finds the risky moments a segment spec names and cuts a contact sheet around them (no error detection claimed)."""
 import shutil
 import subprocess
 import sys

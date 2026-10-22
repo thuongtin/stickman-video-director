@@ -28,7 +28,7 @@ Phase A names each location, its narrative purpose, and what connects the cut: c
 
 ## Separate design, position and state
 
-Use four distinct scopes in every standalone prompt:
+Use four distinct scopes in every standalone segment spec:
 
 1. Static design: character appearance; this clip's location and fixed furniture.
 2. Movable prop identity: count, shape, color and relevant faces; no permanent initial placement.
@@ -43,13 +43,13 @@ Graphical alerts or metaphors belong only to their approved timed beats. Use sim
 
 ## Motion and audio
 
-Use concrete actions, related effects and purposeful shot changes about every two to three seconds, with enough time to complete each handoff. Avoid liquid furniture transformations and too many simultaneous actions. A short sip, hesitation or reaction is useful; do not make the entire clip an idle talking pose. Warm daylight, moving leaves, passing trains and location-specific details can enrich the image without redesigning the character.
+Use concrete actions, related effects and purposeful shot changes about every two to three seconds, with enough time to complete each handoff. Avoid liquid furniture transformations and too many simultaneous actions; they break the layered sets and rigs. A short sip, hesitation or reaction is useful; do not make the entire clip an idle talking pose. Warm daylight, moving leaves, passing trains and location-specific details can enrich the image without redesigning the character.
 
 Apply the shared `voice-continuity.md` contract for every clip. Freeze the video's chosen full voice profile and repeat it verbatim; another place, mood, character age or scene cannot recast the narrator. Keep emotions in visuals/music, and environmental acoustics in SFX rather than changing dry narration into station/cafe reverb. Use a story-appropriate score with the same motif/tempo/instrumentation across segments. The style is not limited to one male voice.
 
 ## Delivery and acceptance
 
-The skill outputs the confirmed proposal and standalone prompt package. Flow operation, paid retries, downloading and publication still require user authorization. Preserve baseline samples and use bounded, issue-specific retests.
+The skill outputs the confirmed proposal and the standalone segment spec package. Rendering, music licensing and publication still require user authorization. Keep the first accepted render as the baseline and fix issues segment by segment.
 
 Before publishing a result or calling it consistent, check:
 
@@ -57,8 +57,7 @@ Before publishing a result or calling it consistent, check:
 - Character count/design, head/torso fill, proportions and current limb poses remain coherent at reaches, lifts, turns and walking steps.
 - Prop ownership and visible faces match the action; no simultaneous hand/background copies or end-state resets.
 - Movement direction and narrative meaning connect the cuts; time jumps are named. Different furniture after an intentional location cut is not itself a failure.
-- Wipes land at actual usable frames, not necessarily the last generated frame; provide a candidate trim point rather than claiming seamless assembly without checking.
+- Wipes land at actual usable frames, not necessarily the last rendered frame; provide a candidate trim point rather than claiming seamless assembly without checking.
 - No white card border, unwanted written labels, unintended people, or pressure graphics leaking into the calm ending.
 - Actual audio is compared by listening. Repeated voice text and screenshots are not audio certification.
-
-The 2026-10-14 Flow samples support the location-change approach and show the intended visual style. They are not a guarantee of frame-perfect anatomy, prop state or voice matching; detailed scoped observations live in repository `tests/reports/style-4.md`, not as marketing claims in the README.
+- Every character's exported pose track passes `tools/posture_gate/posture_gate.py`, and the risk sheet of each rendered clip has been reviewed (`posture-gate.md`).

@@ -1,6 +1,6 @@
-# Multi-character prompt package — Whiteboard Doodle, 30s, 16:9 (gated)
+# Multi-character spec package — Whiteboard Doodle, 30s, 16:9 (gated)
 
-Built by `make_cast_package.py` from the frozen blocks in `whiteboard-doodle.md` and the cast cards in `gallery/cast/cast_meta.json`. Lint facts: [`cast-prompts-30s.facts.md`](cast-prompts-30s.facts.md).
+Built by `make_cast_package.py` from the frozen blocks in `whiteboard-doodle.md` and the cast cards in `gallery/cast/cast_meta.json`. Lint facts: [`cast-specs-30s.facts.md`](cast-specs-30s.facts.md).
 
 ## Hook card
 
@@ -25,7 +25,7 @@ Built by `make_cast_package.py` from the frozen blocks in `whiteboard-doodle.md`
 ## Clip 1 — The rain cloud
 
 ```text
-Create an approximately 10-second 16:9 horizontal whiteboard animation clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal whiteboard animation segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Board: a matte white whiteboard fills the entire frame, seen flat and front-on, soft even daylight, very faint gray ghosting of old erased marks. All drawings are black whiteboard-marker line art with slightly irregular hand-drawn strokes, natural ink density and rounded line ends, medium consistent line weight; characters and props are outlines left white inside. Lines appear exactly under the marker tip in natural stroke order; nothing appears ahead of the tip and nothing fades in. The only other marker colors are red, blue and green, used on small areas such as a blush, a bow, a tie, a collar, a scarf, a balloon, a small circle or an arrow. No painted background, no shading, no gradients, no 3D.
 
@@ -63,7 +63,7 @@ Negative constraints: no painted or full-color backgrounds, no paper texture, no
 ## Clip 2 — The balloon pass
 
 ```text
-Create an approximately 10-second 16:9 horizontal whiteboard animation clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal whiteboard animation segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Board: a matte white whiteboard fills the entire frame, seen flat and front-on, soft even daylight, very faint gray ghosting of old erased marks. All drawings are black whiteboard-marker line art with slightly irregular hand-drawn strokes, natural ink density and rounded line ends, medium consistent line weight; characters and props are outlines left white inside. Lines appear exactly under the marker tip in natural stroke order; nothing appears ahead of the tip and nothing fades in. The only other marker colors are red, blue and green, used on small areas such as a blush, a bow, a tie, a collar, a scarf, a balloon, a small circle or an arrow. No painted background, no shading, no gradients, no 3D.
 
@@ -101,7 +101,7 @@ Negative constraints: no painted or full-color backgrounds, no paper texture, no
 ## Clip 3 — Passing it on
 
 ```text
-Create an approximately 10-second 16:9 horizontal whiteboard animation clip targeting 720p at 24 FPS with synchronized audio.
+Build an approximately 10-second 16:9 horizontal whiteboard animation segment, rendered at 1080p and 24 FPS, with VO, music and SFX on separate tracks timed to the beats.
 
 Board: a matte white whiteboard fills the entire frame, seen flat and front-on, soft even daylight, very faint gray ghosting of old erased marks. All drawings are black whiteboard-marker line art with slightly irregular hand-drawn strokes, natural ink density and rounded line ends, medium consistent line weight; characters and props are outlines left white inside. Lines appear exactly under the marker tip in natural stroke order; nothing appears ahead of the tip and nothing fades in. The only other marker colors are red, blue and green, used on small areas such as a blush, a bow, a tie, a collar, a scarf, a balloon, a small circle or an arrow. No painted background, no shading, no gradients, no 3D.
 
@@ -151,7 +151,7 @@ Negative constraints: no painted or full-color backgrounds, no paper texture, no
 
 Optional overlays in the upper-right blank zone: clip 1 "Bad moods spread", clip 2 "Small kindness", clip 3 "Pass it on".
 
-## What to check in a generated clip
+## What to check in a rendered clip
 
 1. Can a viewer tell the three apart in every frame without color?
 2. Does the balloon move only through the two visible passes, and is there ever more than one balloon?
