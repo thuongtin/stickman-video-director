@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Style pack template states honest status levels and a signature checklist; the catalog labels Styles 1-4."""
+"""Style pack template states honest status levels and a signature checklist; the catalog labels Styles 1-5."""
 from pathlib import Path
 
 REFS = Path(__file__).resolve().parents[1] / "skills/directing-stickman-videos/references"
@@ -12,7 +12,7 @@ for phrase in ("`research`", "`gated`", "`approved`", "lowest level whose eviden
 
 catalog = (REFS / "style-catalog.md").read_text()
 status = catalog.split("### Status", 1)[1].split("New styles are drafted", 1)[0]
-for style in ("Style 1 Dark", "Style 1 Light", "Style 2A", "Style 2B", "Style 3", "Style 4"):
+for style in ("Style 1 Dark", "Style 1 Light", "Style 2A", "Style 2B", "Style 3", "Style 4", "Style 5"):
     row = next((l for l in status.splitlines() if l.startswith(f"| {style} |")), None)
     assert row, f"catalog has no status row for {style}"
     assert any(f"| {lvl} |" in row for lvl in ("research", "gated", "approved", "core")), row

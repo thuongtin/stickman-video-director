@@ -46,7 +46,7 @@ Estou testando estilos populares de animação com bonecos de palito e compartil
 
 <div align="center">
 
-**4 estilos · 6 opções visuais · Exemplos testados · Grátis e de código aberto**
+**5 estilos · 6 opções visuais · Exemplos testados · Grátis e de código aberto**
 
 ⭐ **Deixe um Star para guardar. Na próxima animação, você não precisa começar do zero.**
 
@@ -108,6 +108,21 @@ Uma caneca que você guarda para uma ocasião especial. Uma mensagem que parece 
 - **Visual:** Cabeças redondas preenchidas de branco, corpos alongados, membros finos e escuros e expressões discretas em cenários 2D coloridos. Planos abertos apresentam o lugar; closes mostram hesitação ou alívio; a câmera acompanha o personagem para a história seguir em frente.
 - **Indicado para:** Identificação com o cotidiano, crescimento pessoal, relacionamentos, momentos de afeto, novos hábitos e conteúdo infantil em inglês.
 - **Como escolher:** Para quem quer que o público pense “isso também acontece comigo”. A cor e a luz acompanham o tema, seja acolhimento, ansiedade, cansaço ou recomeço.
+
+
+---
+
+### Estilo 5: Desenho histórico
+
+Um soldado romano caminha por uma estrada entre colinas e ciprestes. Um estudante do período Edo acena diante de casas de madeira. O mesmo jeito de desenhar atravessa as épocas: só figurino, cenário, objetos, paleta e música mudam com o período.
+
+- **Visual:** Cabeças redondas preenchidas de branco, olhos ovais pretos e sólidos, sobrancelhas e bocas expressivas, sem nariz, membros finos de palito pretos, contornos grossos e limpos e sombreamento cel suave em tecido, couro e metal, em paisagens e arquitetura com ar de pintura.
+- **Indicado para:** Explicações de história, o cotidiano de outras épocas, histórias de civilizações e humor histórico, separando os fatos das cenas ilustrativas ou cômicas.
+- **Como escolher:** Cada história ganha seu pacote de época (figurino, cenários, paleta, música), mas o rig é um só, então todas as épocas usam o mesmo andar, os mesmos gestos e o mesmo portão de postura.
+
+O estilo vem do repositório original (conceito visual de [@leksautomate](https://github.com/leksautomate)). Neste fork ele é desenhado em código sobre o rig do protagonista do Estilo 2, e todas as poses passam pelo portão de postura ([folha do elenco](docs/style-5/sheet.png), [como é feito](docs/style-5/README.md)):
+
+<p align="center"><img src="docs/style-5/motion.gif" alt="Estilo 5: um soldado romano caminha por uma estrada do campo e aponta o caminho; depois um estudante do período Edo acena" width="480"></p>
 
 
 <!-- readme:advantages -->
@@ -204,13 +219,14 @@ Serve para vídeos sem aparecer na câmera: explicações, história e negócios
 
 ## Últimas novidades
 
+- **2026-10-22:** Estilo 5, Desenho histórico, trazido do repositório original e montado em motion graphics: quatro personagens de três épocas (Roma, Japão Edo, Egito antigo) desenhados em código sobre um único rig, com todas as poses aprovadas pelo portão de postura.
 - **2026-10-22:** A Skill passou a montar vídeos só em motion graphics: a saída aprovada é uma especificação por trecho, o portão de postura roda sobre as trilhas de pose exportadas dos rigs depois da renderização e a narração é gravada uma única vez para o vídeo inteiro. Os clipes de demonstração antigos saíram da página inicial.
 - **2026-10-15:** Revisão da página inicial em chinês, da instalação e das explicações dos exemplos; prévias mais leves e gráfico do Star History. As regras da Skill não mudaram.
 - **2026-10-14:** Estilo 4 adicionado, com exemplos na estação e no café.
 - **2026-10-13:** Ajustes nas descrições do personagem e nas restrições de pose do Estilo 1.
 - **2026-10-12:** Melhoria das regras de consistência de voz para todos os estilos e inclusão de exemplos pré-históricos e da comunidade.
 
-Já instalou? Mudanças na apresentação da página não exigem reinstalação. Atualize a Skill se quiser o Estilo 4 ou se sua instalação for anterior às mudanças nas regras de personagens e voz.
+Já instalou? Mudanças na apresentação da página não exigem reinstalação. Atualize a Skill se quiser os Estilos 4 e 5 ou se sua instalação for anterior às mudanças nas regras de personagens e voz.
 
 <!-- readme:contribute -->
 

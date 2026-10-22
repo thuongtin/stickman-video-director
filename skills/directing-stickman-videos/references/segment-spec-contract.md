@@ -10,6 +10,8 @@ Style 3 (Prehistoric Hand-Drawn / Dark Comedy): read `prehistoric-dark-comedy.md
 
 Style 4 (Cozy Storytelling / 治愈故事风): read `cozy-storytelling.md`. Repeat full character and voice anchors, but give each segment its approved new setting. Describe each scene opening as a recognizable new location, then connect action/prop/screen direction or a named time cut. Do not repeat one global room layout, inherit Style 1's no-face/filled-body bans, or require hand-drawn/paper aesthetics. Keep movable-object appearance separate from initial positions and timed state changes.
 
+Style 5 (Historical Cartoon / 历史卡通风): read `historical-cartoon.md` for its standalone spec order and overrides. Repeat the full frozen drawing anchor, visible cast cards, approved era pack and complete `voice-continuity.md` voice block in every segment. Keep solid oval eyes and black stick limbs, with historical costume layers on the shared rig and colored painterly scenery. Do not inherit Style 1's hollow-head/no-face/no-clothes contract or generic piano, three-color, four-device and no-idle requirements. Follow its era score, physical beats and planned cuts; do not shorten approved anchors to meet an arbitrary character budget.
+
 ## Production package order
 
 Deliver these sections in order:
@@ -21,7 +23,7 @@ Deliver these sections in order:
 
 ## Global continuity block
 
-State the chosen aspect ratio (`16:9` or `9:16`), target duration, selected visual style (Style 1 Classic, Style 2A Studio Tech, Style 2B Cinematic Story, Style 3 Prehistoric, or Style 4 Cozy Storytelling), character anchor design, palette or environment definition, narrator identity, audio arc, and continuity strategy. Treat this block as a review summary; each spec still repeats all critical locks.
+State the chosen aspect ratio (`16:9` or `9:16`), target duration, selected visual style (Style 1 Classic, Style 2A Studio Tech, Style 2B Cinematic Story, Style 3 Prehistoric, Style 4 Cozy Storytelling, or Style 5 Historical Cartoon), character anchor design, palette or environment definition, narrator identity, audio arc, and continuity strategy. Treat this block as a review summary; each spec still repeats all critical locks.
 
 ## Standalone segment spec order
 
@@ -34,6 +36,7 @@ Write every segment spec in this order:
    - For Style 2A (Studio Tech): modern bright white studio space with subtle light-gray perspective grid lines on the floor plane, high-key lighting, clean white negative space, sleek glowing cyan/blue glass elements
    - For Style 2B (Cinematic Story): rich full-color cinematic environment with soft light shafts and layered depth
    - For Style 4 (Cozy Storytelling): full-color 2D cartoon environment and a segment-specific setting, with varied wide/close/moving shots; new segment means an intentional scene change unless otherwise approved
+   - For Style 5 (Historical Cartoon): full-color painterly historical setting from the approved era pack, with clean cel shading; name the segment's location and any planned time cut
 3. Character lock:
    - For Style 1: repeat the concise frozen character anchor from `style-catalog.md`, including the chosen polarity and expression setting; no "same character" shortcuts, numeric anatomy recipes or pen paths in the spec (the rig owns its measurements). Keep the circular head hollow, proportions and line weight stable, and only the current pose of each of the two arms and two legs. A raised arm replaces its old lowered line. Keep accents on props/graphics, never recolor the figure. Do not let action or camera wording redefine the drawing; preserve rich motion and effects separately.
    - For Style 2 (Modern Pop):
@@ -41,6 +44,7 @@ Write every segment spec in this order:
      - Only when the user asked for the beanie character: the beanie alternative anchor from `style-catalog.md`, verbatim, instead. One lead per video.
      - No "the same figure" or ellipsis shortcut in segments 2–N. The glasses stay on in every beat.
    - For Style 4: repeat its full frozen character anchor from `cozy-storytelling.md`, including white head/torso fill, dark limbs and simple facial marks. Location and expression changes do not redesign the character.
+   - For Style 5: repeat its full drawing anchor from `historical-cartoon.md` and the full approved cast card of every visible role. Era costume layers sit on the shared rig; solid oval eyes, white head fill and black stick limbs never change.
 4. Palette and accent roles (expressed only with ordinary color names, no hex or technical codes)
 5. Composition strategy for the chosen ratio (`16:9` or `9:16`)
 6. First-frame state inherited from the previous segment, including the `Hands at start` ledger line from `posture-gate.md` whenever a character holds something
@@ -92,7 +96,7 @@ Use ordinary descriptive color names such as vivid red, electric blue, or warm g
 
 ## Audio continuity contract
 
-Use the shared contract in `voice-continuity.md` for Style 1 Light/Dark, Style 2A, Style 2B, Style 3 and Style 4. Choose voices per video, not per segment. Every standalone spec carries its own full voice and music instructions:
+Use the shared contract in `voice-continuity.md` for Style 1 Light/Dark, Style 2A, Style 2B, Style 3, Style 4 and Style 5. Choose voices per video, not per segment. Every standalone spec carries its own full voice and music instructions:
 
 1. **Narrator Lock**: Resolve one complete approved profile, then repeat its frozen English block verbatim across all N specs. Use the accepted male block or build another coherent profile; do not force all videos into one voice. "Same narrator" and "continue the voice from clip 1" alone are insufficient. Separate voice identity/delivery/recording treatment from the emotional and musical arc; no scene-specific timbre changes or switches into character dialogue unless explicitly approved.
 2. **BGM Lock**:
@@ -119,7 +123,7 @@ Forbid:
 
 ## Stitching guide
 
-List all N segments in order. For every cut, repeat the ending state and its continuing action/prop/direction, or state the approved location/time change. Style 4 changes scenery intentionally rather than requiring identical backgrounds. Include any trim, short audio crossfade, or match-cut note needed for assembly; check the rendered joins rather than assuming a wipe lands on the last frame.
+List all N segments in order. For every cut, repeat the ending state and its continuing action/prop/direction, or state the approved location/time change. Styles 4 and 5 change scenery intentionally rather than requiring identical backgrounds. Include any trim, short audio crossfade, or match-cut note needed for assembly; check the rendered joins rather than assuming a wipe lands on the last frame.
 
 ## Audio continuity note
 

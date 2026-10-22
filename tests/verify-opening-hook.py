@@ -128,7 +128,7 @@ assert 'Clip 1 only: follow "Golden Hook in detail"' in contract
 assert "The hook adds no separate line to the spec." in contract
 
 ref = golden_hook()
-for style in ("Style 1:", "Style 2A:", "Style 2B:", "Style 3:", "Style 4:"):
+for style in ("Style 1:", "Style 2A:", "Style 2B:", "Style 3:", "Style 4:", "Style 5:"):
     assert style in ref, f"Missing style override: {style}"
 assert "MIT-licensed" in ref, "Source attribution missing"
 assert "not a second hook system" in ref and "Only the hook technique is taken" in ref, "Source scope must stay explicit"
