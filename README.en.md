@@ -70,8 +70,8 @@ A few lines can explain a big idea. On a pure-white or pure-black canvas, charac
 
 <table width="100%">
 <tr>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="Light: an idea lights up" width="360"><br><sub>Light: an idea lights up</sub></td>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="Dark: a jump for joy" width="360"><br><sub>Dark: a jump for joy</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="Light: a cage of worry slams down, he bends the bars and breaks out" width="360"><br><sub>Light: a cage of worry slams down, he bends the bars and breaks out</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="Dark: pushing a progress bar until it fills with blue" width="360"><br><sub>Dark: pushing a progress bar until it fills with blue</sub></td>
 </tr>
 </table>
 
@@ -109,9 +109,9 @@ Take today's problems back to a world without phones or offices. Caves, animal h
 - **Best for:** Prehistoric what-ifs, workplace satire, observations about human nature, dark comedy, fables, and children's English stories.
 - **Why choose it?** For a short setup and an unexpected payoff—especially when modern relationships become absurdly familiar in a prehistoric tribe.
 
-<p align="center"><img src="docs/core-previews/style-3.gif" alt="A caveman in a hide tunic walks to the campfire and warms his hands" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-3.gif" alt="In the cave, the chief offers a roast leg and the caveman takes it" width="480"></p>
 
-<p align="center"><sub>A caveman in a hide tunic walks to the campfire and warms his hands. Drawn from code rigs and posture-gated.</sub></p>
+<p align="center"><sub>In the cave, the chief offers a roast leg and the caveman takes it. Drawn from code rigs and posture-gated.</sub></p>
 
 
 ---
@@ -124,9 +124,9 @@ A mug you've been saving for a special occasion. A message you feel compelled to
 - **Best for:** Relatable everyday stories, personal growth, relationships, warm moments, habit building, and children's English content.
 - **Why choose it?** To help viewers recognize themselves in a small moment. Color and lighting follow the topic: warmth, anxiety, exhaustion, or a fresh start.
 
-<p align="center"><img src="docs/core-previews/style-4.gif" alt="A walk through the park with a coffee, then a wave outside the cafe" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-4.gif" alt="A quiet coffee at a sidewalk cafe table" width="480"></p>
 
-<p align="center"><sub>A walk through the park with a coffee, then a wave outside the cafe. Drawn from code rigs and posture-gated.</sub></p>
+<p align="center"><sub>A quiet coffee at a sidewalk cafe table. Drawn from code rigs and posture-gated.</sub></p>
 
 
 ---

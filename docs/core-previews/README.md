@@ -4,12 +4,12 @@ Motion previews for the core styles 1, 3 and 4. They are shown in every README's
 
 | File | Style | Shot |
 |---|---|---|
-| `style-1-light.gif` | 1 Classic Minimalist, light | A black line figure walks in and raises a hand; a gold idea bulb lights up |
-| `style-1-dark.gif` | 1 Classic Minimalist, dark | A white line figure jumps for joy in a blue and red burst |
-| `style-3.gif` | 3 Prehistoric dark comedy | A caveman in a hide tunic walks to a campfire and warms his hands |
-| `style-4.gif` | 4 Cozy storytelling | A tracking walk through a park with a coffee cup, then a wave outside a cafe (the cup stays in the right hand) |
+| `style-1-light.gif` | 1 Classic Minimalist, light | A cage of worry slams down on a black line figure; he grips two bars, bends them and breaks out as the red lock flies off |
+| `style-1-dark.gif` | 1 Classic Minimalist, dark | A white line figure pushes a huge progress bar until it fills with electric blue, then cheers |
+| `style-3.gif` | 3 Prehistoric dark comedy | In the cave, the chief offers a roast leg; the bored caveman lights up and takes it (a real hand-off: both hands on it, then the chief lets go) |
+| `style-4.gif` | 4 Cozy storytelling | A quiet coffee at a sidewalk cafe table: reach for the mug, a sip with eyes closed, set it down, lean back |
 
-Everything here is drawn by `render.py` (Pillow) from 2D rigs. The joints come from the Style 2 lead's rig and only the drawing changes per style. No AI video or image model was used. Each shot's joints are saved in `tracks/` and pass `tools/posture_gate/posture_gate.py check` with no errors or warnings (`tests/verify-core-previews.py`).
+Everything here is drawn with Pillow from 2D rigs (`rig2d.py`), one module per style (`style1.py`, `style3.py`, `style4.py`). No AI video or image model was used. Each character's joints are saved in `tracks/` and pass `tools/posture_gate/posture_gate.py check` with no errors or warnings; the Style 3 pair also passes `check --scene` for the hand-off (`tests/verify-core-previews.py`).
 
 ```bash
 python3 docs/core-previews/render.py

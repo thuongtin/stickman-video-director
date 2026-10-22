@@ -72,8 +72,8 @@ Poucas linhas, uma ideia bem explicada. Em um fundo totalmente branco ou preto, 
 
 <table width="100%">
 <tr>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="Fundo branco: surge uma ideia" width="360"><br><sub>Fundo branco: surge uma ideia</sub></td>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="Fundo preto: um pulo de alegria" width="360"><br><sub>Fundo preto: um pulo de alegria</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="Fundo branco: a jaula da preocupação cai, ele entorta as grades e escapa" width="360"><br><sub>Fundo branco: a jaula da preocupação cai, ele entorta as grades e escapa</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="Fundo preto: empurra a barra de progresso até ela encher de azul" width="360"><br><sub>Fundo preto: empurra a barra de progresso até ela encher de azul</sub></td>
 </tr>
 </table>
 
@@ -107,9 +107,9 @@ E se os problemas de hoje fossem parar em um mundo sem celular nem escritório? 
 - **Indicado para:** Imaginação pré-histórica, sátira do trabalho, comportamento humano, humor ácido, fábulas e histórias infantis para aprender inglês.
 - **Como escolher:** Quando um pequeno acontecimento precisa levar a um final inesperado. Relações modernas ficam familiares e absurdas ao mesmo tempo em uma tribo pré-histórica.
 
-<p align="center"><img src="docs/core-previews/style-3.gif" alt="Um homem das cavernas com túnica de pele vai até a fogueira e aquece as mãos" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-3.gif" alt="Na caverna, o chefe oferece uma coxa assada e o homem das cavernas aceita" width="480"></p>
 
-<p align="center"><sub>Um homem das cavernas com túnica de pele vai até a fogueira e aquece as mãos. Desenhado a partir de rigs em código e aprovado pelo portão de postura.</sub></p>
+<p align="center"><sub>Na caverna, o chefe oferece uma coxa assada e o homem das cavernas aceita. Desenhado a partir de rigs em código e aprovado pelo portão de postura.</sub></p>
 
 
 ---
@@ -122,9 +122,9 @@ Uma caneca que você guarda para uma ocasião especial. Uma mensagem que parece 
 - **Indicado para:** Identificação com o cotidiano, crescimento pessoal, relacionamentos, momentos de afeto, novos hábitos e conteúdo infantil em inglês.
 - **Como escolher:** Para quem quer que o público pense “isso também acontece comigo”. A cor e a luz acompanham o tema, seja acolhimento, ansiedade, cansaço ou recomeço.
 
-<p align="center"><img src="docs/core-previews/style-4.gif" alt="Uma caminhada no parque com um café e um aceno na frente da cafeteria" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-4.gif" alt="Um café tranquilo na mesa de uma cafeteria de calçada" width="480"></p>
 
-<p align="center"><sub>Uma caminhada no parque com um café e um aceno na frente da cafeteria. Desenhado a partir de rigs em código e aprovado pelo portão de postura.</sub></p>
+<p align="center"><sub>Um café tranquilo na mesa de uma cafeteria de calçada. Desenhado a partir de rigs em código e aprovado pelo portão de postura.</sub></p>
 
 
 <!-- readme:advantages -->

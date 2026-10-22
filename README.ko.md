@@ -72,8 +72,8 @@
 
 <table width="100%">
 <tr>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="흰 배경: 아이디어가 번뜩" width="360"><br><sub>흰 배경: 아이디어가 번뜩</sub></td>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="검은 배경: 기뻐서 점프" width="360"><br><sub>검은 배경: 기뻐서 점프</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="흰 배경: 걱정의 우리가 떨어지자 창살을 구부려 빠져나온다" width="360"><br><sub>흰 배경: 걱정의 우리가 떨어지자 창살을 구부려 빠져나온다</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="검은 배경: 진행 막대를 밀어 파란색으로 채운다" width="360"><br><sub>검은 배경: 진행 막대를 밀어 파란색으로 채운다</sub></td>
 </tr>
 </table>
 
@@ -107,9 +107,9 @@
 - **추천 주제:** 선사시대 상상, 직장 풍자, 인간관계 관찰, 블랙코미디, 우화, 어린이 영어 이야기.
 - **선택 기준:** 짧은 사건 뒤에 뜻밖의 결말을 보여 주고 싶을 때 좋습니다. 현대의 관계를 원시 부족으로 옮기면 낯설면서도 익숙한 웃음이 생깁니다.
 
-<p align="center"><img src="docs/core-previews/style-3.gif" alt="가죽옷을 입은 원시인이 모닥불로 걸어가 손을 녹인다" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-3.gif" alt="동굴에서 족장이 구운 고기를 건네고 원시인이 받는다" width="480"></p>
 
-<p align="center"><sub>가죽옷을 입은 원시인이 모닥불로 걸어가 손을 녹인다. 코드 리그로 그렸고 자세 게이트를 통과했습니다.</sub></p>
+<p align="center"><sub>동굴에서 족장이 구운 고기를 건네고 원시인이 받는다. 코드 리그로 그렸고 자세 게이트를 통과했습니다.</sub></p>
 
 
 ---
@@ -122,9 +122,9 @@
 - **추천 주제:** 일상 공감, 마음의 성장, 인간관계, 따뜻한 이야기, 습관 만들기, 어린이 영어.
 - **선택 기준:** 보는 사람이 “내 얘기 같다”고 느낄 생활 속 한 장면을 담고 싶을 때 선택하세요. 색과 빛은 주제에 따라 바뀌며, 따뜻함뿐 아니라 불안과 피로, 새로운 시작도 표현합니다.
 
-<p align="center"><img src="docs/core-previews/style-4.gif" alt="커피를 들고 공원을 걷다가 카페 앞에서 손을 흔든다" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-4.gif" alt="길가 카페 테이블에서 커피를 한 모금 마신다" width="480"></p>
 
-<p align="center"><sub>커피를 들고 공원을 걷다가 카페 앞에서 손을 흔든다. 코드 리그로 그렸고 자세 게이트를 통과했습니다.</sub></p>
+<p align="center"><sub>길가 카페 테이블에서 커피를 한 모금 마신다. 코드 리그로 그렸고 자세 게이트를 통과했습니다.</sub></p>
 
 
 <!-- readme:advantages -->

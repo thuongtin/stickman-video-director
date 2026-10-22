@@ -72,8 +72,8 @@
 
 <table width="100%">
 <tr>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="白背景：アイデアがひらめく" width="360"><br><sub>白背景：アイデアがひらめく</sub></td>
-<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="黒背景：喜んでジャンプ" width="360"><br><sub>黒背景：喜んでジャンプ</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-light.gif" alt="白背景：不安の檻が落ちてくるが、鉄格子を曲げて抜け出す" width="360"><br><sub>白背景：不安の檻が落ちてくるが、鉄格子を曲げて抜け出す</sub></td>
+<td width="50%" align="center"><img src="docs/core-previews/style-1-dark.gif" alt="黒背景：進捗バーを押して青で満たす" width="360"><br><sub>黒背景：進捗バーを押して青で満たす</sub></td>
 </tr>
 </table>
 
@@ -107,9 +107,9 @@
 - **向いている内容：** 原始時代の「もしも」、職場風刺、人間観察、ブラックユーモア、寓話、子ども向け英語の物語。
 - **選び方：** 短い出来事から「そう来たか」と思わせたいときに。現代の人間関係を原始の部族に移すと、見慣れた悩みが違って見えてきます。
 
-<p align="center"><img src="docs/core-previews/style-3.gif" alt="毛皮の服の原始人がたき火に歩み寄って手を温める" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-3.gif" alt="洞窟で族長が骨付き肉を差し出し、原始人が受け取る" width="480"></p>
 
-<p align="center"><sub>毛皮の服の原始人がたき火に歩み寄って手を温める. コードのリグから描画し、姿勢ゲートを通過しています。</sub></p>
+<p align="center"><sub>洞窟で族長が骨付き肉を差し出し、原始人が受け取る. コードのリグから描画し、姿勢ゲートを通過しています。</sub></p>
 
 
 ---
@@ -122,9 +122,9 @@
 - **向いている内容：** 日常の共感、心の成長、人間関係、温かい物語、習慣作り、子ども向け英語。
 - **選び方：** 見た人が「自分にもある」と感じる場面を描きたいときに。色と光はテーマに合わせ、温もりだけでなく、不安や疲れ、再出発も表現できます。
 
-<p align="center"><img src="docs/core-previews/style-4.gif" alt="コーヒーを持って公園を歩き、カフェの前で手を振る" width="480"></p>
+<p align="center"><img src="docs/core-previews/style-4.gif" alt="歩道のカフェで、コーヒーをひと口味わう" width="480"></p>
 
-<p align="center"><sub>コーヒーを持って公園を歩き、カフェの前で手を振る. コードのリグから描画し、姿勢ゲートを通過しています。</sub></p>
+<p align="center"><sub>歩道のカフェで、コーヒーをひと口味わう. コードのリグから描画し、姿勢ゲートを通過しています。</sub></p>
 
 
 <!-- readme:advantages -->
