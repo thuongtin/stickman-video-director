@@ -9,7 +9,7 @@ A style's status is the lowest level whose evidence exists. A level covers only 
 | Level | What it means | Evidence the pack must link |
 |---|---|---|
 | `research` | References studied, signature checklist written, cast sheets or poses drawn | Sources, checklist, gallery |
-| `gated` | Rigs or poses pass `tools/posture_gate/posture_gate.py`; the sample package passes `tools/package_lint/package_lint.py` | Gate report, the lint facts block (`--facts`) |
+| `gated` | Rigs or poses pass `tools/posture_gate/posture_gate.py`; every character's turnaround sheet passes the view check in `posture-gate.md`; the sample package passes `tools/package_lint/package_lint.py` | Gate report, turnaround sheets, the lint facts block (`--facts`) |
 | `approved` | The owner accepted named samples | The owner's words, the date and what the acceptance covers |
 | `core` | Styles 1–5, shipped with the skill (catalog only; a new pack never uses this level) | The catalog entry |
 

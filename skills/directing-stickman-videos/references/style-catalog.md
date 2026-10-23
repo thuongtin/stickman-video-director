@@ -52,6 +52,7 @@ Levels follow `style-pack-template.md`: a level covers only the samples behind i
 | voxel-world | gated | `styles/voxel-world.md`, sample `styles/samples/voxel-world.md` with lint facts |
 | brick-build | gated | `styles/brick-build.md`, sample `styles/samples/brick-build.md` with lint facts |
 | tech-illustration | gated | `styles/tech-illustration.md`, sample `styles/samples/tech-illustration.md` with lint facts |
+| pov-story | gated | `styles/pov-story.md`, sample `styles/samples/pov-story.md` with lint facts |
 
 New styles are drafted with `style-pack-template.md` and named by slug.
 
@@ -84,6 +85,7 @@ Each style below is a slug-named pack in `styles/<slug>.md` with a gated sample 
 | `voxel-world` | Voxel Block World | A cube-built Vietnamese river village, crisp 16×16 pixel textures, flat block lighting | Building and teamwork stories, cause and effect, step-by-step assembly | Rigid box characters with cube heads and painted pixel faces; straight limbs swing only at shoulder and hip; right-wrist lemon band |
 | `brick-build` | Brick-Built Town | A tabletop town of glossy plastic toy bricks on studded baseplates, macro lens, shallow depth of field, stop-motion on twos | How parts fit together, cause and effect, gentle kids' stories, small physics jokes | Brick figures: rounded-cube head with no stud, box torso, hinged two-piece limbs, round knob hands, lime ring on the right wrist |
 | `tech-illustration` | Soft Tech Illustration | White and pale-blue 2.5D tech scenes: isometric white blocks, floating UI cards of bars, nodes and icons, clean dark-navy outlines with soft gradient shading | Software, AI and productivity explainers, app and onboarding stories, helper-robot stories | Outlined chibi team about 2.5 heads tall plus a white robot sidekick with a dark visor; cyan band on the right wrist |
+| `pov-story` | POV Story Series | Flat 2D vertical drama: white round heads with lidded eyes, stick limbs, pastel everyday sets, a POV caption box and word-by-word subtitles added in post | Short multi-part drama series about everyday conflicts (neighbours, landlords, coworkers, family) told as "POV: you ..." | Six original characters with plain white heads and coloured hair; character dialogue; 9:16 only |
 
 For Style 3 read `prehistoric-dark-comedy.md`. It overrides this catalog's generic motion and piano rules. Fix the drawing grammar across stories, not one universal face; fix each approved character within a story.
 

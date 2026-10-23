@@ -32,6 +32,9 @@ assert "references/core-contract.md" in skill
 assert "core-contract.md" in (REFS / "segment-spec-contract.md").read_text()
 assert "core-contract.md" in (REFS / "style-pack-template.md").read_text()
 assert "tools/risk_sheet/risk_sheet.py" in skill and "risk_sheet.py" in (REFS / "posture-gate.md").read_text()
+# the turnaround check covers what joints cannot: view-dependent details such as a beard sliding onto the mouth in profile
+assert "turnaround sheet" in skill and "turnaround check" in (REFS / "posture-gate.md").read_text()
+assert "turnaround sheet" in (REFS / "style-pack-template.md").read_text()
 # SKILL.md no longer carries its own copies of rules the core owns elsewhere.
 for copy in ("Never place technical color notation", "Default generated clips to no visible words",
              "avoid abstract liquid/shape morphing", "Treat narration as audio-only"):

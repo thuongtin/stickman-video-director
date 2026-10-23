@@ -46,11 +46,11 @@ Dự án thử các phong cách hoạt hình người que phổ biến trên m�
 
 <div align="center">
 
-**5 phong cách · 6 lựa chọn hình ảnh · 23 phong cách thử nghiệm · Gate tư thế · Miễn phí, mã nguồn mở**
+**5 phong cách · 6 lựa chọn hình ảnh · 24 phong cách thử nghiệm · Gate tư thế · Miễn phí, mã nguồn mở**
 
 ⭐ **Bấm Star ngay. Lần sau làm hoạt hình, khỏi phải bắt đầu từ trang trắng.**
 
-[Bắt đầu](#quick-start) · [23 phong cách mới](#experimental-styles) · [Bản fork này thêm gì](#fork-additions) · [Cập nhật mới](#recent-updates)
+[Bắt đầu](#quick-start) · [24 phong cách mới](#experimental-styles) · [Bản fork này thêm gì](#fork-additions) · [Cập nhật mới](#recent-updates)
 
 </div>
 
@@ -148,9 +148,9 @@ Phong cách này đến từ upstream (ý tưởng hình ảnh của [@leksautom
 
 <a id="experimental-styles"></a>
 
-### Phong cách thử nghiệm: 23 phong cách mới
+### Phong cách thử nghiệm: 24 phong cách mới
 
-Bản fork này thêm 23 phong cách. Mỗi phong cách có dàn nhân vật gốc riêng, luật riêng và một gói segment spec mẫu ba clip đã qua gate tư thế và kiểm tra gói. Muốn dùng, hãy hỏi một phong cách thử nghiệm hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Các phong cách này đang ở mức `gated`: chưa được dựng thành một video hoàn chỉnh. Mỗi ô là một đoạn chuyển động vài giây, dựng từ khung xương vẽ bằng code của chính phong cách đó và đã qua gate tư thế. Bấm “Xem dàn nhân vật” để xem cả dàn. [Cách chọn và các công cụ kiểm tra](#fork-additions).
+Bản fork này thêm 24 phong cách. Mỗi phong cách có dàn nhân vật gốc riêng, luật riêng và một gói segment spec mẫu ba clip đã qua gate tư thế và kiểm tra gói. Muốn dùng, hãy hỏi một phong cách thử nghiệm hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Các phong cách này đang ở mức `gated`: chưa được dựng thành một video hoàn chỉnh. Mỗi ô là một đoạn chuyển động vài giây, dựng từ khung xương vẽ bằng code của chính phong cách đó và đã qua gate tư thế. Bấm “Xem dàn nhân vật” để xem cả dàn. [Cách chọn và các công cụ kiểm tra](#fork-additions).
 
 <table width="100%">
 <tr>
@@ -314,7 +314,12 @@ Hợp với: Các bộ phận khớp với nhau thế nào, nguyên nhân và k�
 Hợp với: Giải thích phần mềm, AI và mẹo làm việc hiệu quả, câu chuyện về ứng dụng, chuyện có robot trợ lý<br>
 <a href="docs/style-previews/tech-illustration.jpg">Xem dàn nhân vật</a>
 </td>
-<td width="50%"></td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/pov-story.gif" alt="Đoạn chuyển động phong cách Kể chuyện POV" width="360"><br>
+<strong>Kể chuyện POV</strong> · <code>pov-story</code><br>
+Hợp với: Phim bộ ngắn nhiều phần về va chạm đời thường (hàng xóm, chủ nhà, đồng nghiệp, gia đình), kể theo kiểu “POV: bạn…”, khung dọc 9:16<br>
+<a href="docs/style-previews/pov-story.jpg">Xem dàn nhân vật</a>
+</td>
 </tr>
 </table>
 
@@ -324,15 +329,15 @@ Hợp với: Giải thích phần mềm, AI và mẹo làm việc hiệu quả, 
 
 Bản fork này của [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) giữ nguyên mọi thứ ở trên và thêm bốn phần: nhiều phong cách hơn, gate kiểm tra tư thế, Golden Hook chi tiết hơn, và nhân vật chính riêng cho Phong cách 2.
 
-### 23 phong cách thử nghiệm
+### 24 phong cách thử nghiệm
 
-Ngoài Phong cách 1–5, Skill có thể dùng 23 phong cách thử nghiệm. Mỗi phong cách có một dàn nhân vật gốc cố định, luật riêng và một gói segment spec mẫu ba clip.
+Ngoài Phong cách 1–5, Skill có thể dùng 24 phong cách thử nghiệm. Mỗi phong cách có một dàn nhân vật gốc cố định, luật riêng và một gói segment spec mẫu ba clip.
 
 - **Cách chọn:** hỏi một phong cách thử nghiệm, hoặc gọi đúng mã của nó, ví dụ “làm theo phong cách `dong-ho`”. Skill chỉ gợi ý các phong cách này khi bạn hỏi, và sẽ nói rõ mỗi phong cách đang ở mức `gated`.
 - **`gated` nghĩa là gì:** khung xương nhân vật đã qua gate tư thế, và gói segment spec mẫu đã qua các bước kiểm tra gói bên dưới. Các phong cách này chưa được dựng thành một video hoàn chỉnh.
 - **Nằm ở đâu:** `skills/directing-stickman-videos/references/styles/<mã>.md`, gói mẫu ở `styles/samples/<mã>.md`. Danh sách đầy đủ nằm trong bảng “Experimental styles” của `references/style-catalog.md`.
 
-Bảng dưới đây liệt kê lại cả 23 phong cách. Clip chuyển động và mô tả từng phong cách nằm ở [Phong cách thử nghiệm](#experimental-styles).
+Bảng dưới đây liệt kê lại cả 24 phong cách. Clip chuyển động và mô tả từng phong cách nằm ở [Phong cách thử nghiệm](#experimental-styles).
 
 | Mã | Phong cách | Hợp với |
 |---|---|---|
@@ -359,6 +364,7 @@ Bảng dưới đây liệt kê lại cả 23 phong cách. Clip chuyển động
 | `voxel-world` | Thế giới khối voxel | Chuyện xây dựng và làm việc nhóm, nguyên nhân và kết quả, lắp ráp từng bước |
 | `brick-build` | Thị trấn gạch ráp | Các bộ phận khớp với nhau thế nào, nguyên nhân và kết quả, chuyện nhẹ nhàng cho trẻ em, đùa vật lý nhỏ |
 | `tech-illustration` | Minh hoạ công nghệ | Giải thích phần mềm, AI và mẹo làm việc hiệu quả, câu chuyện về ứng dụng, chuyện có robot trợ lý |
+| `pov-story` | Kể chuyện POV | Phim bộ ngắn nhiều phần về va chạm đời thường (hàng xóm, chủ nhà, đồng nghiệp, gia đình), kể theo kiểu “POV: bạn…”, khung dọc 9:16 |
 
 Không segment spec nào nêu tên hãng phim, thương hiệu hay nhân vật nổi tiếng. Phong cách nào gợi nhớ một kiểu hình quen thuộc thì chỉ bám theo thể loại và chất liệu.
 
@@ -477,6 +483,7 @@ Dùng cho video giải thích không lộ mặt, chủ đề lịch sử và kin
 
 ## Cập nhật mới
 
+- **2026-10-23:** Thêm phong cách thử nghiệm `pov-story` (Kể chuyện POV): phim bộ khung dọc 9:16 với nhân vật đầu tròn trắng, hộp chữ POV và phụ đề chạy chữ thêm bằng code.
 - **2026-10-22:** Thêm Phong cách 5, Hoạt hình lịch sử, từ upstream, chuyển sang dựng bằng motion graphics: bốn nhân vật ở ba thời đại (La Mã, Nhật thời Edo, Ai Cập cổ) vẽ bằng code từ một khung xương, mọi tư thế đã qua gate tư thế.
 - **2026-10-22:** Skill chuyển hẳn sang dựng video bằng motion graphics: Phase B giờ là segment spec cho từng đoạn, gate tư thế chạy trên dữ liệu xuất từ khung xương sau khi render, lời dẫn thu một lần cho cả video. Các clip demo cũ được gỡ khỏi trang chủ.
 - **2026-10-22:** Thêm phong cách thử nghiệm `tech-illustration` (Minh hoạ công nghệ): minh hoạ công nghệ 2.5D với nhóm lập trình chibi và robot trợ lý.
