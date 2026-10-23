@@ -19,7 +19,7 @@ These works are named here as research only. Specs never name them, and the cast
 
 | Work | Images looked at | Confirms | Contradicts, and what changed |
 |---|---|---|---|
-| The owner's reference screenshot (a short-video animation account's post, shared in the project, 2026-10-23) | The screenshot itself: one full 9:16 frame and eight thumbnails of the same series | Trait 1: big round white heads with coloured hair shapes, simple dot pupils under heavy lids, thin black stick limbs, simple clothes. Trait 2: a white rounded caption box at the top with a "POV: ..." premise and "Part N". Trait 3: bold capital subtitles in the middle with the current word highlighted. Trait 4: flat everyday sets (an office counter, an apartment door, a store) in pastel wall colours. Trait 5: the half-lidded, unimpressed looks. Multi-part numbering on every thumbnail. | The reference cast (a red-haired clerk with a lanyard, a ginger woman in a mustard dress) and its captions are that account's own; this cast avoids red buns, ginger waves, lanyards and mustard, and the stories are new. |
+| The owner's reference screenshot (a short-video animation account's post, shared in the project, 2026-10-23) | The screenshot itself: one full 9:16 frame and eight thumbnails of the same series | Trait 1: big round white heads with coloured hair shapes, thin-outlined eyes with a lid line and small pupils, solid black stick limbs, simple A-line clothes. Trait 2: a white rounded caption box at the top with a "POV: ..." premise and "Part N". Trait 3: bold capital subtitles in the middle with the current word highlighted. Trait 4: flat everyday sets (an office counter, an apartment door, a store) in pastel wall colours. Trait 5: the half-lidded, unimpressed looks. Multi-part numbering on every thumbnail. | The reference cast (a red-haired clerk with a lanyard, a ginger woman in a mustard dress) and its captions are that account's own; this cast avoids red buns, ginger hair, lanyards, shoulder bags and mustard, and the stories are new. |
 | "POV: Your Landlord Was Old Money — He Taught You 6 Rules" (Wealth Decisions, YouTube 8EyEHV2IpLw) | https://i.ytimg.com/vi/8EyEHV2IpLw/hqdefault.jpg ; hq1, hq2, hq3 | Trait 3: bold subtitle words with one word in yellow, set low in the frame. The second-person "POV:" premise as the title of a short story. | Painterly, shaded illustration with realistic proportions, not flat cartoon heads. Kept only the caption grammar; the flat look comes from the reference. |
 | "POV You Look Like You're Still Renting — You're the Landlord" (Rental Life POV, YouTube BFAwomH_jYk) | https://i.ytimg.com/vi/BFAwomH_jYk/hqdefault.jpg ; hq1, hq2, hq3 | The genre's settings: apartment doors, a driveway, a kitchen table; one lead in the same clothes in every frame. | Same painterly rendering and a horizontal frame. This pack keeps the vertical frame and the flat fills. |
 | "My Best Friend Kept A Huge Secret From Me" (storybooth, YouTube CHfj6DDzymI) | https://i.ytimg.com/vi/CHfj6DDzymI/hqdefault.jpg ; hq1, hq2, hq3 | Trait 1 and 5: flat 2D figures with simple outlines, a palms-up shrug, a sideways unimpressed look, plain flat backgrounds behind a speaking character. | Skin-coloured faces and full hands, 16:9. The white heads and stick hands stay the reference's. |
@@ -27,17 +27,17 @@ These works are named here as research only. Specs never name them, and the cast
 
 What was looked at: the reference screenshot and sixteen still frames from four videos, at thumbnail size, on 2026-10-23. Stills show design, captions and staging, not timing; the motion grammar (limited animation, held poses, lip flaps, one punch-in per part) is this pack's choice, checked in the code-rendered motion test.
 
-Changes made because of the frames: the subtitle highlight is a yellow word (seen in two sources) rather than a coloured box; the caption box stays white with black text; the faces keep white heads (the reference) while the lids and side-eyes come from the reference and storybooth; nothing painterly or shaded.
+Changes made because of the frames: the caption box stays white with black text; the faces keep white heads (the reference) while the lids and side-eyes come from the reference and storybooth; nothing painterly. After the owner's review on 2026-10-23 ("make it truly look like the original") the drawing was rebuilt by rendering a counter two-shot framed like the reference frame and comparing them side by side over nine rounds: the eyes became thin-outlined white ovals with a straight lid line and a small pupil (the first version's big pupils read as sunglasses); the head grew to about a fifth of the height and the body shortened; arms and legs became solid black and thicker; garments became soft A-line or boxy shapes with rounded shoulders and one soft shade side; hair became flat colour with no strand lines; sets lost their black outlines; the subtitle highlight became a purple box behind the current word with a soft shadow on white capitals, as in the reference, instead of a yellow word.
 
 ### Five signature traits
 
 | Tag | Trait (visible in a still) |
 |---|---|
-| `must` | Big round white heads with no nose, coloured hair shapes, white eyes with black dot pupils under heavy upper lids, thin black stick arms and legs with tiny stick-finger hands, simple flat clothes |
+| `must` | Big round white heads with no nose and a bold outline, flat coloured hair shapes, thin-outlined white oval eyes cut by a straight lid line with a small black pupil tucked under it, thin brow arcs, solid black stick arms and legs with small splayed black hands, soft A-line or boxy clothes with one soft shade side, black flat shoes |
 | `must` | A vertical 9:16 frame with a white rounded caption box near the top: the second-person premise line and the part number (added in post) |
-| `must` | Bold capital subtitles of the spoken line in the middle-low band, white with a dark stroke, the word being said in yellow (added in post) |
-| `bonus` | Flat pastel everyday sets with simple outlines: a hallway with plain panel doors, a mailroom counter, a kitchen; a slow push-in on a two-shot and one punch-in on a reaction |
-| `forbidden` | Shading, gradients or textures on characters, skin-coloured faces, noses, realistic hands, any text drawn in the art (signs, labels, phone screens), any account name or watermark |
+| `must` | Heavy white capital subtitles of the spoken line in the middle-low band with a soft dark shadow, the word being said on a purple box (added in post) |
+| `bonus` | Flat pastel everyday sets with thin slate lines only on furniture and no black outlines: a hallway with plain panel doors, a mailroom counter, a kitchen; a slow push-in on a two-shot and one punch-in on a reaction |
+| `forbidden` | Gradients, textures or modelled shading on characters, skin-coloured faces, noses, realistic hands, any text drawn in the art (signs, labels, phone screens), any account name or watermark |
 
 ### Nearest neighbour
 
@@ -57,7 +57,7 @@ The frozen style block below says each one in plain words. The caption and subti
 Repeat it verbatim in every clip. The set goes on a separate `Setting:` line, which may change between clips.
 
 ```text
-Style: a flat 2D cartoon for a vertical short drama series. Characters have big round plain white heads with no nose, simple coloured hair shapes, white eyes with small black dot pupils under heavy upper eyelids that droop for deadpan and side-eye looks, short line eyebrows and small simple mouths. Bodies are simple flat clothing shapes on thin black stick arms and legs, with tiny black stick-finger hands. Every shape has an even dark outline and a flat fill, with no shading, gradients or texture. Sets are flat pastel everyday interiors with simple outlines and few details. Limited animation: characters hold clear poses, mouths flap on their lines, eyes blink and slide sideways, and gestures are small and quick. Vertical 9:16 framing from the knees up, with clean wall space in the top fifth for a caption box and clean space across the middle-low band for subtitles; nobody's face sits in those bands.
+Style: a flat 2D cartoon for a vertical short drama series. Characters have big round plain white heads with no nose and a bold black outline, about a fifth of their height, with flat coloured hair shapes. Eyes are two close-set white ovals with thin outlines, each cut by a straight eyelid line that drops for deadpan and side-eye looks, with a small black pupil tucked under the lid; thin arched eyebrows and small simple mouths. Bodies are short, soft A-line or boxy clothing shapes with rounded shoulders, a flat fill and one slightly darker side, on solid black stick arms and legs, with small splayed black hands and black flat shoes. No gradients or texture. Sets are flat pastel everyday interiors with no black outlines and few details. Limited animation: characters hold clear poses, mouths flap on their lines, eyes blink and slide sideways, and gestures are small and quick. Vertical 9:16 framing from the knees up, with clean wall space in the top fifth for a caption box and clean space across the middle-low band for subtitles; nobody's face sits in those bands.
 ```
 
 ## 3. Cast cards (verbatim anchors)
@@ -66,17 +66,17 @@ Six original characters for apartment-building stories. They differ first by sil
 
 | Character | Role | Anchor |
 |---|---|---|
-| Jess | the POV lead ("you" in the caption) | Jess: a young woman with a big round plain white head, dark-brown hair to her shoulders with a straight blunt fringe, a lavender sweatshirt with the sleeves pushed up to the elbows, bare black stick legs and white sneakers. |
-| Marcus | building manager | Marcus: a tall man with a big round plain white head, short black curly hair and a short black boxed beard along his jaw, a navy polo shirt with a small white collar, khaki trousers and brown shoes. |
-| Priya | next-door neighbour | Priya: a young woman with a big round plain white head, long black hair in one thick braid hanging over her right shoulder, a coral blouse, a teal knee-length skirt, bare black stick legs and tan flats. |
+| Jess | the POV lead ("you" in the caption) | Jess: a young woman with a big round plain white head, wavy dark-brown hair past her shoulders with a side-swept fringe, a lavender A-line dress to above the knee, black stick legs and black flats. |
+| Marcus | building manager | Marcus: a tall man with a big round plain white head, short black curly hair and a short black boxed beard along his jaw, a navy polo shirt with a small white collar, khaki trousers and black shoes. |
+| Priya | next-door neighbour | Priya: a young woman with a big round plain white head, long black hair in one thick braid hanging over her right shoulder, a coral blouse, a teal knee-length skirt, black stick legs and black flats. |
 | Derek | neighbour across the hall | Derek: a tall young man with a big round plain white head, blond hair swept up into a tall quiff, a maroon bomber jacket over a white t-shirt, black trousers and white sneakers. |
-| Mrs. Oakley | landlady | Mrs. Oakley: an older woman with a big round plain white head, short silver curls like a small cloud, small round brown-framed glasses, a green cardigan over a cream blouse, a long brown skirt, bare black stick legs and dark shoes. |
-| Theo | Jess's little brother, nine | Theo: a small boy about three quarters of Jess's height with a big round plain white head, messy spiky brown hair, a yellow t-shirt with one blue stripe across the chest, blue shorts, bare black stick legs and red sneakers. |
+| Mrs. Oakley | landlady | Mrs. Oakley: an older woman with a big round plain white head, short silver curls like a small cloud, small round brown-framed glasses, a green cardigan over a cream blouse, a long brown skirt, black stick legs and black shoes. |
+| Theo | Jess's little brother, nine | Theo: a small boy about three quarters of Jess's height with a big round plain white head, messy spiky brown hair, a yellow t-shirt with one blue stripe across the chest, blue shorts, black stick legs and red sneakers. |
 
 After the anchors in every clip, add this rule once:
 
 ```text
-Every character has exactly two thin black stick arms and two thin black stick legs, and tiny black hands with three short stick fingers. Elbows and knees bend one way only and limbs never stretch. Heads stay plain white circles with no nose and no skin colour.
+Every character has exactly two solid black stick arms and two solid black stick legs, and small black hands with four short splayed fingers. Elbows and knees bend one way only and limbs never stretch. Heads stay plain white circles with no nose and no skin colour.
 ```
 
 Anchor rules:
@@ -101,7 +101,7 @@ Anchor rules:
 ## 5. Text, motion, camera
 
 - **Text policy: `post-overlay`.** No words, letters or numbers in the art: plain doors, blank lockers, a parcel icon on the phone. The caption box ("POV: <premise>" on one or two lines, then "Part N"), the closing "Part N+1" tag and the subtitles are drawn by code after the scene, in the bands the style block keeps clean: caption box in the top fifth, subtitles across the middle-low band, part tag near the bottom edge above the platform bar. The overlay text is listed in the sample's continuity block, never in a spec.
-- **Subtitles:** bold capitals, white with a dark stroke, at most two lines of about 300 px at 360 px width; the word being said turns yellow; the line stays on screen about one second after the speaker stops.
+- **Subtitles:** heavy white capitals with a soft dark shadow, at most two lines of about 250 px at 360 px width, set at about 70% of the frame height; the word being said sits on a purple box; the line stays on screen about one second after the speaker stops.
 - **Motion cadence: `stepped`.** Hold poses; animate mouths (open, mid, closed on a short loop), blinks, pupil slides and one small gesture per beat; a pass is eased over about one second.
 - **Camera.** Follow the camera grammar in `storyboard-template.md`; name the move at the start of every beat.
   - Base framing: from the knees up, feet near the bottom edge, faces in the upper-middle band.
@@ -150,7 +150,7 @@ Gating 48 pose tracks (each of six characters in stand, wave, shrug, phone, carr
 Negatives, verbatim in every clip. They include the five shared posture negatives from `posture-gate.md`:
 
 ```text
-Negative constraints: no logos, no brand marks, no watermark, no account names, no letters, numbers or words anywhere in the art, no writing on signs, doors, lockers, parcels or phone screens, no captions or subtitles drawn into the scene, no speech bubbles, no skin-coloured faces, no noses, no realistic hands, no shading, no gradients, no textures, no photorealistic people, no faces inside the top caption band or the subtitle band, no extra fingers, no extra arms or legs, no duplicate characters, no unintended characters, no raised hand, arm or prop covering anyone's face, no changed proportions or colors between shots, no knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass, no morphing.
+Negative constraints: no logos, no brand marks, no watermark, no account names, no letters, numbers or words anywhere in the art, no writing on signs, doors, lockers, parcels or phone screens, no captions or subtitles drawn into the scene, no speech bubbles, no skin-coloured faces, no noses, no realistic hands, no gradients, no textures, no photorealistic people, no faces inside the top caption band or the subtitle band, no extra fingers, no extra arms or legs, no duplicate characters, no unintended characters, no raised hand, arm or prop covering anyone's face, no changed proportions or colors between shots, no knees or elbows bending backward, no limbs changing length, no head turned past the shoulders, no swapped left and right hands, no prop switching hands without a visible pass, no morphing.
 ```
 
 ## 8. Post-production
