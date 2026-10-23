@@ -169,6 +169,7 @@ Reaction before cause suits this style: the first frame shows the lead frozen an
 
 - [samples/pov-story.md](samples/pov-story.md): 3 clips, 9:16, "Part 1" of a parcel story, with 1, 2 and 2 characters on screen.
 - `tools/package_lint/package_lint.py samples/pov-story.md`: PASS, 0 red, 0 yellow. [Facts block](samples/pov-story.facts.md). `hand_ledger.py`: PASS. `tests/verify-opening-hook.py`: passed.
+- Turnaround view check (`posture-gate.md`): one sheet per character (head and full figure in front, three-quarter both ways and side both ways) reviewed by eye. Fixed from it: Marcus's beard ran up onto the cheek and mouth in profile (now sideburn, jaw, under the mouth); Priya's braid showed behind the head when facing left, where her right shoulder is the far side; Mrs. Oakley's glasses had no far lens in profile and the arm ran past the head; part lines crossed the hair outline in profile; a hair tail stuck out under Mrs. Oakley's nape; Derek's quiff had a second point at the back of the head.
 - Posture gate: 48/48 pose tracks PASS with 0 errors and 0 warnings (front-view frames carry `body_width`, `body_profile`, `limb_width`, `hand_length` and `head_radius`).
 - Motion test (`motion/motion.mp4`, 9:16, 204 frames at 12 fps): Jess's phone buzz; Marcus passes the camera still from his right hand to Jess's left hand across the counter with six frames of both hands on it; the door across the hall opens on Derek holding the parcel in both hands. All five tracks PASS, and `--scene` PASSES for both two-character shots, 0 errors and 0 warnings.
 

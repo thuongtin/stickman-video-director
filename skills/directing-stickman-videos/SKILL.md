@@ -83,7 +83,7 @@ For Style 5, read `references/historical-cartoon.md` before planning and spec as
   - no invented facts.
 
   Styles 3, 4 and 5 and slug packs override only the rules its table marks as overridable.
-- Before delivering Phase B, run `tools/package_lint/package_lint.py` on the package (Phase A storyboard included when available) and fix every RED; it runs `tools/posture_gate/hand_ledger.py` as check B3. After rendering, gate every character's exported pose track with `tools/posture_gate/posture_gate.py` and review each rendered clip with `tools/risk_sheet/risk_sheet.py` (`references/posture-gate.md`); report rendered-clip results as a review, not as certification.
+- Before delivering Phase B, run `tools/package_lint/package_lint.py` on the package (Phase A storyboard included when available) and fix every RED; it runs `tools/posture_gate/hand_ledger.py` as check B3. After rendering, gate every character's exported pose track with `tools/posture_gate/posture_gate.py`, review each character's turnaround sheet (every view-dependent detail in front, three-quarter and side views) and review each rendered clip with `tools/risk_sheet/risk_sheet.py` (`references/posture-gate.md`); report rendered-clip results as a review, not as certification.
 
 ## Revision rules
 
