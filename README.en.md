@@ -46,11 +46,11 @@ I'm testing popular stickman animation styles from across the web and sharing th
 
 <div align="center">
 
-**5 styles · 6 visual options · 23 experimental styles · Posture gate · Free and open source**
+**5 styles · 6 visual options · 24 experimental styles · Posture gate · Free and open source**
 
 ⭐ **Star it now. Next time you make an animation, skip the blank page.**
 
-[Get started](#quick-start) · [23 new styles](#experimental-styles) · [What this fork adds](#fork-additions) · [Latest updates](#recent-updates)
+[Get started](#quick-start) · [24 new styles](#experimental-styles) · [What this fork adds](#fork-additions) · [Latest updates](#recent-updates)
 
 </div>
 
@@ -148,9 +148,9 @@ The style comes from upstream (visual concept by [@leksautomate](https://github.
 
 <a id="experimental-styles"></a>
 
-### Experimental styles: 23 new styles
+### Experimental styles: 24 new styles
 
-This fork adds 23 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not yet been built into a full video. Each card is a few seconds of motion rendered from that style's own code-drawn rigs, which passed the posture gate. “See the cast” opens the full cast. [How to pick one and the checking tools](#fork-additions).
+This fork adds 24 styles. Each has its own cast of original characters, its own rules, and a three-clip sample package that passed the posture gate and the package checks. To use one, ask for an experimental style or name it by its key, for example “make it in the `dong-ho` style”. These styles are `gated`: they have not yet been built into a full video. Each card is a few seconds of motion rendered from that style's own code-drawn rigs, which passed the posture gate. “See the cast” opens the full cast. [How to pick one and the checking tools](#fork-additions).
 
 <table width="100%">
 <tr>
@@ -314,7 +314,12 @@ Good for: How parts fit together, cause and effect, gentle kids' stories, small 
 Best for: Software, AI and productivity explainers, app and onboarding stories, helper-robot stories<br>
 <a href="docs/style-previews/tech-illustration.jpg">See the cast</a>
 </td>
-<td width="50%"></td>
+<td width="50%" align="center" valign="top">
+<img src="docs/style-previews/pov-story.gif" alt="Motion clip of the style POV Story Series" width="360"><br>
+<strong>POV Story Series</strong> · <code>pov-story</code><br>
+Best for: Short multi-part drama series about everyday conflicts (neighbours, landlords, coworkers, family) told as “POV: you…”, vertical 9:16<br>
+<a href="docs/style-previews/pov-story.jpg">See the cast</a>
+</td>
 </tr>
 </table>
 
@@ -324,15 +329,15 @@ Best for: Software, AI and productivity explainers, app and onboarding stories, 
 
 This fork of [kaomei/stickman-video-director](https://github.com/kaomei/stickman-video-director) keeps everything above and adds four things: more styles, a posture gate, a more detailed Golden Hook, and its own Style 2 lead.
 
-### 23 experimental styles
+### 24 experimental styles
 
-Besides Styles 1–5, the Skill can use 23 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
+Besides Styles 1–5, the Skill can use 24 experimental styles. Each one has a frozen cast of original characters, its own style rules, and a three-clip sample package.
 
 - **How to pick one:** ask for an experimental style, or name one by its key, for example “make it in the `dong-ho` style”. The Skill offers them only when asked, and tells you each one is `gated`.
 - **What `gated` means:** the character rigs passed the posture gate, and the sample package passed the package checks below. These styles have not yet been built into a full video.
 - **Where they live:** `skills/directing-stickman-videos/references/styles/<key>.md`, with the sample package in `styles/samples/<key>.md`. The full list is in the “Experimental styles” table of `references/style-catalog.md`.
 
-The table below lists all 23 again. Motion clips and descriptions are under [Experimental styles](#experimental-styles).
+The table below lists all 24 again. Motion clips and descriptions are under [Experimental styles](#experimental-styles).
 
 | Key | Style | Good for |
 |---|---|---|
@@ -359,6 +364,7 @@ The table below lists all 23 again. Motion clips and descriptions are under [Exp
 | `voxel-world` | Voxel Block World | Building and teamwork stories, cause and effect, step-by-step assembly |
 | `brick-build` | Brick-Built Town | How parts fit together, cause and effect, gentle kids' stories, small physics jokes |
 | `tech-illustration` | Soft Tech Illustration | Software, AI and productivity explainers, app and onboarding stories, helper-robot stories |
+| `pov-story` | POV Story Series | Short multi-part drama series about everyday conflicts (neighbours, landlords, coworkers, family) told as “POV: you…”, vertical 9:16 |
 
 No segment spec names a studio, brand or famous character. Where a style resembles a well-known look, it matches the genre and material only.
 
@@ -477,6 +483,7 @@ Use it for faceless explainers, history and business topics, personal growth, ev
 
 ## Latest updates
 
+- **2026-10-23:** Added the experimental style `pov-story` (POV Story Series): a vertical 9:16 drama series with white-headed cartoon characters, a POV caption box and word-by-word subtitles added by code.
 - **2026-10-22:** Added Style 5, Historical Cartoon, from upstream, built as motion graphics: four roles from three eras (Roman, Edo Japan, ancient Egypt) drawn in code on one rig, every pose through the posture gate.
 - **2026-10-22:** The Skill now builds videos as motion graphics only: Phase B is a segment spec per segment, the posture gate runs on pose tracks exported from the rigs after rendering, and the narration is recorded once for the whole video. The old demo clips were removed from the homepage.
 - **2026-10-22:** New experimental style `tech-illustration` (Soft Tech Illustration): a soft 2.5D tech explainer look with a chibi developer team and a robot sidekick.
